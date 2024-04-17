@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="1" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="2" time="7.093">
-    <testcase classname="When a GET request containing valid authorization credentials and the customer id data for the desired detailed information is sent to the /api/get-user endpoint, the expected status code returned should be 200, and the message in the response body should confirm: &quot;success&quot;." name="When a GET request containing valid authorization credentials and the customer id data for the desired detailed information is sent to the /api/get-user endpoint, the expected status code returned should be 200, and the message in the response body should confirm: &quot;success&quot;." time="4.419">
-        <failure message="status code: 404, reason phrase: Not Found" type="io.restassured.internal.http.HttpResponseException">
-            <![CDATA[* The api user constructs the base url with the "admin" token...............passed
-* The api user sets "api/coupon/couponDetails" path parameters..............passed
+<testsuite errors="0" failures="1" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="7.048">
+    <testcase classname="As an administrator, I should be able to access holiday data for staff members via API connection." name="When a GET request is sent to the /api/holidayList endpoint with invalid authorization credentials," time="6.521">
+        <failure message="status code: 401, reason phrase: Unauthorized" type="io.restassured.internal.http.HttpResponseException">
+            <![CDATA[* The api user constructs the base url with the "invalid" token.............passed
+* The api user sets "api/holidayList" path parameters.......................passed
 * The API user sends a GET request and records the response from the api refundReasonList endpoint..failed
-* The api user verifies that the status code is 200.........................skipped
-* The api user verifies that the message information in the response body is "success".skipped
+* The api user verifies that the status code is 401.........................skipped
+* The api user verifies that the message information in the response body is "Unauthenticated".skipped
 
 StackTrace:
-io.restassured.internal.http.HttpResponseException: status code: 404, reason phrase: Not Found
+io.restassured.internal.http.HttpResponseException: status code: 401, reason phrase: Unauthorized
 	at io.restassured.internal.http.HTTPBuilder.defaultFailureHandler(HTTPBuilder.java:629)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -30,7 +30,7 @@ io.restassured.internal.http.HttpResponseException: status code: 404, reason phr
 	at io.restassured.internal.RequestSpecificationImpl$RestAssuredHttpBuilder.doRequest(RequestSpecificationImpl.groovy:2098)
 	at io.restassured.internal.http.HTTPBuilder.doRequest(HTTPBuilder.java:497)
 	at io.restassured.internal.http.HTTPBuilder.request(HTTPBuilder.java:454)
-	at io.restassured.internal.http.HTTPBuilder$request$3.call(Unknown Source)
+	at io.restassured.internal.http.HTTPBuilder$request$2.call(Unknown Source)
 	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
 	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
 	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:166)
@@ -61,6 +61,8 @@ io.restassured.internal.http.HttpResponseException: status code: 404, reason phr
 	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:819)
 	at groovy.lang.GroovyObject.invokeMethod(GroovyObject.java:39)
 	at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.call(PogoInterceptableSite.java:45)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
 	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:166)
 	at io.restassured.internal.filter.SendRequestFilter.filter(SendRequestFilter.groovy:30)
 	at io.restassured.filter.Filter$filter$0.call(Unknown Source)
@@ -70,9 +72,13 @@ io.restassured.internal.http.HttpResponseException: status code: 404, reason phr
 	at io.restassured.filter.time.TimingFilter.filter(TimingFilter.java:56)
 	at io.restassured.filter.Filter$filter.call(Unknown Source)
 	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
-	at io.restassured.filter.Filter$filter$0.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:157)
 	at io.restassured.internal.filter.FilterContextImpl.next(FilterContextImpl.groovy:72)
 	at io.restassured.filter.FilterContext$next.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:47)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:148)
 	at io.restassured.internal.RequestSpecificationImpl.applyPathParamsAndSendRequest(RequestSpecificationImpl.groovy:1686)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -86,6 +92,8 @@ io.restassured.internal.http.HttpResponseException: status code: 404, reason phr
 	at groovy.lang.GroovyObject.invokeMethod(GroovyObject.java:39)
 	at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.call(PogoInterceptableSite.java:45)
 	at org.codehaus.groovy.runtime.callsite.PogoInterceptableSite.callCurrent(PogoInterceptableSite.java:55)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCallCurrent(CallSiteArray.java:51)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:171)
 	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.callCurrent(AbstractCallSite.java:203)
 	at io.restassured.internal.RequestSpecificationImpl.applyPathParamsAndSendRequest(RequestSpecificationImpl.groovy:1692)
 	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
@@ -107,18 +115,8 @@ io.restassured.internal.http.HttpResponseException: status code: 404, reason phr
 	at io.restassured.internal.RequestSpecificationImpl.get(RequestSpecificationImpl.groovy)
 	at utilities.API_Utilities.API_Methods.getResponse(API_Methods.java:20)
 	at stepdefinitions.API_Stepdefinitions.the_apı_user_sends_a_get_request_and_records_the_response_from_the_api_refund_reason_list_endpoint(API_Stepdefinitions.java:64)
-	at ✽.The API user sends a GET request and records the response from the api refundReasonList endpoint.(file:///C:/Users/Yusuf/IdeaProjects/buySellCycleApi/src/test/resources/features/API/US_006.GET.feature:13)
+	at ✽.The API user sends a GET request and records the response from the api refundReasonList endpoint.(file:///C:/Users/beytullah/IdeaProjects/buysellCyle_Project_API/src/test/resources/features/API/US_07.feature:37)
 ]]>
         </failure>
-    </testcase>
-    <testcase classname="As an administrator, I want to be able to access the details of the coupon with the specified ID number via the API connection." name="When a GET request body containing valid authorization information and the coupon ID to access details is sent to the /api/coupon/couponDetails endpoint," time="2.407">
-        <system-out>
-            <![CDATA[* The api user constructs the base url with the "admin" token...............passed
-* The api user sets "api/coupon/couponDetails" path parameters..............passed
-* The api user prepares a GET request containing the  25 for which details are to be accessed..passed
-* The API user sends a GET request and records the response ................passed
-* The api user validates the 25, "Orderder", "ordered", 2, "2024-04-18", "2024-04-20", 10, 0, 1, 2, 4, 4, 0, 1, "2024-04-10T13:38:06.000000Z", "2024-04-10T14:34:58.000000Z" of the response body ..passed
-]]>
-        </system-out>
     </testcase>
 </testsuite>
