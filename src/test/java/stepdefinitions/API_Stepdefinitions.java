@@ -292,5 +292,15 @@ public class API_Stepdefinitions {
 
         // Assert.assertEquals("TR",jsonPath.getString());
     }
+    //============================= US_07 GET ==================
+    @Given("The api user verifies the content of the data {int}, {string}, {string}, in the response body.")
+    public void the_api_user_verifies_the_content_of_the_data_in_the_response_body(int id, String year, String name) {
+        jsonPath=API_Methods.response.jsonPath();
+
+        Assert.assertEquals(id,jsonPath.getInt("holiday[0].id"));
+        Assert.assertEquals(year,jsonPath.getString("holiday[0].year"));
+        Assert.assertEquals(name,jsonPath.getString("holiday[0].name"));
+
+    }
 
 }
