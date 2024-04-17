@@ -1,6 +1,7 @@
 Feature: As an administrator, I want to access the details of the Refund&Reason with the specified ID number via the
   API connection.
 
+
   Scenario Outline: When a GET request body containing valid authorization information and the refund&reason ID to access detailed
   information is sent to the /api/refundReasonDetails endpoint, the returned status code should be 200 and the
   message information in the response body should be verified as "success".
