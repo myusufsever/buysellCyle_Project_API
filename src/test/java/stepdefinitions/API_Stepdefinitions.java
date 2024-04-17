@@ -219,13 +219,12 @@ public class API_Stepdefinitions {
 
     @Given("The API user sends a GET request and records the response .")
     public void the_apı_user_sends_a_get_request_and_records_the_response() {
-        API_Methods.getBodyResponse(requestBody.toString());
+        API_Methods.getBodyResponse(requestBody.toString());//json objesi ile oluşturuldu
     }
     @Given("The API user records the response , confirming that the status code is {string} and the message is {string}.")
     public void the_apı_user_records_the_response_confirming_that_the_status_code_is_and_the_message_is_Unauthenticated(String code,String message) {
         Assert.assertTrue(API_Methods.tryCatchGet().contains(code+message));
-      //  API_Methods.statusCodeAssert(401);
-      //  API_Methods.messageAssert("Unauthenticated");
+
     }
     @Given("The api user validates the {int}, {string}, {string}, {string}, {string} of the response body with index {int}.")
     public void the_api_user_validates_the_of_the_response_body_with_index(int id,String first_name,String username,String email,String name, int dataIndex) {
@@ -277,6 +276,7 @@ public class API_Stepdefinitions {
         requestBody = new JSONObject();
         requestBody.put("id", id);
         System.out.println(requestBody);
+
     }
     @Given("The API user records the response , verifying that the status code is '404' and message coupon not found.")
     public void the_apı_user_records_the_response_verifying_that_the_status_code_is_and_message_coupon_not_found() {
@@ -284,13 +284,17 @@ public class API_Stepdefinitions {
 
     }
 //============================= US_37 GET ==================
+@Given("The API user sends a GET request 'not body' and records the response .")
+public void the_apı_user_sends_a_get_request_not_body_and_records_the_response() {
+    API_Methods.getResponse();//json objesi ile oluşturuldu
+}
 
-
-    @Given("The api user validates the  confirm that the country with an ID of '223' has the following attributes: code: TR and name: Turkey.")
-    public void the_api_user_validates_the_confirm_that_the_country_with_an_ıd_of_has_the_following_attributes_and() {
+    @Given("The api user validates the  confirm that the country with an ID of {int} has the following attributes: {string}: TR and {string}: Turkey.")
+    public void the_api_user_validates_the_confirm_that_the_country_with_an_ıd_of_has_the_following_attributes_and(int id,String code,String name) {
         jsonPath = API_Methods.response.jsonPath();
-
-        // Assert.assertEquals("TR",jsonPath.getString());
+        Assert.assertEquals(id,jsonPath.getInt("addresses[222].id"));
+        Assert.assertEquals(code,jsonPath.getString("addresses[222].code"));
+        Assert.assertEquals(name,jsonPath.getString("addresses[222].name"));
     }
     //============================= US_07 GET ==================
     @Given("The api user verifies the content of the data {int}, {string}, {string}, in the response body.")
