@@ -1,5 +1,5 @@
 Feature: As an administrator, I want to access the Refund & Reason List through the API connection.
-@API
+
   Scenario: When a GET request with valid authorization information is sent to the /api/refundReasonList endpoint, the
   returned status code should be verified as 200, and the message in the response body should be verified as "success".
 
@@ -42,4 +42,3 @@ Feature: As an administrator, I want to access the Refund & Reason List through 
     # APi kullanicisi "api/refundReasonList" path parametrelerini olusturur
     * The API user records the response from the api refundReasonList endpoint, confirming that the status code is '401' and the reason phrase is Unauthorized.
     # Api kullanicisi api refundReasonList endpointinden donen responsei kaydeder status code '401' ve reason phrase Unauthorized oldugunu dogrular
-

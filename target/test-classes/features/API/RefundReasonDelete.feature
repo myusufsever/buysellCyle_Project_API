@@ -22,6 +22,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
 
     Examples:
       | id |
+      | 25 |
 
 
   Scenario Outline: When a DELETE request body containing valid authorization information and an incorrect (non-existent in the
@@ -32,17 +33,14 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/refundReasonDelete" path parameters
     # APi kullanicisi "api/refundReasonDelete" path parametrelerini olusturur
-    * The api user prepares a DELETE request containing the refund reason <id> that are not present in the system to send to the api refundReasonDelete endpoint.
-    # Api kullanicisi api refundReasonDelete endpointine gondermek icin sistemde bulunmayan refund reason idsini iceren bir delete request hazirlar
-    * The api user sends the DELETE request and saves the response returned from the api refundReasonDelete endpoint.
-    # Api kullanicisi delete request gonderir ve api refundReasonDelete endpointinden donen responsei kaydeder
-    * The api user verifies that the status code is 404
-    # Api kullanicisi status codeun 404 oldugunu dogrular
-    * The api user verifies that the message information in the response body is "refundReason not found"
-    # Api kullanicisi response bodydeki message bilgisinin "refundReason not found" oldugunu dogrular
+    * The api user prepares a DELETE request containing the refund reason <id> to be deleted to send to the api refundReasonDelete endpoint.
+    # Api kullanicisi api refundReasonDelete endpointine gondermek icin silinmek istenen refund reason idsini iceren bir delete request hazirlar
+    * The API user records the response from the api refundReasonDelete endpoint, confirming that the status code is '404' and the reason phrase is Not Found.
+    # Api kullanicisi api refundReasonDelete endpointinden donen responsei kaydeder, status code '404' ve reason phrase Not Found oldugunu dogrular
 
     Examples:
       | id |
+      | 26 |
 
 
   Scenario Outline: When a DELETE body containing invalid authorization information and the refund&reason ID to be deleted is
@@ -55,15 +53,12 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
     # APi kullanicisi "api/refundReasonDelete" path parametrelerini olusturur
     * The api user prepares a DELETE request containing the refund reason <id> to be deleted to send to the api refundReasonDelete endpoint.
     # Api kullanicisi api refundReasonDelete endpointine gondermek icin silinmek istenen refund reason idsini iceren bir delete request hazirlar
-    * The api user sends the DELETE request and saves the response returned from the api refundReasonDelete endpoint.
-    # Api kullanicisi delete request gonderir ve api refundReasonDelete endpointinden donen responsei kaydeder
-    * The api user verifies that the status code is 401
-    # Api kullanicisi status codeun 401 oldugunu dogrular
-    * The api user verifies that the message information in the response body is "Unauthenticated."
-    # Api kullanicisi response bodydeki message bilgisinin "Unauthenticated." oldugunu dogrular
+    * The API user saves the response from the api refundReasonDelete endpoint, verifying that the status code is '401' and the reason phrase is Unauthorized.
+    # Api kullanicisi api refundReasonDelete endpointinden donen responsei kaydeder, status code '401' ve reason phrase Unauthorized oldugunu dogrular
 
     Examples:
       | id |
+      | 25 |
 
 
   Scenario Outline: The deletion of the desired Refund&Reason record via the API should be validated from the API.
@@ -75,10 +70,9 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
     * The api user sets "api/refundReasonDetails" path parameters
     * The api user prepares a GET request containing the refund reason <id> for which details are to be accessed, to send to the api refundReasonDetails endpoint.
     # Api kullanicisi api refundReasonDetails endpointine gondermek icin detaylarina erisilmek istenen refund reason idsini iceren bir get request hazirlar
-    * The api user saves the response returned from the api refundReasonDetails endpoint and confirms that the status code is '404' and the reason phrase is Not Found.
-    # Api kullanicisi api refundReasonDetails endpointinden donen responsei kaydeder, status codeun '404' ve reason phrase bilgisinin Not Found oldugunu dogrular
+    * The API user records the response from the api refundReasonDetails endpoint, verifying that the status code is '404' and the reason phrase is Not Found.
+    # Api kullanicisi api refundReasonDetails endpointinden donen responsei kaydeder, status code '404' ve reason phrase Not Found oldugunu dogrular
 
     Examples:
       | id |
-
-
+      | 25 |
