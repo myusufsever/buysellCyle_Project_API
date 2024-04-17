@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="5.707">
-    <testcase classname="As an administrator, I want to access the Refund &amp; Reason List through the API connection." name="When a GET request with valid authorization information is sent to the /api/refundReasonList endpoint, the" time="5.461">
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="3.95">
+    <testcase classname="As an administrator, I want to be able to add a new Refund&amp;Reason record to the system via the API connection." name="When a POST body containing invalid authorization information and necessary data (reason) is sent to the" time="3.75">
         <system-out>
-            <![CDATA[* The api user constructs the base url with the "admin" token...............passed
-* The api user sets "api/refundReasonList" path parameters..................passed
-* The API user sends a GET request and records the response from the api refundReasonList endpoint..passed
-* The api user verifies that the status code is 200.........................passed
-* The api user verifies that the message information in the response body is "success".passed
+            <![CDATA[* The api user constructs the base url with the "invalid" token.............passed
+* The api user sets "api/refundReasonAdd" path parameters...................passed
+* The api user prepares a POST request containing the "product mismatch" information to send to the api refundReasonAdd endpoint..passed
+* The api user sends the POST request and saves the response returned from the api refundReasonAdd endpoint..passed
+* The api user verifies that the status code is 401.........................passed
+* The api user verifies that the message information in the response body is "Unauthenticated.".passed
 ]]>
         </system-out>
     </testcase>

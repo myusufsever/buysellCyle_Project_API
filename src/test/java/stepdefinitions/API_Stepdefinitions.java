@@ -6,9 +6,11 @@ import io.cucumber.java.en.Given;
 import io.restassured.path.json.JsonPath;
 import org.json.JSONObject;
 import org.junit.Assert;
+import pojos.Pojo;
 import utilities.API_Utilities.API_Methods;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 import static hooks.HooksAPI.spec;
 import static org.hamcrest.Matchers.equalTo;
@@ -19,10 +21,12 @@ public class API_Stepdefinitions {
     public static String fullPath;
     JSONObject requestBody;
     JsonPath jsonPath;
+    HashMap<String, Object> reqBody;
+    Pojo requestPojo;
 
     @Given("The api user sets {string} path parameters")
     public void the_api_user_sets_path_parameters(String rawPaths) {
-        String[] paths = rawPaths.split("/"); // [api, refundReasonList]
+        String[] paths = rawPaths.split("/"); // [api,refundReasonUpdate,25]
 
         System.out.println(Arrays.toString(paths));
 
@@ -118,6 +122,7 @@ public class API_Stepdefinitions {
         Assert.assertEquals(reason, jsonPath.getString("refundReasonDetails[0].reason"));
         Assert.assertEquals(created_at, jsonPath.getString("refundReasonDetails[0].created_at"));
         Assert.assertEquals(updated_at, jsonPath.getString("refundReasonDetails[0].updated_at"));
+        // Assert.assertNull(jsonPath.get("refundReasonDetails[0].updated_at"));
     }
 
     @Given("The API user records the response from the api refundReasonDetails endpoint, verifying that the status code is '404' and the reason phrase is Not Found.")
@@ -128,5 +133,86 @@ public class API_Stepdefinitions {
     @Given("The API user records the response from the api refundReasonDetails endpoint, confirming that the status code is '401' and the reason phrase is Unauthorized.")
     public void the_apı_user_records_the_response_from_the_api_refund_reason_details_endpoint_confirming_that_the_status_code_is_and_the_reason_phrase_is_unauthorized() {
         Assert.assertTrue(API_Methods.tryCatchGetBody(requestBody.toString()).equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
+    }
+
+    @Given("The api user prepares a POST request containing the {string} information to send to the api refundReasonAdd endpoint.")
+    public void the_api_user_prepares_a_post_request_containing_the_information_to_send_to_the_api_refund_reason_add_endpoint(String reason) {
+        reqBody = new HashMap<>();
+        reqBody.put("reason", reason);
+
+        // requestPojo = new Pojo(reason);
+    }
+
+    @Given("The api user sends the POST request and saves the response returned from the api refundReasonAdd endpoint.")
+    public void the_api_user_sends_the_post_request_and_saves_the_response_returned_from_the_api_refund_reason_add_endpoint() {
+        API_Methods.postResponse(reqBody);
+    }
+
+    @Given("The api user prepares a PATCH request containing the {string} data to send to the api refundReasonUpdate endpoint.")
+    public void the_api_user_prepares_a_patch_request_containing_the_data_to_send_to_the_api_refund_reason_update_endpoint(String reason) {
+        requestBody = new JSONObject();
+        requestBody.put("reason", reason);
+    }
+
+    @Given("The api user sends the PATCH request and saves the response returned from the api refundReasonUpdate endpoint.")
+    public void the_api_user_sends_the_patch_request_and_saves_the_response_returned_from_the_api_refund_reason_update_endpoint() {
+        API_Methods.patchResponse(requestBody.toString());
+    }
+
+    @Given("The api user verifies that the updated id information in the response body matches the id path parameter specified in the endpoint.")
+    public void the_api_user_verifies_that_the_updated_id_information_in_the_response_body_matches_the_id_path_parameter_specified_in_the_endpoint() {
+        // 1. adim
+        jsonPath = API_Methods.response.jsonPath();
+        Assert.assertEquals(id, jsonPath.getInt("updated_Id"));
+
+        // 2. adim
+        API_Methods.response.then()
+                .assertThat()
+                .body("updated_Id", equalTo(id));
+    }
+
+    @Given("The API user records the response from the api refundReasonUpdate endpoint, confirming that the status code is '404' and the reason phrase is Not Found.")
+    public void the_apı_user_records_the_response_from_the_api_refund_reason_update_endpoint_confirming_that_the_status_code_is_and_the_reason_phrase_is_not_found() {
+        Assert.assertTrue(API_Methods.tryCatchPatch(requestBody.toString()).equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
+    }
+
+    @Given("The API user records the response from the api refundReasonUpdate endpoint, confirming that the status code is '401' and the reason phrase is Unauthorized.")
+    public void the_apı_user_records_the_response_from_the_api_refund_reason_update_endpoint_confirming_that_the_status_code_is_and_the_reason_phrase_is_unauthorized() {
+        Assert.assertTrue(API_Methods.tryCatchPatch(requestBody.toString()).equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
+    }
+
+    @Given("The api user verifies that the reason information in the response body is {string}.")
+    public void the_api_user_verifies_that_the_reason_information_in_the_response_body_is(String reasonValue) {
+        jsonPath = API_Methods.response.jsonPath();
+
+        Assert.assertEquals(reasonValue, jsonPath.getString("refundReasonDetails[0].reason"));
+    }
+
+    @Given("The api user prepares a DELETE request containing the refund reason {int} to be deleted to send to the api refundReasonDelete endpoint.")
+    public void the_api_user_prepares_a_delete_request_containing_the_refund_reason_to_be_deleted_to_send_to_the_api_refund_reason_delete_endpoint(int id) {
+        requestBody = new JSONObject();
+        requestBody.put("id", id);
+    }
+
+    @Given("The api user sends the DELETE request and saves the response returned from the api refundReasonDelete endpoint.")
+    public void the_api_user_sends_the_delete_request_and_saves_the_response_returned_from_the_api_refund_reason_delete_endpoint() {
+        API_Methods.deleteResponse(requestBody.toString());
+    }
+
+    @Given("The api user verifies that the Deleted id information in the response body is the same as the id information in the request body.")
+    public void the_api_user_verifies_that_the_deleted_id_information_in_the_response_body_is_the_same_as_the_id_information_in_the_request_body() {
+        jsonPath = API_Methods.response.jsonPath();
+
+        Assert.assertEquals(requestBody.get("id"), jsonPath.getInt("Deleted_Id"));
+    }
+
+    @Given("The API user records the response from the api refundReasonDelete endpoint, confirming that the status code is '404' and the reason phrase is Not Found.")
+    public void the_apı_user_records_the_response_from_the_api_refund_reason_delete_endpoint_confirming_that_the_status_code_is_and_the_reason_phrase_is_not_found() {
+        Assert.assertTrue(API_Methods.tryCatchDelete(requestBody.toString()).equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
+    }
+
+    @Given("The API user saves the response from the api refundReasonDelete endpoint, verifying that the status code is '401' and the reason phrase is Unauthorized.")
+    public void the_apı_user_saves_the_response_from_the_api_refund_reason_delete_endpoint_verifying_that_the_status_code_is_and_the_reason_phrase_is_unauthorized() {
+        Assert.assertTrue(API_Methods.tryCatchDelete(requestBody.toString()).equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
     }
 }

@@ -154,4 +154,3 @@ public class API_Methods {
                 .body("message", equalTo(message));
     }
 }
-

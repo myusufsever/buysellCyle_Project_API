@@ -1,6 +1,7 @@
 Feature: As an administrator, I want to be able to update the Refund&Reason information with the specified ID number via the
   API connection.
 
+
   Scenario Outline: When a PATCH request body containing valid authorization information, the Refund&Reason ID to be updated,
   and necessary data (reason) is sent to the /api/refundReasonUpdate/{id} endpoint, the returned status code
   should be 202, and the message information in the response body should be verified as "refundReason updated successfully".
@@ -22,7 +23,7 @@ Feature: As an administrator, I want to be able to update the Refund&Reason info
 
     Examples:
       | id | reason                 |
-      | 19 | Product arrived lately |
+      | 25 | Product arrived lately |
 
 
   Scenario Outline: When a PATCH request body containing valid authorization information and an incorrect (non-existent in the
@@ -36,15 +37,12 @@ Feature: As an administrator, I want to be able to update the Refund&Reason info
     # APi kullanicisi "api/refundReasonUpdate/{id}" path parametrelerini olusturur
     * The api user prepares a PATCH request containing the "<reason>" data to send to the api refundReasonUpdate endpoint.
     # Api kullanicisi api refundReasonUpdate endpointine gondermek icin "<reason>" verisini iceren bir patch request hazirlar
-    * The api user sends the PATCH request and saves the response returned from the api refundReasonUpdate endpoint.
-    # Api kullanicisi patch request gonderir ve api 404
-    # Api kullanicisi status codeun 404 oldugunu dogrular
-    * The api user verifies that the message information in the response body is "refundReason not found"
-    # Api kullanicisi response bodydeki message bilgisinin "refundReason not found" oldugunu dogrular
+    * The API user records the response from the api refundReasonUpdate endpoint, confirming that the status code is '404' and the reason phrase is Not Found.
+    # Api kullanicisi api refundReasonUpdate endpointinden donen responsei kaydeder, status code '404' ve reason phrase Not Found oldugunu dogrular
 
     Examples:
-      | id  | reason                 |
-      | 425 | Product arrived lately |
+      | id | reason                 |
+      | 26 | Product arrived lately |
 
 
   Scenario Outline: When a PATCH request body containing invalid authorization information, along with the Refund&Reason ID to
@@ -58,16 +56,12 @@ Feature: As an administrator, I want to be able to update the Refund&Reason info
     # APi kullanicisi "api/refundReasonUpdate/{id}" path parametrelerini olusturur
     * The api user prepares a PATCH request containing the "<reason>" data to send to the api refundReasonUpdate endpoint.
     # Api kullanicisi api refundReasonUpdate endpointine gondermek icin "<reason>" verisini iceren bir patch request hazirlar
-    * The api user sends the PATCH request and saves the response returned from the api refundReasonUpdate endpoint.
-    # Api kullanicisi patch request gonderir ve api 401
-    # Api kullanicisi status codeun 401 oldugunu dogrular
-    * The api user verifies that the message information in the response body is "Unauthenticated."
-    # Api kullanicisi response bodydeki message bilgisinin "Unauthenticated." oldugunu dogrular
+    * The API user records the response from the api refundReasonUpdate endpoint, confirming that the status code is '401' and the reason phrase is Unauthorized.
+    # Api kullanicisi api refundReasonUpdate endpointinden donen responsei kaydeder, status code '401' ve reason phrase Unauthorized oldugunu dogrular
 
     Examples:
       | id | reason                 |
-      | 19 | Product arrived lately |
-
+      | 25 | Product arrived lately |
 
 
   Scenario Outline: The update of the desired Refund&Reason record via the API should be validated from the API.
@@ -87,8 +81,4 @@ Feature: As an administrator, I want to be able to update the Refund&Reason info
 
     Examples:
       | id | reasonValue            |
-      | 19 | Product arrived lately |
-
-
-
-
+      | 25 | Product arrived lately |

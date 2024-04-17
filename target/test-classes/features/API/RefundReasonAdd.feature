@@ -39,7 +39,7 @@ Feature: As an administrator, I want to be able to add a new Refund&Reason recor
     Examples:
       | id |
 
-
+  @API
 
   Scenario Outline: When a POST body containing invalid authorization information and necessary data (reason) is sent to the
   /api/refundReasonAdd endpoint, the returned status code should be 401, and the message information in the

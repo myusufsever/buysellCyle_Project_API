@@ -59,4 +59,3 @@ Feature: As an administrator, I want to access the details of the Refund&Reason 
     Examples:
       | id |
       | 1  |
-
