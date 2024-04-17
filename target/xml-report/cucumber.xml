@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="5.707">
-    <testcase classname="As an administrator, I want to access the Refund &amp; Reason List through the API connection." name="When a GET request with valid authorization information is sent to the /api/refundReasonList endpoint, the" time="5.461">
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="8.017">
+    <testcase classname="As an administrator, I should be able to access all registered user information via API connection." name="When a GET request is sent to the /api/get-users endpoint with valid authorization credentials, the expected status code" time="7.59">
         <system-out>
             <![CDATA[* The api user constructs the base url with the "admin" token...............passed
-* The api user sets "api/refundReasonList" path parameters..................passed
-* The API user sends a GET request and records the response from the api refundReasonList endpoint..passed
+* The api user sets "api/get-users" path parameters.........................passed
+* The API user sends a GET request and records the response ................passed
 * The api user verifies that the status code is 200.........................passed
 * The api user verifies that the message information in the response body is "success".passed
 ]]>
