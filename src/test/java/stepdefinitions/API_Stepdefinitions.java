@@ -317,6 +317,44 @@ public void the_apı_user_sends_a_get_request_not_body_and_records_the_response(
         Assert.assertEquals(name,jsonPath.getString("holiday[0].name"));
 
     }
+
+    //============================= US_42 POST ==================
+
+    @Given("The api user prepares a POST request containing the {int}, {string}, {string}, {string}, {int}, {string}, {string}, {string}, {int}, {string} informations to send to the api desired endpoint.")
+    public void the_api_user_prepares_a_post_request_containing_the_informations_to_send_to_the_api_desired_endpoint(int customer_id, String name, String email, String address, int phone, String city, String state, String country, int postal_code, String address_type) {
+        requestBody=new JSONObject();
+
+        requestBody.put("customer_id", customer_id);
+        requestBody.put("name", name);
+        requestBody.put("email", email);
+        requestBody.put("address", address);
+        requestBody.put("phone", phone);
+        requestBody.put("city", city);
+        requestBody.put("state", state);
+        requestBody.put("country", country);
+        requestBody.put("postal_code", postal_code);
+        requestBody.put("address_type", address_type);
+
+    }
+
+    @Given("The api user sends the POST request and saves the response returned from the api desired endpoint.")
+    public void the_api_user_sends_the_post_request_and_saves_the_response_returned_from_the_api_desired_endpoint() {
+
+        API_Methods.postResponse(requestBody.toString());
+    }
+    @Given("The api user prepares a GET request containing the refund reason {int} for which details are to be accessed, to send to the api desired endpoint.")
+    public void the_api_user_prepares_a_get_request_containing_the_refund_reason_for_which_details_are_to_be_accessed_to_send_to_the_api_desired_endpoint(int id) {
+        requestBody = new JSONObject();
+        requestBody.put("id", id);
+    }
+    @Given("The api user sends a GET request and saves the response returned from the api desired endpoint.")
+    public void the_api_user_sends_a_get_request_and_saves_the_response_returned_from_the_api_desired_endpoint() {
+        API_Methods.getBodyResponse(requestBody.toString());
+
+    }
+
+
+
     //----------------------------simge----------------------------------
     @Given("The api user prepares a POST request containing the {string}, {string}, {string}, {string}, {string}, {string} information to send to the api register endpoint.")
     public void the_api_user_prepares_a_post_request_containing_the_information_to_send_to_the_api_register_endpoint(String firstname, String lastname, String password, String passwordconfirm, String usertype, String refferalcode) {
@@ -432,6 +470,7 @@ public void the_apı_user_sends_a_get_request_not_body_and_records_the_response(
 
 }
 
+
     @Given("The api user validates the {int}, {string}, {string}, {string} of the response body .")
     public void the_api_user_validates_the_of_the_response_body(int id, String first_name, String last_name, String email) {
 
@@ -448,7 +487,11 @@ public void the_apı_user_sends_a_get_request_not_body_and_records_the_response(
 
 
 
+
+
+
     }
+
 
 
 

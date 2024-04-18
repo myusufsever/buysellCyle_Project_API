@@ -149,8 +149,10 @@ public class API_Methods {
     }
 
     public static void messageAssert(String message) {
+
         response.then()
                 .assertThat()
                 .body("message", equalTo(message));
+
     }
 }
