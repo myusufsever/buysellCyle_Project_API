@@ -1,5 +1,6 @@
 package stepdefinitions;
 
+import com.github.javafaker.Faker;
 import config_Requirements.ConfigReader;
 import hooks.HooksAPI;
 import io.cucumber.java.en.Given;
@@ -23,6 +24,7 @@ public class API_Stepdefinitions {
     JsonPath jsonPath;
     HashMap<String, Object> reqBody;
     Pojo requestPojo;
+    Faker faker = new Faker();
 
     @Given("The api user sets {string} path parameters")
     public void the_api_user_sets_path_parameters(String rawPaths) {
@@ -337,4 +339,25 @@ public class API_Stepdefinitions {
 
     }
 
+
+
+    @Given("The api user validates the {int}, {string}, {string}, {string} of the response body .")
+    public void the_api_user_validates_the_of_the_response_body(int id, String first_name, String last_name, String email) {
+
+        Assert.assertEquals(id, jsonPath.getInt("user[0].id"));
+        Assert.assertEquals(first_name, jsonPath.getString("user[0].first_name"));
+        Assert.assertEquals(last_name, jsonPath.getString("user[0].last_name"));
+        Assert.assertEquals(email, jsonPath.getInt("user[0].email"));
+
+
+
+    }
+
+
+
+
+
 }
+
+
+
