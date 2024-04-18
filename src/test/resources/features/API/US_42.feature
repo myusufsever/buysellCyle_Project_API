@@ -46,7 +46,7 @@ Feature: As an administrator, I want to be able to add a new address record for 
 
 
   @42/4
-  Scenario : a POST body containing invalid authorization credentials and necessary data
+  Scenario: a POST body containing invalid authorization credentials and necessary data
   (customer_id, name, email, address, phone, city, state, country, postal_code, address_type)
   is sent to the /api/profile/addressAdd endpoint, the returned status code should be validated as 401,
   and the message information in the response body should confirm as "Unauthenticated.".
