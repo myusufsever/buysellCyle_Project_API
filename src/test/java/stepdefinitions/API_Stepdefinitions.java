@@ -307,4 +307,45 @@ public void the_apı_user_sends_a_get_request_not_body_and_records_the_response(
 
     }
 
-}
+
+    //----------------------US_006 GET--------------------------------------
+
+    @Given("The api user validates the {int}, {string}, {string}, {int}, {int}, {int}, {string}, {int}, {string}, {string} of the response body .")
+    public void the_api_user_validates_the_of_the_response_body(int id, String first_name, String last_name, int role_id, int is_verified, int is_active, String lang_code, int currency_id, String currency_code, String name) {
+        jsonPath = API_Methods.response.jsonPath();
+
+        Assert.assertEquals(id, jsonPath.getInt("user[0].id"));
+        Assert.assertEquals(first_name, jsonPath.getString("user[0].first_name"));
+        Assert.assertEquals(last_name, jsonPath.getString("user[0].last_name"));
+        Assert.assertEquals(role_id, jsonPath.getInt("user[0].role_id"));
+        Assert.assertEquals(currency_code, jsonPath.getString("user[0].currency_code"));
+        Assert.assertEquals(lang_code, jsonPath.getString("user[0].lang_code"));
+        Assert.assertEquals(is_verified, jsonPath.getInt("user[0].is_verified"));
+        Assert.assertEquals(is_active, jsonPath.getInt("user[0].is_active"));
+        Assert.assertEquals(currency_id, jsonPath.getInt("user[0].currency_id"));
+        Assert.assertEquals(name , jsonPath.getString("user[0].name"));
+
+
+
+
+    }
+
+    @Given("The api user validates the {int}, {string}, {string}, {string} of the response body .")
+    public void the_api_user_validates_the_of_the_response_body(int id, String first_name, String last_name, String email) {
+
+        Assert.assertEquals(id, jsonPath.getInt("user[0].id"));
+        Assert.assertEquals(first_name, jsonPath.getString("user[0].first_name"));
+        Assert.assertEquals(last_name, jsonPath.getString("user[0].last_name"));
+        Assert.assertEquals(email, jsonPath.getInt("user[0].email"));
+
+
+
+    }
+
+
+
+
+
+    }
+
+
