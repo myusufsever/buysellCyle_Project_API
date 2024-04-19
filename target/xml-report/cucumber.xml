@@ -1,13 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="4.901">
-    <testcase classname="As a user/administrator, I should be able to create a new customer record in the system via API connection." name="The creation of a customer via API should be verified to confirm whether the customer exists in the customer list using API connection." time="4.635">
+<testsuite errors="0" failures="1" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="2" time="6.78">
+    <testcase classname="As a user/administrator, I should be able to create a new customer record in the system via API connection." name="When a POST body consisting of valid data (first_name,last_name, email, password, password_confirmation, user_type, referral_code)" time="4.555">
         <system-out>
-            <![CDATA[* The api user constructs the base url with the "admin" token...............passed
-* The api user sets "api/get-user" path parameters..........................passed
-* The api user prepares a GET request containing the register 366 for which details are to be accessed, to send to the api get-users endpoint..passed
-* The api user sends a GET request and saves the response returned from the api get-users endpoint..passed
-* The api user verifies the content of the data 366 in the response body....passed
+            <![CDATA[* The api user constructs the base url with the "customer" token............passed
+* The api user sets "api/register" path parameters..........................passed
+* The api user prepares a POST request containing the "registerApi", "TestApi", "123123123", "123123123", "customer", "0101010101" information to send to the api register endpoint..passed
+* The api user sends the "post" request and saves the "Response"............passed
+* The api user verifies that for "post" request type the status code is 201 and the message information in the response body is "Successfully registered".passed
 ]]>
         </system-out>
+    </testcase>
+    <testcase classname="As a user/administrator, I should be able to create a new customer record in the system via API connection." name="The creation of a customer via API should be verified to confirm whether the customer exists in the customer list using API connection." time="1.926">
+        <failure message="" type="java.lang.AssertionError">
+            <![CDATA[* The api user constructs the base url with the "admin" token...............passed
+* The api user sets "api/get-users" path parameters.........................passed
+* The api user sends the "get" request and saves the "Response".............passed
+* The api user verifies the content of the data id in the response body.....failed
+
+StackTrace:
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:86)
+	at org.junit.Assert.assertTrue(Assert.java:41)
+	at org.junit.Assert.assertTrue(Assert.java:52)
+	at stepdefinitions.API_Stepdefinitions.the_api_user_verifies_the_content_of_the_data_id_in_the_response_body(API_Stepdefinitions.java:354)
+	at ✽.The api user verifies the content of the data id in the response body(file:///C:/Users/ATALAY/IdeaProjects/buysellCyle_Project_API/src/test/resources/features/API/US_001.POST.feature:24)
+]]>
+        </failure>
     </testcase>
 </testsuite>

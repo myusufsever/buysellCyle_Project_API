@@ -43,18 +43,19 @@ Feature: As an administrator, I want to access the details of the Refund&Reason 
       | id |
       | 20 |
 
-
+@simge3
   Scenario Outline: When a GET request body containing invalid authorization information and the refund&reason ID to access
   detailed information is sent to the /api/refundReasonDetails endpoint, the returned status code should be 401,
   and the message information in the response body should be validated as "Unauthenticated.".
 
-    * The api user constructs the base url with the "invalid" token.
+    * The api user constructs the base url with the "invalid" token
     # APi kullanicisi "invalid" token ile base urli olusturur
     * The api user sets "api/refundReasonDetails" path parameters
     # APi kullanicisi "api/refundReasonDetails" path parametrelerini olustur
     * The api user prepares a GET request containing the refund reason <id> for which details are to be accessed, to send to the api refundReasonDetails endpoint.
     # Api kullanicisi api refundReasonDetails endpointine gondermek icin detaylarina erisilmek istenen refund reason idsini iceren bir get request hazirlar
-    * The API user records the response from the api refundReasonDetails endpoint, confirming that the status code is '401' and the reason phrase is Unauthorized.
+    * The api user verifies that for "getbody" request type the status code is 401 and the message information in the response body is "Unauthorized"
+   # * The API user records the response from the api refundReasonDetails endpoint, confirming that the status code is '401' and the reason phrase is Unauthorized.
     # Api kullanicisi api refundReasonDetails endpointinden donen responsei kaydeder, status code '401' ve reason phrase Unauthorized oldugunu dogrular
 
     Examples:

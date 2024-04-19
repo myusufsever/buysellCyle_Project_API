@@ -20,7 +20,7 @@ Feature: As an administrator, I should be able to access all registered user inf
   Examples:
     | id |
     | 20 |
-@simge2
+
   Scenario Outline: When a GET request is sent to the /api/get-users endpoint with valid authorization credentials, the information returned in the response body for the user with id(x) should be validated,
   including fields such as first_name, username, email, name.
 

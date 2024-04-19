@@ -45,7 +45,7 @@ Feature: As an administrator, I want to be able to add a new Refund&Reason recor
   /api/refundReasonAdd endpoint, the returned status code should be 401, and the message information in the
   response body should be verified as "Unauthenticated.".
 
-    * The api user constructs the base url with the "invalid" token.
+    * The api user constructs the base url with the "invalid" token
     # APi kullanicisi "invalid" token ile base urli olusturur
     * The api user sets "api/refundReasonAdd" path parameters
     # APi kullanicisi "api/refundReasonAdd" path parametrelerini olusturur
