@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
         tags = "@API",
 
 
-        tags = "@[US_002-TC_002]",
+
 
 
         dryRun = false

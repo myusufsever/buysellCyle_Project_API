@@ -442,7 +442,95 @@ public void the_apı_user_sends_a_get_request_not_body_and_records_the_response(
 
 
     }
-
+    // US_29_POST_REQUEST_Kevser
+    @Given("The api user prepares a POST request containing the {string} {string} {int} {string} {string} {int} {int} {int} {int} {int} {int} information to send to the api coupon CouponAdd endpoint.")
+    public void the_api_user_prepares_a_post_request_containing_the_information_to_send_to_the_api_coupon_coupon_add_endpoint(String couponTitle, String couponCode, int couponType, String startDate, String endDate, int discount, int discountType, int minShopping, int maxDiscount, int isExpire, int isMultipleBuy) {
+        reqBody = new HashMap<>();
+        reqBody.put("title",couponTitle);
+        reqBody.put("coupon_code",couponCode);
+        reqBody.put("coupon_type",couponType);
+        reqBody.put("start_date",startDate);
+        reqBody.put("end_date",endDate);
+        reqBody.put("discount",discount);
+        reqBody.put("discount_type",discountType);
+        reqBody.put("minimum_shopping",minShopping);
+        reqBody.put("maximum_discount",maxDiscount);
+        reqBody.put("is_expire",isExpire);
+        reqBody.put("is_multiple_buy",isMultipleBuy);
+    }
+    @Given("The api user sends the POST request and saves the response returned from the api coupon CouponAdd endpoint.")
+    public void the_api_user_sends_the_post_request_and_saves_the_response_returned_from_the_api_coupon_coupon_add_endpoint() {
+        API_Methods.postResponse(reqBody);
+    }
+    @Given("The api user prepares a GET request containing the coupon {int} for which details are to be accessed, to send to the api coupon CouponDetails endpoint.")
+    public void the_api_user_prepares_a_get_request_containing_the_coupon_for_which_details_are_to_be_accessed_to_send_to_the_api_coupon_coupon_details_endpoint(int id) {
+        requestBody = new JSONObject();
+        requestBody.put("id",id);
+    }
+    @Given("The api user sends a GET request and saves the response returned from the api coupon CouponDetails endpoint.")
+    public void the_api_user_sends_a_get_request_and_saves_the_response_returned_from_the_api_coupon_coupon_details_endpoint() {
+        API_Methods.getBodyResponse(requestBody.toString());
+    }
+    // US_03_GET_REQUEST_Kevser
+    @Given("The API user sends a GET request and records the response from the api profile get-customer-data endpoint.")
+    public void the_apı_user_sends_a_get_request_and_records_the_response_from_the_api_profile_get_customer_data_endpoint() {
+        API_Methods.getResponse();
+    }
+    @Given("The api user verifies the content of the data {int} {int} {int} {int} {int} in the response body.")
+    public void the_api_user_verifies_the_content_of_the_data_in_the_response_body(int runningBalance, int pendingBalance, int totalCoupon, int totalWishlist,int canceledOrder) {
+        jsonPath = API_Methods.response.jsonPath();
+        Assert.assertEquals(runningBalance, jsonPath.getInt("wallet_running_balance"));
+        Assert.assertEquals(pendingBalance, jsonPath.getInt("wallet_pending_balance"));
+        Assert.assertEquals(totalCoupon, jsonPath.getInt("total_coupon"));
+        Assert.assertEquals(totalWishlist, jsonPath.getInt("total_wishlist"));
+        Assert.assertEquals(canceledOrder, jsonPath.getInt("total_cancel_order"));
+    }
+    @Given("The API user records the response from the api profile get-customer-data, confirming that the status code is '401' and the message is Unauthorized.")
+    public void the_apı_user_records_the_response_from_the_api_profile_get_customer_data_confirming_that_the_status_code_is_and_the_message_is_unauthorized() {
+        Assert.assertTrue(API_Methods.tryCatchGet().equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
+    }
+    // US_09_POST_REQUEST_Kevser
+    @Given("The api user prepares a POST request containing the {string} {string} {string} information to send to the api holidayAdd endpoint.")
+    public void the_api_user_prepares_a_post_request_containing_the_information_to_send_to_the_api_holiday_add_endpoint(String holidayYear, String holidayName, String holidayDate) {
+        reqBody = new HashMap<>();
+        reqBody.put("year",holidayYear);
+        reqBody.put("name",holidayName);
+        reqBody.put("date",holidayDate);
+    }
+    @Given("The api user sends the POST request and saves the response returned from the api holidayAdd endpoint.")
+    public void the_api_user_sends_the_post_request_and_saves_the_response_returned_from_the_api_holiday_add_endpoint() {
+        API_Methods.postResponse(reqBody);
+    }
+    @Given("The api user prepares a GET request containing the {int} for which details are to be accessed, to send to the api holidayAdd endpoint.")
+    public void the_api_user_prepares_a_get_request_containing_the_for_which_details_are_to_be_accessed_to_send_to_the_api_holiday_add_endpoint(int id) {
+        requestBody = new JSONObject();
+        requestBody.put("id",id);
+    }
+    // US_32_GET_QA_Kevser
+    @Given("The API user sends a GET request and records the response from the api profile address-list endpoint.")
+    public void the_apı_user_sends_a_get_request_and_records_the_response_from_the_api_profile_address_list_endpoint() {
+        API_Methods.getResponse();
+    }
+    @Given("The api user validates the {int} {string} {string} {string} {string} {string} {string} {string} {string} {int} {int} {string} {string} of the response body with index {int}.")
+    public void the_api_user_validates_the_of_the_response_body_with_index(int customerID, String customerName, String eMail, String phoneNum, String adres, String city, String state, String country, String postalCode, int isShippingDefault, int isBillingDefault, String createdAt, String updatedAt, int idIndex) {
+        API_Methods.response.then().assertThat().body("addresses[" + idIndex + "].customer_id", equalTo(customerID));
+        API_Methods.response.then().assertThat().body("addresses[" + idIndex + "].name", equalTo(customerName));
+        API_Methods.response.then().assertThat().body("addresses[" + idIndex + "].email", equalTo(eMail));
+        API_Methods.response.then().assertThat().body("addresses[" + idIndex + "].phone", equalTo(phoneNum));
+        API_Methods.response.then().assertThat().body("addresses[" + idIndex + "].address", equalTo(adres));
+        API_Methods.response.then().assertThat().body("addresses[" + idIndex + "].city", equalTo(city));
+        API_Methods.response.then().assertThat().body("addresses[" + idIndex + "].state", equalTo(state));
+        API_Methods.response.then().assertThat().body("addresses[" + idIndex + "].country", equalTo(country));
+        API_Methods.response.then().assertThat().body("addresses[" + idIndex + "].postal_code", equalTo(postalCode));
+        API_Methods.response.then().assertThat().body("addresses[" + idIndex + "].is_shipping_default", equalTo(isShippingDefault));
+        API_Methods.response.then().assertThat().body("addresses[" + idIndex + "].is_billing_default", equalTo(isBillingDefault));
+        API_Methods.response.then().assertThat().body("addresses[" + idIndex + "].created_at", equalTo(createdAt));
+        API_Methods.response.then().assertThat().body("addresses[" + idIndex + "].updated_at", equalTo(updatedAt));
+    }
+    @Given("The api user records the response from the api profile address-list endpoint, confirming that the status code is {string} and the reason phrase is Unauthenticated.")
+    public void the_api_user_records_the_response_from_the_api_profile_address_list_endpoint_confirming_that_the_status_code_is_and_the_reason_phrase_is_unauthenticated(String string) {
+        Assert.assertTrue(API_Methods.tryCatchGet().equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
+    }
 
 
 
