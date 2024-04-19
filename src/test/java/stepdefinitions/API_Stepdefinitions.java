@@ -349,6 +349,7 @@ public void the_apı_user_sends_a_get_request_not_body_and_records_the_response(
 
   @Given("The api user sends the {string} request and saves the {string}")
   public void the_api_user_sends_the_request_and_saves_the(String requestType, String response) {
+
       switch ((requestType+response).toLowerCase()){
 
           case   "postresponse": response2=API_Methods.postResponse(reqBody);
