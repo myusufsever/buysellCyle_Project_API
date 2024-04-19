@@ -357,12 +357,6 @@ public void the_apı_user_sends_a_get_request_not_body_and_records_the_response(
     public void the_api_user_sends_a_get_request_and_saves_the_response_returned_from_the_api_get_users_endpoint() {
         API_Methods.getBodyResponse(requestBody.toString());
     }
-    @Given("The api user verifies the content of the data id in the response body.")
-    public void the_api_user_verifies_the_content_of_the_data_id_in_the_response_body() {
-        jsonPath = API_Methods.response.jsonPath();
-        Assert.assertEquals(id, jsonPath.getInt("user[0].id"));
-
-
   @Given("The api user sends the {string} request and saves the {string}")
   public void the_api_user_sends_the_request_and_saves_the(String requestType, String response) {
 
