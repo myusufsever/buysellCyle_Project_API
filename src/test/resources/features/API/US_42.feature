@@ -37,4 +37,18 @@ Feature: As an administrator, I want to be able to add a new address record for 
       | 210 |
 
 
+  @42/3
+  Scenario: When a POST body containing valid authorization credentials and an invalid email (not containing '@')
+  is sent to the /api/profile/addressAdd endpoint,along with fields: customer_id, name, email, address, phone, city, state,
+  country, postal_code, address_type,the expected status code returned should be 422, and the message in the response body
+  should confirm as "The email must be a valid email address.".
+
+
+
+  @42/4
+  Scenario: a POST body containing invalid authorization credentials and necessary data
+  (customer_id, name, email, address, phone, city, state, country, postal_code, address_type)
+  is sent to the /api/profile/addressAdd endpoint, the returned status code should be validated as 401,
+  and the message information in the response body should confirm as "Unauthenticated.".
+
 
