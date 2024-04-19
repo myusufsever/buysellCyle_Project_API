@@ -16,15 +16,12 @@ import org.junit.runner.RunWith;
         features = {"src/test/resources/features/API", "src/test/resources/features/DB"},
         glue = {"stepdefinitions", "hooks"},
 
- 
 
 
-        tags = "  @[US_006-TC_002]",
-
-
-
+        tags = "@HS",
 
         dryRun = false
+
 )
 public class Runner {
 }
