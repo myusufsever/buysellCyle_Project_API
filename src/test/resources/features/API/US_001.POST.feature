@@ -12,7 +12,7 @@ Feature: As a user/administrator, I should be able to create a new customer reco
     Examples:
       | first_name  | last_name| password  | password_confirmation| user_type | referral_code |
       | registerApi | TestApi  | 123123123 | 123123123            | customer  | 0101010101     |
-@simge
+
   Scenario: The creation of a customer via API should be verified to confirm whether the customer exists in the customer list using API connection.
   (The existence of a customer record can be confirmed by comparing the id returned in the response body of the /api/register endpoint with the customer records
   returned in the response body of the /api/get-users endpoint.)

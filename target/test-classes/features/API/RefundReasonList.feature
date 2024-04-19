@@ -36,7 +36,7 @@ Feature: As an administrator, I want to access the Refund & Reason List through 
   Scenario: When a GET request with invalid authorization information is sent to the /api/refundReasonList endpoint, it
   should be verified that the returned status code is 401, and the message in the response body is "Unauthenticated.".
 
-    * The api user constructs the base url with the "invalid" token.
+    * The api user constructs the base url with the "invalid" token
     # APi kullanicisi "invalid" token ile base urli olusturur
     * The api user sets "api/refundReasonList" path parameters
     # APi kullanicisi "api/refundReasonList" path parametrelerini olusturur
