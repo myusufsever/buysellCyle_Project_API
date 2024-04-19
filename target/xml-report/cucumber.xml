@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="4.299">
-    <testcase classname="As an administrator, I want to be able to create a new coupon record via the API connection." name="When a POST body containing valid authorization information and necessary data" time="4.097">
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="4.319">
+    <testcase classname="As a user/administrator, I should be able to create a new customer record in the system via API connection." name="The creation of a customer via API should be verified to confirm whether the customer exists in the customer list using API connection." time="4.069">
         <system-out>
             <![CDATA[* The api user constructs the base url with the "admin" token...............passed
-* The api user sets "api/coupon/couponAdd" path parameters..................passed
-* The api user prepares a POST request containing the "Coupon Ekleme 001" "attemt" 07 "2024-04-10" "2024-06-10" 35 0 1 5 0 1 information to send to the api coupon CouponAdd endpoint..passed
-* The api user sends the POST request and saves the response returned from the api coupon CouponAdd endpoint..passed
-* The api user verifies that the status code is 201.........................passed
-* The api user verifies that the message information in the response body is "coupon added successfully".passed
+* The api user sets "api/get-user" path parameters..........................passed
+* The api user prepares a GET request containing the  366 for which details are to be accessed.passed
+* The api user sends the "getbody" request and saves the "Response".........passed
+* The api user verifies the content of the data 366 in the response body....passed
 ]]>
         </system-out>
     </testcase>

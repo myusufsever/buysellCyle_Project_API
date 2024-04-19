@@ -48,7 +48,7 @@ Feature: As an administrator, I want to access the details of the Refund&Reason 
   detailed information is sent to the /api/refundReasonDetails endpoint, the returned status code should be 401,
   and the message information in the response body should be validated as "Unauthenticated.".
 
-    * The api user constructs the base url with the "invalid" token.
+    * The api user constructs the base url with the "invalid" token
     # APi kullanicisi "invalid" token ile base urli olusturur
     * The api user sets "api/refundReasonDetails" path parameters
     # APi kullanicisi "api/refundReasonDetails" path parametrelerini olustur
