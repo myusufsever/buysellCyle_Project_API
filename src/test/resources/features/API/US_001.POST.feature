@@ -18,11 +18,11 @@ Feature: As a user/administrator, I should be able to create a new customer reco
   (The existence of a customer record can be confirmed by comparing the id returned in the response body of the /api/register endpoint with the customer records
   returned in the response body of the /api/get-users endpoint.)
 
-    * The api user constructs the base url with the "customer" token.
-    * The api user sets "api/get-users" path parameters
+    * The api user constructs the base url with the "admin" token.
+    * The api user sets "api/get-user" path parameters
     * The api user prepares a GET request containing the register <id> for which details are to be accessed, to send to the api get-users endpoint.
     * The api user sends a GET request and saves the response returned from the api get-users endpoint.
     * The api user verifies the content of the data id in the response body.
   Examples:
   |id |
-  |358|
+  |366|

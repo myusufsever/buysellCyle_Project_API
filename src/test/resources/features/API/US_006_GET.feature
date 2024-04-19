@@ -30,7 +30,7 @@ Scenario Outline: When a GET request body containing valid authorization informa
 the data (id, title ,coupon_code, coupon_type, start_date, end_date, discount, discount_type, minimum_shopping, maximum_discount, created_by, updated_by, is_expire, is_multiple_buy, multiple_buy_limit, created_at, updated_at ) returned in the response body should be validated.
 
 
-  * The api user constructs the base url with the "customer" token.
+  * The api user constructs the base url with the "admin" token.
 
   * The api user sets "api/get-user" path parameters
 

@@ -331,18 +331,18 @@ public void the_apı_user_sends_a_get_request_not_body_and_records_the_response(
     }
 
     @Given("The api user prepares a GET request containing the register {int} for which details are to be accessed, to send to the api get-users endpoint.")
-    public void the_api_user_prepares_a_get_request_containing_the_register_for_which_details_are_to_be_accessed_to_send_to_the_api_get_users_endpoint(Integer int1) {
+    public void the_api_user_prepares_a_get_request_containing_the_register_for_which_details_are_to_be_accessed_to_send_to_the_api_get_users_endpoint(int  id) {
         requestBody = new JSONObject();
         requestBody.put("id", id);
     }
     @Given("The api user sends a GET request and saves the response returned from the api get-users endpoint.")
     public void the_api_user_sends_a_get_request_and_saves_the_response_returned_from_the_api_get_users_endpoint() {
-        API_Methods.postResponse(requestBody.toString());
+        API_Methods.getBodyResponse(requestBody.toString());
     }
     @Given("The api user verifies the content of the data id in the response body.")
     public void the_api_user_verifies_the_content_of_the_data_id_in_the_response_body() {
         jsonPath = API_Methods.response.jsonPath();
-        Assert.assertEquals(id, jsonPath.getInt("get-user[0].id"));
+        Assert.assertEquals(id, jsonPath.getInt("user[0].id"));
     }
 
 
