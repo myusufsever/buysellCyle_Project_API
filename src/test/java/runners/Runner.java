@@ -16,16 +16,11 @@ import org.junit.runner.RunWith;
         features = {"src/test/resources/features/API", "src/test/resources/features/DB"},
         glue = {"stepdefinitions", "hooks"},
 
- 
-
-
-        tags = "@API",
-
-
-        tags = "@[US_002-TC_002]",
+        tags = "@simge2",
 
 
         dryRun = false
+
 )
 public class Runner {
 }
