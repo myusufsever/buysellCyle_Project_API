@@ -223,25 +223,31 @@ public class API_Stepdefinitions {
     public void the_apı_user_sends_a_get_request_and_records_the_response() {
         API_Methods.getBodyResponse(requestBody.toString());//json objesi ile oluşturuldu
     }
+
     @Given("The API user records the response , confirming that the status code is {string} and the message is {string}.")
-    public void the_apı_user_records_the_response_confirming_that_the_status_code_is_and_the_message_is_Unauthenticated(String code,String message) {
-        Assert.assertTrue(API_Methods.tryCatchGet().contains(code+message));
+
+    public void the_apı_user_records_the_response_confirming_that_the_status_code_is_and_the_message_is_Unauthenticated(String code, String message) {
+        Assert.assertTrue(API_Methods.tryCatchGet().contains(code + message));
+        //  API_Methods.statusCodeAssert(401);
+        //  API_Methods.messageAssert("Unauthenticated");
+
+
+
 
     }
+
     @Given("The api user validates the {int}, {string}, {string}, {string}, {string} of the response body with index {int}.")
-    public void the_api_user_validates_the_of_the_response_body_with_index(int id,String first_name,String username,String email,String name, int dataIndex) {
+    public void the_api_user_validates_the_of_the_response_body_with_index(int id, String first_name, String username, String email, String name, int dataIndex) {
 //The api user validates the <id> "<first_name>" "<username>" "<email>" "<phone>" "<name>"of the response body with index <dataIndex>.
         jsonPath = API_Methods.response.jsonPath();
 
-        Assert.assertEquals(id, jsonPath.getInt("user["+dataIndex+"].id"));
-        Assert.assertEquals(first_name, jsonPath.getString("user["+dataIndex+"].first_name"));
-        Assert.assertEquals(username, jsonPath.getString("user["+dataIndex+"].username"));
-        Assert.assertEquals(email, jsonPath.getString("user["+dataIndex+"].email"));
-        Assert.assertNull(jsonPath.get("user["+dataIndex+"].phone"));
-        Assert.assertTrue(jsonPath.getString("user["+dataIndex+"].name").contains(name));
+        Assert.assertEquals(id, jsonPath.getInt("user[" + dataIndex + "].id"));
+        Assert.assertEquals(first_name, jsonPath.getString("user[" + dataIndex + "].first_name"));
+        Assert.assertEquals(username, jsonPath.getString("user[" + dataIndex + "].username"));
+        Assert.assertEquals(email, jsonPath.getString("user[" + dataIndex + "].email"));
+        Assert.assertNull(jsonPath.get("user[" + dataIndex + "].phone"));
+        Assert.assertTrue(jsonPath.getString("user[" + dataIndex + "].name").contains(name));
     }
-
-
 
 
     @Given("The API user records the response , confirming that the status code is '401' and the message is Unauthorized.")
@@ -273,6 +279,7 @@ public class API_Stepdefinitions {
         Assert.assertEquals(created_at, jsonPath.getString("couponDetails[0].created_at"));
         Assert.assertEquals(updated_at, jsonPath.getString("couponDetails[0].updated_at"));
     }
+
     @Given("The api user prepares a GET request containing the  {int} for which details are to be accessed.")
     public void the_api_user_prepares_a_get_request_containing_the_for_which_details_are_to_be_accessed(int id) {
         requestBody = new JSONObject();
@@ -280,6 +287,7 @@ public class API_Stepdefinitions {
         System.out.println(requestBody);
 
     }
+
     @Given("The API user records the response , verifying that the status code is '404' and message coupon not found.")
     public void the_apı_user_records_the_response_verifying_that_the_status_code_is_and_message_coupon_not_found() {
         Assert.assertTrue(API_Methods.tryCatchGetBody(requestBody.toString()).equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
@@ -369,6 +377,68 @@ public void the_apı_user_sends_a_get_request_not_body_and_records_the_response(
 
     }
 
+
+    // =========================  Z  =========================================================================
+
+
+    @Given("The api user validates the {int}, {int}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {int}, {int}, {string}, {string} of the response body with index {int}.")
+    public void the_api_user_validates_the_of_the_response_body_with_index(Integer id, Integer customer_id, String name, String email, String phone, String address, String city, String state, String country, Integer is_shipping_default, Integer is_billing_default, String created_at, String updated_at, Integer dataindex) {
+
+        API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].id", equalTo(id));
+        API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].customer_id", equalTo(customer_id));
+        API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].email", equalTo(email));
+        API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].phone", equalTo(phone));
+        API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].address", equalTo(address));
+        API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].state", equalTo(state));
+        API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].country", equalTo(country));
+        API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].is_shipping_default", equalTo(is_shipping_default));
+        API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].is_billing_default", equalTo(is_billing_default));
+        API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].created_at", equalTo(created_at));
+        API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].updated_at", equalTo(updated_at));
+    }
+
+    @Given("The api user prepares a GET request containing the {int} for which details are not accessed.")
+    public void the_api_user_prepares_a_get_request_containing_the_for_which_details_are_not_accessed(Integer int1) {
+        requestBody = new JSONObject();
+        requestBody.put("id", id);
+        System.out.println(requestBody);
+
+        //Assert.assertTrue(API_Methods.tryCatchGetBody(requestBody.toString()).equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
+
+
+    }
+
+    @Given("The API user records the response from the api refundReasonList endpoint, confirming that the status code is {int} and the reason phrase is Unauthenticated.")
+    public void the_apı_user_records_the_response_from_the_api_refund_reason_list_endpoint_confirming_that_the_status_code_is_and_the_reason_phrase_is_unauthenticated(Integer int1) {
+        Assert.assertTrue(API_Methods.tryCatchGet().equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
+
+    }
+
+    @Given("The api user verifies that the message information in the response body is address not found")
+    public void the_api_user_verifies_that_the_message_information_in_the_response_body_is_address_not_found() {
+        Assert.assertTrue(API_Methods.tryCatchGet().equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
+
+    }
+
+    @Given("The api user prepares a POST request containing the {string}, {string}, {string} information to send to the api departmentAdd endpoint.")
+    public void the_api_user_prepares_a_post_request_containing_the_information_to_send_to_the_api_department_add_endpoint(String name, String details, String status) {
+        reqBody = new HashMap<>();
+        reqBody.put("name",name);
+        reqBody.put("details", details);
+        reqBody.put("status", status);
+
+
+    }
+    @Given("The api user sends a GET request and saves the response returned from the api departmentAdd endpoint.")
+    public void the_api_user_sends_a_get_request_and_saves_the_response_returned_from_the_api_department_add_endpoint() {
+        API_Methods.postResponse(reqBody);
+
+    }
+
+
+
+
+
     @Given("The api user validates the {int}, {string}, {string}, {string} of the response body .")
     public void the_api_user_validates_the_of_the_response_body(int id, String first_name, String last_name, String email) {
 
@@ -386,5 +456,6 @@ public void the_apı_user_sends_a_get_request_not_body_and_records_the_response(
 
 
     }
+
 
 
