@@ -4,7 +4,7 @@ Feature: As an administrator, I want to be able to add a new Refund&Reason recor
   /api/refundReasonAdd endpoint, the returned status code should be 201, and the message information in the
   response body should be verified as "refundReason added successfully".
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "admin" token
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/refundReasonAdd" path parameters
     # APi kullanicisi "api/refundReasonAdd" path parametrelerini olusturur
@@ -26,7 +26,7 @@ Feature: As an administrator, I want to be able to add a new Refund&Reason recor
   (The creation of the record can be verified by sending a GET request to the /api/refundReasonDetails endpoint
   with the added_item_id returned in the response body.)
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "admin" token
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/refundReasonDetails" path parameters
      # APi kullanicisi "api/refundReasonDetails" path parametrelerini olusturur

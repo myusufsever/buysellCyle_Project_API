@@ -320,7 +320,19 @@ public void the_apı_user_sends_a_get_request_not_body_and_records_the_response(
 
 
 
+    @Given("The api user prepares a GET request containing the  {int} for which details are to be accessed")
+    public void the_api_user_prepares_a_get_request_containing_the_for_which_details_are_to_be_accessed(int id) {
+        reqBody = new HashMap<>();
+        reqBody.put("id",id);
 
+    }
+    @Given("The api user verifies the content of the data {int} in the response body")
+    public void the_api_user_verifies_the_content_of_the_data_in_the_response_body(int id) {
+        jsonPath = API_Methods.response.jsonPath();
+        System.out.println(id);
+        System.out.println(jsonPath.getInt("user.id"));
+        Assert.assertEquals(id, jsonPath.getInt("user.id"));
+    }
     @Given("The api user prepares a POST request containing the {string}, {string}, {string}, {string}, {string}, {string} information to send to the api register endpoint.")
     public void the_api_user_prepares_a_post_request_containing_the_information_to_send_to_the_api_register_endpoint(String firstname, String lastname, String password, String passwordconfirm, String usertype, String refferalcode) {
         reqBody = new HashMap<>();
