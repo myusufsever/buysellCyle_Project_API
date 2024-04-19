@@ -6,7 +6,7 @@ Feature: As an administrator, I want to be able to update the Refund&Reason info
   and necessary data (reason) is sent to the /api/refundReasonUpdate/{id} endpoint, the returned status code
   should be 202, and the message information in the response body should be verified as "refundReason updated successfully".
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "admin" token
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/refundReasonUpdate/<id>" path parameters
     # APi kullanicisi "api/refundReasonUpdate/{id}" path parametrelerini olusturur
@@ -31,7 +31,7 @@ Feature: As an administrator, I want to be able to update the Refund&Reason info
   endpoint, the returned status code should be 404, and the message information in the response body should be
   verified as "refundReason not found".
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "admin" token
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/refundReasonUpdate/<id>" path parameters
     # APi kullanicisi "api/refundReasonUpdate/{id}" path parametrelerini olusturur
@@ -69,7 +69,7 @@ Feature: As an administrator, I want to be able to update the Refund&Reason info
   (The update of the record can be confirmed by sending a GET request to the /api/refundReasonDetails endpoint
   with the updated_Id returned in the response body.)
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "admin" token
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/refundReasonDetails" path parameters
     # APi kullanicisi "api/refundReasonDetails" path parametrelerini olusturur

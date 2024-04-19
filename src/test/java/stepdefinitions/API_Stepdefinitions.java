@@ -317,6 +317,10 @@ public void the_apı_user_sends_a_get_request_not_body_and_records_the_response(
 
     }
     //----------------------------simge----------------------------------
+
+
+
+
     @Given("The api user prepares a POST request containing the {string}, {string}, {string}, {string}, {string}, {string} information to send to the api register endpoint.")
     public void the_api_user_prepares_a_post_request_containing_the_information_to_send_to_the_api_register_endpoint(String firstname, String lastname, String password, String passwordconfirm, String usertype, String refferalcode) {
         reqBody = new HashMap<>();

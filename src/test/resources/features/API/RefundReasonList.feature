@@ -3,7 +3,7 @@ Feature: As an administrator, I want to access the Refund & Reason List through 
   Scenario: When a GET request with valid authorization information is sent to the /api/refundReasonList endpoint, the
   returned status code should be verified as 200, and the message in the response body should be verified as "success".
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "admin" token
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/refundReasonList" path parameters
     # APi kullanicisi "api/refundReasonList" path parametrelerini olusturur
@@ -18,7 +18,7 @@ Feature: As an administrator, I want to access the Refund & Reason List through 
   Scenario Outline: When a GET request containing valid authorization information is sent to the /api/refundReasonList endpoint,
   the returned information in the response body for the reason with ID 'x' should be validated.
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "admin" token
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/refundReasonList" path parameters
     # APi kullanicisi "api/refundReasonList" path parametrelerini olusturur
