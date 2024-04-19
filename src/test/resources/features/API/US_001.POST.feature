@@ -17,6 +17,7 @@ Feature: As a user/administrator, I should be able to create a new customer reco
   (The existence of a customer record can be confirmed by comparing the id returned in the response body of the /api/register endpoint with the customer records
   returned in the response body of the /api/get-users endpoint.)
 
+
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/get-user" path parameters
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
@@ -25,6 +26,7 @@ Feature: As a user/administrator, I should be able to create a new customer reco
  Examples:
   |id |
   |366|
+
 
 
 
