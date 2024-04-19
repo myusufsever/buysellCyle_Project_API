@@ -13,6 +13,7 @@ import pojos.Pojo;
 import utilities.API_Utilities.API_Methods;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 
 import static hooks.HooksAPI.spec;
@@ -24,7 +25,7 @@ public class API_Stepdefinitions {
 
     public static int id;
     public static String fullPath;
-    JSONObject requestBody;
+    public JSONObject requestBody = new JSONObject();
     JsonPath jsonPath;
     HashMap<String, Object> reqBody;
     Pojo requestPojo;
@@ -515,11 +516,31 @@ public void the_apı_user_sends_a_get_request_not_body_and_records_the_response(
 
     }
 
+    //----------------------US_008 GET HariSeldon--------------------------------------
 
-
-
-
+    @Given("The api user validates the {int}, {int}, {string}, {int}, {string}, {string}, {string} of the response body.")
+    public void the_api_user_validates_the_12t15_000000z_of_the_response_body(int id, int year, String name, int type, String date, String created_at, String updated_at)
+    {
+        jsonPath=API_Methods.response.jsonPath();
+        Assert.assertEquals(id,jsonPath.getInt("holidayDetails[0].id"));
+        Assert.assertEquals(year,jsonPath.getInt("holidayDetails[0].year"));
+        Assert.assertEquals(name,jsonPath.getString("holidayDetails[0].name"));
+        Assert.assertEquals(type,jsonPath.getInt("holidayDetails[0].type"));
+        Assert.assertEquals(date,jsonPath.getString("holidayDetails[0].date"));
+        Assert.assertEquals(created_at,jsonPath.getString("holidayDetails[0].created_at"));
+        Assert.assertEquals(updated_at,jsonPath.getString("holidayDetails[0].updated_at"));
     }
+
+    @Given("The API user sends a {string} request and records the response from the {string} endpoint.")
+    public void the_apı_user_sends_a_get_request_and_records_the_response_from_the_api_endpoint(String requestType, String endpoint) {
+        switch (requestType.toUpperCase()){
+            case "GET": API_Methods.getResponse();break;
+            case "POST": API_Methods.postResponse(requestBody);break;
+            case "PATCH": API_Methods.patchResponse(requestBody);break;
+            case "DELETE": API_Methods.deleteResponse(requestBody);break;
+        }
+    }
+}
 
 
 
