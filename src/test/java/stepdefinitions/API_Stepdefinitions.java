@@ -1,5 +1,6 @@
 package stepdefinitions;
 
+import com.beust.ah.A;
 import com.github.javafaker.Faker;
 import config_Requirements.ConfigReader;
 import hooks.HooksAPI;
@@ -353,7 +354,20 @@ public class API_Stepdefinitions {
 
     }
 
+    @Given("The api user verifies the content of the data {int}, {string}, {int}, {string}, {string}, {string} in the response body.")
+    public void the_api_user_verifies_the_content_of_the_data_in_the_response_body(int id, String name, int status, String details, String created_at, String updated_at) {
+        JsonPath jsonPath=API_Methods.response.jsonPath();
 
+        Assert.assertEquals(id,jsonPath.getInt("departmentDetails[0].id"));
+        Assert.assertEquals(name,jsonPath.getString("departmentDetails[0].name"));
+        Assert.assertEquals(status,jsonPath.getInt("departmentDetails[0].status"));
+        Assert.assertEquals(details,jsonPath.getString("departmentDetails[0].details"));
+        Assert.assertNull(jsonPath.getString("departmentDetails[0].created_at"));
+        Assert.assertNull(jsonPath.getString("departmentDetails[0].updated_at"));
+
+
+
+    }
 
 
 
