@@ -5,7 +5,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
   to the /api/refundReasonDelete endpoint, the returned status code should be 202, and the message information
   in the response body should be verified as "refundReason deleted successfully".
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "admin" token
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/refundReasonDelete" path parameters
     # APi kullanicisi "api/refundReasonDelete" path parametrelerini olusturur
@@ -29,7 +29,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
   system) refund&reason ID is sent to the /api/refundReasonDelete endpoint, the returned status code should be
   404, and the message information in the response body should be verified as "refundReason not found".
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "admin" token
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/refundReasonDelete" path parameters
     # APi kullanicisi "api/refundReasonDelete" path parametrelerini olusturur
@@ -47,7 +47,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
   sent to the /api/refundReasonDelete endpoint, the returned status code should be 401, and the message
   information in the response body should be verified as "Unauthenticated.".
 
-    * The api user constructs the base url with the "invalid" token.
+    * The api user constructs the base url with the "invalid" token
     # APi kullanicisi "invalid" token ile base urli olusturur
     * The api user sets "api/refundReasonDelete" path parameters
     # APi kullanicisi "api/refundReasonDelete" path parametrelerini olusturur
@@ -65,7 +65,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
   (The deletion of the record can be confirmed by sending a GET request to the /api/refundReasonDetails
   endpoint with the Deleted_Id returned in the response body.)
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "admin" token
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/refundReasonDetails" path parameters
     * The api user prepares a GET request containing the refund reason <id> for which details are to be accessed, to send to the api refundReasonDetails endpoint.

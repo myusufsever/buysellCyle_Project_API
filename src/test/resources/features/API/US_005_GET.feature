@@ -4,7 +4,7 @@ Feature: As an administrator, I should be able to access all registered user inf
   Scenario Outline: When a GET request is sent to the /api/get-users endpoint with valid authorization credentials, the expected status code
   returned should be 200, and the message in the response body should confirm: "success".
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "admin" token
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/get-users" path parameters
     # APi kullanicisi "api/get-users" path parametrelerini olusturur
@@ -24,7 +24,7 @@ Feature: As an administrator, I should be able to access all registered user inf
   Scenario Outline: When a GET request is sent to the /api/get-users endpoint with valid authorization credentials, the information returned in the response body for the user with id(x) should be validated,
   including fields such as first_name, username, email, name.
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "admin" token
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/get-users" path parameters
     # APi kullanicisi "api/get-users" path parametrelerini olusturur
@@ -43,7 +43,7 @@ Feature: As an administrator, I should be able to access all registered user inf
     Scenario Outline: When a GET request is sent to the /api/get-users endpoint with invalid authorization credentials,
     the expected status code returned should be 401, and the message in the response body should confirm: "Unauthenticated.".
 
-      * The api user constructs the base url with the "invalid" token.
+      * The api user constructs the base url with the "invalid" token
     # APi kullanicisi "invalid" token ile base urli olusturur
       * The api user sets "api/get-users" path parameters
     # APi kullanicisi "api/get-users" path parametrelerini olusturur

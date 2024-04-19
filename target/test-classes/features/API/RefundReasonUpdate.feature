@@ -6,7 +6,7 @@ Feature: As an administrator, I want to be able to update the Refund&Reason info
   and necessary data (reason) is sent to the /api/refundReasonUpdate/{id} endpoint, the returned status code
   should be 202, and the message information in the response body should be verified as "refundReason updated successfully".
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "admin" token
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/refundReasonUpdate/<id>" path parameters
     # APi kullanicisi "api/refundReasonUpdate/{id}" path parametrelerini olusturur
@@ -31,7 +31,7 @@ Feature: As an administrator, I want to be able to update the Refund&Reason info
   endpoint, the returned status code should be 404, and the message information in the response body should be
   verified as "refundReason not found".
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "admin" token
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/refundReasonUpdate/<id>" path parameters
     # APi kullanicisi "api/refundReasonUpdate/{id}" path parametrelerini olusturur
@@ -50,13 +50,14 @@ Feature: As an administrator, I want to be able to update the Refund&Reason info
   status code should be 401, and the message information in the response body should be verified
   as "Unauthenticated.".
 
-    * The api user constructs the base url with the "invalid" token.
+    * The api user constructs the base url with the "invalid" token
     # APi kullanicisi "invalid" token ile base urli olusturur
     * The api user sets "api/refundReasonUpdate/<id>" path parameters
     # APi kullanicisi "api/refundReasonUpdate/{id}" path parametrelerini olusturur
     * The api user prepares a PATCH request containing the "<reason>" data to send to the api refundReasonUpdate endpoint.
     # Api kullanicisi api refundReasonUpdate endpointine gondermek icin "<reason>" verisini iceren bir patch request hazirlar
-    * The API user records the response from the api refundReasonUpdate endpoint, confirming that the status code is '401' and the reason phrase is Unauthorized.
+    *  The api user verifies that the status code is 401 and the message information in the response body is "Unauthorized."
+   # * The API user records the response from the api refundReasonUpdate endpoint, confirming that the status code is '401' and the reason phrase is Unauthorized.
     # Api kullanicisi api refundReasonUpdate endpointinden donen responsei kaydeder, status code '401' ve reason phrase Unauthorized oldugunu dogrular
 
     Examples:
@@ -68,7 +69,7 @@ Feature: As an administrator, I want to be able to update the Refund&Reason info
   (The update of the record can be confirmed by sending a GET request to the /api/refundReasonDetails endpoint
   with the updated_Id returned in the response body.)
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "admin" token
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/refundReasonDetails" path parameters
     # APi kullanicisi "api/refundReasonDetails" path parametrelerini olusturur
