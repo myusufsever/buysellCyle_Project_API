@@ -297,11 +297,9 @@ public class API_Stepdefinitions {
         Assert.assertTrue(API_Methods.tryCatchGetBody(requestBody.toString()).equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
 
     }
+
+
 //============================= US_37 GET ==================
-@Given("The API user sends a GET request 'not body' and records the response .")
-public void the_apı_user_sends_a_get_request_not_body_and_records_the_response() {
-    API_Methods.getResponse();//json objesi ile oluşturuldu
-}
 
     @Given("The api user validates the  confirm that the country with an ID of {int} has the following attributes: {string}: TR and {string}: Turkey.")
     public void the_api_user_validates_the_confirm_that_the_country_with_an_ıd_of_has_the_following_attributes_and(int id,String code,String name) {
@@ -694,6 +692,7 @@ public void the_apı_user_sends_a_get_request_not_body_and_records_the_response(
 
 
 
+
     @Given("The api user prepares a GET request containing the  <country_id> for which details are to be accessed")
     public void the_api_user_prepares_a_get_request_containing_the_country_id_for_which_details_are_to_be_accessed(int country_id) {
         requestBody = new JSONObject();
@@ -715,7 +714,66 @@ public void the_apı_user_sends_a_get_request_not_body_and_records_the_response(
 
 
 
+
+    //===================== US_ 34 _POST =======================
+
+    @Given("The api user prepares a POST request containing the {string},{string},{string},{string},{string},{string},{string},{string},{string} information to send to the api.")
+    public void the_api_user_prepares_a_post_request_containing_the_information_to_send_to_the_api (String
+                                                                                                            name, String email, String address, String phone, String city, String state, String country, String
+                                                                                                            postal_code, String address_type){
+        // * The api user prepares a POST request containing the "<name>","<email>","<address>","<phone>","<city>","<state>","<country>","<postal_code>","<address_type>" information to send to the api.
+        reqBody = new HashMap<>();
+        reqBody.put("name", name);
+        reqBody.put("email", email);
+        reqBody.put("address", address);
+        reqBody.put("phone", phone);
+        reqBody.put("city", city);
+        reqBody.put("state", state);
+        reqBody.put("country", country);
+        reqBody.put("postal_code", postal_code);
+        reqBody.put("address_type", address_type);
+
+    }
+    @Given("The api user sends the POST request and saves the response returned.")
+    public void the_api_user_sends_the_post_request_and_saves_the_response_returned () {
+        API_Methods.postResponse(reqBody);
+    }
+
+    //============================= US_25 PATCH =========================
+
+    @Given("The api user prepares a PATCH request containing the {string} data to send to the api.")
+    public void the_api_user_prepares_a_patch_request_containing_the_data_to_send_to_the_api (String name){
+        requestBody = new JSONObject();
+        requestBody.put("name", name);
+
+    }
+    @Given("The api user sends the PATCH request and saves the response returned.")
+    public void the_api_user_sends_the_patch_request_and_saves_the_response_returned () {
+        API_Methods.patchResponse(requestBody.toString());
+    }
+    @Given("The API user records the response, confirming that the status code is '404' and the reason phrase is Not Found.")
+    public void the_apı_user_records_the_response_confirming_that_the_status_code_is_and_the_reason_phrase_is_not_found
+            () {
+        Assert.assertTrue(API_Methods.tryCatchPatch(requestBody.toString()).equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
+    }
+    @Given("The API user records the response, confirming that the status code is '401' and the reason phrase is Unauthorized.")
+    public void the_apı_user_records_the_response_confirming_that_the_status_code_is_and_the_reason_phrase_is_unauthorized
+            () {
+        Assert.assertTrue(API_Methods.tryCatchPatch(requestBody.toString()).equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
+    }
+    @Given("The api user verifies that the reason information in the response body {string}.")
+    public void the_api_user_verifies_that_the_reason_information_in_the_response_body (String nameValue){
+        jsonPath = API_Methods.response.jsonPath();
+
+        Assert.assertEquals(nameValue, jsonPath.getString("departmentDetails[0].name"));
+    }
+
+
+
 }
+
+
+
 
 
 

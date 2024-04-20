@@ -30,7 +30,7 @@ Feature: When a GET request containing valid authorization credentials and the h
     * The api user validates the <id>, <year>, "<name>", <type>, "<date>", "<created_at>", "<updated_at>" of the response body.
     Examples:
       | id | year |              name                          | type |    date    |        created_at           |          updated_at         |
-      | 2 | 2023 | 23 Nisan Ulusal Egemenlik ve Çocuk Bayramı |   0  | 2023-04-23 | 2024-03-12T15:32:02.000000Z | 2024-03-12T15:32:02.000000Z |
+      | 2 | 2025 | Spring |   0  | | 2024-03-12T15:32:02.000000Z | 2024-04-19T13:31:47.000000Z |
 
 
   @HS
