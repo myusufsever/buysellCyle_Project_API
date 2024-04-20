@@ -18,13 +18,14 @@ import org.junit.runner.RunWith;
 
 
 
-        tags = "@simge6",
+        tags = "@[US_038-TC_002]",
 
 
 
 
 
         dryRun = false
+
 
 )
 public class Runner {
