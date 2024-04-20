@@ -4,13 +4,13 @@ Feature:When a GET request containing valid authorization credentials and the cu
 
 
   @[US_006-TC_001]
-  Scenario Outline:When a GET request containing valid authorization credentials and the customer id data for the desired detailed information is sent to the /api/get-user endpoint, the expected status code returned should be 200, and the message in the response body should confirm: "success".
+  Scenario Outline:When a GET request containing valid authorization credentials and the customer id data for the desired detailed information is sent to the /api/get-user endpoint, the expected status code returned should be 200, and the message in the response body should confirm: "success"
 
-    * The api user constructs the base url with the "admin" token.
+    * The api user constructs the base url with the "admin" token
 
     * The api user sets "api/get-user" path parameters
 
-    * The api user prepares a GET request containing the  <id> for which details are to be accessed.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
 
     * The API user sends a GET request and records the response .
 
@@ -30,15 +30,15 @@ Scenario Outline: When a GET request body containing valid authorization informa
 the data (id, title ,coupon_code, coupon_type, start_date, end_date, discount, discount_type, minimum_shopping, maximum_discount, created_by, updated_by, is_expire, is_multiple_buy, multiple_buy_limit, created_at, updated_at ) returned in the response body should be validated.
 
 
-  * The api user constructs the base url with the "admin" token.
+  * The api user constructs the base url with the "admin" token
 
   * The api user sets "api/get-user" path parameters
 
-  * The api user prepares a GET request containing the  <id> for which details are to be accessed.
+  * The api user prepares a GET request containing the  <id> for which details are to be accessed
 
   * The API user sends a GET request and records the response .
 
-  *  The api user validates the <id>, "<first_name>", "<last_name>", <role_id>, <is_verified>, <is_active>, "<lang_code>", <currency_id>, "<currency_code>", "<name>" of the response body .
+  *  The api user validates the <id>, "<first_name>", "<last_name>", <role_id>, <is_verified>, <is_active>, "<lang_code>", <currency_id>, "<currency_code>", "<name>" of the response body
 
     Examples:
 
@@ -52,11 +52,11 @@ the data (id, title ,coupon_code, coupon_type, start_date, end_date, discount, d
   Scenario Outline: When a GET request containing valid authorization
   credentials and incorrect customer id data is sent to the /api/get-user endpoint, the expected status code returned should be 404, and the message in the response body should confirm: "user not found".
 
-    * The api user constructs the base url with the "customer" token.
+    * The api user constructs the base url with the "customer" token
 
     * The api user sets "api/get-user" path parameters
 
-    * The api user prepares a GET request containing the  <id> for which details are to be accessed.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
 
     * The API user records the response , verifying that the status code is '404' and message coupon not found.
 
@@ -69,11 +69,11 @@ the data (id, title ,coupon_code, coupon_type, start_date, end_date, discount, d
   Scenario Outline: When a GET request body containing invalid authorization information and the coupon ID to access details is sent to the api/get-user endpoint,
   the returned status code should be 401, and the message information should be verified as "Unauthenticated.".
 
-    * The api user constructs the base url with the "invalid" token.
+    * The api user constructs the base url with the "invalid" token
 
     * The api user sets "api/get-user" path parameters
 
-    * The api user prepares a GET request containing the  <id> for which details are to be accessed.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
 
     * The API user records the response , confirming that the status code is '401' and the message is Unauthorized.
 
