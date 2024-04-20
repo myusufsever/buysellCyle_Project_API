@@ -691,6 +691,30 @@ public void the_apı_user_sends_a_get_request_not_body_and_records_the_response(
             case "DELETE": API_Methods.deleteResponse(requestBody);break;
         }
     }
+
+
+
+    @Given("The api user prepares a GET request containing the  <country_id> for which details are to be accessed")
+    public void the_api_user_prepares_a_get_request_containing_the_country_id_for_which_details_are_to_be_accessed(int country_id) {
+        requestBody = new JSONObject();
+        requestBody.put("country_id",country_id);
+    }
+
+    @Given("The api user validates the {int} , {string}  of the response body")
+    public void the_api_user_validates_the_of_the_response_body(int id, String name) {
+        jsonPath = API_Methods.response.jsonPath();
+
+        Assert.assertEquals(id, jsonPath.getInt("addresses[6].id"));
+        Assert.assertEquals(name, jsonPath.getString("addresses[6].name"));
+    }
+
+
+
+
+
+
+
+
 }
 
 

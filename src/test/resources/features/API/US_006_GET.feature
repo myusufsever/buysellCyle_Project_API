@@ -38,7 +38,7 @@ the data (id, title ,coupon_code, coupon_type, start_date, end_date, discount, d
 
   * The API user sends a GET request and records the response .
 
-  *  The api user validates the <id>, "<first_name>", "<last_name>", <role_id>, <is_verified>, <is_active>, "<lang_code>", <currency_id>, "<currency_code>", "<name>" of the response body
+  * The api user validates the <id>, "<first_name>", "<last_name>", <role_id>, <is_verified>, <is_active>, "<lang_code>", <currency_id>, "<currency_code>", "<name>" of the response body
 
     Examples:
 
