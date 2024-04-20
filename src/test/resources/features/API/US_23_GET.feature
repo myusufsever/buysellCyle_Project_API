@@ -14,9 +14,6 @@ Feature:As an administrator, I want to be able to access detailed information ab
     * The api user verifies that the status code is 200
     * The api user verifies that the message information in the response body is "success"
 
-    # * The api user verifies the content of the data <id>, "<reason>", "<created_at>", "<updated_at>" in the response body.
-    # API kullanicisi response bodydeki data <id>, "<reason>", "<created_at>", "<updated_at>"  içeriklerini doğrular.
-
     Examples:
       | id |
       | 1  |
@@ -78,6 +75,7 @@ Feature:As an administrator, I want to be able to access detailed information ab
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
       # Api kullanicisi api refundReasonDetails endpointine gondermek icin detaylarina erisilmek istenen refund reason idsini iceren bir get request hazirlar
     * The API user records the response from the api refundReasonList endpoint, confirming that the status code is '401' and the reason phrase is Unauthorized.
+
     Examples:
 
       | id |
