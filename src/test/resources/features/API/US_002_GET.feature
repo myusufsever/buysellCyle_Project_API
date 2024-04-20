@@ -24,7 +24,7 @@ Feature:As a user, I should be able to access detailed information about the use
   @[US_002-TC_002]
 
 
-    # YUSUF HOCAM BENDE BENZER BİR METHOD VARDI SİZİNKİNİ ONUNLA GÜNCELLEDİM VE KOD ÇALIŞIYOR, SİZİN STEPLERİNİZİ YORUMA ALDIM İD BOŞA ÇIKMIŞ OLDU SİZ YİNE KONTROL EDERSİNİZ
+
   Scenario Outline: When a GET request is sent to the /api/customerGetUser endpoint with valid authorization credentials, the data returned in the response body (first_name, last_name, email) should be validated to match the information of the user who logged into the system.
   (The values provided in the request body during registration at the /api/register endpoint should match the user information (first_name, last_name, email) returned in the response body at the /api/customerGetUser endpoint.).
 
