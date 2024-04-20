@@ -12,6 +12,7 @@ import static stepdefinitions.API_Stepdefinitions.fullPath;
 public class API_Methods {
 
     public static Response response;
+    public static String exceptionMesaj;
 
     public static Response getResponse() {
         response = given()
@@ -153,6 +154,30 @@ public class API_Methods {
         response.then()
                 .assertThat()
                 .body("message", equalTo(message));
+
+    }
+
+
+
+    public static void requestResponse(String request, Object requestBody) {
+
+        try {
+            if (requestBody==null){response = given().spec(spec).when().get(fullPath);}
+            else {
+                switch (request.toUpperCase()){
+                    case "GET":  response = given().spec(spec).contentType(ContentType.JSON).when().body(requestBody).get(fullPath);break;
+                    case "POST": response = given().spec(spec).contentType(ContentType.JSON).when().body(requestBody).post(fullPath);break;
+                    case "PATCH": response = given().spec(spec).contentType(ContentType.JSON).when().body(requestBody).patch(fullPath);break;
+                    case "DELETE": response = given().spec(spec).contentType(ContentType.JSON).when().body(requestBody).delete(fullPath);break;
+                }
+            }
+
+            response.prettyPrint();
+        } catch (Exception e) {
+            exceptionMesaj = e.getMessage();
+        }
+        System.out.println("Exception Mesaj : " + exceptionMesaj);
+
 
     }
 }
