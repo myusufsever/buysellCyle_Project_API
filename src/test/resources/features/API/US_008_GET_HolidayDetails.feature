@@ -23,7 +23,7 @@ about the holiday with the specified id number via API connection.
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/holidayDetails" path parameters
-    * The api user prepares a GET request containing the  <id> for which details are to be accessed
+    * The api user prepares a GET request containing the <id> for which details are to be accessed.
     * The API user sends a GET request and records the response .
     * The api user validates the <id>, <year>, "<name>", <type>, "<date>", "<created_at>", "<updated_at>" of the response body.
     Examples:
@@ -38,7 +38,8 @@ about the holiday with the specified id number via API connection.
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/holidayDetails" path parameters
-    * The api user prepares a GET request containing the <id> for which details are to be accessed.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
+    * The API user sends a GET request and records the response .
     * The api user verifies that the status code is 404 and the message information in the response body is "holiday not found".
 
     Examples:
@@ -50,10 +51,10 @@ about the holiday with the specified id number via API connection.
   Scenario Outline: When a GET request body containing invalid authorization information and the coupon ID to access details is sent to the /api/coupon/couponDetails endpoint,
   the returned status code should be 401, and the message information should be verified as "Unauthenticated.".
 
-    * The api user constructs the base url with the "invalid" token
+    * The api user constructs the base url with the "admin" token
     * The api user sets "api/holidayDetails" path parameters
-    * The api user prepares a GET request containing the <id> for which details are to be accessed.
-    * The api user verifies that the status code is 401 and the message information in the response body is "Unauthenticated.".
+    * The api user prepares a GET request containing the "id" as <id> for which details are to be accessed.
+    * The api user verifies that for "getbody" request type the status code is 401 and the message information in the response body is "Unauthorized"
 
     Examples:
       | id |

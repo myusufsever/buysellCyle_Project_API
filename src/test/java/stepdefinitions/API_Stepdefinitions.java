@@ -697,16 +697,7 @@ public class API_Stepdefinitions {
         Assert.assertEquals(updated_at,jsonPath.getString("holidayDetails[0].updated_at"));
     }
 
-    @Given("The API user sends a {string} request and records the response from the {string} endpoint.")
-    public void the_apı_user_sends_a_get_request_and_records_the_response_from_the_api_endpoint(String requestType, String endpoint) {
-        API_Methods.requestResponse(requestType, requestBody);
-//        switch (requestType.toUpperCase()){
-//            case "GET": API_Methods.getResponse();break;
-//            case "POST": API_Methods.postResponse(requestBody);break;
-//            case "PATCH": API_Methods.patchResponse(requestBody);break;
-//            case "DELETE": API_Methods.deleteResponse(requestBody);break;
-//        }
-    }
+
 
 
 
@@ -785,23 +776,8 @@ public class API_Stepdefinitions {
 
         Assert.assertEquals(nameValue, jsonPath.getString("departmentDetails[0].name"));
     }
-    @Given("The api user verifies that the status code is {int} and the message information in the response body is {string}.")
-    public void the_api_user_verifies_that_the_status_code_is(int code, String message) {
-        String switchCase= code+message;
-        switch (message){
-            case "200success" : API_Methods.statusCodeAssert(code);API_Methods.messageAssert(message);
-            case "401Unauthenticated." : assertTrue(requestBody.toString().equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
-            case "404holiday not found" : assertTrue(requestBody.toString().equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
-        }
-    }
-    @Given("The api user prepares a GET request containing the {int} for which details are to be accessed.")
-    public void the_api_user_prepares_a_request_containing_the_for_which_details_are_to_be_accessed(int id) {
-        requestBody = new JSONObject();
-        requestBody.put("id", id);
 
 
-
-    }
 }
 
 
