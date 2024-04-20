@@ -21,12 +21,14 @@ import java.util.Objects;
 import static hooks.HooksAPI.spec;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static org.junit.Assert.assertTrue;
 
 public class API_Stepdefinitions {
     public static Response response2;
 
     public static int id;
     public static String fullPath;
+    public static String requestType;
     public JSONObject requestBody = new JSONObject();
     JsonPath jsonPath;
     HashMap<String, Object> reqBody;
@@ -111,7 +113,7 @@ public class API_Stepdefinitions {
       Assert.assertTrue(exceptionMesaj.equals(ConfigReader.getProperty("unauthorizedExceptionMessage","api")));
 
          */
-        Assert.assertTrue(API_Methods.tryCatchGet().equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
+        assertTrue(API_Methods.tryCatchGet().equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
 
     }
 
@@ -139,12 +141,12 @@ public class API_Stepdefinitions {
 
     @Given("The API user records the response from the api refundReasonDetails endpoint, verifying that the status code is '404' and the reason phrase is Not Found.")
     public void the_apı_user_records_the_response_from_the_api_refund_reason_details_endpoint_verifying_that_the_status_code_is_and_the_reason_phrase_is_not_found() {
-        Assert.assertTrue(API_Methods.tryCatchGetBody(requestBody.toString()).equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
+        assertTrue(API_Methods.tryCatchGetBody(requestBody.toString()).equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
     }
 
     @Given("The API user records the response from the api refundReasonDetails endpoint, confirming that the status code is '401' and the reason phrase is Unauthorized.")
     public void the_apı_user_records_the_response_from_the_api_refund_reason_details_endpoint_confirming_that_the_status_code_is_and_the_reason_phrase_is_unauthorized() {
-        Assert.assertTrue(API_Methods.tryCatchGetBody(requestBody.toString()).equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
+        assertTrue(API_Methods.tryCatchGetBody(requestBody.toString()).equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
     }
 
     @Given("The api user prepares a POST request containing the {string} information to send to the api refundReasonAdd endpoint.")
@@ -185,12 +187,12 @@ public class API_Stepdefinitions {
 
     @Given("The API user records the response from the api refundReasonUpdate endpoint, confirming that the status code is '404' and the reason phrase is Not Found.")
     public void the_apı_user_records_the_response_from_the_api_refund_reason_update_endpoint_confirming_that_the_status_code_is_and_the_reason_phrase_is_not_found() {
-        Assert.assertTrue(API_Methods.tryCatchPatch(requestBody.toString()).equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
+        assertTrue(API_Methods.tryCatchPatch(requestBody.toString()).equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
     }
 
     @Given("The API user records the response from the api refundReasonUpdate endpoint, confirming that the status code is '401' and the reason phrase is Unauthorized.")
     public void the_apı_user_records_the_response_from_the_api_refund_reason_update_endpoint_confirming_that_the_status_code_is_and_the_reason_phrase_is_unauthorized() {
-        Assert.assertTrue(API_Methods.tryCatchPatch(requestBody.toString()).equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
+        assertTrue(API_Methods.tryCatchPatch(requestBody.toString()).equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
     }
 
     @Given("The api user verifies that the reason information in the response body is {string}.")
@@ -220,12 +222,12 @@ public class API_Stepdefinitions {
 
     @Given("The API user records the response from the api refundReasonDelete endpoint, confirming that the status code is '404' and the reason phrase is Not Found.")
     public void the_apı_user_records_the_response_from_the_api_refund_reason_delete_endpoint_confirming_that_the_status_code_is_and_the_reason_phrase_is_not_found() {
-        Assert.assertTrue(API_Methods.tryCatchDelete(requestBody.toString()).equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
+        assertTrue(API_Methods.tryCatchDelete(requestBody.toString()).equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
     }
 
     @Given("The API user saves the response from the api refundReasonDelete endpoint, verifying that the status code is '401' and the reason phrase is Unauthorized.")
     public void the_apı_user_saves_the_response_from_the_api_refund_reason_delete_endpoint_verifying_that_the_status_code_is_and_the_reason_phrase_is_unauthorized() {
-        Assert.assertTrue(API_Methods.tryCatchDelete(requestBody.toString()).equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
+        assertTrue(API_Methods.tryCatchDelete(requestBody.toString()).equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
     }
     // ================================= US_05 GET =============================
 
@@ -237,7 +239,7 @@ public class API_Stepdefinitions {
     @Given("The API user records the response , confirming that the status code is {string} and the message is {string}.")
 
     public void the_apı_user_records_the_response_confirming_that_the_status_code_is_and_the_message_is_Unauthenticated(String code, String message) {
-        Assert.assertTrue(API_Methods.tryCatchGet().contains(code + message));
+        assertTrue(API_Methods.tryCatchGet().contains(code + message));
         //  API_Methods.statusCodeAssert(401);
         //  API_Methods.messageAssert("Unauthenticated");
 
@@ -256,13 +258,13 @@ public class API_Stepdefinitions {
         Assert.assertEquals(username, jsonPath.getString("user[" + dataIndex + "].username"));
         Assert.assertEquals(email, jsonPath.getString("user[" + dataIndex + "].email"));
         Assert.assertNull(jsonPath.get("user[" + dataIndex + "].phone"));
-        Assert.assertTrue(jsonPath.getString("user[" + dataIndex + "].name").contains(name));
+        assertTrue(jsonPath.getString("user[" + dataIndex + "].name").contains(name));
     }
 
 
     @Given("The API user records the response , confirming that the status code is '401' and the message is Unauthorized.")
     public void the_apı_user_records_the_response__confirming_that_the_status_code_is_and_the_message_is_unauthorized() {
-        Assert.assertTrue(API_Methods.tryCatchGetBody(requestBody.toString()).equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
+        assertTrue(API_Methods.tryCatchGetBody(requestBody.toString()).equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
     }
 
     //========================== US28 GET =========================
@@ -294,7 +296,7 @@ public class API_Stepdefinitions {
 
     @Given("The API user records the response , verifying that the status code is '404' and message coupon not found.")
     public void the_apı_user_records_the_response_verifying_that_the_status_code_is_and_message_coupon_not_found() {
-        Assert.assertTrue(API_Methods.tryCatchGetBody(requestBody.toString()).equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
+        assertTrue(API_Methods.tryCatchGetBody(requestBody.toString()).equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
 
     }
 
@@ -414,7 +416,7 @@ public class API_Stepdefinitions {
     @Given("The api user verifies the content of the data id in the response body")
     public void the_api_user_verifies_the_content_of_the_data_id_in_the_response_body() {
         System.out.println(postId2);
-        Assert.assertTrue(response2.jsonPath().getString("user.id").contains(postId2));
+        assertTrue(response2.jsonPath().getString("user.id").contains(postId2));
     }
     @Given("The api user verifies that for {string} request type the status code is {int} and the message information in the response body is {string}")
     public void the_api_user_verifies_that_for_request_type_the_status_code_is_and_the_message_information_in_the_response_body_is(String requestType, int code, String message) {
@@ -536,13 +538,13 @@ public class API_Stepdefinitions {
 
     @Given("The API user records the response from the api refundReasonList endpoint, confirming that the status code is {int} and the reason phrase is Unauthenticated.")
     public void the_apı_user_records_the_response_from_the_api_refund_reason_list_endpoint_confirming_that_the_status_code_is_and_the_reason_phrase_is_unauthenticated(Integer int1) {
-        Assert.assertTrue(API_Methods.tryCatchGet().equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
+        assertTrue(API_Methods.tryCatchGet().equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
 
     }
 
     @Given("The api user verifies that the message information in the response body is address not found")
     public void the_api_user_verifies_that_the_message_information_in_the_response_body_is_address_not_found() {
-        Assert.assertTrue(API_Methods.tryCatchGet().equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
+        assertTrue(API_Methods.tryCatchGet().equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
 
     }
 
@@ -621,7 +623,7 @@ public class API_Stepdefinitions {
     }
     @Given("The API user records the response from the api profile get-customer-data, confirming that the status code is '401' and the message is Unauthorized.")
     public void the_apı_user_records_the_response_from_the_api_profile_get_customer_data_confirming_that_the_status_code_is_and_the_message_is_unauthorized() {
-        Assert.assertTrue(API_Methods.tryCatchGet().equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
+        assertTrue(API_Methods.tryCatchGet().equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
     }
     // US_09_POST_REQUEST_Kevser
     @Given("The api user prepares a POST request containing the {string} {string} {string} information to send to the api holidayAdd endpoint.")
@@ -663,7 +665,7 @@ public class API_Stepdefinitions {
     }
     @Given("The api user records the response from the api profile address-list endpoint, confirming that the status code is {string} and the reason phrase is Unauthenticated.")
     public void the_api_user_records_the_response_from_the_api_profile_address_list_endpoint_confirming_that_the_status_code_is_and_the_reason_phrase_is_unauthenticated(String string) {
-        Assert.assertTrue(API_Methods.tryCatchGet().equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
+        assertTrue(API_Methods.tryCatchGet().equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
     }
 
     //----------------------US_008 GET HariSeldon--------------------------------------
@@ -682,12 +684,13 @@ public class API_Stepdefinitions {
 
     @Given("The API user sends a {string} request and records the response from the {string} endpoint.")
     public void the_apı_user_sends_a_get_request_and_records_the_response_from_the_api_endpoint(String requestType, String endpoint) {
-        switch (requestType.toUpperCase()){
-            case "GET": API_Methods.getResponse();break;
-            case "POST": API_Methods.postResponse(requestBody);break;
-            case "PATCH": API_Methods.patchResponse(requestBody);break;
-            case "DELETE": API_Methods.deleteResponse(requestBody);break;
-        }
+        API_Methods.requestResponse(requestType, requestBody);
+//        switch (requestType.toUpperCase()){
+//            case "GET": API_Methods.getResponse();break;
+//            case "POST": API_Methods.postResponse(requestBody);break;
+//            case "PATCH": API_Methods.patchResponse(requestBody);break;
+//            case "DELETE": API_Methods.deleteResponse(requestBody);break;
+//        }
     }
     //===================== US_ 34 _POST =======================
 
@@ -728,12 +731,12 @@ public class API_Stepdefinitions {
     @Given("The API user records the response, confirming that the status code is '404' and the reason phrase is Not Found.")
     public void the_apı_user_records_the_response_confirming_that_the_status_code_is_and_the_reason_phrase_is_not_found
             () {
-        Assert.assertTrue(API_Methods.tryCatchPatch(requestBody.toString()).equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
+        assertTrue(API_Methods.tryCatchPatch(requestBody.toString()).equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
     }
     @Given("The API user records the response, confirming that the status code is '401' and the reason phrase is Unauthorized.")
     public void the_apı_user_records_the_response_confirming_that_the_status_code_is_and_the_reason_phrase_is_unauthorized
             () {
-        Assert.assertTrue(API_Methods.tryCatchPatch(requestBody.toString()).equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
+        assertTrue(API_Methods.tryCatchPatch(requestBody.toString()).equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
     }
     @Given("The api user verifies that the reason information in the response body {string}.")
     public void the_api_user_verifies_that_the_reason_information_in_the_response_body (String nameValue){
@@ -741,8 +744,21 @@ public class API_Stepdefinitions {
 
         Assert.assertEquals(nameValue, jsonPath.getString("departmentDetails[0].name"));
     }
+    @Given("The api user verifies that the status code is {int} and the message information in the response body is {string}.")
+    public void the_api_user_verifies_that_the_status_code_is(int code, String message) {
+        String switchCase= code+message;
+        switch (message){
+            case "200success" : API_Methods.statusCodeAssert(code);API_Methods.messageAssert(message);
+            case "401Unauthenticated." : assertTrue(requestBody.toString().equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
+            case "404holiday not found" : assertTrue(requestBody.toString().equals(ConfigReader.getProperty("notFoundExceptionMessage", "api")));
+        }
+    }
+    @Given("The api user prepares a GET request containing the {int} for which details are to be accessed.")
+    public void the_api_user_prepares_a_request_containing_the_for_which_details_are_to_be_accessed(int id) {
+        requestBody = new JSONObject();
+        requestBody.put("id", id);
 
-
+    }
 }
 
 
