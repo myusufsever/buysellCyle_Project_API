@@ -12,6 +12,7 @@ import static stepdefinitions.API_Stepdefinitions.fullPath;
 public class API_Methods {
 
     public static Response response;
+    public static String exceptionMesaj;
 
     public static Response getResponse() {
         response = given()
@@ -155,4 +156,5 @@ public class API_Methods {
                 .body("message", equalTo(message));
 
     }
+
 }

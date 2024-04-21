@@ -1,4 +1,5 @@
-/target
+target/
+src/test/java/runners/Runner.java
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
@@ -44,5 +45,3 @@ build/
 .DS_Store
 
 
-/src/test/java/runners/Runner.java
-/target/
