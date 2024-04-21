@@ -849,6 +849,13 @@ public class API_Stepdefinitions {
         Assert.assertEquals(postal_code,jsonPath.getString("addresses[0].postal_code"));
 
     }
+    //==================================US_21 Delete ======================
+    @Given("The api user prepares a {string} request containing the  {int} for which details are to be accessed")
+    public void the_api_user_prepares_a_get_request_containing_the_for_which_details_are_to_be_accessed(String sorgu,int id) {
+        requestBody = new JSONObject();
+        requestBody.put("id",id);
+
+    }
 
 }
 

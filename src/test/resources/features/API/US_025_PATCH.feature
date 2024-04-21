@@ -27,7 +27,7 @@ Feature: As an administrator, I want to be able to update department information
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/departmentUpdate/<id>" path parameters
     * The api user prepares a PATCH request containing the "<name>" data to send to the api.
-    * The API user records the response, confirming that the status code is '404' and the reason phrase is Not Found.
+    * The api user verifies that for "get" request type the status code is 404 and the message information in the response body is "Not Found"
 
     Examples:
       | id  | name        |
@@ -54,7 +54,7 @@ Feature: As an administrator, I want to be able to update department information
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/departmentDetails" path parameters
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
-    * The API user sends a GET request and records the response .
+    * The api user sends the "getbody" request and saves the "Response"
     * The api user verifies that the reason information in the response body "<nameValue>".
 
     Examples:
