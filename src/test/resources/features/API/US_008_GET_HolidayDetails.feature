@@ -1,6 +1,7 @@
 Feature: As an administrator, I should be able to access detailed information
 about the holiday with the specified id number via API connection.
 
+
   @HS
   Scenario Outline: When a GET request containing valid authorization credentials and the holiday id data for the
   desired detailed information is sent to the /api/holidayDetails endpoint, the expected status code returned
@@ -16,7 +17,6 @@ about the holiday with the specified id number via API connection.
       | id |
       | 2 |
 
-
   @HS
   Scenario Outline: When a GET request containing valid authorization credentials and the holiday id data for
   the desired detailed information is sent to the /api/holidayDetails endpoint, the data returned in the response
@@ -30,7 +30,6 @@ about the holiday with the specified id number via API connection.
     Examples:
       | id | year |  name  | type |    date    |        created_at           |          updated_at         |
       |  2 | 2025 | Spring |   0  |            | 2024-03-12T15:32:02.000000Z | 2024-04-19T13:31:47.000000Z |
-
 
   @HS
   Scenario Outline: When a GET request containing valid authorization credentials and an incorrect (non-existent in the system)
@@ -46,7 +45,6 @@ about the holiday with the specified id number via API connection.
     Examples:
       | id |
       | 222222 |
-
 
   @HS
   Scenario Outline: When a GET request containing invalid authorization credentials and the holiday id data
