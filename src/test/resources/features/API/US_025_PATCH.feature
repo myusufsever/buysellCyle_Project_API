@@ -1,6 +1,6 @@
 Feature: As an administrator, I want to be able to update department information with
   the specified ID number via the API connection.
-
+@zehra
   Scenario Outline: When a PATCH request body containing valid authorization information,
   the department ID to be updated, and necessary data (name, details, status) is sent to the
   /api/departmentUpdate/{id} endpoint, the returned status code should be 202,
