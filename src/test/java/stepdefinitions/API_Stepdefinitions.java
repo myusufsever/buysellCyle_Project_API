@@ -13,10 +13,7 @@ import org.junit.Assert;
 import pojos.Pojo;
 import utilities.API_Utilities.API_Methods;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
 
 import static hooks.HooksAPI.spec;
 import static io.restassured.RestAssured.given;
@@ -422,7 +419,7 @@ public class API_Stepdefinitions {
     public void the_api_user_verifies_that_for_request_type_the_status_code_is_and_the_message_information_in_the_response_body_is(String requestType, int code, String message) {
         if(code==401 && message.equals("Unauthorized")) {
             switch (requestType.toLowerCase()){
-            case "getbody":
+            case "getbody":response2=API_Methods.getBodyResponse(requestBody.toString());
                 Assert.assertEquals(API_Methods.tryCatchGetBody(requestBody.toString()), ConfigReader.getProperty("unauthorizedExceptionMessage", "api"));
                 break;
             case "get":
@@ -700,9 +697,10 @@ public class API_Stepdefinitions {
     }
     //----------------------US_008 GET HariSeldon--------------------------------------
     @Given("The api user validates the {int}, {int}, {string}, {int}, {string}, {string}, {string} of the response body.")
-    public void the_api_user_validates_the_12t15_000000z_of_the_response_body(int id, int year, String name, int type, String date, String created_at, String updated_at)
+    public void the_api_user_validates_the_response_body(int id, int year, String name, int type, String date, String created_at, String updated_at)
     {
         jsonPath=API_Methods.response.jsonPath();
+
         Assert.assertEquals(id,jsonPath.getInt("holidayDetails[0].id"));
         Assert.assertEquals(year,jsonPath.getInt("holidayDetails[0].year"));
         Assert.assertEquals(name,jsonPath.getString("holidayDetails[0].name"));
@@ -848,6 +846,14 @@ public class API_Stepdefinitions {
         Assert.assertEquals(country,jsonPath.getString("addresses[0].country"));
         Assert.assertEquals(postal_code,jsonPath.getString("addresses[0].postal_code"));
 
+    }
+    @Given("The api user prepares a GET request containing {string} {int} to send to the api {string} endpoint.")
+    public void get_request_containing_the_id_for_which_details_are_to_be_accessed_to_send_to_the_api_desired_endpoint(String data, int id, String endpoint) {
+        System.out.println("The api user sent a GET request with " + data + " id: " + id + " to the " + endpoint + " endpoint and the request response result is as below: ");
+        reqBody=new HashMap<>();
+        reqBody.put("id",id);
+        requestBody = new JSONObject();
+        requestBody.put("id", id);
     }
 
 }
