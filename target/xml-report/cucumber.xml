@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite errors="0" failures="1" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="1.016">
-    <testcase classname="As an administrator, I want to be able to add a new address record for a customer specified by customer_id via the API connection." name="a POST body containing invalid authorization credentials and necessary data" time="0.314">
-        <failure message="The scenario has no steps" type="java.lang.Exception"/>
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="8.04">
+    <testcase classname="As an administrator, I should be able to access holiday data for staff members via API connection." name="When a GET request is sent to the /api/holidayList endpoint with valid authorization credentials," time="7.561">
+        <system-out>
+            <![CDATA[* The api user constructs the base url with the "admin" token...............passed
+* The api user sets "api/holidayList" path parameters.......................passed
+* The API user sends a GET request and records the response from the api refundReasonList endpoint..passed
+* The api user verifies that the status code is 200.........................passed
+* The api user verifies that the message information in the response body is "success".passed
+]]>
+        </system-out>
     </testcase>
 </testsuite>
