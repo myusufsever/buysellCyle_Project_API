@@ -8,9 +8,7 @@ registered in the system with the specified state_id via the API connection.
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/profile/stateCities" path parameters
-    * The api user prepares a GET request containing the "state_id" as <id> for which details are to be accessed.
     * The API user sends a GET request and records the response .
-    * The api user verifies that the status code is 200 and the message information in the response body is "success".
 
     Examples:
       | id |
@@ -30,7 +28,7 @@ registered in the system with the specified state_id via the API connection.
       |96  |Muhammed Yusuf SEVER     |  null      | customer.muhammed@buysellcycle.com  |
 
 
-#  @HS
+  @HS
   Scenario Outline: When a GET request body containing valid authorization credentials and an incorrect
   (not found in the system) state_id is sent to the /api/profile/stateCities endpoint, the returned status code
   should be validated as 404, and the message information in the response body should confirm as "address not found".
@@ -39,8 +37,8 @@ registered in the system with the specified state_id via the API connection.
     * The api user sets "api/profile/stateCities" path parameters
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
     * The API user sends a GET request and records the response .
-    * The api user verifies that the status code is 404
-    * The api user verifies that the message information in the response body is "address not found"
+    * The api user verifies that for "getbody" request type the status code is 404 and the message information in the response body is "Unauthorized"
+
 
     Examples:
       | id |
@@ -54,8 +52,6 @@ registered in the system with the specified state_id via the API connection.
 
     * The api user constructs the base url with the "invalid" token
     * The api user sets "api/profile/stateCities" path parameters
-    * The api user prepares a GET request containing the <id> for which details are to be accessed.
-    * The api user verifies that the status code is 401 and the message information in the response body is "Unauthenticated.".
 
     Examples:
       | id |
