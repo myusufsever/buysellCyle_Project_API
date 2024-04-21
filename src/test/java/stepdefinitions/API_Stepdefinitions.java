@@ -683,6 +683,21 @@ public class API_Stepdefinitions {
     }
 
 
+
+    @Given("The api user verifies the content of the data {int}, {string}, {int}, {string}, {string}, {string} in the response body.")
+    public void the_api_user_verifies_the_content_of_the_data_in_the_response_body(int id, String name, int status, String details, String created_at, String updated_at) {
+        JsonPath jsonPath=API_Methods.response.jsonPath();
+
+        Assert.assertEquals(id,jsonPath.getInt("departmentDetails[0].id"));
+        Assert.assertEquals(name,jsonPath.getString("departmentDetails[0].name"));
+        Assert.assertEquals(status,jsonPath.getInt("departmentDetails[0].status"));
+        Assert.assertEquals(details,jsonPath.getString("departmentDetails[0].details"));
+        Assert.assertNull(jsonPath.getString("departmentDetails[0].created_at"));
+        Assert.assertNull(jsonPath.getString("departmentDetails[0].updated_at"));
+
+
+
+    }
     //----------------------US_008 GET HariSeldon--------------------------------------
     @Given("The api user validates the {int}, {int}, {string}, {int}, {string}, {string}, {string} of the response body.")
     public void the_api_user_validates_the_12t15_000000z_of_the_response_body(int id, int year, String name, int type, String date, String created_at, String updated_at)
@@ -777,6 +792,63 @@ public class API_Stepdefinitions {
         Assert.assertEquals(nameValue, jsonPath.getString("departmentDetails[0].name"));
     }
 
+//============================= US_42 POST ==================
+
+    @Given("The api user prepares a POST request containing the {int}, {string}, {string}, {string}, {int}, {string}, {string}, {string}, {int}, {string} informations to send to the api desired endpoint.")
+    public void the_api_user_prepares_a_post_request_containing_the_informations_to_send_to_the_api_desired_endpoint(int customer_id, String name, String email, String address, int phone, String city, String state, String country, int postal_code, String address_type) {
+        requestBody=new JSONObject();
+
+        requestBody.put("customer_id", customer_id);
+        requestBody.put("name", name);
+        requestBody.put("email", email);
+        requestBody.put("address", address);
+        requestBody.put("phone", phone);
+        requestBody.put("city", city);
+        requestBody.put("state", state);
+        requestBody.put("country", country);
+        requestBody.put("postal_code", postal_code);
+        requestBody.put("address_type", address_type);
+
+    }
+
+    @Given("The api user sends the POST request and saves the response returned from the api desired endpoint.")
+    public void the_api_user_sends_the_post_request_and_saves_the_response_returned_from_the_api_desired_endpoint() {
+
+        API_Methods.postResponse(requestBody.toString());
+    }
+    @Given("The api user prepares a GET request containing the refund reason {int} for which details are to be accessed, to send to the api desired endpoint.")
+    public void the_api_user_prepares_a_get_request_containing_the_refund_reason_for_which_details_are_to_be_accessed_to_send_to_the_api_desired_endpoint(int id) {
+
+        reqBody=new HashMap<>();
+        reqBody.put("id",id);
+        requestBody = new JSONObject();
+        requestBody.put("id", id);
+    }
+    @Given("The api user sends a GET request and saves the response returned from the api desired endpoint.")
+    public void the_api_user_sends_a_get_request_and_saves_the_response_returned_from_the_api_desired_endpoint() {
+        // API_Methods.getBodyResponse(requestBody.toString());
+        API_Methods.getBodyResponse(reqBody);
+        System.out.println("reqBody = " + reqBody);
+
+    }
+    //============================= US_40 GET ==================
+    @Given("The api user verifies the content of the data {int} ,{int},{string},{string}, {string}, {string},{string} ,{string},{string},{string} in the response body.")
+    public void the_api_user_verifies_the_content_of_the_data_in_the_response_body(int id, int customer_id, String name, String email, String phone, String address, String city, String state, String country, String postal_code) {
+
+        jsonPath=API_Methods.response.jsonPath();
+
+        Assert.assertEquals(id,jsonPath.getInt("addresses[0].id"));
+        Assert.assertEquals(customer_id,jsonPath.getInt("addresses[0].customer_id"));
+        Assert.assertEquals(name,jsonPath.getString("addresses[0].name"));
+        Assert.assertEquals(email,jsonPath.getString("addresses[0].email"));
+        Assert.assertEquals(phone,jsonPath.getString("addresses[0].phone"));
+        Assert.assertEquals(address,jsonPath.getString("addresses[0].address"));
+        Assert.assertEquals(city,jsonPath.getString("addresses[0].city"));
+        Assert.assertEquals(state,jsonPath.getString("addresses[0].state"));
+        Assert.assertEquals(country,jsonPath.getString("addresses[0].country"));
+        Assert.assertEquals(postal_code,jsonPath.getString("addresses[0].postal_code"));
+
+    }
 
 }
 
