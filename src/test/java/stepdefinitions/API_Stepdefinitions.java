@@ -876,6 +876,15 @@ public class API_Stepdefinitions {
     public void the_api_user_sends_a_get_request_and_saves_the_response_returned_from_the_api_faqs_details_endpoint() {
         API_Methods.getBodyResponse(requestBody.toString());
     }
+
+    //==================================US_21 Delete ======================
+    @Given("The api user prepares a {string} request containing the  {int} for which details are to be accessed")
+    public void the_api_user_prepares_a_get_request_containing_the_for_which_details_are_to_be_accessed(String sorgu,int id) {
+        requestBody = new JSONObject();
+        requestBody.put("id",id);
+
+    }
+
     @Given("The api user verifies the content of the data {int}, null, {string}, {string}, {int}, {string}, {string} in the response body.")
     public void the_api_user_verifies_the_content_of_the_data_null_in_the_response_body(int id, String title, String description, int status, String created_at, String updated_at) {
         jsonPath= API_Methods.response.jsonPath();
@@ -885,6 +894,7 @@ public class API_Stepdefinitions {
         Assert.assertEquals(status,jsonPath.getInt("FaqsDetails[0].status"));
         Assert.assertEquals(created_at,jsonPath.getString("FaqsDetails[0].created_at"));
         Assert.assertEquals(updated_at,jsonPath.getString("FaqsDetails[0].updated_at"));
+
 
     }
 }
