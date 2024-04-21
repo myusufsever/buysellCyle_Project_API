@@ -78,7 +78,7 @@ public class API_Methods {
     }
 
     public static String tryCatchGet() {
-        String exceptionMesaj = null;
+//        String exceptionMesaj = null;
         try {
             response = given()
                     .spec(spec)
@@ -87,13 +87,13 @@ public class API_Methods {
         } catch (Exception e) {
             exceptionMesaj = e.getMessage();
         }
-        System.out.println("Exception Mesaj : " + exceptionMesaj);
+        System.out.println("Exception Message : " + exceptionMesaj);
 
         return exceptionMesaj;
     }
 
     public static String tryCatchGetBody(Object requestBody) {
-        String exceptionMesaj = null;
+//        String exceptionMesaj = null;
         try {
             response = given()
                     .spec(spec)
@@ -104,13 +104,13 @@ public class API_Methods {
         } catch (Exception e) {
             exceptionMesaj = e.getMessage();
         }
-        System.out.println("Exception Mesaj : " + exceptionMesaj);
+        System.out.println("Exception Message : " + exceptionMesaj);
 
         return exceptionMesaj;
     }
 
     public static String tryCatchDelete(Object requestBody) {
-        String exceptionMesaj = null;
+//        String exceptionMesaj = null;
         try {
             response = given()
                     .spec(spec)
@@ -121,13 +121,13 @@ public class API_Methods {
         } catch (Exception e) {
             exceptionMesaj = e.getMessage();
         }
-        System.out.println("Exception Mesaj : " + exceptionMesaj);
+        System.out.println("Exception Message : " + exceptionMesaj);
 
         return exceptionMesaj;
     }
 
     public static String tryCatchPatch(Object requestBody) {
-        String exceptionMesaj = null;
+//        String exceptionMesaj = null;
         try {
             response = given()
                     .spec(spec)
@@ -138,7 +138,7 @@ public class API_Methods {
         } catch (Exception e) {
             exceptionMesaj = e.getMessage();
         }
-        System.out.println("Exception Mesaj : " + exceptionMesaj);
+        System.out.println("Exception Message : " + exceptionMesaj);
 
         return exceptionMesaj;
     }
