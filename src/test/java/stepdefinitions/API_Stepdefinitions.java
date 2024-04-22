@@ -868,7 +868,7 @@ public class API_Stepdefinitions {
 
     //========================== US13 GET =========================
     @Given("The api user prepares a GET request containing the refund reason {int} for which details are to be accessed, to send to the api faqsDetails endpoint.")
-    public void the_api_user_prepares_a_get_request_containing_the_refund_reason_for_which_details_are_to_be_accessed_to_send_to_the_api_faqs_details_endpoint(Integer int1) {
+    public void the_api_user_prepares_a_get_request_containing_the_refund_reason_for_which_details_are_to_be_accessed_to_send_to_the_api_faqs_details_endpoint(int id) {
         requestBody= new JSONObject();
         requestBody.put("id",id);
     }
@@ -894,10 +894,28 @@ public class API_Stepdefinitions {
         Assert.assertEquals(status,jsonPath.getInt("FaqsDetails[0].status"));
         Assert.assertEquals(created_at,jsonPath.getString("FaqsDetails[0].created_at"));
         Assert.assertEquals(updated_at,jsonPath.getString("FaqsDetails[0].updated_at"));
+    }
+
+        //==================================US_10 Patch ======================
+
+        @Given("The api user prepares a PATCH request containing the {string},{string},{string} data to send to the api.")
+        public void the_api_user_prepares_a_patch_request_containing_the_data_to_send_to_the_api(String year, String name, String date) {
+
+            requestBody = new JSONObject();
+            requestBody.put("year", year);
+            requestBody.put("name", name);
+            requestBody.put("date", date);
 
 
+
+        }
+    @Given("The API user records the response from the api holidayUpdate endpoint, confirming that the status code is 400 and the reason phrase is dublicate holiday request.")
+    public void the_apı_user_records_the_response_from_the_api_holiday_update_endpoint_confirming_that_the_status_code_is_and_the_reason_phrase_is_dublicate_holiday_request() {
+
+        Assert.assertTrue(API_Methods.tryCatchPatch(requestBody.toString()).equals(ConfigReader.getProperty("dublicateholidayMessage", "api")));
     }
 }
+
 
 
 
