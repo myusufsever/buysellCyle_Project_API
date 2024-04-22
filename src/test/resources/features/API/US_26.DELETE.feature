@@ -1,9 +1,10 @@
 Feature: As an administrator, I want to be able to delete Refund&Reason information with the specified ID number
   via the API connection.
 
-  Scenario Outline: When a DELETE body containing valid authorization information and the refund&reason ID to be deleted is sent
-  to the /api/refundReasonDelete endpoint, the returned status code should be 202, and the message information
-  in the response body should be verified as "refundReason deleted successfully".
+  Scenario Outline: When a DELETE body containing valid authorization information and the department ID
+  to be deleted is sent to the /api/departmentDelete endpoint, the returned status code should be 202,
+  and the message information in the response body should be verified as "department deleted successfully".
+
 
     * The api user constructs the base url with the "admin" token
     # APi kullanicisi "admin" token ile base urli olusturur
@@ -24,10 +25,10 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
       | id |
       | 25 |
 
+  Scenario Outline: When a DELETE body containing valid authorization information and an incorrect (non-existent in the system)
+  department ID is sent to the /api/departmentDelete endpoint, the returned status code should be 404,
+  and the message information in the response body should be verified as "department not found".
 
-  Scenario Outline: When a DELETE request body containing valid authorization information and an incorrect (non-existent in the
-  system) refund&reason ID is sent to the /api/refundReasonDelete endpoint, the returned status code should be
-  404, and the message information in the response body should be verified as "refundReason not found".
 
     * The api user constructs the base url with the "admin" token
     # APi kullanicisi "admin" token ile base urli olusturur
@@ -43,9 +44,10 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
       | 26 |
 
 
-  Scenario Outline: When a DELETE body containing invalid authorization information and the refund&reason ID to be deleted is
-  sent to the /api/refundReasonDelete endpoint, the returned status code should be 401, and the message
-  information in the response body should be verified as "Unauthenticated.".
+  Scenario Outline: When a DELETE body containing invalid authorization information and the department ID
+  to be deleted is sent to the /api/departmentDelete endpoint, the returned status code should be 401,
+  and the message information in the response body should be verified as "Unauthenticated.".
+
 
     * The api user constructs the base url with the "invalid" token
     # APi kullanicisi "invalid" token ile base urli olusturur
@@ -61,9 +63,9 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
       | 25 |
 
 
-  Scenario Outline: The deletion of the desired Refund&Reason record via the API should be validated from the API.
-  (The deletion of the record can be confirmed by sending a GET request to the /api/refundReasonDetails
-  endpoint with the Deleted_Id returned in the response body.)
+  Scenario Outline: The Deleted_Id information in the response body from the /api/departmentDelete endpoint should be verified
+  to be identical to the id information in the DELETE request body sent to the /api/departmentDelete endpoint.
+
 
     * The api user constructs the base url with the "admin" token
     # APi kullanicisi "admin" token ile base urli olusturur
@@ -76,3 +78,27 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
     Examples:
       | id |
       | 25 |
+
+
+
+  Scenario Outline: The deletion of the department record via the API should be validated from the API itself.
+  (The deletion of the record can be confirmed by sending a GET request to the /api/departmentDetails endpoint
+  with the Deleted_Id returned in the response body.)"
+
+
+
+    * The api user constructs the base url with the "invalid" token
+    # APi kullanicisi "invalid" token ile base urli olusturur
+    * The api user sets "api/refundReasonDelete" path parameters
+    # APi kullanicisi "api/refundReasonDelete" path parametrelerini olusturur
+    * The api user prepares a DELETE request containing the refund reason <id> to be deleted to send to the api refundReasonDelete endpoint.
+    # Api kullanicisi api refundReasonDelete endpointine gondermek icin silinmek istenen refund reason idsini iceren bir delete request hazirlar
+    * The API user saves the response from the api refundReasonDelete endpoint, verifying that the status code is '401' and the reason phrase is Unauthorized.
+    # Api kullanicisi api refundReasonDelete endpointinden donen responsei kaydeder, status code '401' ve reason phrase Unauthorized oldugunu dogrular
+
+    Examples:
+      | id |
+      | 25 |
+
+
+
