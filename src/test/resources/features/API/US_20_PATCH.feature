@@ -7,23 +7,14 @@ Feature: As an administrator, I want to be able to update the Refund&Reason info
   should be 202, and the message information in the response body should be verified as "refundReason updated successfully".
 
     * The api user constructs the base url with the "admin" token
-    # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/refundReasonUpdate/<id>" path parameters
-    # APi kullanicisi "api/refundReasonUpdate/{id}" path parametrelerini olusturur
     * The api user prepares a PATCH request containing the "<reason>" data to send to the api refundReasonUpdate endpoint.
-    # Api kullanicisi api refundReasonUpdate endpointine gondermek icin "<reason>" verisini iceren bir patch request hazirlar
-    * The api user sends the PATCH request and saves the response returned from the api refundReasonUpdate endpoint.
-    # Api kullanicisi patch request gonderir ve api refundReasonUpdate endpointinden donen responsei kaydeder
-    * The api user verifies that the status code is 202
-    # Api kullanicisi status codeun 202 oldugunu dogrular
-    * The api user verifies that the message information in the response body is "refundReason updated successfully"
-    # Api kullanicisi response bodydeki message bilgisinin "refundReason updated successfully" oldugunu dogrular
-    * The api user verifies that the updated id information in the response body matches the id path parameter specified in the endpoint.
-    # Api kullanicisi response body icindeki updated Id bilgisinin endpointde yazan id path parametresi ile ayni oldugu dogrular
+    * The api user sends the "patch" request and saves the "Response"
+    * The api user verifies that for "patchbody" request type the status code is 202 and the message information in the response body is "refundReason updated successfully"
 
     Examples:
-      | id | reason                 |
-      | 25 | Product arrived lately |
+      | id  | reason  |
+      | 122 | Updated |
 
   @20/2
   Scenario Outline: When a PATCH request body containing valid authorization information and an incorrect (non-existent in the
@@ -60,14 +51,16 @@ Feature: As an administrator, I want to be able to update the Refund&Reason info
   /api/refundReasonUpdate/{id} endpoint should be verified to be identical
   to the id path parameter specified in the /api/refundReasonUpdate/{id} endpoint.
 
-    *
-    *
-    *
+    * The api user constructs the base url with the "admin" token
+    * The api user sets "api/refundReasonUpdate/<id>" path parameters
+    * The api user prepares a PATCH request containing the "<reason>" data to send to the api refundReasonUpdate endpoint.
+    * The api user sends the "patch" request and saves the "Response"
+    * The api user verifies that the updated id information in the response body matches the id path parameter specified in the endpoint.
 
 
     Examples:
-      | id | reason                 |
-      | 25 | Product arrived lately |
+      | id  | reason  |
+      | 122 | Updated |
 
   @20/5
   Scenario Outline: The update of the desired Refund&Reason record via the API should be validated from the API.
@@ -77,7 +70,7 @@ Feature: As an administrator, I want to be able to update the Refund&Reason info
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/refundReasonDetails" path parameters
     * The api user prepares a GET request containing the refund reason <id> for which details are to be accessed, to send to the api refundReasonDetails endpoint.
-    * The api user sends a GET request and saves the response returned from the api refundReasonDetails endpoint.
+    * The api user sends the "patch" request and saves the "Response"
     * The api user verifies that the reason information in the response body is "<reasonValue>".
 
     Examples:

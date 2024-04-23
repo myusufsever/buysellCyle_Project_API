@@ -10,9 +10,8 @@ Feature: As an administrator, I want to be able to update department information
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/holidayUpdate/<id>" path parameters
     * The api user prepares a PATCH request containing the "<year>","<name>","<date>" data to send to the api.
-    * The api user sends the PATCH request and saves the response returned.
-    * The api user verifies that the status code is 202
-    * The api user verifies that the message information in the response body is "holiday updated successfully"
+    * The api user sends the "patch" request and saves the "Response"
+    * The api user verifies that for "patch" request type the status code is 202 and the message information in the response body is "holiday updated successfully"
     * The api user verifies that the updated id information in the response body matches the id path parameter specified in the endpoint.
 
     Examples:
@@ -42,7 +41,7 @@ Feature: As an administrator, I want to be able to update department information
     * The api user constructs the base url with the "invalid" token
     * The api user sets "api/holidayUpdate/<id>" path parameters
     * The api user prepares a PATCH request containing the "<year>","<name>","<date>" data to send to the api.
-    * The API user records the response, confirming that the status code is '401' and the reason phrase is Unauthorized.
+    * The api user verifies that for "patch" request type the status code is 401 and the message information in the response body is "Unauthorized"
 
     Examples:
       | id  | year | name     | date       |
@@ -72,7 +71,8 @@ Feature: As an administrator, I want to be able to update department information
     * The api user sets "api/holidayUpdate/<id>" path parameters
     * The api user prepares a PATCH request containing the "<year>","<name>","<date>" data to send to the api.
     * The api user sends the "patch" request and saves the "Response"
-    * The API user records the response from the api holidayUpdate endpoint, confirming that the status code is 400 and the reason phrase is dublicate holiday request.
+    * The api user verifies that for "patch" request type the status code is 400 and the message information in the response body is "dublicate holiday request."
+   # * The API user records the response from the api holidayUpdate endpoint, confirming that the status code is 400 and the reason phrase is dublicate holiday request.
 
 
 

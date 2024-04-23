@@ -11,7 +11,7 @@ Feature: As an administrator, I want to be able to access all customer addresses
     * The API user sends a GET request and records the response from the api refundReasonList endpoint.
     * The api user verifies that the status code is 200
     * The api user verifies that the message information in the response body is "success"
-
+@402
   Scenario Outline: When a GET request body containing valid authorization credentials is sent to
   the /api/profile/allAddressList endpoint, the information returned in the response body for the entry
   with id (x) should be validated. This includes fields such as customer_id, name,email, phone, address,
@@ -21,11 +21,17 @@ Feature: As an administrator, I want to be able to access all customer addresses
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/profile/allAddressList" path parameters
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
-    * The api user verifies the content of the data <id> ,<customer_id>,"<name>","<email>", "<phone>", "<address>","<city>" ,"<state>","<country>","<postal_code>" in the response body.
+    * The api user sends the "getbody" request and saves the "Response"
+    * The api user validates the <id> <customer_id>  "<name>"  "<email>"  "<phone>" "<address>"  "<city>"  "<state>" "<country>" "<is_shipping_default>" "<is_billing_default>" "<created_at>" "<updated_at>" of the response body with index <dataindex>.
 
-    Examples:
-      | id | id | customer_id | name    | email             | phone            | address | city  | state | country | postal_code |
-      | 1  | 1  | 5           | ra_name | ra_mail@gmail.com | 0123456789123456 | DE      | 18744 | 1357  | 82      | 45857       |
+  Examples:
+    | id | customer_id  | name        | email                           | phone              | address                | city    | state   | country | is_shipping_default | is_billing_default | created_at                  | updated_at                   | dataindex  |
+    | 1  | 5            | ra_name     | ra_mail@gmail.com               | 0123456789123456   | DE                     | 18744   |1357     |82       |                  |                 |                        |                         |      0     |
+  # * The api user verifies the content of the data <id> ,<customer_id>,"<name>","<email>", "<phone>", "<address>","<city>" ,"<state>","<country>","<postal_code>" in the response body.
+
+  #  Examples:
+   #   | id | id | customer_id | name    | email             | phone            | address | city  | state | country | postal_code |
+    #  | 1  | 1  | 5           | ra_name | ra_mail@gmail.com | 0123456789123456 | DE      | 18744 | 1357  | 82      | 45857       |
 
 
   Scenario Outline: When a GET request body containing invalid authorization credentials is sent to
