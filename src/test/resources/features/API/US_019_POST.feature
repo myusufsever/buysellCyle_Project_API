@@ -8,7 +8,7 @@ Feature: As an administrator, I want to be able to add a new Refund&Reason recor
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/refundReasonAdd" path parameters
     # APi kullanicisi "api/refundReasonAdd" path parametrelerini olusturur
-    * The api user prepares a POST request containing the "<reason>" information to send to the api refundReasonAdd endpoint.
+    * The api user prepares a PATCH request containing the "<reason>" data to send to the api refundReasonUpdate endpoint.
     # Api kullanicisi api refundReasonAdd endpointine gondermek icin "<reason>" bilgisini iceren bir post request hazirlar
     * The api user sends the POST request and saves the response returned from the api refundReasonAdd endpoint.
     # Api kullanicisi post request gonderir ve api refundReasonAdd endpointinden donen responsei kaydeder
@@ -30,7 +30,7 @@ Feature: As an administrator, I want to be able to add a new Refund&Reason recor
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/refundReasonDetails" path parameters
      # APi kullanicisi "api/refundReasonDetails" path parametrelerini olusturur
-    * The api user prepares a GET request containing the refund reason <id> for which details are to be accessed, to send to the api refundReasonDetails endpoint.
+    * The api user prepares a PATCH request containing the "<reason>" data to send to the api refundReasonUpdate endpoint.
     # Api kullanicisi api refundReasonDetails endpointine gondermek icin detaylarina erisilmek istenen refund reason idsini iceren bir get request hazirlar
     * The api user sends a GET request and saves the response returned from the api refundReasonDetails endpoint.
     # Api kullanicisi get request gonderir ve api refundReasonDetails endpointinden donen responsei kaydeder
@@ -49,7 +49,7 @@ Feature: As an administrator, I want to be able to add a new Refund&Reason recor
     # APi kullanicisi "invalid" token ile base urli olusturur
     * The api user sets "api/refundReasonAdd" path parameters
     # APi kullanicisi "api/refundReasonAdd" path parametrelerini olusturur
-    * The api user prepares a POST request containing the "<reason>" information to send to the api refundReasonAdd endpoint.
+    * The api user prepares a PATCH request containing the "<reason>" data to send to the api refundReasonUpdate endpoint.
     # Api kullanicisi api refundReasonAdd endpointine gondermek icin "<reason>" bilgisini iceren bir post request hazirlar
     * The api user sends the POST request and saves the response returned from the api refundReasonAdd endpoint.
     # Api kullanicisi post request gonderir ve api refundReasonAdd endpointinden donen responsei kaydeder
