@@ -16,7 +16,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
 
     Examples:
       | id |
-      | 120|
+      | 123|
 
 
   Scenario Outline: When a DELETE request body containing valid authorization information and an incorrect (non-existent in the
@@ -30,7 +30,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
 
     Examples:
       | id |
-      | 120|
+      | 900|
 
 
   Scenario Outline: When a DELETE body containing invalid authorization information and the refund&reason ID to be deleted is
@@ -44,7 +44,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
 
     Examples:
       | id |
-      | 121 |
+      | 123|
 
 
   Scenario Outline: The deletion of the desired Refund&Reason record via the API should be validated from the API.
@@ -58,4 +58,4 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
 
     Examples:
       | id |
-      | 120|
+      | 123|
