@@ -959,6 +959,13 @@ public class API_Stepdefinitions {
 
         Assert.assertTrue(API_Methods.tryCatchPatch(requestBody.toString()).equals(ConfigReader.getProperty("dublicateholidayMessage", "api")));
     }*/
+
+    @Given("The api user adds a key field {string} with a value {string} to the request body")
+    public void the_api_user_prepares_to_be_accessed_to_send_to_the_api_refund_reason_details_endpoint(String key, String value) {
+        requestBody.put(key,value);
+
+    }
+
 }
 
 
