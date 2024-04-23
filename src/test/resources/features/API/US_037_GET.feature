@@ -35,7 +35,8 @@ Feature: As an administrator, I want to be able to access all the country inform
     * The api user constructs the base url with the "invalid" token
     * The api user sets "api/profile/allCountries" path parameters
     * The api user prepares a "GET" request containing the  <id> for which details are to be accessed
-    * The api user verifies that for "getbody" request type the status code is 401 and the message information in the response body is "Unauthorized"
+    * The API user records the response , confirming that the status code is '401' and the message is Unauthorized.
+
 
     Examples:
       | id |
