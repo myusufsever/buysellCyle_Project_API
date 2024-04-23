@@ -4,20 +4,14 @@ import com.github.javafaker.Faker;
 import config_Requirements.ConfigReader;
 import hooks.HooksAPI;
 import io.cucumber.java.en.Given;
-import io.netty.channel.epoll.Epoll;
-import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.codehaus.groovy.transform.SourceURIASTTransformation;
 import org.json.JSONObject;
 import org.junit.Assert;
 import pojos.Pojo;
 import utilities.API_Utilities.API_Methods;
-
 import java.util.*;
-
 import static hooks.HooksAPI.spec;
-import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
 
