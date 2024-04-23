@@ -10,12 +10,9 @@ Feature:As a user, I should be able to access detailed information about the use
 
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
 
-    * The API user sends a GET request and records the response .
+    * The api user sends the "getbody" request and saves the "Response"
 
-    * The api user verifies that the status code is 200
-
-    * The api user verifies that the message information in the response body is "success"
-
+    * The api user verifies that for "getbody" request type the status code is 200 and the message information in the response body is "success"
     Examples:
 
       |id |
@@ -55,7 +52,8 @@ Feature:As a user, I should be able to access detailed information about the use
 
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
 
-    * The API user records the response , confirming that the status code is '401' and the message is Unauthorized.
+    * The api user verifies that for "getbody" request type the status code is 401 and the message information in the response body is "Unauthorized"
+
 
     Examples:
       | id |

@@ -65,7 +65,7 @@ Feature: As an administrator, I want to be able to update the existing address i
 
       * The api user constructs the base url with the "admin" token
       * The api user sets "api/profile/addressDetails" path parameters
-      * The api user prepares a GET request containing the <id> information to send to the api register endpoint
+      * The api user prepares a GET request containing the <id> information to send to the api endpoint
       * The api user sends the "getbody" request and saves the "Response"
       * The api user verifies the content of the data <id> in the response body at the "list" endpoint
       Examples:

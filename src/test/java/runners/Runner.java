@@ -18,10 +18,7 @@ import org.junit.runner.RunWith;
 
 
 
-        tags = "@HS",
-
-
-
+        tags = "@402",
 
 
         dryRun = false

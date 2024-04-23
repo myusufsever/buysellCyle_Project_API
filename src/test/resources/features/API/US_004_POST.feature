@@ -75,7 +75,7 @@ Feature:As a user, I should be able to edit my user information via API connecti
   should be 401, and the message in the response body should confirm: "Unauthenticated.".
 
 
-    * The api user constructs the base url with the "Invalid" token
+    * The api user constructs the base url with the "invalid" token
 
     * The api user sets "api/change-password" path parameters
 
@@ -83,7 +83,7 @@ Feature:As a user, I should be able to edit my user information via API connecti
 
     * The api user sends the "post" request and saves the "Response"
 
-    * The api user verifies that for "post" request type the status code is 401 and the message information in the response body is "Unauthenticated."
+    * The api user verifies that for "post" request type the status code is 401 and the message information in the response body is "Unauthorized"
 
     Examples:
       | old_password | password         | password_confirmation       |
