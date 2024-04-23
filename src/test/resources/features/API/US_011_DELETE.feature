@@ -1,6 +1,8 @@
 Feature: As an administrator, I want to be able to delete Refund&Reason information with the specified ID number
   via the API connection.
 
+
+  @[US_011-TC_001]
   Scenario Outline: When a DELETE request containing valid authorization credentials and the holiday id to be deleted is sent to the /api/holidayDelete endpoint, the expected status code returned should be 202, and the message
   in the response body should confirm: "holiday deleted successfully".
 
@@ -23,7 +25,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
       | 56 |
 
 
-
+  @[US_011-TC_002]
 
   Scenario Outline:When a DELETE request containing valid authorization credentials and an incorrect (non-existent in the system) holiday id is sent to the /api/holidayDelete endpoint, the expected status code returned should be
   404, and the message in the response body should confirm: "holiday not found".
@@ -42,6 +44,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
       | id |
       | 641 |
 
+  @[US_011-TC_003]
     Scenario Outline:When a DELETE request containing invalid authorization credentials and the holiday id to be deleted is sent to the /api/holidayDelete endpoint, the expected status code returned should
     be 401, and the message in the response body should confirm: "Unauthenticated.".
 
@@ -59,6 +62,8 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
       Examples:
         | id |
         | 64 |
+
+  @[US_011-TC_004]
 
 
   Scenario Outline:The Deleted_Id information in the response body returned from the /api/holidayDelete endpoint should be verified to be the same as the 'id' information
