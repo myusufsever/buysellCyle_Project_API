@@ -9,7 +9,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
 
     * The api user constructs the base url with the "customer" token
     * The api user sets "api/profile/customerDeleteAddress" path parameters
-    * The api user prepares a "delete" request containing the  <id> for which details are to be accessed
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
     * The api user sends the "delete" request and saves the "Response"
     * The api user verifies that the status code is 202
     * The api user verifies that the message information in the response body is "address deleted successfully"
@@ -28,7 +28,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
 
     * The api user constructs the base url with the "customer" token
     * The api user sets "api/profile/customerDeleteAddress" path parameters
-    * The api user prepares a DELETE request containing the refund reason <id> to be deleted to send to the api refundReasonDelete endpoint.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
       #* The api user prepares a "delete" request containing the  <id> for which details are to be accessed
     * The api user verifies that for "delete" request type the status code is 404 and the message information in the response body is "address not found"
 
@@ -44,7 +44,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
 
     * The api user constructs the base url with the "invalid" token
     * The api user sets "api/profile/customerDeleteAddress" path parameters
-    * The api user prepares a "delete" request containing the  <id> for which details are to be accessed
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
     * The api user verifies that for "delete" request type the status code is 401 and the message information in the response body is "Unauthorized."
 
     Examples:
@@ -58,7 +58,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/profile/customerDetailsAddress" path parameters
-    * The api user prepares a "get" request containing the  <id> for which details are to be accessed
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
     * The API user records the response from the api refundReasonDetails endpoint, verifying that the status code is '404' and the reason phrase is Not Found.
 
     Examples:

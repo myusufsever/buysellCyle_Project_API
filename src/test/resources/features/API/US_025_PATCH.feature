@@ -16,7 +16,7 @@ Feature: As an administrator, I want to be able to update department information
 
     Examples:
       | id | name        |
-      | 33 | Marketing 3 |
+      | 33 | Marketing 2 |
 
   Scenario Outline: When a PATCH request body containing valid authorization information and an
   incorrect (non-existent in the system) department ID, along with necessary data
@@ -31,7 +31,7 @@ Feature: As an administrator, I want to be able to update department information
 
     Examples:
       | id  | name        |
-      | 133 | Marketing 3 |
+      | 133 | Marketing 2 |
 
   Scenario Outline: When a PATCH request body containing invalid authorization information,
   along with the department ID to be updated and necessary data (name, details, status),
@@ -45,7 +45,7 @@ Feature: As an administrator, I want to be able to update department information
 
     Examples:
       | id | name        |
-      | 33 | Marketing 3 |
+      | 33 | Marketing 2 |
 
   Scenario Outline: The update of the desired department record via the API should be confirmed from the API itself.
   (The update of the record can be verified by sending a GET request to the /api/departmentDetails
@@ -59,4 +59,4 @@ Feature: As an administrator, I want to be able to update department information
 
     Examples:
       | id | nameValue   |
-      | 33 | Marketing 3 |
+      | 33 | Marketing 2 |

@@ -69,7 +69,7 @@ Feature: As an administrator, I want to be able to update the Refund&Reason info
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/refundReasonDetails" path parameters
-    * The api user prepares a GET request containing the refund reason <id> for which details are to be accessed, to send to the api refundReasonDetails endpoint.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
     * The api user sends the "patch" request and saves the "Response"
     * The api user verifies that the reason information in the response body is "<reasonValue>".
 
