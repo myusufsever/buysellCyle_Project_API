@@ -16,7 +16,7 @@ Feature: As a user, I want to view the addresses in my profile via the API conne
     * The api user constructs the base url with the "customer" token
     * The api user sets "api/profile/address-list" path parameters
     * The api user sends the "get" request and saves the "Response"
-    * The api user validates the <id>, <customer_id>, "<name>", "<email>", "<phone>", "<address>", "<city>", "<state>", "<country>", <is_shipping_default>, <is_billing_default>, "<created_at>", "<updated_at>" of the response body with index <dataindex>.
+  * The api user validates the <id> <customer_id>  "<name>"  "<email>"  "<phone>" "<address>"  "<city>"  "<state>" "<country>" "<is_shipping_default>" "<is_billing_default>" "<created_at>" "<updated_at>" of the response body with index <dataindex>.
 
     Examples:
       | id | customer_id  | name        | email                           | phone         | address                | city    | state   | country | is_shipping_default | is_billing_default | created_at                  | updated_at                   | dataindex  |

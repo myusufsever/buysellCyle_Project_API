@@ -562,24 +562,25 @@ public class API_Stepdefinitions {
     }*/
     @Given("The api user validates the {int} {int}  {string}  {string}  {string} {string}  {string}  {string} {string} {string} {string} {string} {string} of the response body with index {int}.")
     public void the_api_user_validates_the_of_the_response_body_with_index(int id, int customer_id, String name, String email, String phone, String address, String city, String state, String country, String is_shipping_default, String is_billing_default, String created_at, String updated_at, int dataindex) {
-      /*  jsonPath = API_Methods.response.jsonPath();
 
-        assertEquals(id, jsonPath.getInt("addresses[0].id"));
+        jsonPath = API_Methods.response.jsonPath();
+        assertEquals(id, jsonPath.getInt("addresses["+dataindex+"].id"));
+        assertEquals(customer_id, jsonPath.getInt("addresses["+dataindex+"].customer_id"));
+        assertEquals(email, jsonPath.getString("addresses["+dataindex+"].email"));
+        assertEquals(phone, jsonPath.getString("addresses["+dataindex+"].phone"));
+        assertEquals(address, jsonPath.getString("addresses["+dataindex+"].address"));
+        assertEquals(state, jsonPath.getString("addresses["+dataindex+"].state"));
+        assertEquals(country, jsonPath.getString("addresses["+dataindex+"].country"));
 
-*/
-        String path = "addresses[" + dataindex + "]."+"is_shipping_default";
-        API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].id", equalTo(id));
-        API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].customer_id", equalTo(customer_id));
-        API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].email", equalTo(email));
-        API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].phone", equalTo(phone));
-        API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].address", equalTo(address));
-        API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].state", equalTo(state));
-        API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].country", equalTo(country));
-        assertNull(path);
-      //  API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].is_shipping_default", equalTo(is_shipping_default));
-      //  API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].is_billing_default", equalTo(is_billing_default));
-      //  API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].created_at", equalTo(created_at));
-      //  API_Methods.response.then().assertThat().body("addresses[" + dataindex + "].updated_at", equalTo(updated_at));
+        if (!(jsonPath.getString("addresses[0].is_shipping_default")==null)){
+
+            assertEquals(is_shipping_default, jsonPath.getString("addresses["+dataindex+"].is_shipping_default"));
+            assertEquals(is_billing_default, jsonPath.getString("addresses["+dataindex+"].is_billing_default"));
+            assertEquals(created_at, jsonPath.getString("addresses["+dataindex+"].created_at"));
+            assertEquals(updated_at, jsonPath.getString("addresses["+dataindex+"].updated_at"));
+        }
+
+
     }
 
     @Given("The api user prepares a GET request containing the {int} for which details are not accessed.")
