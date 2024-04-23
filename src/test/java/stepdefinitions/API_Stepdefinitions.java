@@ -597,6 +597,19 @@ public class API_Stepdefinitions {
             requestBody.put("name", name);
             requestBody.put("date", date);
         }
+  /*  @Given("The API user records the response from the api holidayUpdate endpoint, confirming that the status code is 400 and the reason phrase is dublicate holiday request.")
+    public void the_apı_user_records_the_response_from_the_api_holiday_update_endpoint_confirming_that_the_status_code_is_and_the_reason_phrase_is_dublicate_holiday_request() {
+
+        Assert.assertTrue(API_Methods.tryCatchPatch(requestBody.toString()).equals(ConfigReader.getProperty("dublicateholidayMessage", "api")));
+    }*/
+
+    @Given("The api user adds a key field {string} with a value {string} to the request body")
+    public void the_api_user_prepares_to_be_accessed_to_send_to_the_api_refund_reason_details_endpoint(String key, String value) {
+        requestBody.put(key,value);
+
+    }
+
+
 }
 
 
