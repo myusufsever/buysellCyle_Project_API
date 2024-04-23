@@ -268,8 +268,10 @@ public class API_Stepdefinitions {
               System.out.println(postId); break;
           case   "patchresponse": response2=API_Methods.patchResponse(requestBody.toString()); break;
           case   "deleteresponse": response2=API_Methods.deleteResponse(requestBody.toString()); break;
-          case   "getbodyresponse": response2=API_Methods.getBodyResponse(requestBody.toString());break;
-          case   "getresponse": response2=API_Methods.getResponse(); System.out.println("selam"); break;
+//          case   "getbodyresponse": response2=API_Methods.getBodyResponse(requestBody.toString());break;
+          case   "getresponse": if (requestBody==null){response2=API_Methods.getResponse(); System.out.println("selam");}
+              else {response2=API_Methods.getBodyResponse(requestBody.toString());} break;
+//              response2=API_Methods.getResponse(); System.out.println("selam"); break;
       }
        postId2 = postId;
   }

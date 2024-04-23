@@ -19,7 +19,7 @@ Feature: As an administrator, I want to be able to create a new FAQ record via A
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/faqsDetails" path parameters
-    * The api user adds a key field "" with a value "newFaqTitle" to the request body
+    * The api user adds a key field "added_item_id" with a value "1" to the request body
     * The api user sends the "get" request and saves the "Response"
     * The api user verifies the content of the data id in the response body
 
