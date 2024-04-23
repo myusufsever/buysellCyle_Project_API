@@ -210,8 +210,6 @@ public class API_Stepdefinitions {
     }
     //----------------------------simge----------------------------------
 
-
-
     @Given("The api user prepares a GET request containing the  {int} for which details are to be accessed")
     public void the_api_user_prepares_a_get_request_containing_the_for_which_details_are_to_be_accessed(int id) {
         requestBody = new JSONObject();
@@ -369,8 +367,6 @@ public class API_Stepdefinitions {
         }
     }
 
-
-
     //----------------------US_006 GET--------------------------------------
     @Given("The api user validates the {int}, {string}, {string}, {int}, {int}, {int}, {string}, {int}, {string}, {string} of the response body")
     public void the_api_user_validates_the_of_the_response_body(int id, String first_name, String last_name, int role_id, int is_verified, int is_active, String lang_code, int currency_id, String currency_code, String name) {
@@ -388,9 +384,6 @@ public class API_Stepdefinitions {
     }
 
     // =========================  Z  =========================================================================
-
-
-
     @Given("The api user validates the {int} {int}  {string}  {string}  {string} {string}  {string}  {string} {string} {string} {string} {string} {string} of the response body with index {int}.")
     public void the_api_user_validates_the_of_the_response_body_with_index(int id, int customer_id, String name, String email, String phone, String address, String city, String state, String country, String is_shipping_default, String is_billing_default, String created_at, String updated_at, int dataindex) {
 
@@ -410,11 +403,7 @@ public class API_Stepdefinitions {
             assertEquals(created_at, jsonPath.getString("addresses["+dataindex+"].created_at"));
             assertEquals(updated_at, jsonPath.getString("addresses["+dataindex+"].updated_at"));
         }
-
-
     }
-
-
     @Given("The api user prepares a POST request containing the {string}, {string}, {string} information to send to the api departmentAdd endpoint.")
     public void the_api_user_prepares_a_post_request_containing_the_information_to_send_to_the_api_department_add_endpoint(String name, String details, String status) {
         reqBody = new HashMap<>();
@@ -422,20 +411,7 @@ public class API_Stepdefinitions {
         reqBody.put("details", details);
         reqBody.put("status", status);
 
-
     }
-/*
-    @Given("The api user validates the {int}, {string}, {string}, {string} of the response body .")
-    public void the_api_user_validates_the_of_the_response_body(int id, String first_name, String last_name, String email) {
-
-        assertEquals(id, jsonPath.getInt("user[0].id"));
-        assertEquals(first_name, jsonPath.getString("user[0].first_name"));
-        assertEquals(last_name, jsonPath.getString("user[0].last_name"));
-        assertEquals(email, jsonPath.getInt("user[0].email"));
-
-
-
-    }*/
     // US_09_POST_REQUEST_Kevser
     @Given("The api user prepares a POST request containing the {string} {string} {string} information to send to the api holidayAdd endpoint.")
     public void the_api_user_prepares_a_post_request_containing_the_information_to_send_to_the_api_holiday_add_endpoint(String holidayYear, String holidayName, String holidayDate) {
@@ -507,9 +483,6 @@ public class API_Stepdefinitions {
         assertEquals(details,jsonPath.getString("departmentDetails[0].details"));
         Assert.assertNull(jsonPath.getString("departmentDetails[0].created_at"));
         Assert.assertNull(jsonPath.getString("departmentDetails[0].updated_at"));
-
-
-
     }
     //----------------------US_008 GET HariSeldon--------------------------------------
     @Given("The api user validates the {int}, {int}, {string}, {int}, {string}, {string}, {string} of the response body.")
@@ -525,17 +498,6 @@ public class API_Stepdefinitions {
         assertEquals(created_at,jsonPath.getString("holidayDetails[0].created_at"));
         assertEquals(updated_at,jsonPath.getString("holidayDetails[0].updated_at"));
     }
-
-
-
-
-
-/*
-    @Given("The api user prepares a GET request containing the  <country_id> for which details are to be accessed")
-    public void the_api_user_prepares_a_get_request_containing_the_country_id_for_which_details_are_to_be_accessed(int country_id) {
-        requestBody = new JSONObject();
-        requestBody.put("country_id",country_id);
-    }*/
 
     @Given("The api user validates the {int} , {string}  of the response body")
     public void the_api_user_validates_the_of_the_response_body(int id, String name) {
@@ -585,7 +547,6 @@ public class API_Stepdefinitions {
     @Given("The api user prepares a POST request containing the {int}, {string}, {string}, {string}, {int}, {string}, {string}, {string}, {int}, {string} informations to send to the api desired endpoint.")
     public void the_api_user_prepares_a_post_request_containing_the_informations_to_send_to_the_api_desired_endpoint(int customer_id, String name, String email, String address, int phone, String city, String state, String country, int postal_code, String address_type) {
         requestBody=new JSONObject();
-
         requestBody.put("customer_id", customer_id);
         requestBody.put("name", name);
         requestBody.put("email", email);
@@ -641,11 +602,7 @@ public class API_Stepdefinitions {
             requestBody.put("year", year);
             requestBody.put("name", name);
             requestBody.put("date", date);
-
-
-
         }
-
 }
 
 
