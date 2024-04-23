@@ -11,7 +11,7 @@ Feature: As an administrator,
 
     * The api user sets "api/faqsDetails" path parameters
 
-    * The api user prepares a GET request containing the refund reason <id> for which details are to be accessed, to send to the api faqsDetails endpoint.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
 
     * The api user sends the "getbody" request and saves the "Response"
 
@@ -33,7 +33,7 @@ Feature: As an administrator,
 
     * The api user sets "api/faqsDetails" path parameters
 
-    * The api user prepares a GET request containing the refund reason <id> for which details are to be accessed, to send to the api faqsDetails endpoint.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
 
     * The api user sends the "getbody" request and saves the "Response"
 
@@ -53,7 +53,7 @@ Feature: As an administrator,
     # APi kullanicisi "invalid" token ile base urli olusturur
     * The api user sets "api/refundReasonDetails" path parameters
     # APi kullanicisi "api/refundReasonDetails" path parametrelerini olustur
-    * The api user prepares a GET request containing the refund reason <id> for which details are to be accessed, to send to the api refundReasonDetails endpoint.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
     # Api kullanicisi api refundReasonDetails endpointine gondermek icin detaylarina erisilmek istenen refund reason idsini iceren bir get request hazirlar
     * The API user records the response from the api refundReasonDetails endpoint, confirming that the status code is '401' and the reason phrase is Unauthorized.
     # Api kullanicisi api refundReasonDetails endpointinden donen responsei kaydeder, status code '401' ve reason phrase Unauthorized oldugunu dogrular

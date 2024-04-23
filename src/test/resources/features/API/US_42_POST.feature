@@ -26,7 +26,7 @@ Feature: As an administrator, I want to be able to add a new address record for 
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/profile/addressDetails" path parameters
      # APi kullanicisi "api/refundReasonDetails" path parametrelerini olusturur
-    * The api user prepares a GET request containing the refund reason <id> for which details are to be accessed, to send to the api desired endpoint.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
     # Api kullanicisi api istenen endpointe gondermek icin detaylarina erisilmek istenen refund reason idsini iceren bir get request hazirlar
     * The api user sends a GET request and saves the response returned from the api desired endpoint.
     # Api kullanicisi get request gonderir ve api refundReasonDetails endpointinden donen responsei kaydeder
@@ -98,7 +98,7 @@ Feature: As an administrator, I want to be able to add a new address record for 
     # APi kullanicisi "admin" token ile base urli olusturur
     * The api user sets "api/profile/addressDetails" path parameters
      # APi kullanicisi "api/refundReasonDetails" path parametrelerini olusturur
-    * The api user prepares a GET request containing the refund reason <id> for which details are to be accessed, to send to the api desired endpoint.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
     # Api kullanicisi api istenen endpointe gondermek icin detaylarina erisilmek istenen refund reason idsini iceren bir get request hazirlar
     * The api user sends a GET request and saves the response returned from the api desired endpoint.
     # Api kullanicisi get request gonderir ve api refundReasonDetails endpointinden donen responsei kaydeder
