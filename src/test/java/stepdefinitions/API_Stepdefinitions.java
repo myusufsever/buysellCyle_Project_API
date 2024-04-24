@@ -710,6 +710,8 @@ public class API_Stepdefinitions extends Manage{
             System.out.println(requestBody.toString());}
         else if (value.equals("Deleted_Id")) {requestBody.put(key,DeletedId);
             System.out.println(requestBody.toString());}
+        else if (key.equals("id")) {id=parseInt(value);requestBody.put(key,value);
+            System.out.println(requestBody.toString());}
         else {requestBody.put(key,value);}
     }
     @Given("The api user verifies that {string} returned in the response body by sending a GET request to the {string} endpoint")
@@ -730,7 +732,7 @@ public class API_Stepdefinitions extends Manage{
 
         switch (key){
             case "updated_Id": jsonPath = API_Methods.response.jsonPath(); assertEquals(id, jsonPath.getInt(key));break;
-            case "Deleted_Id": id = requestBody.getInt("Deleted_Id"); jsonPath = API_Methods.response.jsonPath(); assertEquals(id, jsonPath.getInt(key));break;
+            case "Deleted_Id": jsonPath = API_Methods.response.jsonPath(); assertEquals(id, jsonPath.getInt(key));break;
         }
 
 
