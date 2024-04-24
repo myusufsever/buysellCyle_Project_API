@@ -6,34 +6,41 @@ import hooks.HooksAPI;
 import io.cucumber.java.en.Given;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import manage.Manage;
 import org.json.JSONObject;
 import org.junit.Assert;
 import pojos.Pojo;
 import utilities.API_Utilities.API_Methods;
+
+import java.lang.invoke.SwitchPoint;
 import java.util.*;
 import static hooks.HooksAPI.spec;
+import static java.lang.Integer.parseInt;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
 
-public class API_Stepdefinitions {
-    public static Response response2;
+public class API_Stepdefinitions extends Manage{
 
-    public static int id;
-    public static String fullPath;
-    public JSONObject requestBody = new JSONObject();
-    JsonPath jsonPath;
-    HashMap<String, Object> reqBody = new HashMap<>();
-    Pojo requestPojo;
-    Faker faker = new Faker();
-    public static String email_class_level;
-    public static String postId;
-    public static String postId2;
-    public static String addedItemId;
-    public static String updatedId;
-    String[] paths;
+
+//    public static Response response2;
+//    public static int id;
+//    public static String fullPath;
+//    public JSONObject requestBody = new JSONObject();
+//    JsonPath jsonPath;
+//    HashMap<String, Object> reqBody = new HashMap<>();
+//    Pojo requestPojo;
+//    Faker faker = new Faker();
+//    public static String email_class_level;
+//    public static String postId;
+//    public static String postId2;
+//    public static String addedItemId;
+//    public static String updatedId;
+//    public static String DeletedId;
+//    public static int deletedId;
+
     @Given("The api user sets {string} path parameters")
     public void the_api_user_sets_path_parameters(String rawPaths) {
-        paths = rawPaths.split("/"); // [api,refundReasonUpdate,25]
+        String[] paths = rawPaths.split("/"); // [api,refundReasonUpdate,25]
 
         System.out.println(Arrays.toString(paths));
 
@@ -50,7 +57,7 @@ public class API_Stepdefinitions {
             tempPath.append(key + "}/{");
 
             if (value.matches("\\d+")) {  // value.matches("\\d+") burada value rakam iceriyorsa dedik
-                id = Integer.parseInt(value);
+                id = parseInt(value);
             }
         }
         tempPath.deleteCharAt(tempPath.lastIndexOf("/"));
@@ -273,7 +280,8 @@ public class API_Stepdefinitions {
 
           case   "patchresponse": response2=API_Methods.patchResponse(requestBody.toString());
               updatedId = response2.jsonPath().getString("updated_Id");break;
-          case   "deleteresponse": response2=API_Methods.deleteResponse(requestBody.toString()); break;
+          case   "deleteresponse": response2=API_Methods.deleteResponse(requestBody.toString());
+              DeletedId = response2.jsonPath().getString("Deleted_Id");break;
           case   "getbodyresponse":response2=API_Methods.getBodyResponse(requestBody.toString()); break;
           case   "getresponse": response2=API_Methods.getResponse(); System.out.println("selam");break;
 //              response2=API_Methods.getResponse(); System.out.println("selam"); break;
@@ -694,11 +702,15 @@ public class API_Stepdefinitions {
     }*/
 
     @Given("The api user adds a key field {string} with the value {string} to the request body")
-    public void the_api_user_prepares_to_be_accessed_to_send_to_the_api_refund_reason_details_endpoint(String key, String value) {
+    public void the_api_user_prepares_the_request_body(String key, String value) {
         if (value.equals("added_item_id")){
             requestBody.put(key,addedItemId);
             System.out.println(requestBody.toString());}
         else if (value.equals("updated_Id")) {requestBody.put(key,updatedId);
+            System.out.println(requestBody.toString());}
+        else if (value.equals("Deleted_Id")) {requestBody.put(key,DeletedId);
+            System.out.println(requestBody.toString());}
+        else if (key.equals("id")) {id=parseInt(value);requestBody.put(key,value);
             System.out.println(requestBody.toString());}
         else {requestBody.put(key,value);}
     }
@@ -713,7 +725,21 @@ public class API_Stepdefinitions {
             case "customerDetailsAddress":Assert.assertTrue(API_Methods.response.jsonPath().getString("addresses[0].id").contains(addedItemId));break;
             case "addressDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("addresses[0].id").contains(addedItemId));break;
         }
+    }
 
+    @Given("The api user verifies that the {string} information in the response body matches the id path parameter specified in the endpoint.")
+    public void the_api_user_verifies_that_the_id_information_in_the_response_body_matches_with_the_id_path_parameter_specified_in_the_endpoint(String key) {
+
+        switch (key){
+            case "updated_Id": jsonPath = API_Methods.response.jsonPath(); assertEquals(id, jsonPath.getInt(key));break;
+            case "Deleted_Id": jsonPath = API_Methods.response.jsonPath(); assertEquals(id, jsonPath.getInt(key));break;
+        }
+
+
+//        // 2. adim
+//        API_Methods.response.then()
+//                .assertThat()
+//                .body("Deleted_Id", equalTo(id));
     }
 
 }
