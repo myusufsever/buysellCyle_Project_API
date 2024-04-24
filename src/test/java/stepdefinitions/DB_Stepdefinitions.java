@@ -19,9 +19,11 @@ import static org.junit.Assert.*;
 
 
 public class DB_Stepdefinitions {
+
     Manage manage = new Manage();
     //prepared statement timestamp instant döndürür.
     Instant instant = Instant.now();
+    int sonuc;
 
     @Given("Database connection is established.")
     public void database_connection_is_established() {
@@ -90,18 +92,18 @@ public class DB_Stepdefinitions {
     /** executeBatch() yöntemi, her sorgunun etkilenen satır sayısını içeren bir int dizisi döndürür.*/
 
 
-    @Given("getCities veri ekleme query is prepared and executed.")
-    public void getCities_veri_ekleme_query_is_prepared_and_executed() throws SQLException {
-        query = manage.getCities_veri_ekleme();
 
+    @Given("Prepare a query that adds {int} data to the cities table in bulk.")
+    public void prepare_a_query_that_adds_data_to_the_cities_table_in_bulk(Integer count) throws SQLException {
+        query = manage.getCities_veri_ekleme();
         preparedStatement = getPraperedStatement(query);
         List<Cities> city = generateCities(count);
         int flag = 0;
         for (Cities cities : city) {
-            preparedStatement.setString(1, Cities.getName());
-            preparedStatement.setInt(2, Cities.getState_id());
-            preparedStatement.setInt(3, Cities.getStatus());
-            preparedStatement.setString(4, Cities.getCreated_at());
+            preparedStatement.setString(1, city.get(flag).getName());
+            preparedStatement.setInt(2, city.get(flag).getState_id());
+            preparedStatement.setInt(3, city.get(flag).getStatus());
+            preparedStatement.setString(4, city.get(flag).getCreated_at());
 
             preparedStatement.addBatch();
             flag++;
@@ -109,16 +111,19 @@ public class DB_Stepdefinitions {
                 result = preparedStatement.executeBatch();
             }
 
-
-
         }
-
 
     }
 
-    @Given("cities tablosu uzerinden {int} adet verinin eklendigini dogrulayiniz.")
-    public void cities_tablosu_uzerinden_adetverinin_eklendigini_dogrulayiniz(int rowCount) {
 
+
+
+    @Given("cities tablosu uzerinden {int} adet verinin eklendigini dogrulayiniz.")
+    public void cities_tablosu_uzerinden_adet_verinin_eklendigini_dogrulayiniz(int rowCount) {
+
+
+        System.out.println("Inserted " + result.length + " records successfully.");
+        System.out.println(Arrays.toString(result));
         assertEquals(rowCount, result.length);
 
 
@@ -126,7 +131,20 @@ public class DB_Stepdefinitions {
 
     }
 
+//=========================== US_014 ZD ===========================
 
+    @Given("Verify whether there is data Query is prepared and executed.")
+    public void verify_whether_there_is_data_query_is_prepared_and_executed() throws SQLException {
+        query = manage.getRefund_reasons_null();
+        resultSet = getStatement().executeQuery(query);
+    }
+    @Given("Verify the {string} information result are obtained.")
+    public void verify_the_information_result_are_obtained(String reason) throws SQLException {
+        resultSet.next();
+        reason = resultSet.getString(reason);
+        assertNull(reason);
+
+    }
 
 
 }

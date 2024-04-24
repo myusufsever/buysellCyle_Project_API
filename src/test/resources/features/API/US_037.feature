@@ -1,18 +1,13 @@
 Feature: As an administrator, I want to be able to access all the country information registered in the system via the API connection.
   @zehra
-  Scenario Outline: When a GET request body containing valid authorization credentials is sent to the /api/profile/allCountries endpoint, the returned status code should be validated as 200
+  Scenario: When a GET request body containing valid authorization credentials is sent to the /api/profile/allCountries endpoint, the returned status code should be validated as 200
   , and the message information in the response body should confirm as "success".
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/profile/allCountries" path parameters
-    * The api user prepares a GET request containing the  <id> for which details are to be accessed
-    * The api user sends the "getbody" request and saves the "Response"
-    * The api user verifies that the status code is 200
-    * The api user verifies that the message information in the response body is "success"
+    * The api user sends the "get" request and saves the "Response"
+    * The api user verifies that for "get" request type the status code is 200 and the message information in the response body is "success"
 
-    Examples:
-      | id |
-      | 2  |
 
 
   Scenario Outline: When a GET request body containing valid authorization credentials is sent to the /api/profile/allCountries endpoint, the returned response body should be validated to
