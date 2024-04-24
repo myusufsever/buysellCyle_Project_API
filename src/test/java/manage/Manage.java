@@ -40,6 +40,10 @@ public class Manage {
 
 
 
+    private String ps_cities_veri_ekleme = "INSERT INTO cities (name, state_id, status, created_at) VALUES (?, ?, ?, ?);";
+
+    public String getCities_veri_ekleme() {
+        return ps_cities_veri_ekleme;
     private String cities_veri_ekleme = "INSERT INTO cities (name, state_id, status, created_at) VALUES (?, ?, ?, ?);";
     public String getCities_veri_ekleme() {return cities_veri_ekleme;}
 
