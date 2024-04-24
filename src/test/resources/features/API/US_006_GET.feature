@@ -12,11 +12,9 @@ Feature:When a GET request containing valid authorization credentials and the cu
 
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
 
-    * The API user sends a GET request and records the response .
+    * The api user sends the "getbody" request and saves the "Response"
 
-    * The api user verifies that the status code is 200
-
-    * The api user verifies that the message information in the response body is "success"
+    * The api user verifies that for "getbody" request type the status code is 200 and the message information in the response body is "success"
 
 
 
@@ -36,7 +34,7 @@ the data (id, title ,coupon_code, coupon_type, start_date, end_date, discount, d
 
   * The api user prepares a GET request containing the  <id> for which details are to be accessed
 
-  * The API user sends a GET request and records the response .
+  * The api user sends the "getbody" request and saves the "Response"
 
   * The api user validates the <id>, "<first_name>", "<last_name>", <role_id>, <is_verified>, <is_active>, "<lang_code>", <currency_id>, "<currency_code>", "<name>" of the response body
 
@@ -58,7 +56,7 @@ the data (id, title ,coupon_code, coupon_type, start_date, end_date, discount, d
 
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
 
-    * The API user records the response , verifying that the status code is '404' and message coupon not found.
+    * The api user verifies that for "getbody" request type the status code is 404 and the message information in the response body is "Not Found"
 
     Examples:
       | id |
@@ -75,7 +73,7 @@ the data (id, title ,coupon_code, coupon_type, start_date, end_date, discount, d
 
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
 
-    * The API user records the response , confirming that the status code is '401' and the message is Unauthorized.
+    * The api user verifies that for "getbody" request type the status code is 401 and the message information in the response body is "Unauthorized"
 
     Examples:
       | id |
