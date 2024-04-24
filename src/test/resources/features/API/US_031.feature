@@ -9,7 +9,7 @@ coupon information with the specified ID number via the API connection.
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/coupon/couponDelete" path parameters
-    * The api user adds a key field "id" with the value "115" to the request body
+    * The api user adds a key field "id" with the value "108" to the request body
     * The api user sends the "delete" request and saves the "response"
     * The api user verifies that for "delete" request type the status code is 202 and the message information in the response body is "coupon deleted successfully"
 
@@ -42,22 +42,21 @@ coupon information with the specified ID number via the API connection.
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/coupon/couponDelete" path parameters
-    * The api user adds a key field "id" with the value "115" to the request body
+    * The api user adds a key field "id" with the value "107" to the request body
     * The api user sends the "delete" request and saves the "response"
     * The api user verifies that for "delete" request type the status code is 202 and the message information in the response body is "coupon deleted successfully"
     * The api user verifies that the "Deleted_Id" information in the response body matches the id path parameter specified in the endpoint.
 
 
   @HS
-  Scenario Outline: The deletion of the coupon record via the API should be verified through the API by sending a GET
+  Scenario: The deletion of the coupon record via the API should be verified through the API by sending a GET
   request to the /api/coupon/couponDetails endpoint with the Deleted_Id returned in the response.
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/coupon/couponDelete" path parameters
-    * The api user adds a key field "id" with the value "125" to the request body
+    * The api user adds a key field "id" with the value "106" to the request body
     * The api user sends the "delete" request and saves the "response"
     * The api user verifies that for "delete" request type the status code is 202 and the message information in the response body is "coupon deleted successfully"
+    * The api user sets "api/coupon/couponDetails" path parameters
+    * The api user adds a key field "id" with the value "Deleted_Id" to the request body
     * The api user verifies that for "getbody" request type the status code is 404 and the message information in the response body is "Not Found"
-    Examples:
-      |id |
-      |127|
