@@ -24,13 +24,11 @@ public class Manage {
     public static String postId2;
     public static String addedItemId;
     public static String updatedId;
-    public static String DeletedId;
+    public static int DeletedId;
     public static int deletedId;
-
- //************************** From API_Methods Class **************************//
-
-
-    //********************************** API Test Variables and Parameters **************************************************************************
+                             //************************** From Stepdefinitions Class **************************//
+ 
+        //********************************** API Test Variables and Parameters **************************************************************************
 
     private String verify_the_name_value_of_categories="Select  name from categories Where slug='fashion';";
 

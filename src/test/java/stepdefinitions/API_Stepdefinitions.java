@@ -281,7 +281,7 @@ public class API_Stepdefinitions extends Manage{
           case   "patchresponse": response2=API_Methods.patchResponse(requestBody.toString());
               updatedId = response2.jsonPath().getString("updated_Id");break;
           case   "deleteresponse": response2=API_Methods.deleteResponse(requestBody.toString());
-              DeletedId = response2.jsonPath().getString("Deleted_Id");break;
+              DeletedId = response2.jsonPath().getInt("Deleted_Id");break;
           case   "getbodyresponse":response2=API_Methods.getBodyResponse(requestBody.toString()); break;
           case   "getresponse": response2=API_Methods.getResponse(); System.out.println("selam");break;
 //              response2=API_Methods.getResponse(); System.out.println("selam"); break;
@@ -732,7 +732,7 @@ public class API_Stepdefinitions extends Manage{
 
         switch (key){
             case "updated_Id": jsonPath = API_Methods.response.jsonPath(); assertEquals(id, jsonPath.getInt(key));break;
-            case "Deleted_Id": jsonPath = API_Methods.response.jsonPath(); assertEquals(id, jsonPath.getInt(key));break;
+            case "Deleted_Id": jsonPath = API_Methods.response.jsonPath(); assertEquals(DeletedId, jsonPath.getInt(key));break;
         }
 
 
@@ -740,6 +740,28 @@ public class API_Stepdefinitions extends Manage{
 //        API_Methods.response.then()
 //                .assertThat()
 //                .body("Deleted_Id", equalTo(id));
+    }
+    @Given("The api user adds a requestKey field {string} with the requestValue {string} to the request body")
+    public void the_api_user_prepares_the_requestbody(String requestKey, String requestValue) {
+        switch (requestKey){
+            case "id" : id=parseInt(requestValue);
+                        requestBody.put(requestKey,id);
+                        System.out.println(requestBody.toString());break;
+            case "":
+        }
+
+
+
+//        if (requestValue.equals("added_item_id")){
+//            requestBody.put(requestKey,addedItemId);
+//            System.out.println(requestBody.toString());}
+//        else if (requestValue.equals("updated_Id")) {requestBody.put(requestKey,updatedId);
+//            System.out.println(requestBody.toString());}
+//        else if (requestValue.equals("Deleted_Id")) {requestBody.put(requestKey,DeletedId);
+//            System.out.println(requestBody.toString());}
+//        else if (requestKey.equals("id")) {id=parseInt(requestValue);requestBody.put(requestKey,requestValue);
+//            System.out.println(requestBody.toString());}
+//        else {requestBody.put(requestKey,requestValue);}
     }
 
 }
