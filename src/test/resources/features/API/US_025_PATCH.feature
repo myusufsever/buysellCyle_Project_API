@@ -16,7 +16,7 @@ Feature: As an administrator, I want to be able to update department information
 
     Examples:
       | id | name        |
-      | 33 | Marketing 3 |
+      | 33 | Marketing 2 |
 
   Scenario Outline: When a PATCH request body containing valid authorization information and an
   incorrect (non-existent in the system) department ID, along with necessary data
@@ -27,11 +27,11 @@ Feature: As an administrator, I want to be able to update department information
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/departmentUpdate/<id>" path parameters
     * The api user prepares a PATCH request containing the "<name>" data to send to the api.
-    * The API user records the response, confirming that the status code is '404' and the reason phrase is Not Found.
+    * The api user verifies that for "get" request type the status code is 404 and the message information in the response body is "Not Found"
 
     Examples:
       | id  | name        |
-      | 133 | Marketing 3 |
+      | 133 | Marketing 2 |
 
   Scenario Outline: When a PATCH request body containing invalid authorization information,
   along with the department ID to be updated and necessary data (name, details, status),
@@ -45,7 +45,7 @@ Feature: As an administrator, I want to be able to update department information
 
     Examples:
       | id | name        |
-      | 33 | Marketing 3 |
+      | 33 | Marketing 2 |
 
   Scenario Outline: The update of the desired department record via the API should be confirmed from the API itself.
   (The update of the record can be verified by sending a GET request to the /api/departmentDetails
@@ -54,9 +54,9 @@ Feature: As an administrator, I want to be able to update department information
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/departmentDetails" path parameters
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
-    * The API user sends a GET request and records the response .
+    * The api user sends the "getbody" request and saves the "Response"
     * The api user verifies that the reason information in the response body "<nameValue>".
 
     Examples:
       | id | nameValue   |
-      | 33 | Marketing 3 |
+      | 33 | Marketing 2 |

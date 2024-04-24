@@ -14,14 +14,14 @@ Feature: As an administrator, I want to be able to access the address informatio
     | id |
     | 77 |
 
-
+@412
   Scenario Outline: When a GET request body containing valid authorization credentials and the desired address id to access detailed information is sent to the /api/profile/addressDetails endpoint, the data returned in the response body should be validated. This data should include fields such as id, customer_id, name, email, phone, address, city, state, country, postal_code, is_shipping_default, is_billing_default, created_at, updated_at.
 
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/profile/addressDetails" path parameters
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
-    * The API user sends a GET request and records the response .
+   # * The API user sends a GET request and records the response .
     * The api user validates the <id>, <customer_id>, "<name>", "<email>", "<phone>", "<address>", "<city>", "<state>", "<country>", <is_shipping_default>, <is_billing_default>, "<created_at>", "<updated_at>" of the response body with index <dataindex>.
 
     Examples:
@@ -38,7 +38,7 @@ Feature: As an administrator, I want to be able to access the address informatio
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/profile/addressDetails" path parameters
-    * The api user prepares a GET request containing the <id> for which details are not accessed.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
     * The API user records the response from the api refundReasonDetails endpoint, verifying that the status code is '404' and the reason phrase is Not Found.
 
     Examples:

@@ -1,5 +1,5 @@
 Feature: As an administrator, I want to be able to access all the country information registered in the system via the API connection.
-
+  @zehra
   Scenario Outline: When a GET request body containing valid authorization credentials is sent to the /api/profile/allCountries endpoint, the returned status code should be validated as 200
   , and the message information in the response body should confirm as "success".
 

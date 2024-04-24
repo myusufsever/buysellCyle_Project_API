@@ -1,6 +1,6 @@
 Feature: As a user, I want to add a new address record to my profile via API connection
 
-  @APII
+  @zehra
 
   Scenario Outline: When a valid POST body containing authorization credentials and necessary data
   (name, email, address, phone, city, state, country, postal_code, address_type) is sent to the
@@ -10,7 +10,7 @@ Feature: As a user, I want to add a new address record to my profile via API con
     * The api user constructs the base url with the "customer" token
     * The api user sets "api/profile/address-store" path parameters
     * The api user prepares a POST request containing the "<name>","<email>","<address>","<phone>","<city>","<state>","<country>","<postal_code>","<address_type>" information to send to the api.
-    * The api user sends the POST request and saves the response returned.
+    * The api user sends the "post" request and saves the "Response"
     * The api user verifies that the status code is 201
     * The api user verifies that the message information in the response body is "address added successfully"
 
@@ -25,8 +25,8 @@ Feature: As a user, I want to add a new address record to my profile via API con
 
     * The api user constructs the base url with the "customer" token
     * The api user sets "api/profile/customerDetailsAddress" path parameters
-    * The api user prepares a GET request containing the  <id> for which details are to be accessed.
-    * The API user sends a GET request and records the response .
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
+    * The api user sends the "getbody" request and saves the "Response"
     * The api user verifies that the message information in the response body is "success"
 
     Examples:
@@ -41,7 +41,7 @@ Feature: As a user, I want to add a new address record to my profile via API con
     * The api user constructs the base url with the "customer" token
     * The api user sets "api/profile/address-store" path parameters
     * The api user prepares a POST request containing the "<name>","<email>","<address>","<phone>","<city>","<state>","<country>","<postal_code>","<address_type>" information to send to the api.
-    * The api user sends the POST request and saves the response returned.
+    * The api user sends the "post" request and saves the "Response"
     * The api user verifies that the status code is 422
     * The api user verifies that the message information in the response body is "The email must be a valid email address."
 
@@ -59,9 +59,8 @@ Feature: As a user, I want to add a new address record to my profile via API con
     * The api user constructs the base url with the "invalid" token
     * The api user sets "api/profile/address-store" path parameters
     * The api user prepares a POST request containing the "<name>","<email>","<address>","<phone>","<city>","<state>","<country>","<postal_code>","<address_type>" information to send to the api.
-    * The api user sends the POST request and saves the response returned.
-    * The api user verifies that the status code is 401
-    * The api user verifies that the message information in the response body is "Unauthenticated."
+    * The api user sends the "post" request and saves the "Response"
+    * The api user verifies that for "post" request type the status code is 401 and the message information in the response body is "Unauthenticated."
 
     Examples:
       | name  | email       | address | phone    | city     | state           | country | postal_code | address_type |

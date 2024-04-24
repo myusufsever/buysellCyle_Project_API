@@ -1,5 +1,5 @@
 Feature: As an administrator, I want to be able to access the details of the coupon with the specified ID number via the API connection.
-
+  @zehra
 
   Scenario Outline: When a GET request body containing valid authorization information and
   the coupon ID to access details is sent to the /api/coupon/couponDetails endpoint, the returned status code should be 200, and the message information should be verified as "success".
