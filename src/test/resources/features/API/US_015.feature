@@ -21,13 +21,14 @@ of the FAQ record with the specified FAQ id via API connection.
   status code returned should be 202, and the message in the response body should confirm: "faqs updated successfully".
 
     * The api user constructs the base url with the "admin" token
-    * The api user sets "api/profile/addressUpdate/<id>" path parameters
+    * The api user sets "api/faqsUpdate/<id>" path parameters
     * The api user adds a key field "title" with the value "updatedTitle" to the request body
     * The api user adds a key field "description" with the value "updatedDescription" to the request body
+    * The api user sends the "patch" request and saves the "Response"
     * The api user verifies that for "patch" request type the status code is 202 and the message information in the response body is "faqs updated successfully"
     Examples:
-      | id |
-      | 120 |
+      |id |
+      |120|
 
 
 
@@ -37,7 +38,7 @@ of the FAQ record with the specified FAQ id via API connection.
   the expected status code returned should be 404, and the message in the response body should confirm: "faqs not found".
 
     * The api user constructs the base url with the "admin" token
-    * The api user sets "api/profile/addressUpdate/<id>" path parameters
+    * The api user sets "api/faqsUpdate/<id>" path parameters
     * The api user adds a key field "title" with the value "updatedTitle" to the request body
     * The api user adds a key field "description" with the value "updatedDescription" to the request body
     * The api user verifies that for "patch" request type the status code is 404 and the message information in the response body is "Not Found"
@@ -51,34 +52,37 @@ of the FAQ record with the specified FAQ id via API connection.
   code returned should be 401, and the message in the response body should confirm: "Unauthenticated.".
 
     * The api user constructs the base url with the "invalid" token
-    * The api user sets "api/profile/addressUpdate/<id>" path parameters
+    * The api user sets "api/faqsUpdate/<id>" path parameters
     * The api user adds a key field "title" with the value "updatedTitle" to the request body
     * The api user adds a key field "description" with the value "updatedDescription" to the request body
     * The api user verifies that for "patch" request type the status code is 401 and the message information in the response body is "Unauthorized"
     Examples:
       | id |
-      | 96 |
+      | 120 |
 
   Scenario Outline: The updated_Id information in the response body from the /api/faqsUpdate/{id} endpoint should be
   verified to be the same as the id path parameter specified in the /api/faqsUpdate/{id} endpoint.
 
     * The api user constructs the base url with the "admin" token
-    * The api user sets "api/profile/addressUpdate/<id>" path parameters
-    * The api user prepares a PATCH request containing the <id>, "<title>", "<description>" information to send to the api register endpoint
+    * The api user sets "api/faqsUpdate/<id>" path parameters
+    * The api user adds a key field "title" with the value "updatedTitle" to the request body
+    * The api user adds a key field "title" with the value "updatedTitle" to the request body
     * The api user sends the "patch" request and saves the "Response"
-    * The api user verifies the content of the data <id> in the response body at the "nonList" endpoint
+    * The api user verifies that for "patch" request type the status code is 202 and the message information in the response body is "faqs updated successfully"
+    * The api user verifies that the updated id information in the response body matches the id path parameter specified in the endpoint.
+
     Examples:
-      | id |   title   |   description    |
-      | 96 |  FaqTitle |  FaqDescription  |
+      | id  |
+      | 120 |
 
   Scenario Outline: The update of the FAQ record via the API should be verified through the API
   by sending a GET request to the /api/faqsDetails endpoint with the updated_Id returned in the response.
 
     * The api user constructs the base url with the "admin" token
-    * The api user sets "api/profile/addressUpdate/<id>" path parameters
-    * The api user prepares a GET request containing the <id> information to send to the api register endpoint
+    * The api user sets "api/faqsDetails" path parameters
+    * The api user adds a key field "id" with the value "updated_Id" to the request body
     * The api user sends the "getbody" request and saves the "Response"
     * The api user verifies the content of the data <id> in the response body at the "api/faqsDetails" endpoint
     Examples:
       |id |
-      |96|
+      |120|
