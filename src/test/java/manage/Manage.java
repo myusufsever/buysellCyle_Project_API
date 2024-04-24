@@ -2,6 +2,11 @@ package manage;
 
 public class Manage {
     private String verify_the_name_value_of_categories="Select  name from categories Where slug='fashion';";
+    private String list_the_unique_id = "SELECT user_id, count(user_id)=1 from u168183796_qabuysell.support_tickets where reference_no like '%-%' or reference_no not like '%-%' group by user_id;";
+
+    public String getList_the_unique_id() {
+        return list_the_unique_id;
+    }
 
     public String getVerify_the_name_value_of_categories() {
         return verify_the_name_value_of_categories;
