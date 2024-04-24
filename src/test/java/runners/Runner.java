@@ -19,12 +19,12 @@ import org.junit.runner.RunWith;
 
 
 
-        tags = "@ZS",
+        tags = "@ZSDB",
 
 
 
 
-        dryRun = true
+        dryRun = false
 
 )
 public class Runner {
