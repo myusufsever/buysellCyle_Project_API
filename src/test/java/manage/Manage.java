@@ -13,4 +13,14 @@ public class Manage {
     }
 
     private String bank_account_insert_data="Insert Into bank_accounts (id,bank_name,branch_name,account_name,account_number,opening_balance,description,status) Values(?,?,?,?,?,?,?,?)";
+
+
+
+    private String cities_veri_ekleme = "INSERT INTO cities (name, state_id, status, created_at) VALUES (?, ?, ?, ?);";
+
+    public String getCities_veri_ekleme() {
+        return cities_veri_ekleme;
+
+
+    }
 }

@@ -2,6 +2,7 @@ package stepdefinitions;
 
 import config_Requirements.ConfigReader;
 import helperDB.BankAccount;
+import helperDB.Cities;
 import io.cucumber.java.en.Given;
 import manage.Manage;
 
@@ -11,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static helperDB.BankAccount.generateBankAccount;
+import static helperDB.Cities.generateCities;
 import static helperDB.JDBC_Cons.*;
 import static helperDB.JDBC_Structure_Methods.*;
 import static org.junit.Assert.*;
@@ -86,6 +88,45 @@ public class DB_Stepdefinitions {
 
 
     /** executeBatch() yöntemi, her sorgunun etkilenen satır sayısını içeren bir int dizisi döndürür.*/
+
+
+    @Given("getCities veri ekleme query is prepared and executed.")
+    public void getCities_veri_ekleme_query_is_prepared_and_executed() throws SQLException {
+        query = manage.getCities_veri_ekleme();
+
+        preparedStatement = getPraperedStatement(query);
+        List<Cities> city = generateCities(count);
+        int flag = 0;
+        for (Cities cities : city) {
+            preparedStatement.setString(1, Cities.getName());
+            preparedStatement.setInt(2, Cities.getState_id());
+            preparedStatement.setInt(3, Cities.getStatus());
+            preparedStatement.setString(4, Cities.getCreated_at());
+
+            preparedStatement.addBatch();
+            flag++;
+            if (flag == city.size()) {
+                result = preparedStatement.executeBatch();
+            }
+
+
+
+        }
+
+
+    }
+
+    @Given("cities tablosu uzerinden {int} adet verinin eklendigini dogrulayiniz.")
+    public void cities_tablosu_uzerinden_adetverinin_eklendigini_dogrulayiniz(int rowCount) {
+
+        assertEquals(rowCount, result.length);
+
+
+
+
+    }
+
+
 
 
 }
