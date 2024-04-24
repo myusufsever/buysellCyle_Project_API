@@ -5,7 +5,7 @@ Feature: As an administrator, I want to be able to add a new department record v
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/departmentAdd" path parameters
     * The api user prepares a POST request containing the "<name>", "<details>", "<staus>" information to send to the api departmentAdd endpoint.
-    * The api user sends a GET request and saves the response returned from the api departmentAdd endpoint.
+    * The api user sends a GET request and saves the response returned from the api departmentAdd endpoint
     * The api user verifies that the status code is 201
     * The api user verifies that the message information in the response body is "department added successfully"
 
@@ -15,9 +15,7 @@ Feature: As an administrator, I want to be able to add a new department record v
 
 
 
-
-  @API
-  Scenario Outline:The creation of the new department record via the API should be verified from the API itself.
+   Scenario Outline:The creation of the new department record via the API should be verified from the API itself.
   (The creation of the record can be confirmed by sending a GET request to the /api/departmentDetails endpoint with the added_item_id returned in the response body.)
 
     * The api user constructs the base url with the "admin" token
@@ -45,5 +43,3 @@ Feature: As an administrator, I want to be able to add a new department record v
       | name | details        | staus |
       | HR   | Human Resource | 1     |
 
-    # bug var sanırım-postman de dönen exeption mesajı sorgudaki ile aynı ancak kod ile yapılan sorguda dönen
-# exeption mesajı "Exception Mesaj : status code: 404, reason phrase: Not Found"
