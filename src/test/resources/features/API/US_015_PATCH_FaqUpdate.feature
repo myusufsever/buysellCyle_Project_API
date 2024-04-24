@@ -1,24 +1,18 @@
 Feature: As an administrator, I want to be able to update the information
 of the FAQ record with the specified FAQ id via API connection.
 
-
-
-
   Scenario Outline:  When a PATCH request containing valid authorization credentials, the FAQ id to be updated, and the
   updated information of the FAQ (title) is sent to the /api/faqsUpdate/{id} endpoint, the expected status code returned
   should be 202, and the message in the response body should confirm: "faqs updated successfully".
 
     * The api user constructs the base url with the "admin" token
-    * The api user sets "api/faqsUpdate/{id}" path parameters
-    * The api user prepares a PATCH request containing the <id>, "<title>" information to send to the api register endpoint
+    * The api user sets "api/faqsUpdate/<id>" path parameters
+    * The api user adds a key field "title" with the value "updatedTitle" to the request body
     * The api user sends the "patch" request and saves the "Response"
     * The api user verifies that for "patch" request type the status code is 202 and the message information in the response body is "faqs updated successfully"
     Examples:
-      |id |   title   |
-      |96|  faqTitle |
-
-
-
+      |id |
+      |119|
 
 
 
@@ -28,11 +22,12 @@ of the FAQ record with the specified FAQ id via API connection.
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/profile/addressUpdate/<id>" path parameters
-    * The api user prepares a PATCH request containing the <id>, "<title>", "<description>" information to send to the api register endpoint
+    * The api user adds a key field "title" with the value "updatedTitle" to the request body
+    * The api user adds a key field "description" with the value "updatedDescription" to the request body
     * The api user verifies that for "patch" request type the status code is 202 and the message information in the response body is "faqs updated successfully"
     Examples:
-      | id |   title   |   description    |
-      | 96 |  FaqTitle |  FaqDescription  |
+      | id |
+      | 120 |
 
 
 
@@ -43,24 +38,26 @@ of the FAQ record with the specified FAQ id via API connection.
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/profile/addressUpdate/<id>" path parameters
-    * The api user prepares a PATCH request containing the <id>, "<title>", "<description>" information to send to the api register endpoint
-    * The api user verifies that for "patch" request type the status code is 404 and the message information in the response body is "faqs not found"
+    * The api user adds a key field "title" with the value "updatedTitle" to the request body
+    * The api user adds a key field "description" with the value "updatedDescription" to the request body
+    * The api user verifies that for "patch" request type the status code is 404 and the message information in the response body is "Not Found"
     Examples:
-      | id |   title   |   description    |
-      | 96 |  FaqTitle |  FaqDescription  |
+      | id |
+      | 96 |
 
 
   Scenario Outline: When a PATCH request containing invalid authorization credentials, the FAQ id to be updated, and the
   updated information of the FAQ (title, description) is sent to the /api/faqsUpdate/{id} endpoint, the expected status
   code returned should be 401, and the message in the response body should confirm: "Unauthenticated.".
 
-    * The api user constructs the base url with the "admin" token
+    * The api user constructs the base url with the "invalid" token
     * The api user sets "api/profile/addressUpdate/<id>" path parameters
-    * The api user prepares a PATCH request containing the <id>, "<title>", "<description>" information to send to the api register endpoint
-    * The api user verifies that for "patch" request type the status code is 401 and the message information in the response body is "Unauthenticated."
+    * The api user adds a key field "title" with the value "updatedTitle" to the request body
+    * The api user adds a key field "description" with the value "updatedDescription" to the request body
+    * The api user verifies that for "patch" request type the status code is 401 and the message information in the response body is "Unauthorized"
     Examples:
-      | id |   title   |   description    |
-      | 96 |  FaqTitle |  FaqDescription  |
+      | id |
+      | 96 |
 
   Scenario Outline: The updated_Id information in the response body from the /api/faqsUpdate/{id} endpoint should be
   verified to be the same as the id path parameter specified in the /api/faqsUpdate/{id} endpoint.
