@@ -29,9 +29,11 @@ public class API_Stepdefinitions {
     public static String postId;
     public static String postId2;
     public static String addedItemId;
+    public static String updatedId;
+    String[] paths;
     @Given("The api user sets {string} path parameters")
     public void the_api_user_sets_path_parameters(String rawPaths) {
-        String[] paths = rawPaths.split("/"); // [api,refundReasonUpdate,25]
+        paths = rawPaths.split("/"); // [api,refundReasonUpdate,25]
 
         System.out.println(Arrays.toString(paths));
 
@@ -269,7 +271,8 @@ public class API_Stepdefinitions {
               System.out.println(postId);
               System.out.println("addedItemId: "+ addedItemId); break;
 
-          case   "patchresponse": response2=API_Methods.patchResponse(requestBody.toString()); break;
+          case   "patchresponse": response2=API_Methods.patchResponse(requestBody.toString());
+              updatedId = response2.jsonPath().getString("updated_Id");break;
           case   "deleteresponse": response2=API_Methods.deleteResponse(requestBody.toString()); break;
           case   "getbodyresponse":response2=API_Methods.getBodyResponse(requestBody.toString()); break;
           case   "getresponse": response2=API_Methods.getResponse(); System.out.println("selam");break;
@@ -347,6 +350,7 @@ public class API_Stepdefinitions {
                 break;
             }
         } else  {
+
             API_Methods.messageAssert(message);
             API_Methods.statusCodeAssert(code);
 
@@ -693,6 +697,8 @@ public class API_Stepdefinitions {
     public void the_api_user_prepares_to_be_accessed_to_send_to_the_api_refund_reason_details_endpoint(String key, String value) {
         if (value.equals("added_item_id")){
             requestBody.put(key,addedItemId);
+            System.out.println(requestBody.toString());}
+        else if (value.equals("updated_Id")) {requestBody.put(key,updatedId);
             System.out.println(requestBody.toString());}
         else {requestBody.put(key,value);}
     }
