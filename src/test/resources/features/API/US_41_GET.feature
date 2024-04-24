@@ -38,7 +38,7 @@ Feature: As an administrator, I want to be able to access the address informatio
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/profile/addressDetails" path parameters
-    * The api user prepares a GET request containing the <id> for which details are not accessed.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
     * The API user records the response from the api refundReasonDetails endpoint, verifying that the status code is '404' and the reason phrase is Not Found.
 
     Examples:

@@ -25,7 +25,7 @@ Feature: As a user, I want to add a new address record to my profile via API con
 
     * The api user constructs the base url with the "customer" token
     * The api user sets "api/profile/customerDetailsAddress" path parameters
-    * The api user prepares a "GET" request containing the  <id> for which details are to be accessed
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
     * The api user sends the "getbody" request and saves the "Response"
     * The api user verifies that the message information in the response body is "success"
 

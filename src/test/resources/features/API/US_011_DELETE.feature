@@ -10,7 +10,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
 
     * The api user sets "api/holidayDelete" path parameters
 
-    * The api user prepares a DELETE request containing the refund reason <id> to be deleted to send to the api refundReasonDelete endpoint.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
 
     * The api user sends the DELETE request and saves the response returned from the api refundReasonDelete endpoint.
 
@@ -34,7 +34,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
 
     * The api user sets "api/holidayDelete" path parameters
 
-    * The api user prepares a DELETE request containing the refund reason <id> to be deleted to send to the api refundReasonDelete endpoint.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
 
     * The API user records the response from the api refundReasonDelete endpoint, confirming that the status code is '404' and the reason phrase is Not Found.
 
@@ -52,7 +52,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
 
       * The api user sets "api/holidayDelete" path parameters
 
-      * The api user prepares a DELETE request containing the refund reason <id> to be deleted to send to the api refundReasonDelete endpoint.
+      * The api user prepares a GET request containing the  <id> for which details are to be accessed
 
       * The API user saves the response from the api refundReasonDelete endpoint, verifying that the status code is '401' and the reason phrase is Unauthorized.
 
@@ -73,7 +73,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
 
     * The api user sets "api/holidayDelete" path parameters
 
-    * The api user prepares a GET request containing the refund reason <id> for which details are to be accessed, to send to the api refundReasonDetails endpoint.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
 
 
     * The API user records the response from the api refundReasonDetails endpoint, verifying that the status code is '404' and the reason phrase is Not Found.
@@ -92,7 +92,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
 
     * The api user sets "api/holidayDelete" path parameters
 
-    * The api user prepares a DELETE request containing the refund reason <id> to be deleted to send to the api refundReasonDelete endpoint.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
 
     * The API user saves the response from the api refundReasonDelete endpoint, verifying that the status code is '401' and the reason phrase is Unauthorized.
 

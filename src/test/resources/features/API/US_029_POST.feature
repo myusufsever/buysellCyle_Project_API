@@ -19,7 +19,7 @@ Feature: As an administrator, I want to be able to create a new coupon record vi
   Scenario Outline: The creation of the new coupon record via the API should be verified from the API itself.
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/coupon/couponDetails" path parameters
-    * The api user prepares a GET request containing the coupon <id> for which details are to be accessed, to send to the api coupon CouponDetails endpoint.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
     * The api user sends a GET request and saves the response returned from the api coupon CouponDetails endpoint.
     * The api user verifies that the message information in the response body is "success"
 

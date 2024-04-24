@@ -6,7 +6,7 @@ Feature: As an administrator, I should be able to access all registered user inf
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/get-users" path parameters
-    * The api user prepares a "GET" request containing the  <id> for which details are to be accessed
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
     * The api user sends the "getbody" request and saves the "Response"
     * The api user verifies that for "getbody" request type the status code is 200 and the message information in the response body is "success"
     Examples:
@@ -18,7 +18,7 @@ Feature: As an administrator, I should be able to access all registered user inf
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/get-users" path parameters
-    * The api user prepares a "GET" request containing the  <id> for which details are to be accessed
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
     * The api user sends the "getbody" request and saves the "Response"
     * The api user validates the <id>, "<first_name>", "<username>", "<email>", "<name>" of the response body with index <dataIndex>.
 
@@ -32,7 +32,7 @@ Feature: As an administrator, I should be able to access all registered user inf
 
     * The api user constructs the base url with the "invalid" token
     * The api user sets "api/get-users" path parameters
-    * The api user prepares a "GET" request containing the  <id> for which details are to be accessed
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
     * The api user verifies that for "getbody" request type the status code is 401 and the message information in the response body is "Unauthorized"
     Examples:
       | id |

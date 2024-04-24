@@ -18,7 +18,7 @@ Feature: As an administrator, I want to add a new holiday record for staff via A
   Scenario Outline: The creation of the new holiday record via the API should be verified through the API itself.
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/holidayDetails" path parameters
-    * The api user prepares a GET request containing the <id> for which details are to be accessed, to send to the api holidayAdd endpoint.
+    * The api user prepares a GET request containing the  <id> for which details are to be accessed
     * The api user sends the "post" request and saves the "Response"
     * The api user verifies that for "post" request type the status code is 200 and the message information in the response body is "success"
 
