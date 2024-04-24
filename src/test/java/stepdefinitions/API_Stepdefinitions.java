@@ -26,9 +26,9 @@ public class API_Stepdefinitions {
     Pojo requestPojo;
     Faker faker = new Faker();
     public static String email_class_level;
-   public static String postId;
+    public static String postId;
     public static String postId2;
-
+    public static String addedItemId;
     @Given("The api user sets {string} path parameters")
     public void the_api_user_sets_path_parameters(String rawPaths) {
         String[] paths = rawPaths.split("/"); // [api,refundReasonUpdate,25]
@@ -261,16 +261,18 @@ public class API_Stepdefinitions {
 
   @Given("The api user sends the {string} request and saves the {string}")
   public void the_api_user_sends_the_request_and_saves_the(String requestType, String response) {
-      switch ((requestType+response).toLowerCase()){
 
+      switch ((requestType+response).toLowerCase()){
           case   "postresponse": response2=API_Methods.postResponse(requestBody.toString());
               postId =  response2.jsonPath().getString("user.id");
-              System.out.println(postId); break;
+              addedItemId = response2.jsonPath().getString("added_item_id");
+              System.out.println(postId);
+              System.out.println("addedItemId: "+ addedItemId); break;
+
           case   "patchresponse": response2=API_Methods.patchResponse(requestBody.toString()); break;
           case   "deleteresponse": response2=API_Methods.deleteResponse(requestBody.toString()); break;
-//          case   "getbodyresponse": response2=API_Methods.getBodyResponse(requestBody.toString());break;
-          case   "getresponse": if (requestBody==null){response2=API_Methods.getResponse(); System.out.println("selam");}
-              else {response2=API_Methods.getBodyResponse(requestBody.toString());} break;
+          case   "getbodyresponse":response2=API_Methods.getBodyResponse(requestBody.toString()); break;
+          case   "getresponse": response2=API_Methods.getResponse(); System.out.println("selam");break;
 //              response2=API_Methods.getResponse(); System.out.println("selam"); break;
       }
        postId2 = postId;
@@ -689,20 +691,21 @@ public class API_Stepdefinitions {
 
     @Given("The api user adds a key field {string} with the value {string} to the request body")
     public void the_api_user_prepares_to_be_accessed_to_send_to_the_api_refund_reason_details_endpoint(String key, String value) {
-        if (value.equals("added_item_id")){requestBody.put(key,postId2);}
+        if (value.equals("added_item_id")){
+            requestBody.put(key,addedItemId);
+            System.out.println(requestBody.toString());}
         else {requestBody.put(key,value);}
     }
     @Given("The api user verifies that {string} returned in the response body by sending a GET request to the {string} endpoint")
     public void the_api_user_verifies_response_body(String key, String endpoint) {
-        System.out.println(postId2);
         switch (endpoint){
-            case "holidayDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("holidayDetails[0].id").contains(postId2));break;
-            case "faqsDetails": Assert.assertTrue(API_Methods.response.jsonPath().getString("FaqsDetails[0].id").contains(postId2));break;
-            case "refundReasonDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("refundReasonDetails[0].id").contains(postId2));break;
-            case "departmentDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("departmentDetails[0].id").contains(postId2));break;
-            case "couponDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("couponDetails[0].id").contains(postId2));break;
-            case "customerDetailsAddress":Assert.assertTrue(API_Methods.response.jsonPath().getString("addresses[0].id").contains(postId2));break;
-            case "addressDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("addresses[0].id").contains(postId2));break;
+            case "holidayDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("holidayDetails[0].id").contains(addedItemId));break;
+            case "faqsDetails": Assert.assertTrue(API_Methods.response.jsonPath().getString("FaqsDetails[0].id").contains(addedItemId));break;
+            case "refundReasonDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("refundReasonDetails[0].id").contains(addedItemId));break;
+            case "departmentDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("departmentDetails[0].id").contains(addedItemId));break;
+            case "couponDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("couponDetails[0].id").contains(addedItemId));break;
+            case "customerDetailsAddress":Assert.assertTrue(API_Methods.response.jsonPath().getString("addresses[0].id").contains(addedItemId));break;
+            case "addressDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("addresses[0].id").contains(addedItemId));break;
         }
 
     }
