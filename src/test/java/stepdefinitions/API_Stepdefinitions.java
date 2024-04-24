@@ -607,7 +607,7 @@ public class API_Stepdefinitions {
 
     @Given("The api user adds a key field {string} with the value {string} to the request body")
     public void the_api_user_prepares_to_be_accessed_to_send_to_the_api_refund_reason_details_endpoint(String key, String value) {
-        if (value.equals("added_item_id")){value=postId2;requestBody.put(key,value);}
+        if (value.equals("added_item_id")){requestBody.put(key,postId2);}
         else {requestBody.put(key,value);}
     }
     @Given("The api user verifies that {string} returned in the response body by sending a GET request to the {string} endpoint")
