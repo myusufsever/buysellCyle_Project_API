@@ -51,6 +51,7 @@ public class BankAccount {
     public static int getStatus() {
         return status;
     }
+
     public BankAccount(int bank_account_id,String bank_name,String branch_name,String account_name,String account_number,Double opening_balance,String description,int status){
         this.bank_account_id = bank_account_id;
         this.bank_name=bank_name;

@@ -6,28 +6,37 @@ import hooks.HooksAPI;
 import io.cucumber.java.en.Given;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import manage.Manage;
 import org.json.JSONObject;
 import org.junit.Assert;
 import pojos.Pojo;
 import utilities.API_Utilities.API_Methods;
+
+import java.lang.invoke.SwitchPoint;
 import java.util.*;
 import static hooks.HooksAPI.spec;
+import static java.lang.Integer.parseInt;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
 
-public class API_Stepdefinitions {
-    public static Response response2;
+public class API_Stepdefinitions extends Manage{
 
-    public static int id;
-    public static String fullPath;
-    public JSONObject requestBody = new JSONObject();
-    JsonPath jsonPath;
-    HashMap<String, Object> reqBody = new HashMap<>();
-    Pojo requestPojo;
-    Faker faker = new Faker();
-    public static String email_class_level;
-   public static String postId;
-    public static String postId2;
+
+//    public static Response response2;
+//    public static int id;
+//    public static String fullPath;
+//    public JSONObject requestBody = new JSONObject();
+//    JsonPath jsonPath;
+//    HashMap<String, Object> reqBody = new HashMap<>();
+//    Pojo requestPojo;
+//    Faker faker = new Faker();
+//    public static String email_class_level;
+//    public static String postId;
+//    public static String postId2;
+//    public static String addedItemId;
+//    public static String updatedId;
+//    public static String DeletedId;
+//    public static int deletedId;
 
     @Given("The api user sets {string} path parameters")
     public void the_api_user_sets_path_parameters(String rawPaths) {
@@ -48,7 +57,7 @@ public class API_Stepdefinitions {
             tempPath.append(key + "}/{");
 
             if (value.matches("\\d+")) {  // value.matches("\\d+") burada value rakam iceriyorsa dedik
-                id = Integer.parseInt(value);
+                id = parseInt(value);
             }
         }
         tempPath.deleteCharAt(tempPath.lastIndexOf("/"));
@@ -261,16 +270,20 @@ public class API_Stepdefinitions {
 
   @Given("The api user sends the {string} request and saves the {string}")
   public void the_api_user_sends_the_request_and_saves_the(String requestType, String response) {
-      switch ((requestType+response).toLowerCase()){
 
+      switch ((requestType+response).toLowerCase()){
           case   "postresponse": response2=API_Methods.postResponse(requestBody.toString());
               postId =  response2.jsonPath().getString("user.id");
-              System.out.println(postId); break;
-          case   "patchresponse": response2=API_Methods.patchResponse(requestBody.toString()); break;
-          case   "deleteresponse": response2=API_Methods.deleteResponse(requestBody.toString()); break;
-//          case   "getbodyresponse": response2=API_Methods.getBodyResponse(requestBody.toString());break;
-          case   "getresponse": if (requestBody==null){response2=API_Methods.getResponse(); System.out.println("selam");}
-              else {response2=API_Methods.getBodyResponse(requestBody.toString());} break;
+              addedItemId = response2.jsonPath().getString("added_item_id");
+              System.out.println(postId);
+              System.out.println("addedItemId: "+ addedItemId); break;
+
+          case   "patchresponse": response2=API_Methods.patchResponse(requestBody.toString());
+              updatedId = response2.jsonPath().getString("updated_Id");break;
+          case   "deleteresponse": response2=API_Methods.deleteResponse(requestBody.toString());
+              DeletedId = response2.jsonPath().getInt("Deleted_Id");break;
+          case   "getbodyresponse":response2=API_Methods.getBodyResponse(requestBody.toString()); break;
+          case   "getresponse": response2=API_Methods.getResponse(); System.out.println("selam");break;
 //              response2=API_Methods.getResponse(); System.out.println("selam"); break;
       }
        postId2 = postId;
@@ -345,6 +358,7 @@ public class API_Stepdefinitions {
                 break;
             }
         } else  {
+
             API_Methods.messageAssert(message);
             API_Methods.statusCodeAssert(code);
 
@@ -688,23 +702,66 @@ public class API_Stepdefinitions {
     }*/
 
     @Given("The api user adds a key field {string} with the value {string} to the request body")
-    public void the_api_user_prepares_to_be_accessed_to_send_to_the_api_refund_reason_details_endpoint(String key, String value) {
-        if (value.equals("added_item_id")){requestBody.put(key,postId2);}
+    public void the_api_user_prepares_the_request_body(String key, String value) {
+        if (value.equals("added_item_id")){
+            requestBody.put(key,addedItemId);
+            System.out.println(requestBody.toString());}
+        else if (value.equals("updated_Id")) {requestBody.put(key,updatedId);
+            System.out.println(requestBody.toString());}
+        else if (value.equals("Deleted_Id")) {requestBody.put(key,DeletedId);
+            System.out.println(requestBody.toString());}
+        else if (key.equals("id")) {id=parseInt(value);requestBody.put(key,value);
+            System.out.println(requestBody.toString());}
         else {requestBody.put(key,value);}
     }
     @Given("The api user verifies that {string} returned in the response body by sending a GET request to the {string} endpoint")
     public void the_api_user_verifies_response_body(String key, String endpoint) {
-        System.out.println(postId2);
         switch (endpoint){
-            case "holidayDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("holidayDetails[0].id").contains(postId2));break;
-            case "faqsDetails": Assert.assertTrue(API_Methods.response.jsonPath().getString("FaqsDetails[0].id").contains(postId2));break;
-            case "refundReasonDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("refundReasonDetails[0].id").contains(postId2));break;
-            case "departmentDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("departmentDetails[0].id").contains(postId2));break;
-            case "couponDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("couponDetails[0].id").contains(postId2));break;
-            case "customerDetailsAddress":Assert.assertTrue(API_Methods.response.jsonPath().getString("addresses[0].id").contains(postId2));break;
-            case "addressDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("addresses[0].id").contains(postId2));break;
+            case "holidayDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("holidayDetails[0].id").contains(addedItemId));break;
+            case "faqsDetails": Assert.assertTrue(API_Methods.response.jsonPath().getString("FaqsDetails[0].id").contains(addedItemId));break;
+            case "refundReasonDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("refundReasonDetails[0].id").contains(addedItemId));break;
+            case "departmentDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("departmentDetails[0].id").contains(addedItemId));break;
+            case "couponDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("couponDetails[0].id").contains(addedItemId));break;
+            case "customerDetailsAddress":Assert.assertTrue(API_Methods.response.jsonPath().getString("addresses[0].id").contains(addedItemId));break;
+            case "addressDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("addresses[0].id").contains(addedItemId));break;
+        }
+    }
+
+    @Given("The api user verifies that the {string} information in the response body matches the id path parameter specified in the endpoint.")
+    public void the_api_user_verifies_that_the_id_information_in_the_response_body_matches_with_the_id_path_parameter_specified_in_the_endpoint(String key) {
+
+        switch (key){
+            case "updated_Id": jsonPath = API_Methods.response.jsonPath(); assertEquals(id, jsonPath.getInt(key));break;
+            case "Deleted_Id": jsonPath = API_Methods.response.jsonPath(); assertEquals(DeletedId, jsonPath.getInt(key));break;
         }
 
+
+//        // 2. adim
+//        API_Methods.response.then()
+//                .assertThat()
+//                .body("Deleted_Id", equalTo(id));
+    }
+    @Given("The api user adds a requestKey field {string} with the requestValue {string} to the request body")
+    public void the_api_user_prepares_the_requestbody(String requestKey, String requestValue) {
+        switch (requestKey){
+            case "id" : id=parseInt(requestValue);
+                        requestBody.put(requestKey,id);
+                        System.out.println(requestBody.toString());break;
+            case "":
+        }
+
+
+
+//        if (requestValue.equals("added_item_id")){
+//            requestBody.put(requestKey,addedItemId);
+//            System.out.println(requestBody.toString());}
+//        else if (requestValue.equals("updated_Id")) {requestBody.put(requestKey,updatedId);
+//            System.out.println(requestBody.toString());}
+//        else if (requestValue.equals("Deleted_Id")) {requestBody.put(requestKey,DeletedId);
+//            System.out.println(requestBody.toString());}
+//        else if (requestKey.equals("id")) {id=parseInt(requestValue);requestBody.put(requestKey,requestValue);
+//            System.out.println(requestBody.toString());}
+//        else {requestBody.put(requestKey,requestValue);}
     }
 
 }
