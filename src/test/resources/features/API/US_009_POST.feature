@@ -19,8 +19,8 @@ Feature: As an administrator, I want to add a new holiday record for staff via A
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/holidayDetails" path parameters
     * The api user prepares a GET request containing the <id> for which details are to be accessed, to send to the api holidayAdd endpoint.
-    * The api user sends a GET request and saves the response returned from the api coupon CouponDetails endpoint.
-    * The api user verifies that the message information in the response body is "success"
+    * The api user sends the "post" request and saves the "Response"
+    * The api user verifies that for "post" request type the status code is 200 and the message information in the response body is "success"
 
     Examples:
       | id |
@@ -48,7 +48,7 @@ Feature: As an administrator, I want to add a new holiday record for staff via A
     * The api user sets "api/holidayAdd" path parameters
     * The api user prepares a POST request containing the "<year>" "<name>" "<date>" information to send to the api holidayAdd endpoint.
     * The api user sends the "post" request and saves the "Response"
-    * The api user verifies that for "post" request type the status code is 401 and the message information in the response body is "Unauthenticated."
+    * The api user verifies that for "post" request type the status code is 401 and the message information in the response body is "Unauthorized"
 
     Examples:
       | year | name        | date       |
