@@ -268,8 +268,10 @@ public class API_Stepdefinitions {
               System.out.println(postId); break;
           case   "patchresponse": response2=API_Methods.patchResponse(requestBody.toString()); break;
           case   "deleteresponse": response2=API_Methods.deleteResponse(requestBody.toString()); break;
-          case   "getbodyresponse": response2=API_Methods.getBodyResponse(requestBody.toString());break;
-          case   "getresponse": response2=API_Methods.getResponse(); System.out.println("selam"); break;
+//          case   "getbodyresponse": response2=API_Methods.getBodyResponse(requestBody.toString());break;
+          case   "getresponse": if (requestBody==null){response2=API_Methods.getResponse(); System.out.println("selam");}
+              else {response2=API_Methods.getBodyResponse(requestBody.toString());} break;
+//              response2=API_Methods.getResponse(); System.out.println("selam"); break;
       }
        postId2 = postId;
   }
@@ -597,6 +599,32 @@ public class API_Stepdefinitions {
             requestBody.put("name", name);
             requestBody.put("date", date);
         }
+  /*  @Given("The API user records the response from the api holidayUpdate endpoint, confirming that the status code is 400 and the reason phrase is dublicate holiday request.")
+    public void the_apı_user_records_the_response_from_the_api_holiday_update_endpoint_confirming_that_the_status_code_is_and_the_reason_phrase_is_dublicate_holiday_request() {
+
+        Assert.assertTrue(API_Methods.tryCatchPatch(requestBody.toString()).equals(ConfigReader.getProperty("dublicateholidayMessage", "api")));
+    }*/
+
+    @Given("The api user adds a key field {string} with the value {string} to the request body")
+    public void the_api_user_prepares_to_be_accessed_to_send_to_the_api_refund_reason_details_endpoint(String key, String value) {
+        if (value.equals("added_item_id")){requestBody.put(key,postId2);}
+        else {requestBody.put(key,value);}
+    }
+    @Given("The api user verifies that {string} returned in the response body by sending a GET request to the {string} endpoint")
+    public void the_api_user_verifies_response_body(String key, String endpoint) {
+        System.out.println(postId2);
+        switch (endpoint){
+            case "holidayDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("holidayDetails[0].id").contains(postId2));break;
+            case "faqsDetails": Assert.assertTrue(API_Methods.response.jsonPath().getString("FaqsDetails[0].id").contains(postId2));break;
+            case "refundReasonDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("refundReasonDetails[0].id").contains(postId2));break;
+            case "departmentDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("departmentDetails[0].id").contains(postId2));break;
+            case "couponDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("couponDetails[0].id").contains(postId2));break;
+            case "customerDetailsAddress":Assert.assertTrue(API_Methods.response.jsonPath().getString("addresses[0].id").contains(postId2));break;
+            case "addressDetails":Assert.assertTrue(API_Methods.response.jsonPath().getString("addresses[0].id").contains(postId2));break;
+        }
+
+    }
+
 }
 
 
