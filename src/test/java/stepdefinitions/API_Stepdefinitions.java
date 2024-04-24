@@ -554,10 +554,69 @@ public class API_Stepdefinitions {
 
 
     }
-    @Given("The api user sends a GET request and saves the response returned from the api departmentAdd endpoint.")
+    @Given("The api user sends a GET request and saves the response returned from the api departmentAdd endpoint")
     public void the_api_user_sends_a_get_request_and_saves_the_response_returned_from_the_api_department_add_endpoint() {
         API_Methods.postResponse(reqBody);
 
+    }
+
+    @Given("The api user prepares a PATCH request containing the {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} data to send to the api endpoint")
+    public void the_api_user_prepares_a_patch_request_containing_the_data_to_send_to_the_api_endpoint(String name, String email, String address, String phone, String city, String state, String country, String postal_code, String address_type) {
+
+
+        requestBody.put("name", name);
+        requestBody.put("email", email);
+        requestBody.put("address", address);
+        requestBody.put("phone", phone);
+        requestBody.put("city", city);
+        requestBody.put("state", state);
+        requestBody.put("country", country);
+        requestBody.put("postal_code", postal_code);
+        requestBody.put("address_type", address_type);
+
+        System.out.println(requestBody);
+
+    }
+
+    @Given("The api user sends the PATCH request and saves the response returned from the api endpoint.")
+    public void the_api_user_sends_the_patch_request_and_saves_the_response_returned_from_the_api_endpoint() {
+
+        API_Methods.patchResponse(requestBody.toString());
+
+    }
+
+    @Given("The API user records the response from the api refundReasonUpdate endpoint, confirming that the status code is '404' and the address is not found.")
+    public void the_apı_user_records_the_response_from_the_api_refund_reason_update_endpoint_confirming_that_the_status_code_is_and_the_address_is_not_found() {
+        Assert.assertTrue(API_Methods.tryCatchPatch(requestBody.toString()).equals(ConfigReader.getProperty("invalidEmailAddressExeption", "api")));
+    }
+
+    @Given("The api user prepares a DELETE request containing the refund reason {int} to be deleted to send to the api endpoint")
+    public void the_api_user_prepares_a_delete_request_containing_the_refund_reason_to_be_deleted_to_send_to_the_api_endpoint(int id) {
+        requestBody = new JSONObject();
+        requestBody.put("id", id);
+    }
+
+
+    @Given("The api user sends the DELETE request and saves the response returned from the api endpoint.")
+    public void the_api_user_sends_the_delete_request_and_saves_the_response_returned_from_the_api_endpoint() {
+        API_Methods.deleteResponse(requestBody.toString());
+    }
+    @Given("The api user verifies that the info in the response body is {string}.")
+    public void the_api_user_verifies_that_the_info_in_the_response_body_is(String name) {
+        jsonPath = API_Methods.response.jsonPath();
+
+        assertEquals(name, jsonPath.getString("addresses[0].name"));
+    }
+
+    @Given("The api user prepares a DELETE request containing the data {int} to be deleted to send to the api endpoint")
+    public void the_api_user_prepares_a_delete_request_containing_the_data_to_be_deleted_to_send_to_the_api_endpoint(int id) {
+        requestBody = new JSONObject();
+        requestBody.put("id", id);
+    }
+
+    @Given("The api user sends the DELETE request and saves the response returned from the api addressDelete endpoint.")
+    public void the_api_user_sends_the_delete_request_and_saves_the_response_returned_from_the_api_address_delete_endpoint() {
+        API_Methods.deleteResponse(requestBody.toString());
     }
 
 

@@ -18,13 +18,12 @@ import org.junit.runner.RunWith;
 
 
 
-        tags = "@HS",
+        tags = "@ZS",
 
 
 
 
-
-        dryRun = false
+        dryRun = true
 
 )
 public class Runner {
