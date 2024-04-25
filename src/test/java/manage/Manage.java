@@ -30,6 +30,7 @@ public class Manage {
 
         //********************************** API Test Variables and Parameters **************************************************************************
 
+    private String verify_opening_balance_updated_with_negative_value = "update bank_accounts set opening_balance = -1000000 where bank_name= 'Bank Name 1';";
     private String verify_the_name_value_of_categories="Select  name from categories Where slug='fashion';";
     private String list_the_unique_id = "SELECT user_id, count(user_id)=1 from u168183796_qabuysell.support_tickets where reference_no like '%-%' group by user_id;";
     private String list_the_unique_id_not_contains = "SELECT user_id, count(user_id)=1 from u168183796_qabuysell.support_tickets where reference_no NOT like '%-%' group by user_id;";
@@ -49,6 +50,19 @@ public class Manage {
     private String email_template_types_Grouping = "SELECT module, COUNT(*) AS type_count" + "FROM email_template_types" + "WHERE module IS NOT NULL" + "GROUP BY module;";
 
 
+    public String getVerify_opening_balance_updated_with_negative_value() {
+        return verify_opening_balance_updated_with_negative_value;
+    }
+
+    private String digital_gift_cards_Add_Data_And_Then_Delete_That_Data = "INSERT INTO digital_gift_cards (id,gift_name,descriptionOne,thumbnail_image_one,thumbnail_image_two,created_at) VALUES (143759, 'Lıghting', 'Mcquen', 'http://lorempixel.com/g/640/350/food/', 'http://lorempixel.com/640/480/nature/',  '2024-04-06 19:14:03');";
+
+    private String list_ids_with_shipping_address = "select id from order_address_details where shipping_address='Switzerland';";
+    private String  email_address_from_the_attendances = "";
+    private String  delete_the_data_in_the_cities_table = "delete from u168183796_qabuysell.cities where id=?;";
+    private String couponProductsGroup ="SELECT coupon_id, COUNT(*) AS product_count FROM coupon_products GROUP BY coupon_id;";
+
+
+
 
     public String getList_the_unique_id_not_contains() {return list_the_unique_id_not_contains;}
     public String getSum_of_the_total_price() {return sum_of_the_total_price;}
@@ -64,7 +78,36 @@ public class Manage {
 
     public String getCustomerCouponStoresAndUsers() { return customerCouponStoresAndUsers; }
 
+
     public String getDigital_gift_cards_Add_Data_And_Then_Delete_That_Data() {return digital_gift_cards_Add_Data_And_Then_Delete_That_Data;}
 
     public String getEmail_template_types_Grouping() {return email_template_types_Grouping;}
  }
+
+private String   shipping_address="SELECT COUNT(DISTINCT id) FROM order_address_details WHERE shipping_address <> billing_address;";
+
+ public String getShipping_address() { return shipping_address;}
+
+       public String getList_ids_with_shipping_address() {
+        return list_ids_with_shipping_address;
+    }
+
+    public String getEmail_address_from_the_attendances() {
+        return email_address_from_the_attendances;
+    }
+
+    public String getDelete_the_data_in_the_cities_table() {
+        return delete_the_data_in_the_cities_table;
+    }
+
+
+
+    public String getDigital_gift_cards_Add_Data_And_Then_Delete_That_Data() {
+  return digital_gift_cards_Add_Data_And_Then_Delete_That_Data;
+ }
+
+ public String getCouponProductsGroup() { return couponProductsGroup; }
+
+
+}
+

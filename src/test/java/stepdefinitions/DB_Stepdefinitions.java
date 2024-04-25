@@ -6,6 +6,7 @@ import helperDB.Cities;
 import io.cucumber.java.en.Given;
 import manage.Manage;
 import org.junit.Assert;
+import utilities.DB_Utilities.DBUtils;
 
 import java.sql.Array;
 import java.sql.SQLException;
@@ -168,11 +169,7 @@ public class DB_Stepdefinitions {
 
     }
     //=================== US_15 ZD ============================
-    @Given("Verify Whether there is data Query is prepared and executed.")
-    public void verify_Whether_there_is_data_query_is_prepared_and_executed() throws SQLException {
-        query = manage.getCustomerCouponStoresAndUsers();
-        resultSet = getStatement().executeQuery(query);
-    }
+
     @Given("List the first {int} data in the customer_coupon_stores table by bringing them from the users table.")
     public void list_the_first_data_in_the_customer_coupon_stores_table_by_bringing_them_from_the_users_table(int list) throws SQLException {
         // Beklenen sonuçları tutacak bir liste oluşturma
@@ -199,11 +196,6 @@ public class DB_Stepdefinitions {
 
 //=========================== US_014 ZD ===========================
 
-    @Given("Verify whether there is data Query is prepared and executed.")
-    public void verify_whether_there_is_data_query_is_prepared_and_executed() throws SQLException {
-        query = manage.getRefund_reasons_null();
-        resultSet = getStatement().executeQuery(query);
-    }
     @Given("Verify the {string} information result are obtained.")
     public void verify_the_information_result_are_obtained(String reason) throws SQLException {
         resultSet.next();
@@ -213,11 +205,6 @@ public class DB_Stepdefinitions {
     }
 //========================== US_013 ZD ============================
 
-    @Given("Verify whether  there is data Query is prepared and executed.")
-    public void verify_whether__there_is_data_query_is_prepared_and_executed() throws SQLException {
-        query = manage.getVerify_seller_products();
-        resultSet = getStatement().executeQuery(query);
-    }
     @Given("List and verify {int} items without coupons.")
     public void list_and_verify_items_without_coupons(int list) throws SQLException {
         // Beklenen sonuçları tutacak bir liste oluşturma
@@ -246,19 +233,127 @@ public class DB_Stepdefinitions {
             index++;
         }
     }
+
+
+
+
     @Given("{string} query is prepared and executed.")
     public void query_is_prepared_and_executed(String queryName) throws SQLException {
         switch (queryName)
         {
-            case "List_the_unique_ID_contains": query = manage.getList_the_unique_id(); break;
-            case "List_the_unique_ID_notContains": query = manage.getList_the_unique_id_not_contains(); break;
-            case "query_ismi_1": query = manage.getps_cities_veri_ekleme(); break;
-            case "query_ismi_2": query = manage.getRefund_reasons_null(); break;
-            case "query_ismi_3": query = manage.getCities_veri_ekleme(); break;
-            case "query_ismi_4": query = manage.getBank_account_insert_data(); break;
+            case "Opening balance update with negative value": query = manage.getVerify_opening_balance_updated_with_negative_value(); break;
+            case "List_the_unique_ID_notContains": 
+                query = manage.getList_the_unique_id_not_contains();
+                break;       
+            case "List_the_unique_ID_contains":
+                query = manage.getList_the_unique_id();
+                break;
+            case "coupon_products_group_by":
+                query = manage.getCouponProductsGroup();
+                break;
+            case "query_ismi_1":
+                query = manage.getps_cities_veri_ekleme();
+                break;
+            case "Refund_reasons_null":
+                query = manage.getRefund_reasons_null();
+                break;
+            case "query_ismi_3":
+                query = manage.getCities_veri_ekleme();
+                break;
+            case "query_ismi_4":
+                query = manage.getBank_account_insert_data();
+                break;
+            case "Verify_seller_products":
+                query = manage.getVerify_seller_products();
+                break;
+            case "CustomerCouponStoresAndUsers":
+                query = manage.getCustomerCouponStoresAndUsers();
+                break;
+
         }
         resultSet = getStatement().executeQuery(query);
 
     }
+
+    // ================================BEYTULLAH========================================
+    @Given("Verify order_address_details Query is prepared and executed.")
+    public void verify_order_address_details_query_is_prepared_and_executed() throws SQLException {
+        query = manage.getList_ids_with_shipping_address();
+        resultSet = getStatement().executeQuery(query);
+        resultSet.next();
+
     }
+    @Given("Verify the id information results are listed with shipping_address using order_address_details table")
+    public void verify_the_id_information_results_are_listed_with_shipping_address_using_order_address_details_table() throws SQLException {
+
+
+        int[] expectedIds = {2, 188, 189, 556};
+        int[] actualIds = new int[4];
+
+        for (int i = 0; i < 4; i++) {
+            actualIds[i] = resultSet.getInt("id");
+            resultSet.next();
+            System.out.println("actualIds"+i+" = " + actualIds[i]);
+        }
+
+        Assert.assertArrayEquals(expectedIds, actualIds);
+
+    }
+    @Given("Verify delete Query from cities table is prepared and executed.")
+    public void verify_delete_query_from_cities_table_is_prepared_and_executed() throws SQLException {
+        query = manage.getDelete_the_data_in_the_cities_table();
+
+        preparedStatement= DBUtils.getPraperedStatement(query);
+        preparedStatement.executeUpdate();
+
+    }
+
+
+    @Given("Verify that it has been deleted.")
+    public void verify_that_it_has_been_deleted() throws SQLException {
+
+
+
+
+
+/*
+        SQLWarning warning = statement.getWarnings();
+        if (warning != null) {
+            System.out.println("SQL Warning:");
+            while (warning != null) {
+                System.out.println("Message: " + warning.getMessage());
+                warning = warning.getNextWarning();
+            }
+        } else {
+            System.out.println("No SQL warnings.");
+        }
+
+ */
+    }
+
+
+    // ================================BEYTULLAH========================================
+
+
+
+    //===================================US_06 ZD =========================
+
+    @Given("List how many products there are for each coupon, grouped by coupon_id")
+    public void list_how_many_products_there_are_for_each_coupon_grouped_by_coupon_id() throws SQLException {
+        while (resultSet.next()) {
+            int couponId = resultSet.getInt("coupon_id");
+            int productCount = resultSet.getInt("product_count");
+
+            // Sonuçları yazdırma
+            System.out.println("Coupon ID: " + couponId + ", Product Count: " + productCount);
+        }
+    }
+
+}
+
+
+
+
+
+
 

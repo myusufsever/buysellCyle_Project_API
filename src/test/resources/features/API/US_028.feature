@@ -36,7 +36,7 @@ Feature: As an administrator, I want to be able to access the details of the cou
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/coupon/couponDetails" path parameters
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
-    * The api user verifies that for "getbody" request type the status code is 404 and the message information in the response body is "Not Found"
+    * The api user verifies that for "get" request type the status code is 404 and the message information in the response body is "Not Found"
 
     Examples:
       | id |

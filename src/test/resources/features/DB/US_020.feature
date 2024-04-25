@@ -5,6 +5,6 @@ Feature: US_020 Enter 10 data into the device_tokens table at the same time and 
 
   @HSDB
   Scenario: In the support_tickets table, list the unique user_ids of the data with and without '-' in reference_no.
-    * Query is prepared and executed.
+    * "" query is prepared and executed.
 
     * Database connection is closed
