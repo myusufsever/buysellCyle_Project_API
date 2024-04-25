@@ -235,10 +235,7 @@ public class DB_Stepdefinitions {
     }
 
 
-    @Given("Verify the shipping_address and billing_address are not the same in the order_address_ Query is prepared and executed.")
-    public void verify_the_shipping_address_and_billing_address_are_not_the_same_in_the_order_address_query_is_prepared_and_executed() throws SQLException {
-        query = manage.getShipping_address();
-        resultSet = getStatement().executeQuery(query);
+
 
     @Given("{string} query is prepared and executed.")
     public void query_is_prepared_and_executed(String queryName) throws SQLException {
@@ -355,13 +352,8 @@ public class DB_Stepdefinitions {
 }
 
 
-    @Given("Verify the {int} information Results are obtained.")
-    public void verify_the_information_results_are_obtained(Integer sayi) {
-
-    }
 
 
-}
 
-}
+
 
