@@ -73,7 +73,9 @@ public class Manage {
 
     public String getCustomerCouponStoresAndUsers() { return customerCouponStoresAndUsers; }
 
+private String   shipping_address="SELECT COUNT(DISTINCT id) FROM order_address_details WHERE shipping_address <> billing_address;";
 
+ public String getShipping_address() { return shipping_address;}
 
        public String getList_ids_with_shipping_address() {
         return list_ids_with_shipping_address;

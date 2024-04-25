@@ -247,6 +247,13 @@ public class DB_Stepdefinitions {
             index++;
         }
     }
+
+
+    @Given("Verify the shipping_address and billing_address are not the same in the order_address_ Query is prepared and executed.")
+    public void verify_the_shipping_address_and_billing_address_are_not_the_same_in_the_order_address_query_is_prepared_and_executed() throws SQLException {
+        query = manage.getShipping_address();
+        resultSet = getStatement().executeQuery(query);
+
     @Given("{string} query is prepared and executed.")
     public void query_is_prepared_and_executed(String queryName) throws SQLException {
         switch (queryName)
@@ -284,6 +291,7 @@ public class DB_Stepdefinitions {
         query = manage.getList_ids_with_shipping_address();
         resultSet = getStatement().executeQuery(query);
         resultSet.next();
+
     }
     @Given("Verify the id information results are listed with shipping_address using order_address_details table")
     public void verify_the_id_information_results_are_listed_with_shipping_address_using_order_address_details_table() throws SQLException {
@@ -336,5 +344,14 @@ public class DB_Stepdefinitions {
 
     // ================================BEYTULLAH========================================
 
+
+
+    @Given("Verify the {int} information Results are obtained.")
+    public void verify_the_information_results_are_obtained(Integer sayi) {
+
+    }
+
+
+}
 
 }
