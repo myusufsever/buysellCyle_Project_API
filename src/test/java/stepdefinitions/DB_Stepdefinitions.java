@@ -249,7 +249,12 @@ public class DB_Stepdefinitions {
     }
     @Given("{string} query is prepared and executed.")
     public void query_is_prepared_and_executed(String queryName) throws SQLException {
-        switch (queryName) {
+        switch (queryName)
+        {
+            case "Opening balance update with negative value": query = manage.getVerify_opening_balance_updated_with_negative_value(); break;
+            case "List_the_unique_ID_notContains": 
+                query = manage.getList_the_unique_id_not_contains();
+                break;       
             case "List_the_unique_ID_contains":
                 query = manage.getList_the_unique_id();
                 break;
