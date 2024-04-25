@@ -9,9 +9,9 @@ Feature: As an administrator, I want to be able to update department information
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/departmentUpdate/<id>" path parameters
     * The api user prepares a PATCH request containing the "<name>" data to send to the api.
-  * The api user sends the "patch" request and saves the "Response"
-  * The api user verifies that for "patch" request type the status code is 202 and the message information in the response body is "department updated successfully"
-  * The api user verifies that the updated id information in the response body matches the id path parameter specified in the endpoint.
+    * The api user sends the "patch" request and saves the "Response"
+    * The api user verifies that for "patch" request type the status code is 202 and the message information in the response body is "department updated successfully"
+    * The api user verifies that the updated id information in the response body matches the id path parameter specified in the endpoint.
 
     Examples:
       | id | name        |
