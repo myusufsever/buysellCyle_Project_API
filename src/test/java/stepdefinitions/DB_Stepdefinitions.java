@@ -6,6 +6,7 @@ import helperDB.Cities;
 import io.cucumber.java.en.Given;
 import manage.Manage;
 import org.junit.Assert;
+import utilities.DB_Utilities.DBUtils;
 
 import java.sql.Array;
 import java.sql.SQLException;
@@ -248,17 +249,87 @@ public class DB_Stepdefinitions {
     }
     @Given("{string} query is prepared and executed.")
     public void query_is_prepared_and_executed(String queryName) throws SQLException {
-        switch (queryName)
-        {
-            case "List_the_unique_ID_contains": query = manage.getList_the_unique_id(); break;
-            case "List_the_unique_ID_notContains": query = manage.getList_the_unique_id_not_contains(); break;
-            case "query_ismi_1": query = manage.getps_cities_veri_ekleme(); break;
-            case "query_ismi_2": query = manage.getRefund_reasons_null(); break;
-            case "query_ismi_3": query = manage.getCities_veri_ekleme(); break;
-            case "query_ismi_4": query = manage.getBank_account_insert_data(); break;
+        switch (queryName) {
+            case "List_the_unique_ID_contains":
+                query = manage.getList_the_unique_id();
+                break;
+            case "List_the_unique_ID_notContains":
+                query = manage.getList_the_unique_id_not_contains();
+                break;
+            case "query_ismi_1":
+                query = manage.getps_cities_veri_ekleme();
+                break;
+            case "query_ismi_2":
+                query = manage.getRefund_reasons_null();
+                break;
+            case "query_ismi_3":
+                query = manage.getCities_veri_ekleme();
+                break;
+            case "query_ismi_4":
+                query = manage.getBank_account_insert_data();
+                break;
         }
         resultSet = getStatement().executeQuery(query);
 
     }
+
+    // ================================BEYTULLAH========================================
+    @Given("Verify order_address_details Query is prepared and executed.")
+    public void verify_order_address_details_query_is_prepared_and_executed() throws SQLException {
+        query = manage.getList_ids_with_shipping_address();
+        resultSet = getStatement().executeQuery(query);
+        resultSet.next();
+    }
+    @Given("Verify the id information results are listed with shipping_address using order_address_details table")
+    public void verify_the_id_information_results_are_listed_with_shipping_address_using_order_address_details_table() throws SQLException {
+
+
+        int[] expectedIds = {2, 188, 189, 556};
+        int[] actualIds = new int[4];
+
+        for (int i = 0; i < 4; i++) {
+            actualIds[i] = resultSet.getInt("id");
+            resultSet.next();
+            System.out.println("actualIds"+i+" = " + actualIds[i]);
+        }
+
+        Assert.assertArrayEquals(expectedIds, actualIds);
+
+    }
+    @Given("Verify delete Query from cities table is prepared and executed.")
+    public void verify_delete_query_from_cities_table_is_prepared_and_executed() throws SQLException {
+        query = manage.getDelete_the_data_in_the_cities_table();
+
+        preparedStatement= DBUtils.getPraperedStatement(query);
+        preparedStatement.executeUpdate();
+
     }
 
+
+    @Given("Verify that it has been deleted.")
+    public void verify_that_it_has_been_deleted() throws SQLException {
+
+
+
+
+
+/*
+        SQLWarning warning = statement.getWarnings();
+        if (warning != null) {
+            System.out.println("SQL Warning:");
+            while (warning != null) {
+                System.out.println("Message: " + warning.getMessage());
+                warning = warning.getNextWarning();
+            }
+        } else {
+            System.out.println("No SQL warnings.");
+        }
+
+ */
+    }
+
+
+    // ================================BEYTULLAH========================================
+
+
+}
