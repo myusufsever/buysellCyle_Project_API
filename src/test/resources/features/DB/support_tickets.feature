@@ -8,6 +8,6 @@ Feature:BACKEND JDBC TESTING
   @01
   Scenario: In the support_tickets table, list the unique user_ids of the data with and without '-' in reference_no.
 
-    * Query is prepared and executed.
+    * List the unique user_ids query is prepared and executed.
     * List the unique user_id information results are obtained.
     * Database connection is closed

@@ -36,10 +36,12 @@ public class Manage {
     private String bank_account_insert_data="Insert Into bank_accounts (id,bank_name,branch_name,account_name,account_number,opening_balance,description,status) Values(?,?,?,?,?,?,?,?)";
     private String cities_veri_ekleme = "INSERT INTO cities (name, state_id, status, created_at) VALUES (?, ?, ?, ?);";
     private String  refund_reasons_null  ="SELECT * FROM refund_reasons where reason is null;";
-    public String getList_the_unique_id() {
-        return list_the_unique_id;
-    }
+    private String  calculate_grand_total_average  ="SELECT AVG(grand_total) AS 'Ortalama grand_total' from u168183796_qabuysell.orders where is_paid=1;";
+    private String sum_of_the_total_price ="select SUM(total_price) as sum_total_price from u168183796_qabuysell.carts where created_at <'2024-03-30' and is_buy_now=1;";
 
+    public String getSum_of_the_total_price() {return sum_of_the_total_price;}
+    public String getCalculate_grand_total_average() {return calculate_grand_total_average;}
+    public String getList_the_unique_id() {return list_the_unique_id;}
     public String getVerify_the_name_value_of_categories() {return verify_the_name_value_of_categories;}
     public String getBank_account_insert_data() { return bank_account_insert_data; }
     public String getps_cities_veri_ekleme() {return ps_cities_veri_ekleme;}

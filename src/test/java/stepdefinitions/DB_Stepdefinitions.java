@@ -5,6 +5,7 @@ import helperDB.BankAccount;
 import helperDB.Cities;
 import io.cucumber.java.en.Given;
 import manage.Manage;
+import org.junit.Assert;
 
 import java.sql.Array;
 import java.sql.SQLException;
@@ -90,14 +91,9 @@ public class DB_Stepdefinitions {
 
     /** executeBatch() yöntemi, her sorgunun etkilenen satır sayısını içeren bir int dizisi döndürür.*/
     //-------------------------simge-------------------------------------------
-    @Given("Query is prepared and executed.")
-    public void query_is_prepared_and_executed() throws SQLException {
+    @Given("List the unique user_ids query is prepared and executed.")
+    public void list_the_unique_user_ids_query_is_prepared_and_executed() throws SQLException {
         query = manage.getList_the_unique_id();
-        resultSet = getStatement().executeQuery(query);
-    }
-    @Given("{string} is prepared and executed.")
-    public void is_prepared_and_executed(String query28) throws SQLException {
-        query = query28;
         resultSet = getStatement().executeQuery(query);
     }
     @Given("List the unique user_id information results are obtained.")
@@ -108,6 +104,34 @@ public class DB_Stepdefinitions {
             }
         }
     }
+    @Given("Calculate the total cost of products query is prepared and executed.")
+    public void calculate_the_total_cost_of_products_query_is_prepared_and_executed() throws SQLException {
+        query = manage.getSum_of_the_total_price();
+        resultSet = getStatement().executeQuery(query);
+    }
+    @Given("Verify the total cost value of paid orders in the orders table.")
+    public void verify_the_total_cost_value_of_paid_orders_in_the_orders_table() throws SQLException {
+        resultSet.next();
+        Double expected_sum_total_price = Double.valueOf(9649);
+        Double actual_sum_total_price = resultSet.getDouble("sum_total_price");
+        Assert.assertEquals(expected_sum_total_price,actual_sum_total_price);
+    }
+    @Given("Calculate the average grand total query is prepared and executed.")
+    public void calculate_the_average_grand_total_query_is_prepared_and_executed() throws SQLException {
+        query = manage.getCalculate_grand_total_average();
+        resultSet = getStatement().executeQuery(query);
+    }
+    @Given("Verify the average grand_total value of paid orders \\(is_paid ={int}) in the orders table.")
+    public void verify_the_average_grand_total_value_of_paid_orders_is_paid_in_the_orders_table(int is_paid) throws SQLException {
+     resultSet.next();
+     Double expected_avg_grand_total = 176420.36284403672;
+     Double actual_avg_grand_total = resultSet.getDouble("Ortalama grand_total");
+     assertEquals(expected_avg_grand_total,actual_avg_grand_total);
+    }
+
+
+
+//----------------------------simge_bitis------------------------------------------
 
 
     @Given("Prepare a query that adds {int} data to the cities table in bulk.")
@@ -138,13 +162,9 @@ public class DB_Stepdefinitions {
     @Given("cities tablosu uzerinden {int} adet verinin eklendigini dogrulayiniz.")
     public void cities_tablosu_uzerinden_adet_verinin_eklendigini_dogrulayiniz(int rowCount) {
 
-
         System.out.println("Inserted " + result.length + " records successfully.");
         System.out.println(Arrays.toString(result));
         assertEquals(rowCount, result.length);
-
-
-
 
     }
 
