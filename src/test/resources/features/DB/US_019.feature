@@ -6,6 +6,6 @@ updated with a negative value.
 
   @HSDB
   Scenario: In the support_tickets table, list the unique user_ids of the data with and without '-' in reference_no.
-    * Query is prepared and executed.
+    * "Opening balance update with negative value" query is prepared and executed.
 
     * Database connection is closed

@@ -30,6 +30,7 @@ public class Manage {
 
         //********************************** API Test Variables and Parameters **************************************************************************
 
+    private String verify_opening_balance_updated_with_negative_value = "update bank_accounts set opening_balance = -1000000 where bank_name= 'Bank Name 1';";
     private String verify_the_name_value_of_categories="Select  name from categories Where slug='fashion';";
     private String list_the_unique_id = "SELECT user_id, count(user_id)=1 from u168183796_qabuysell.support_tickets where reference_no like '%-%' group by user_id;";
     private String list_the_unique_id_not_contains = "SELECT user_id, count(user_id)=1 from u168183796_qabuysell.support_tickets where reference_no NOT like '%-%' group by user_id;";
@@ -44,9 +45,11 @@ public class Manage {
 
     private String customerCouponStoresAndUsers  = "SELECT users.*, customer_coupon_stores.* FROM customer_coupon_stores LEFT JOIN users ON customer_coupon_stores.id = users.id LIMIT 3;";
 
+    public String getVerify_opening_balance_updated_with_negative_value() {
+        return verify_opening_balance_updated_with_negative_value;
+    }
 
-
- public String getList_the_unique_id_not_contains() {return list_the_unique_id_not_contains;}
+    public String getList_the_unique_id_not_contains() {return list_the_unique_id_not_contains;}
     public String getSum_of_the_total_price() {return sum_of_the_total_price;}
     public String getCalculate_grand_total_average() {return calculate_grand_total_average;}
     public String getList_the_unique_id() {return list_the_unique_id;}
