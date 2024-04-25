@@ -5,6 +5,7 @@ import helperDB.BankAccount;
 import helperDB.Cities;
 import io.cucumber.java.en.Given;
 import manage.Manage;
+import org.junit.Assert;
 
 import java.sql.Array;
 import java.sql.SQLException;
@@ -147,6 +148,35 @@ public class DB_Stepdefinitions {
 
 
     }
+    //=================== US_15 ZD ============================
+    @Given("Verify Whether there is data Query is prepared and executed.")
+    public void verify_Whether_there_is_data_query_is_prepared_and_executed() throws SQLException {
+        query = manage.getCustomerCouponStoresAndUsers();
+        resultSet = getStatement().executeQuery(query);
+    }
+    @Given("List the first {int} data in the customer_coupon_stores table by bringing them from the users table.")
+    public void list_the_first_data_in_the_customer_coupon_stores_table_by_bringing_them_from_the_users_table(int list) throws SQLException {
+        // Beklenen sonuçları tutacak bir liste oluşturma
+        List<String> expectedResults = new ArrayList<>();
+        System.out.println("| id       | first_name | last_name | Username |role_id     | Email                 |\n"
+                +           "|----------|------------|-----------|----------|------------|-----------------------|\n");
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String first_name = resultSet.getString("first_name");
+            String last_name = resultSet.getString("last_name");
+            String username = resultSet.getString("username");
+            int role_id = resultSet.getInt("role_id");
+            String email = resultSet.getString("email");
+
+            // Elde edilen sonucu bir string olarak oluşturma ve listeye ekleme
+            expectedResults.add("| " + id + " | " + first_name + " | " + last_name + " | " + username + " | " + role_id + " | " + email + " |");
+            // Kullanıcı bilgilerini yazdırma
+        }
+            for (String expectedResult : expectedResults) {
+                System.out.println(expectedResult);
+            }
+
+    }
 
 //=========================== US_014 ZD ===========================
 
@@ -162,6 +192,40 @@ public class DB_Stepdefinitions {
         assertNull(reason);
 
     }
+//========================== US_013 ZD ============================
 
+    @Given("Verify whether  there is data Query is prepared and executed.")
+    public void verify_whether__there_is_data_query_is_prepared_and_executed() throws SQLException {
+        query = manage.getVerify_seller_products();
+        resultSet = getStatement().executeQuery(query);
+    }
+    @Given("List and verify {int} items without coupons.")
+    public void list_and_verify_items_without_coupons(int list) throws SQLException {
+        // Beklenen sonuçları tutacak bir liste oluşturma
+        List<String> expectedResults = new ArrayList<>();
+        expectedResults.add("1166, 1, 1268, 50, 1, 1");
+        expectedResults.add("1167, 1, 1269, 50, 1, 1");
+        expectedResults.add("1168, 1, 1270, 50, 1, 1");
+        int index = 0;
+        while (resultSet.next()) {
+            // İlgili sütunlardan veriyi al
+            int id = resultSet.getInt("id");
+            int userId = resultSet.getInt("user_id");
+            int productId = resultSet.getInt("product_id");
+            int tax = resultSet.getInt("tax");
+            String taxType = resultSet.getString("tax_type");
+            String discountType = resultSet.getString("discount_type");
+            // Elde edilen sonucu bir string olarak oluşturma
+            String result = id + ", " +userId+", " + productId + ", " + tax + ", " + taxType+", " +discountType;
 
-}
+            // Beklenen sonuçlarla elde edilen sonuçları karşılaştırma
+            Assert.assertEquals(expectedResults.get(index), result);
+
+            // Veriyi kullanma
+            System.out.println("id: "+id +", user id: "+userId+",Product ID: " + productId + ", tax: " + tax+", tax_type: "+ taxType+", discount_type: "+ discountType);
+
+            index++;
+        }
+    }
+    }
+

@@ -46,6 +46,11 @@ public class Manage {
     public String getCities_veri_ekleme() {return cities_veri_ekleme;}
     public String getRefund_reasons_null() {return refund_reasons_null;}
 
+    private String verify_seller_products = "SELECT * FROM u168183796_qabuysell.seller_products where discount = 0 limit 3;";
+    public String getVerify_seller_products() { return verify_seller_products; }
+
+    private String customerCouponStoresAndUsers  = "SELECT users.*, customer_coupon_stores.* FROM customer_coupon_stores LEFT JOIN users ON customer_coupon_stores.id = users.id LIMIT 3;";
+    public String getCustomerCouponStoresAndUsers() { return customerCouponStoresAndUsers; }
 
 
 
