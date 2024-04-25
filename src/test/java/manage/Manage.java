@@ -44,9 +44,13 @@ public class Manage {
 
     private String customerCouponStoresAndUsers  = "SELECT users.*, customer_coupon_stores.* FROM customer_coupon_stores LEFT JOIN users ON customer_coupon_stores.id = users.id LIMIT 3;";
 
+    private String digital_gift_cards_Add_Data_And_Then_Delete_That_Data = "INSERT INTO digital_gift_cards (id,gift_name,descriptionOne,thumbnail_image_one,thumbnail_image_two,created_at) VALUES (143759, 'Lıghting', 'Mcquen', 'http://lorempixel.com/g/640/350/food/', 'http://lorempixel.com/640/480/nature/',  '2024-04-06 19:14:03');";
+
+    private String email_template_types_Grouping = "SELECT module, COUNT(*) AS type_count" + "FROM email_template_types" + "WHERE module IS NOT NULL" + "GROUP BY module;";
 
 
- public String getList_the_unique_id_not_contains() {return list_the_unique_id_not_contains;}
+
+    public String getList_the_unique_id_not_contains() {return list_the_unique_id_not_contains;}
     public String getSum_of_the_total_price() {return sum_of_the_total_price;}
     public String getCalculate_grand_total_average() {return calculate_grand_total_average;}
     public String getList_the_unique_id() {return list_the_unique_id;}
@@ -60,18 +64,7 @@ public class Manage {
 
     public String getCustomerCouponStoresAndUsers() { return customerCouponStoresAndUsers; }
 
+    public String getDigital_gift_cards_Add_Data_And_Then_Delete_That_Data() {return digital_gift_cards_Add_Data_And_Then_Delete_That_Data;}
 
-
-
-
-
-    }
-
-    private String digital_gift_cards_Add_Data_And_Then_Delete_That_Data = "INSERT INTO digital_gift_cards (id,gift_name,descriptionOne,thumbnail_image_one,thumbnail_image_two,created_at) VALUES (143759, 'Lıghting', 'Mcquen', 'http://lorempixel.com/g/640/350/food/', 'http://lorempixel.com/640/480/nature/',  '2024-04-06 19:14:03');";
-
-    public String getDigital_gift_cards_Add_Data_And_Then_Delete_That_Data() {
-  return digital_gift_cards_Add_Data_And_Then_Delete_That_Data;
+    public String getEmail_template_types_Grouping() {return email_template_types_Grouping;}
  }
-
-
-}
