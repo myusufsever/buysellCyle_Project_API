@@ -85,21 +85,7 @@ public class API_Stepdefinitions {
 
     @Given("The API user records the response from the api refundReasonList endpoint, confirming that the status code is '401' and the reason phrase is Unauthorized.")
     public void the_apı_user_records_the_response_from_the_api_refund_reason_list_endpoint_confirming_that_the_status_code_is_and_the_reason_phrase_is_unauthorized() {
-       /*
-        String exceptionMesaj = null;
-        try {
-            Response response = given()
-                    .spec(spec)
-                    .when()
-                    .get(fullPath);
-        } catch (Exception e) {
-            mesaj = e.getMessage();
-        }
-        System.out.println("ExceptionMesaj : " + exceptionMesaj);
 
-      Assert.assertTrue(exceptionMesaj.equals(ConfigReader.getProperty("unauthorizedExceptionMessage","api")));
-
-         */
         Assert.assertTrue(API_Methods.tryCatchGet().equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
 
     }
@@ -188,6 +174,7 @@ public class API_Stepdefinitions {
         assertEquals(updated_by, jsonPath.getInt("couponDetails[0].updated_by"));
         assertEquals(is_expire, jsonPath.getInt("couponDetails[0].is_expire"));
         assertEquals(is_multiple_buy, jsonPath.getInt("couponDetails[0].is_multiple_buy"));
+
         assertEquals(created_at, jsonPath.getString("couponDetails[0].created_at"));
         assertEquals(updated_at, jsonPath.getString("couponDetails[0].updated_at"));
     }
@@ -223,6 +210,7 @@ public class API_Stepdefinitions {
     }
     @Given("The api user prepares a POST request containing the {string}, {string}, {string}, {string}, {string}, {string},{string} information to send to the api register endpoint")
     public void the_api_user_prepares_a_post_request_containing_the_information_to_send_to_the_api_register_endpoint(String firstname, String lastname, String password, String passwordconfirm, String usertype, String refferalcode, String email) {
+
         requestBody = new JSONObject();
         requestBody.put("first_name",firstname);
         requestBody.put("last_name",lastname);
@@ -301,6 +289,7 @@ public class API_Stepdefinitions {
         jsonPath = API_Methods.response.jsonPath();
         assertEquals(id, jsonPath.getInt("coupons[0].id"));
         assertEquals(title, jsonPath.getString("coupons[0].title"));
+
         assertEquals(coupon_code, jsonPath.getString("coupons[0].coupon_code"));
         assertEquals(start_date, jsonPath.getString("coupons[0].start_date"));
         assertEquals(end_date, jsonPath.getString("coupons[0].end_date"));
