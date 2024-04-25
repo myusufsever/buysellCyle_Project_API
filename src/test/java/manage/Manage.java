@@ -64,4 +64,14 @@ public class Manage {
 
 
 
+
+    }
+
+    private String digital_gift_cards_Add_Data_And_Then_Delete_That_Data = "INSERT INTO digital_gift_cards (id,gift_name,descriptionOne,thumbnail_image_one,thumbnail_image_two,created_at) VALUES (143759, 'Lıghting', 'Mcquen', 'http://lorempixel.com/g/640/350/food/', 'http://lorempixel.com/640/480/nature/',  '2024-04-06 19:14:03');";
+
+    public String getDigital_gift_cards_Add_Data_And_Then_Delete_That_Data() {
+  return digital_gift_cards_Add_Data_And_Then_Delete_That_Data;
+ }
+
+
 }
