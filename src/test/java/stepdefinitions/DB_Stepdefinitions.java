@@ -110,13 +110,6 @@ public class DB_Stepdefinitions {
     }
 
 
-
-
-
-
-
-
-
     @Given("Prepare a query that adds {int} data to the cities table in bulk.")
     public void prepare_a_query_that_adds_data_to_the_cities_table_in_bulk(Integer count) throws SQLException {
         query = manage.getCities_veri_ekleme();
