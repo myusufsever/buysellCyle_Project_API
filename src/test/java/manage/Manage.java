@@ -44,6 +44,8 @@ public class Manage {
 
     private String customerCouponStoresAndUsers  = "SELECT users.*, customer_coupon_stores.* FROM customer_coupon_stores LEFT JOIN users ON customer_coupon_stores.id = users.id LIMIT 3;";
 
+    private String digital_gift_cards_Add_Data_And_Then_Delete_That_Data = "INSERT INTO digital_gift_cards (id,gift_name,descriptionOne,thumbnail_image_one,thumbnail_image_two,created_at) VALUES (143759, 'Lıghting', 'Mcquen', 'http://lorempixel.com/g/640/350/food/', 'http://lorempixel.com/640/480/nature/',  '2024-04-06 19:14:03');";
+
     private String list_ids_with_shipping_address = "select id from order_address_details where shipping_address='Switzerland';";
     private String  email_address_from_the_attendances = "";
     private String  delete_the_data_in_the_cities_table = "delete from u168183796_qabuysell.cities where id=?;";
@@ -78,4 +80,12 @@ public class Manage {
     public String getDelete_the_data_in_the_cities_table() {
         return delete_the_data_in_the_cities_table;
     }
+
+
+
+    public String getDigital_gift_cards_Add_Data_And_Then_Delete_That_Data() {
+  return digital_gift_cards_Add_Data_And_Then_Delete_That_Data;
+ }
+
+
 }
