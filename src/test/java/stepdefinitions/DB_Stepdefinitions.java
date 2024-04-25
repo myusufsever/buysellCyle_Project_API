@@ -19,6 +19,7 @@ import static helperDB.BankAccount.generateBankAccount;
 import static helperDB.Cities.generateCities;
 import static helperDB.JDBC_Cons.*;
 import static helperDB.JDBC_Structure_Methods.*;
+import static helperDB.JDBC_Structure_Methods.getPraperedStatement;
 import static org.junit.Assert.*;
 
 
@@ -241,37 +242,45 @@ public class DB_Stepdefinitions {
     public void query_is_prepared_and_executed(String queryName) throws SQLException {
         switch (queryName)
         {
-            case "Opening balance update with negative value": query = manage.getVerify_opening_balance_updated_with_negative_value(); break;
-            case "List_the_unique_ID_notContains": 
+            case "Update the opening_balance with a negative value" :
+                query = manage.getVerify_opening_balance_updated_with_negative_value();
+                sonuc=getStatement().executeUpdate(query);
+                statement=getStatement();
+                break;
+            case "List_the_unique_ID_notContains":
                 query = manage.getList_the_unique_id_not_contains();
-                break;       
+                resultSet = getStatement().executeQuery(query);
+                break;
             case "List_the_unique_ID_contains":
                 query = manage.getList_the_unique_id();
+                resultSet = getStatement().executeQuery(query);
                 break;
             case "coupon_products_group_by":
                 query = manage.getCouponProductsGroup();
-                break;
-            case "query_ismi_1":
-                query = manage.getps_cities_veri_ekleme();
+                resultSet = getStatement().executeQuery(query);
                 break;
             case "Refund_reasons_null":
                 query = manage.getRefund_reasons_null();
-                break;
-            case "query_ismi_3":
-                query = manage.getCities_veri_ekleme();
-                break;
-            case "query_ismi_4":
-                query = manage.getBank_account_insert_data();
+                resultSet = getStatement().executeQuery(query);
                 break;
             case "Verify_seller_products":
                 query = manage.getVerify_seller_products();
+                resultSet = getStatement().executeQuery(query);
                 break;
             case "CustomerCouponStoresAndUsers":
                 query = manage.getCustomerCouponStoresAndUsers();
+                resultSet = getStatement().executeQuery(query);
+                break;
+            case "Update":
+                manage.setUpdate(updateTable + setField + whereCondition+";");
+                query = manage.getUpdate();
+                sonuc = getStatement().executeUpdate(query);
+                System.out.println("sonuç: "+sonuc);
                 break;
 
+
         }
-        resultSet = getStatement().executeQuery(query);
+
 
     }
 
@@ -347,6 +356,41 @@ public class DB_Stepdefinitions {
             // Sonuçları yazdırma
             System.out.println("Coupon ID: " + couponId + ", Product Count: " + productCount);
         }
+    }
+    public static String updateTable;
+    public static String setField;
+    public static String whereCondition;
+    public static String selectField;
+    public static String fromTable;
+    @Given("UPDATE {string}")
+    public void updateTable(String table) {
+        updateTable = "UPDATE "+ table +" ";
+    }
+
+    @Given("SET {string} = {string}")
+    public void setField(String field, String value) {
+        setField = "SET "+ field +" = "+value +" ";
+    }
+
+    @Given("WHERE {string} {string} {string}")
+    public void whereCondition(String field, String condition, String value) {
+        whereCondition = "WHERE "+ field+condition+value +" ";
+    }
+    @Given("SELECT {string}")
+    public void select(String field) {
+        selectField = "SELECT "+ field+" ";
+    }
+
+    @Given("FROM {string}")
+    public void from(String table) {
+        fromTable = "FROM "+ table+" ";
+    }
+    @Given("Verify that {string} is positive")
+    public void verify(String field) throws SQLException {
+        resultSet.next();
+        int opening_balance = resultSet.getInt(field);
+        assertTrue(opening_balance >= 0);
+
     }
 
 }

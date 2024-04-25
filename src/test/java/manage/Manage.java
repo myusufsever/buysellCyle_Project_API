@@ -5,6 +5,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.json.JSONObject;
 import pojos.Pojo;
+import stepdefinitions.DB_Stepdefinitions;
 
 import java.util.HashMap;
 
@@ -30,7 +31,7 @@ public class Manage {
 
         //********************************** API Test Variables and Parameters **************************************************************************
 
-    private String verify_opening_balance_updated_with_negative_value = "update bank_accounts set opening_balance = -1000000 where bank_name= 'Bank Name 1';";
+    private String verify_opening_balance_updated_with_negative_value = "SELECT bank_accounts SET opening_balance = -1000000 where bank_name= 'Bank Name 1';";
     private String verify_the_name_value_of_categories="Select  name from categories Where slug='fashion';";
     private String list_the_unique_id = "SELECT user_id, count(user_id)=1 from u168183796_qabuysell.support_tickets where reference_no like '%-%' group by user_id;";
     private String list_the_unique_id_not_contains = "SELECT user_id, count(user_id)=1 from u168183796_qabuysell.support_tickets where reference_no NOT like '%-%' group by user_id;";
@@ -98,5 +99,26 @@ private String   shipping_address="SELECT COUNT(DISTINCT id) FROM order_address_
 
  public String getCouponProductsGroup() { return couponProductsGroup; }
 
+ private String update = DB_Stepdefinitions.updateTable + DB_Stepdefinitions.setField + DB_Stepdefinitions.whereCondition+";";
+ private String select = DB_Stepdefinitions.selectField + DB_Stepdefinitions.fromTable + DB_Stepdefinitions.whereCondition+";";
 
+ public String getPs_cities_veri_ekleme() {
+  return ps_cities_veri_ekleme;
+ }
+
+ public void setUpdate(String update) {
+  this.update = update;
+ }
+
+ public void setSelect(String select) {
+  this.select = select;
+ }
+
+ public String getUpdate() {
+  return update;
+ }
+
+ public String getSelect() {
+  return select;
+ }
 }
