@@ -55,6 +55,7 @@ public class Manage {
     private String list_ids_with_shipping_address = "select id from order_address_details where shipping_address='Switzerland';";
     private String  email_address_from_the_attendances = "";
     private String  delete_the_data_in_the_cities_table = "delete from u168183796_qabuysell.cities where id=?;";
+    private String couponProductsGroup ="SELECT coupon_id, COUNT(*) AS product_count FROM coupon_products GROUP BY coupon_id;";
 
 
 
@@ -94,6 +95,8 @@ private String   shipping_address="SELECT COUNT(DISTINCT id) FROM order_address_
     public String getDigital_gift_cards_Add_Data_And_Then_Delete_That_Data() {
   return digital_gift_cards_Add_Data_And_Then_Delete_That_Data;
  }
+
+ public String getCouponProductsGroup() { return couponProductsGroup; }
 
 
 }

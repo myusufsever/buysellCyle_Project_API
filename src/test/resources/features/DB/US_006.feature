@@ -7,6 +7,6 @@ Feature:BACKEND JDBC TESTING
    Scenario: US_006 Group the coupon_products table by coupon_id and find how many products there are for each coupon
       #coupon_products tablosunu coupon_id'ye göre gruplayarak her kupon için kaç ürün olduğunu bulunuz.
 
-     * Verify whether there is data Query is prepared and executed.
-     * Verify the "reason" information result are obtained.
+     * "coupon_products_group_by" query is prepared and executed.
+     * List how many products there are for each coupon, grouped by coupon_id
      * Database connection is closed
