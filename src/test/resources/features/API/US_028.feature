@@ -1,5 +1,6 @@
+@zehra28
 Feature: As an administrator, I want to be able to access the details of the coupon with the specified ID number via the API connection.
-  @zehra
+
 
   Scenario Outline: When a GET request body containing valid authorization information and
   the coupon ID to access details is sent to the /api/coupon/couponDetails endpoint, the returned status code should be 200, and the message information should be verified as "success".
@@ -8,14 +9,13 @@ Feature: As an administrator, I want to be able to access the details of the cou
     * The api user sets "api/coupon/couponDetails" path parameters
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
     * The api user sends the "getbody" request and saves the "Response"
-    * The api user verifies that the status code is 200
-    * The api user verifies that the message information in the response body is "success"
+    * The api user verifies that for "get" request type the status code is 200 and the message information in the response body is "success"
 
     Examples:
       | id |
       | 20 |
 
-  @API
+
   Scenario Outline: When a GET request body containing valid authorization information and the coupon ID to access details is sent to the /api/coupon/couponDetails endpoint,
   the data (id, title ,coupon_code, coupon_type, start_date, end_date, discount, discount_type, minimum_shopping, maximum_discount, created_by, updated_by, is_expire, is_multiple_buy, multiple_buy_limit, created_at, updated_at ) returned in the response body should be validated.
 
@@ -48,7 +48,7 @@ Feature: As an administrator, I want to be able to access the details of the cou
     * The api user constructs the base url with the "invalid" token
     * The api user sets "api/coupon/couponDetails" path parameters
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
-    * The api user verifies that for "getbody" request type the status code is 401 and the message information in the response body is "Unauthorized"
+    * The api user verifies that for "get" request type the status code is 401 and the message information in the response body is "Unauthorized"
 
     Examples:
       | id |

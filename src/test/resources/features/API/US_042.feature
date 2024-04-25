@@ -1,3 +1,4 @@
+
 Feature: As an administrator, I want to be able to add a new address record for a customer specified by customer_id via the API connection.
 
   @42/1
@@ -70,7 +71,6 @@ Feature: As an administrator, I want to be able to add a new address record for 
     Examples:
       | customer_id | name      | email                   | address | phone       | city      | state     | country   | postal_code | address_type |
       | 001         | Beytullah | beytullah@beytullah.com | abc     | 05551231212 | beytullah | beytullah | beytullah | 00001       | home         |
-Feature: As an administrator, I want to be able to add a new address record for a customer specified by customer_id via the API connection.
 
   @42/1
   Scenario Outline:When a POST body containing valid authorization credentials and necessary data

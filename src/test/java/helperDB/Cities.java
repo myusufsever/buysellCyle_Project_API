@@ -43,9 +43,9 @@ public class Cities {
         for (int i = 0; i < count; i++) {
             Cities cities1 = new Cities(
                     faker.name().fullName(),
-                    faker.number().numberBetween(0, 1000),
+                    faker.number().numberBetween(0, 100),
                     faker.number().numberBetween(0, 3),
-                    faker.date().toString()
+                    null
             );
             cities.add(cities1);
 

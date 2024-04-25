@@ -6,7 +6,6 @@ import hooks.HooksAPI;
 import io.cucumber.java.en.Given;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import manage.Manage;
 import org.json.JSONObject;
 import org.junit.Assert;
 import pojos.Pojo;
@@ -15,28 +14,30 @@ import utilities.API_Utilities.API_Methods;
 import java.lang.invoke.SwitchPoint;
 import java.util.*;
 import static hooks.HooksAPI.spec;
+import static io.restassured.RestAssured.given;
 import static java.lang.Integer.parseInt;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
 
-public class API_Stepdefinitions extends Manage{
+public class API_Stepdefinitions {
 
 
-//    public static Response response2;
-//    public static int id;
-//    public static String fullPath;
-//    public JSONObject requestBody = new JSONObject();
-//    JsonPath jsonPath;
-//    HashMap<String, Object> reqBody = new HashMap<>();
-//    Pojo requestPojo;
-//    Faker faker = new Faker();
-//    public static String email_class_level;
-//    public static String postId;
-//    public static String postId2;
-//    public static String addedItemId;
-//    public static String updatedId;
-//    public static String DeletedId;
-//    public static int deletedId;
+    public static Response response2;
+    public static int id;
+    public static String fullPath;
+    public JSONObject requestBody = new JSONObject();
+    JsonPath jsonPath;
+    HashMap<String, Object> reqBody = new HashMap<>();
+    Pojo requestPojo;
+    Faker faker = new Faker();
+    public static String email_class_level;
+    public static String postId;
+    public static String postId2;
+    public static String addedItemId;
+    public static String updatedId;
+    public static int DeletedId;
+    public static int deletedId;
+    public static int lastCouponId;
 
     @Given("The api user sets {string} path parameters")
     public void the_api_user_sets_path_parameters(String rawPaths) {
@@ -84,21 +85,7 @@ public class API_Stepdefinitions extends Manage{
 
     @Given("The API user records the response from the api refundReasonList endpoint, confirming that the status code is '401' and the reason phrase is Unauthorized.")
     public void the_apı_user_records_the_response_from_the_api_refund_reason_list_endpoint_confirming_that_the_status_code_is_and_the_reason_phrase_is_unauthorized() {
-       /*
-        String exceptionMesaj = null;
-        try {
-            Response response = given()
-                    .spec(spec)
-                    .when()
-                    .get(fullPath);
-        } catch (Exception e) {
-            mesaj = e.getMessage();
-        }
-        System.out.println("ExceptionMesaj : " + exceptionMesaj);
 
-      Assert.assertTrue(exceptionMesaj.equals(ConfigReader.getProperty("unauthorizedExceptionMessage","api")));
-
-         */
         Assert.assertTrue(API_Methods.tryCatchGet().equals(ConfigReader.getProperty("unauthorizedExceptionMessage", "api")));
 
     }
@@ -154,7 +141,7 @@ public class API_Stepdefinitions extends Manage{
 
     @Given("The api user validates the {int}, {string}, {string}, {string}, {string} of the response body with index {int}.")
     public void the_api_user_validates_the_of_the_response_body_with_index(int id, String first_name, String username, String email, String name, int dataIndex) {
-    //The api user validates the <id> "<first_name>" "<username>" "<email>" "<phone>" "<name>"of the response body with index <dataIndex>.
+        //The api user validates the <id> "<first_name>" "<username>" "<email>" "<phone>" "<name>"of the response body with index <dataIndex>.
         jsonPath = API_Methods.response.jsonPath();
 
         assertEquals(id, jsonPath.getInt("user[" + dataIndex + "].id"));
@@ -171,7 +158,7 @@ public class API_Stepdefinitions extends Manage{
     @Given("The api user validates the {int}, {string}, {string}, {int}, {string}, {string}, {int}, {int}, {int}, {int}, {int}, {int}, {int}, {int}, {string}, {string} of the response body .")
     public void the_api_user_validates_the_of_the_response_body(int id, String title, String coupon_code, int coupon_type, String start_date, String end_date, int discount, int discount_type, int minimum_shopping, int maximum_discount, int created_by, int updated_by, int is_expire, int is_multiple_buy, String created_at, String updated_at) {
         jsonPath = API_Methods.response.jsonPath();
-     // * The api user validates the <id>, "<title>", "<coupon_code>", <coupon_type>, "<start_date>", "<end_date>", <discount>, <discount_type>, <minimum_shopping>, <maximum_discount>, <created_by>, <updated_by>, <is_expire>, <is_multiple_buy>, "<created_at>", "<updated_at>" of the response body .
+        // * The api user validates the <id>, "<title>", "<coupon_code>", <coupon_type>, "<start_date>", "<end_date>", <discount>, <discount_type>, <minimum_shopping>, <maximum_discount>, <created_by>, <updated_by>, <is_expire>, <is_multiple_buy>, "<created_at>", "<updated_at>" of the response body .
 
         assertEquals(id, jsonPath.getInt("couponDetails[0].id"));
         assertEquals(title, jsonPath.getString("couponDetails[0].title"));
@@ -187,9 +174,10 @@ public class API_Stepdefinitions extends Manage{
         assertEquals(updated_by, jsonPath.getInt("couponDetails[0].updated_by"));
         assertEquals(is_expire, jsonPath.getInt("couponDetails[0].is_expire"));
         assertEquals(is_multiple_buy, jsonPath.getInt("couponDetails[0].is_multiple_buy"));
+
         assertEquals(created_at, jsonPath.getString("couponDetails[0].created_at"));
         assertEquals(updated_at, jsonPath.getString("couponDetails[0].updated_at"));
-        }
+    }
 
 
 //============================= US_37 GET ==================
@@ -222,6 +210,7 @@ public class API_Stepdefinitions extends Manage{
     }
     @Given("The api user prepares a POST request containing the {string}, {string}, {string}, {string}, {string}, {string},{string} information to send to the api register endpoint")
     public void the_api_user_prepares_a_post_request_containing_the_information_to_send_to_the_api_register_endpoint(String firstname, String lastname, String password, String passwordconfirm, String usertype, String refferalcode, String email) {
+
         requestBody = new JSONObject();
         requestBody.put("first_name",firstname);
         requestBody.put("last_name",lastname);
@@ -268,26 +257,26 @@ public class API_Stepdefinitions extends Manage{
         assertEquals(email, jsonPath.getString("user.email"));
     }
 
-  @Given("The api user sends the {string} request and saves the {string}")
-  public void the_api_user_sends_the_request_and_saves_the(String requestType, String response) {
+    @Given("The api user sends the {string} request and saves the {string}")
+    public void the_api_user_sends_the_request_and_saves_the(String requestType, String response) {
 
-      switch ((requestType+response).toLowerCase()){
-          case   "postresponse": response2=API_Methods.postResponse(requestBody.toString());
-              postId =  response2.jsonPath().getString("user.id");
-              addedItemId = response2.jsonPath().getString("added_item_id");
-              System.out.println(postId);
-              System.out.println("addedItemId: "+ addedItemId); break;
+        switch ((requestType+response).toLowerCase()){
+            case   "postresponse": response2=API_Methods.postResponse(requestBody.toString());
+                postId =  response2.jsonPath().getString("user.id");
+                addedItemId = response2.jsonPath().getString("added_item_id");
+                System.out.println(postId);
+                System.out.println("addedItemId: "+ addedItemId); break;
 
-          case   "patchresponse": response2=API_Methods.patchResponse(requestBody.toString());
-              updatedId = response2.jsonPath().getString("updated_Id");break;
-          case   "deleteresponse": response2=API_Methods.deleteResponse(requestBody.toString());
-              DeletedId = response2.jsonPath().getString("Deleted_Id");break;
-          case   "getbodyresponse":response2=API_Methods.getBodyResponse(requestBody.toString()); break;
-          case   "getresponse": response2=API_Methods.getResponse(); System.out.println("selam");break;
+            case   "patchresponse": response2=API_Methods.patchResponse(requestBody.toString());
+                updatedId = response2.jsonPath().getString("updated_Id");break;
+            case   "deleteresponse": response2=API_Methods.deleteResponse(requestBody.toString());
+                DeletedId = response2.jsonPath().getInt("Deleted_Id");break;
+            case   "getbodyresponse":response2=API_Methods.getBodyResponse(requestBody.toString()); break;
+            case   "getresponse": response2=API_Methods.getResponse(); System.out.println("selam");break;
 //              response2=API_Methods.getResponse(); System.out.println("selam"); break;
-      }
-       postId2 = postId;
-  }
+        }
+        postId2 = postId;
+    }
     @Given("The api user verifies the content of data {int} {string} {string} in the response body")
     public void the_api_user_verifies_the_content_of_data_in_the_response_body(int id, String name, String details) {
         jsonPath = API_Methods.response.jsonPath();
@@ -300,6 +289,7 @@ public class API_Stepdefinitions extends Manage{
         jsonPath = API_Methods.response.jsonPath();
         assertEquals(id, jsonPath.getInt("coupons[0].id"));
         assertEquals(title, jsonPath.getString("coupons[0].title"));
+
         assertEquals(coupon_code, jsonPath.getString("coupons[0].coupon_code"));
         assertEquals(start_date, jsonPath.getString("coupons[0].start_date"));
         assertEquals(end_date, jsonPath.getString("coupons[0].end_date"));
@@ -323,24 +313,24 @@ public class API_Stepdefinitions extends Manage{
     public void the_api_user_verifies_that_for_request_type_the_status_code_is_and_the_message_information_in_the_response_body_is(String requestType, int code, String message) {
         if(code==401 && message.equals("Unauthorized")) {
             switch (requestType.toLowerCase()){
-            case "getbody":
-                assertEquals(API_Methods.tryCatchGetBody(requestBody.toString()), ConfigReader.getProperty("unauthorizedExceptionMessage", "api"));
-                break;
-            case "get":
-                assertEquals(API_Methods.tryCatchGet(), ConfigReader.getProperty("unauthorizedExceptionMessage", "api"));
-               break;
-            case "delete":
-                assertEquals(API_Methods.tryCatchDelete(requestBody.toString()), ConfigReader.getProperty("unauthorizedExceptionMessage", "api"));
-                break;
-            case "patch":
-                assertEquals(API_Methods.tryCatchPatch(requestBody.toString()), ConfigReader.getProperty("unauthorizedExceptionMessage", "api"));
-                break;
+                case "getbody":
+                    assertEquals(API_Methods.tryCatchGetBody(requestBody.toString()), ConfigReader.getProperty("unauthorizedExceptionMessage", "api"));
+                    break;
+                case "get":
+                    assertEquals(API_Methods.tryCatchGet(), ConfigReader.getProperty("unauthorizedExceptionMessage", "api"));
+                    break;
+                case "delete":
+                    assertEquals(API_Methods.tryCatchDelete(requestBody.toString()), ConfigReader.getProperty("unauthorizedExceptionMessage", "api"));
+                    break;
+                case "patch":
+                    assertEquals(API_Methods.tryCatchPatch(requestBody.toString()), ConfigReader.getProperty("unauthorizedExceptionMessage", "api"));
+                    break;
                 default:
                     System.out.println("!!!!!!!!!!Dinamik değişkenlerden biri hatalı!!!!!!!!!!!!");
                     break;
+            }
         }
-        }
-       else if(code==404 && message.equals("Not Found")) {
+        else if(code==404 && message.equals("Not Found")) {
             switch (requestType.toLowerCase()){
                 case "getbody":
                     assertEquals(API_Methods.tryCatchGetBody(requestBody.toString()), ConfigReader.getProperty("notFoundExceptionMessage", "api"));
@@ -355,7 +345,7 @@ public class API_Stepdefinitions extends Manage{
                     assertEquals(API_Methods.tryCatchPatch(requestBody.toString()), ConfigReader.getProperty("notFoundExceptionMessage", "api"));
                     break;
                 default: System.out.println("!!!!!!!!!!Dinamik değişkenlerden biri hatalı!!!!!!!!!!!!");
-                break;
+                    break;
             }
         } else  {
 
@@ -685,16 +675,16 @@ public class API_Stepdefinitions extends Manage{
         Assert.assertEquals(updated_at,jsonPath.getString("FaqsDetails[0].updated_at"));
     }
 
-        //==================================US_10 Patch ======================
+    //==================================US_10 Patch ======================
 
-        @Given("The api user prepares a PATCH request containing the {string},{string},{string} data to send to the api.")
-        public void the_api_user_prepares_a_patch_request_containing_the_data_to_send_to_the_api(String year, String name, String date) {
+    @Given("The api user prepares a PATCH request containing the {string},{string},{string} data to send to the api.")
+    public void the_api_user_prepares_a_patch_request_containing_the_data_to_send_to_the_api(String year, String name, String date) {
 
-            requestBody = new JSONObject();
-            requestBody.put("year", year);
-            requestBody.put("name", name);
-            requestBody.put("date", date);
-        }
+        requestBody = new JSONObject();
+        requestBody.put("year", year);
+        requestBody.put("name", name);
+        requestBody.put("date", date);
+    }
   /*  @Given("The API user records the response from the api holidayUpdate endpoint, confirming that the status code is 400 and the reason phrase is dublicate holiday request.")
     public void the_apı_user_records_the_response_from_the_api_holiday_update_endpoint_confirming_that_the_status_code_is_and_the_reason_phrase_is_dublicate_holiday_request() {
 
@@ -709,6 +699,11 @@ public class API_Stepdefinitions extends Manage{
         else if (value.equals("updated_Id")) {requestBody.put(key,updatedId);
             System.out.println(requestBody.toString());}
         else if (value.equals("Deleted_Id")) {requestBody.put(key,DeletedId);
+            System.out.println(requestBody.toString());}
+        else if (key.equals("id")) {
+            if (value.equals("lastCouponId")) {requestBody.put(key,lastCouponId);}
+//            else if (value.equals("nonList")) {}
+            else {id=parseInt(value);requestBody.put(key,value);}
             System.out.println(requestBody.toString());}
         else {requestBody.put(key,value);}
     }
@@ -730,7 +725,7 @@ public class API_Stepdefinitions extends Manage{
 
         switch (key){
             case "updated_Id": jsonPath = API_Methods.response.jsonPath(); assertEquals(id, jsonPath.getInt(key));break;
-            case "Deleted_Id": id = requestBody.getInt("Deleted_Id"); jsonPath = API_Methods.response.jsonPath(); assertEquals(id, jsonPath.getInt(key));break;
+            case "Deleted_Id": jsonPath = API_Methods.response.jsonPath(); assertEquals(DeletedId, jsonPath.getInt(key));break;
         }
 
 
@@ -739,10 +734,34 @@ public class API_Stepdefinitions extends Manage{
 //                .assertThat()
 //                .body("Deleted_Id", equalTo(id));
     }
+    @Given("The api user adds a requestKey field {string} with the requestValue {string} to the request body")
+    public void the_api_user_prepares_the_requestbody(String requestKey, String requestValue) {
+        switch (requestKey){
+            case "id" : id=parseInt(requestValue);
+                requestBody.put(requestKey,id);
+                System.out.println(requestBody.toString());break;
+            case "":
+        }
 
+
+
+//        if (requestValue.equals("added_item_id")){
+//            requestBody.put(requestKey,addedItemId);
+//            System.out.println(requestBody.toString());}
+//        else if (requestValue.equals("updated_Id")) {requestBody.put(requestKey,updatedId);
+//            System.out.println(requestBody.toString());}
+//        else if (requestValue.equals("Deleted_Id")) {requestBody.put(requestKey,DeletedId);
+//            System.out.println(requestBody.toString());}
+//        else if (requestKey.equals("id")) {id=parseInt(requestValue);requestBody.put(requestKey,requestValue);
+//            System.out.println(requestBody.toString());}
+//        else {requestBody.put(requestKey,requestValue);}
+    }
+    @Given("The api user detects the id at the last index in the response")
+    public void the_api_user_detects_the_id_at_the_last_index(){
+        lastCouponId = given().spec(spec).when().get(fullPath).jsonPath().getInt("coupons[-1].id");
+        System.out.println("lastId= "+lastCouponId);
+    }
 }
-
-
 
 
 
