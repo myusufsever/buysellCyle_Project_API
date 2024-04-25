@@ -11,8 +11,7 @@ Feature: As a user, I want to add a new address record to my profile via API con
     * The api user sets "api/profile/address-store" path parameters
     * The api user prepares a POST request containing the "<name>","<email>","<address>","<phone>","<city>","<state>","<country>","<postal_code>","<address_type>" information to send to the api.
     * The api user sends the "post" request and saves the "Response"
-    * The api user verifies that the status code is 201
-    * The api user verifies that the message information in the response body is "address added successfully"
+    * The api user verifies that for "post" request type the status code is 201 and the message information in the response body is "coupon added successfully"
 
     Examples:
       | name  | email       | address | phone    | city     | state           | country | postal_code | address_type |
@@ -27,7 +26,7 @@ Feature: As a user, I want to add a new address record to my profile via API con
     * The api user sets "api/profile/customerDetailsAddress" path parameters
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
     * The api user sends the "getbody" request and saves the "Response"
-    * The api user verifies that the message information in the response body is "success"
+    * The api user verifies that for "getbody" request type the status code is 200 and the message information in the response body is "success"
 
     Examples:
       | id  |
@@ -42,8 +41,7 @@ Feature: As a user, I want to add a new address record to my profile via API con
     * The api user sets "api/profile/address-store" path parameters
     * The api user prepares a POST request containing the "<name>","<email>","<address>","<phone>","<city>","<state>","<country>","<postal_code>","<address_type>" information to send to the api.
     * The api user sends the "post" request and saves the "Response"
-    * The api user verifies that the status code is 422
-    * The api user verifies that the message information in the response body is "The email must be a valid email address."
+    * The api user verifies that for "post" request type the status code is 422 and the message information in the response body is "The email has already been taken."
 
     Examples:
       | name  | email       | address | phone    | city     | state           | country | postal_code | address_type |

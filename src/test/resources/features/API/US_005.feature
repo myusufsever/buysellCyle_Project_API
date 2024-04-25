@@ -15,8 +15,7 @@ Feature: As an administrator, I should be able to access all registered user inf
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/get-users" path parameters
-    * The api user prepares a GET request containing the  <id> for which details are to be accessed
-    * The api user sends the "getbody" request and saves the "Response"
+    * The api user sends the "get" request and saves the "Response"
     * The api user validates the <id>, "<first_name>", "<username>", "<email>", "<name>" of the response body with index <dataIndex>.
 
     Examples:
