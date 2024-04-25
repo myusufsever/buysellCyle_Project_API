@@ -52,7 +52,9 @@ public class Manage {
     private String customerCouponStoresAndUsers  = "SELECT users.*, customer_coupon_stores.* FROM customer_coupon_stores LEFT JOIN users ON customer_coupon_stores.id = users.id LIMIT 3;";
     public String getCustomerCouponStoresAndUsers() { return customerCouponStoresAndUsers; }
 
+private String   shipping_address="SELECT COUNT(DISTINCT id) FROM order_address_details WHERE shipping_address <> billing_address;";
 
+ public String getShipping_address() { return shipping_address;}
 
 
 

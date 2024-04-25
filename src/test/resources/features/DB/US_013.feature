@@ -1,6 +1,6 @@
 Feature: BACKEND JDBC TESTING
 
-  @DB_13
+
   Background:Database connection
     * Database connection is established.
 
