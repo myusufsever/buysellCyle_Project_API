@@ -6,8 +6,10 @@ import helperDB.Cities;
 import io.cucumber.java.en.Given;
 import manage.Manage;
 
+import java.sql.Array;
 import java.sql.SQLException;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -80,16 +82,38 @@ public class DB_Stepdefinitions {
         System.out.println(Arrays.toString(result));
         assertEquals(rowCount, result.length);
     }
-
-
     /**
      * US018
      /**  addBatch() yöntemi ile her hazırlanan sorgu bu sorgu yığınına eklenir.
      *  Ardından executeBatch() yöntemi kullanılarak tüm sorguları çalıştırılır.
      */
 
-
     /** executeBatch() yöntemi, her sorgunun etkilenen satır sayısını içeren bir int dizisi döndürür.*/
+    //-------------------------simge-------------------------------------------
+    @Given("Query is prepared and executed.")
+    public void query_is_prepared_and_executed() throws SQLException {
+        query = manage.getList_the_unique_id();
+        resultSet = getStatement().executeQuery(query);
+    }
+    @Given("{string} is prepared and executed.")
+    public void is_prepared_and_executed(String query28) throws SQLException {
+        query = query28;
+        resultSet = getStatement().executeQuery(query);
+    }
+    @Given("List the unique user_id information results are obtained.")
+    public void list_the_unique_user_id_information_results_are_obtained() throws SQLException {
+        while(resultSet.next()){
+            if (resultSet.getLong("count(user_id)=1")==1) {
+                System.out.println(resultSet.getLong("user_id"));
+            }
+        }
+    }
+
+
+
+
+
+
 
 
 
