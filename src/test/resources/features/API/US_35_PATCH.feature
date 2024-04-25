@@ -86,7 +86,7 @@ Feature: As a user, I want to be able to update the information of the address i
     * The api user constructs the base url with the "customer" token
     * The api user sets "api/profile/customerDetailsAddress" path parameters
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
-    * The API user sends a GET request and records the response .
+    * The api user sends the "get" request and saves the "Response"
     * The api user verifies that the info in the response body is "<name>".
 
     Examples:

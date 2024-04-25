@@ -1,5 +1,10 @@
 Feature: US_0031 As an administrator, I want to be able to delete
-coupon information with the specified ID number via the API connection.
+  coupon information with the specified ID number via the API connection.
+  Background:
+    * The api user constructs the base url with the "admin" token
+    * The api user sets "api/coupon/couponList" path parameters
+    * The api user detects the id at the last index in the response
+
 
 
   @HS
@@ -9,7 +14,7 @@ coupon information with the specified ID number via the API connection.
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/coupon/couponDelete" path parameters
-    * The api user adds a key field "id" with the value "108" to the request body
+    * The api user adds a key field "id" with the value "lastCouponId" to the request body
     * The api user sends the "delete" request and saves the "response"
     * The api user verifies that for "delete" request type the status code is 202 and the message information in the response body is "coupon deleted successfully"
 
@@ -21,7 +26,7 @@ coupon information with the specified ID number via the API connection.
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/coupon/couponDelete" path parameters
-    * The api user adds a key field "id" with the value "127" to the request body
+    * The api user adds a key field "id" with the value "-1" to the request body
     * The api user verifies that for "delete" request type the status code is 404 and the message information in the response body is "Not Found"
 
 
@@ -32,7 +37,7 @@ coupon information with the specified ID number via the API connection.
 
     * The api user constructs the base url with the "invalid" token
     * The api user sets "api/coupon/couponDelete" path parameters
-    * The api user adds a key field "id" with the value "127" to the request body
+    * The api user adds a key field "id" with the value "lastCouponId" to the request body
     * The api user verifies that for "delete" request type the status code is 401 and the message information in the response body is "Unauthorized"
 
 
@@ -42,7 +47,7 @@ coupon information with the specified ID number via the API connection.
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/coupon/couponDelete" path parameters
-    * The api user adds a key field "id" with the value "107" to the request body
+    * The api user adds a key field "id" with the value "lastCouponId" to the request body
     * The api user sends the "delete" request and saves the "response"
     * The api user verifies that for "delete" request type the status code is 202 and the message information in the response body is "coupon deleted successfully"
     * The api user verifies that the "Deleted_Id" information in the response body matches the id path parameter specified in the endpoint.
@@ -54,7 +59,7 @@ coupon information with the specified ID number via the API connection.
 
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/coupon/couponDelete" path parameters
-    * The api user adds a key field "id" with the value "106" to the request body
+    * The api user adds a key field "id" with the value "lastCouponId" to the request body
     * The api user sends the "delete" request and saves the "response"
     * The api user verifies that for "delete" request type the status code is 202 and the message information in the response body is "coupon deleted successfully"
     * The api user sets "api/coupon/couponDetails" path parameters
