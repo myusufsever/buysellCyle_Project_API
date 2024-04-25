@@ -9,8 +9,8 @@ import pojos.Pojo;
 import java.util.HashMap;
 
 public class Manage {
-    //********************************** API Test Variables and Parameters **************************************************************************
-    //************************** From Stepdefinitions Class **************************//
+   //********************************** API Test Variables and Parameters **************************************************************************
+                             //************************** From Stepdefinitions Class **************************//
     public static Response response2;
     public static int id;
     public static String fullPath;
@@ -26,46 +26,48 @@ public class Manage {
     public static String updatedId;
     public static int DeletedId;
     public static int deletedId;
-    //************************** From Stepdefinitions Class **************************//
+                             //************************** From Stepdefinitions Class **************************//
 
-    //********************************** API Test Variables and Parameters **************************************************************************
+        //********************************** API Test Variables and Parameters **************************************************************************
 
-    private String verify_the_name_value_of_categories = "Select  name from categories Where slug='fashion';";
-    private String list_the_unique_id = "SELECT user_id, count(user_id)=1 from u168183796_qabuysell.support_tickets where reference_no like '%-%' or reference_no not like '%-%' group by user_id;";
+    private String verify_the_name_value_of_categories="Select  name from categories Where slug='fashion';";
+    private String list_the_unique_id = "SELECT user_id, count(user_id)=1 from u168183796_qabuysell.support_tickets where reference_no like '%-%' group by user_id;";
+    private String list_the_unique_id_not_contains = "SELECT user_id, count(user_id)=1 from u168183796_qabuysell.support_tickets where reference_no NOT like '%-%' group by user_id;";
     private String ps_cities_veri_ekleme = "INSERT INTO cities (name, state_id, status, created_at) VALUES (?, ?, ?, ?);";
-    private String bank_account_insert_data = "Insert Into bank_accounts (id,bank_name,branch_name,account_name,account_number,opening_balance,description,status) Values(?,?,?,?,?,?,?,?)";
+    private String bank_account_insert_data="Insert Into bank_accounts (id,bank_name,branch_name,account_name,account_number,opening_balance,description,status) Values(?,?,?,?,?,?,?,?)";
     private String cities_veri_ekleme = "INSERT INTO cities (name, state_id, status, created_at) VALUES (?, ?, ?, ?);";
-    private String refund_reasons_null = "SELECT * FROM refund_reasons where reason is null;";
+    private String  refund_reasons_null  ="SELECT * FROM refund_reasons where reason is null;";
+    private String  calculate_grand_total_average  ="SELECT AVG(grand_total) AS 'Ortalama grand_total' from u168183796_qabuysell.orders where is_paid=1;";
+    private String sum_of_the_total_price ="select SUM(total_price) as sum_total_price from u168183796_qabuysell.carts where created_at <'2024-03-30' and is_buy_now=1;";
+
+    private String verify_seller_products = "SELECT * FROM u168183796_qabuysell.seller_products where discount = 0 limit 3;";
+
+    private String customerCouponStoresAndUsers  = "SELECT users.*, customer_coupon_stores.* FROM customer_coupon_stores LEFT JOIN users ON customer_coupon_stores.id = users.id LIMIT 3;";
 
     private String list_ids_with_shipping_address = "select id from order_address_details where shipping_address='Switzerland';";
     private String  email_address_from_the_attendances = "";
     private String  delete_the_data_in_the_cities_table = "delete from u168183796_qabuysell.cities where id=?;";
 
 
-    public String getList_the_unique_id() {
-        return list_the_unique_id;
-    }
 
-    public String getVerify_the_name_value_of_categories() {
-        return verify_the_name_value_of_categories;
-    }
 
-    public String getBank_account_insert_data() {
-        return bank_account_insert_data;
-    }
+ public String getList_the_unique_id_not_contains() {return list_the_unique_id_not_contains;}
+    public String getSum_of_the_total_price() {return sum_of_the_total_price;}
+    public String getCalculate_grand_total_average() {return calculate_grand_total_average;}
+    public String getList_the_unique_id() {return list_the_unique_id;}
+    public String getVerify_the_name_value_of_categories() {return verify_the_name_value_of_categories;}
+    public String getBank_account_insert_data() { return bank_account_insert_data; }
+    public String getps_cities_veri_ekleme() {return ps_cities_veri_ekleme;}
+    public String getCities_veri_ekleme() {return cities_veri_ekleme;}
+    public String getRefund_reasons_null() {return refund_reasons_null;}
 
-    public String getps_cities_veri_ekleme() {
-        return ps_cities_veri_ekleme;
-    }
+    public String getVerify_seller_products() { return verify_seller_products; }
 
-    public String getCities_veri_ekleme() {
-        return cities_veri_ekleme;
-    }
+    public String getCustomerCouponStoresAndUsers() { return customerCouponStoresAndUsers; }
 
-    public String getRefund_reasons_null() {
-        return refund_reasons_null;
-    }
-    public String getList_ids_with_shipping_address() {
+
+
+       public String getList_ids_with_shipping_address() {
         return list_ids_with_shipping_address;
     }
 

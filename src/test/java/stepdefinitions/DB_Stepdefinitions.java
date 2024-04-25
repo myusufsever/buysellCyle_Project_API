@@ -6,11 +6,9 @@ import helperDB.Cities;
 import io.cucumber.java.en.Given;
 import manage.Manage;
 import org.junit.Assert;
-import utilities.DB_Utilities.DBUtils;
 
 import java.sql.Array;
 import java.sql.SQLException;
-import java.sql.SQLWarning;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -93,14 +91,9 @@ public class DB_Stepdefinitions {
 
     /** executeBatch() yöntemi, her sorgunun etkilenen satır sayısını içeren bir int dizisi döndürür.*/
     //-------------------------simge-------------------------------------------
-    @Given("Query is prepared and executed.")
-    public void query_is_prepared_and_executed() throws SQLException {
+    @Given("List the unique user_ids query is prepared and executed.")
+    public void list_the_unique_user_ids_query_is_prepared_and_executed() throws SQLException {
         query = manage.getList_the_unique_id();
-        resultSet = getStatement().executeQuery(query);
-    }
-    @Given("{string} is prepared and executed.")
-    public void is_prepared_and_executed(String query28) throws SQLException {
-        query = query28;
         resultSet = getStatement().executeQuery(query);
     }
     @Given("List the unique user_id information results are obtained.")
@@ -111,6 +104,34 @@ public class DB_Stepdefinitions {
             }
         }
     }
+    @Given("Calculate the total cost of products query is prepared and executed.")
+    public void calculate_the_total_cost_of_products_query_is_prepared_and_executed() throws SQLException {
+        query = manage.getSum_of_the_total_price();
+        resultSet = getStatement().executeQuery(query);
+    }
+    @Given("Verify the total cost value of paid orders in the orders table.")
+    public void verify_the_total_cost_value_of_paid_orders_in_the_orders_table() throws SQLException {
+        resultSet.next();
+        Double expected_sum_total_price = Double.valueOf(9649);
+        Double actual_sum_total_price = resultSet.getDouble("sum_total_price");
+        Assert.assertEquals(expected_sum_total_price,actual_sum_total_price);
+    }
+    @Given("Calculate the average grand total query is prepared and executed.")
+    public void calculate_the_average_grand_total_query_is_prepared_and_executed() throws SQLException {
+        query = manage.getCalculate_grand_total_average();
+        resultSet = getStatement().executeQuery(query);
+    }
+    @Given("Verify the average grand_total value of paid orders \\(is_paid ={int}) in the orders table.")
+    public void verify_the_average_grand_total_value_of_paid_orders_is_paid_in_the_orders_table(int is_paid) throws SQLException {
+     resultSet.next();
+     Double expected_avg_grand_total = 176420.36284403672;
+     Double actual_avg_grand_total = resultSet.getDouble("Ortalama grand_total");
+     assertEquals(expected_avg_grand_total,actual_avg_grand_total);
+    }
+
+
+
+//----------------------------simge_bitis------------------------------------------
 
 
     @Given("Prepare a query that adds {int} data to the cities table in bulk.")
@@ -141,13 +162,38 @@ public class DB_Stepdefinitions {
     @Given("cities tablosu uzerinden {int} adet verinin eklendigini dogrulayiniz.")
     public void cities_tablosu_uzerinden_adet_verinin_eklendigini_dogrulayiniz(int rowCount) {
 
-
         System.out.println("Inserted " + result.length + " records successfully.");
         System.out.println(Arrays.toString(result));
         assertEquals(rowCount, result.length);
 
+    }
+    //=================== US_15 ZD ============================
+    @Given("Verify Whether there is data Query is prepared and executed.")
+    public void verify_Whether_there_is_data_query_is_prepared_and_executed() throws SQLException {
+        query = manage.getCustomerCouponStoresAndUsers();
+        resultSet = getStatement().executeQuery(query);
+    }
+    @Given("List the first {int} data in the customer_coupon_stores table by bringing them from the users table.")
+    public void list_the_first_data_in_the_customer_coupon_stores_table_by_bringing_them_from_the_users_table(int list) throws SQLException {
+        // Beklenen sonuçları tutacak bir liste oluşturma
+        List<String> expectedResults = new ArrayList<>();
+        System.out.println("| id       | first_name | last_name | Username |role_id     | Email                 |\n"
+                +           "|----------|------------|-----------|----------|------------|-----------------------|\n");
+        while (resultSet.next()) {
+            int id = resultSet.getInt("id");
+            String first_name = resultSet.getString("first_name");
+            String last_name = resultSet.getString("last_name");
+            String username = resultSet.getString("username");
+            int role_id = resultSet.getInt("role_id");
+            String email = resultSet.getString("email");
 
-
+            // Elde edilen sonucu bir string olarak oluşturma ve listeye ekleme
+            expectedResults.add("| " + id + " | " + first_name + " | " + last_name + " | " + username + " | " + role_id + " | " + email + " |");
+            // Kullanıcı bilgilerini yazdırma
+        }
+            for (String expectedResult : expectedResults) {
+                System.out.println(expectedResult);
+            }
 
     }
 
@@ -165,7 +211,55 @@ public class DB_Stepdefinitions {
         assertNull(reason);
 
     }
+//========================== US_013 ZD ============================
 
+    @Given("Verify whether  there is data Query is prepared and executed.")
+    public void verify_whether__there_is_data_query_is_prepared_and_executed() throws SQLException {
+        query = manage.getVerify_seller_products();
+        resultSet = getStatement().executeQuery(query);
+    }
+    @Given("List and verify {int} items without coupons.")
+    public void list_and_verify_items_without_coupons(int list) throws SQLException {
+        // Beklenen sonuçları tutacak bir liste oluşturma
+        List<String> expectedResults = new ArrayList<>();
+        expectedResults.add("1166, 1, 1268, 50, 1, 1");
+        expectedResults.add("1167, 1, 1269, 50, 1, 1");
+        expectedResults.add("1168, 1, 1270, 50, 1, 1");
+        int index = 0;
+        while (resultSet.next()) {
+            // İlgili sütunlardan veriyi al
+            int id = resultSet.getInt("id");
+            int userId = resultSet.getInt("user_id");
+            int productId = resultSet.getInt("product_id");
+            int tax = resultSet.getInt("tax");
+            String taxType = resultSet.getString("tax_type");
+            String discountType = resultSet.getString("discount_type");
+            // Elde edilen sonucu bir string olarak oluşturma
+            String result = id + ", " +userId+", " + productId + ", " + tax + ", " + taxType+", " +discountType;
+
+            // Beklenen sonuçlarla elde edilen sonuçları karşılaştırma
+            Assert.assertEquals(expectedResults.get(index), result);
+
+            // Veriyi kullanma
+            System.out.println("id: "+id +", user id: "+userId+",Product ID: " + productId + ", tax: " + tax+", tax_type: "+ taxType+", discount_type: "+ discountType);
+
+            index++;
+        }
+    }
+    @Given("{string} query is prepared and executed.")
+    public void query_is_prepared_and_executed(String queryName) throws SQLException {
+        switch (queryName)
+        {
+            case "List_the_unique_ID_contains": query = manage.getList_the_unique_id(); break;
+            case "List_the_unique_ID_notContains": query = manage.getList_the_unique_id_not_contains(); break;
+            case "query_ismi_1": query = manage.getps_cities_veri_ekleme(); break;
+            case "query_ismi_2": query = manage.getRefund_reasons_null(); break;
+            case "query_ismi_3": query = manage.getCities_veri_ekleme(); break;
+            case "query_ismi_4": query = manage.getBank_account_insert_data(); break;
+        }
+        resultSet = getStatement().executeQuery(query);
+
+        }
     // ================================BEYTULLAH========================================
     @Given("Verify order_address_details Query is prepared and executed.")
     public void verify_order_address_details_query_is_prepared_and_executed() throws SQLException {
@@ -201,11 +295,11 @@ public class DB_Stepdefinitions {
 
     @Given("Verify that it has been deleted.")
     public void verify_that_it_has_been_deleted() throws SQLException {
-        
-        
-        
-        
-        
+
+
+
+
+
 /*
         SQLWarning warning = statement.getWarnings();
         if (warning != null) {
@@ -217,7 +311,7 @@ public class DB_Stepdefinitions {
         } else {
             System.out.println("No SQL warnings.");
         }
-        
+
  */
     }
 
