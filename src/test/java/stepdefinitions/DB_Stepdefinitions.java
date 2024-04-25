@@ -227,5 +227,18 @@ public class DB_Stepdefinitions {
             index++;
         }
     }
+    @Given("{string} query is prepared and executed.")
+    public void query_is_prepared_and_executed(String queryName) throws SQLException {
+        switch (queryName)
+        {
+            case "List_the_unique_ID": query = manage.getList_the_unique_id(); break;
+            case "query_ismi_1": query = manage.getps_cities_veri_ekleme(); break;
+            case "query_ismi_2": query = manage.getRefund_reasons_null(); break;
+            case "query_ismi_3": query = manage.getCities_veri_ekleme(); break;
+            case "query_ismi_4": query = manage.getBank_account_insert_data(); break;
+        }
+        resultSet = getStatement().executeQuery(query);
+
+    }
     }
 
