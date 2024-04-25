@@ -7,6 +7,7 @@ import io.cucumber.java.en.Given;
 import manage.Manage;
 import org.junit.Assert;
 
+import java.sql.Array;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -21,9 +22,11 @@ import static org.junit.Assert.*;
 
 
 public class DB_Stepdefinitions {
+
     Manage manage = new Manage();
     //prepared statement timestamp instant döndürür.
     Instant instant = Instant.now();
+    int sonuc;
 
     @Given("Database connection is established.")
     public void database_connection_is_established() {
@@ -80,30 +83,45 @@ public class DB_Stepdefinitions {
         System.out.println(Arrays.toString(result));
         assertEquals(rowCount, result.length);
     }
-
-
     /**
      * US018
      /**  addBatch() yöntemi ile her hazırlanan sorgu bu sorgu yığınına eklenir.
      *  Ardından executeBatch() yöntemi kullanılarak tüm sorguları çalıştırılır.
      */
 
-
     /** executeBatch() yöntemi, her sorgunun etkilenen satır sayısını içeren bir int dizisi döndürür.*/
+    //-------------------------simge-------------------------------------------
+    @Given("Query is prepared and executed.")
+    public void query_is_prepared_and_executed() throws SQLException {
+        query = manage.getList_the_unique_id();
+        resultSet = getStatement().executeQuery(query);
+    }
+    @Given("{string} is prepared and executed.")
+    public void is_prepared_and_executed(String query28) throws SQLException {
+        query = query28;
+        resultSet = getStatement().executeQuery(query);
+    }
+    @Given("List the unique user_id information results are obtained.")
+    public void list_the_unique_user_id_information_results_are_obtained() throws SQLException {
+        while(resultSet.next()){
+            if (resultSet.getLong("count(user_id)=1")==1) {
+                System.out.println(resultSet.getLong("user_id"));
+            }
+        }
+    }
 
 
-    @Given("getCities veri ekleme query is prepared and executed.")
-    public void getCities_veri_ekleme_query_is_prepared_and_executed() throws SQLException {
+    @Given("Prepare a query that adds {int} data to the cities table in bulk.")
+    public void prepare_a_query_that_adds_data_to_the_cities_table_in_bulk(Integer count) throws SQLException {
         query = manage.getCities_veri_ekleme();
-
         preparedStatement = getPraperedStatement(query);
         List<Cities> city = generateCities(count);
         int flag = 0;
         for (Cities cities : city) {
-            preparedStatement.setString(1, Cities.getName());
-            preparedStatement.setInt(2, Cities.getState_id());
-            preparedStatement.setInt(3, Cities.getStatus());
-            preparedStatement.setString(4, Cities.getCreated_at());
+            preparedStatement.setString(1, city.get(flag).getName());
+            preparedStatement.setInt(2, city.get(flag).getState_id());
+            preparedStatement.setInt(3, city.get(flag).getStatus());
+            preparedStatement.setString(4, city.get(flag).getCreated_at());
 
             preparedStatement.addBatch();
             flag++;
@@ -111,16 +129,19 @@ public class DB_Stepdefinitions {
                 result = preparedStatement.executeBatch();
             }
 
-
-
         }
-
 
     }
 
-    @Given("cities tablosu uzerinden {int} adet verinin eklendigini dogrulayiniz.")
-    public void cities_tablosu_uzerinden_adetverinin_eklendigini_dogrulayiniz(int rowCount) {
 
+
+
+    @Given("cities tablosu uzerinden {int} adet verinin eklendigini dogrulayiniz.")
+    public void cities_tablosu_uzerinden_adet_verinin_eklendigini_dogrulayiniz(int rowCount) {
+
+
+        System.out.println("Inserted " + result.length + " records successfully.");
+        System.out.println(Arrays.toString(result));
         assertEquals(rowCount, result.length);
 
 
