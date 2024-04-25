@@ -135,7 +135,7 @@ public class DB_Stepdefinitions {
 
     @Given("Verify whether there is data Query is prepared and executed.")
     public void verify_whether_there_is_data_query_is_prepared_and_executed() throws SQLException {
-        query = manage.getRefund_reasons_null();
+        //query = manage.getRefund_reasons_null();
         resultSet = getStatement().executeQuery(query);
     }
     @Given("Verify the {string} information result are obtained.")
