@@ -7,10 +7,13 @@ import io.cucumber.java.en.Given;
 import manage.Manage;
 import org.junit.Assert;
 import utilities.DB_Utilities.DBUtils;
+import utilities.DB_Utilities.JDBCReusableMethods;
 
 import java.sql.Array;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -401,6 +404,37 @@ public class DB_Stepdefinitions {
         int opening_balance = resultSet.getInt(field);
         assertTrue(opening_balance >= 0);
 
+    }
+    // US_04_ insert into & update -> contacts table_Kvsr
+    @Given("Prepare a query that adds data to the contacts table and execute the query.")
+    public void prepare_a_query_that_adds_data_to_the_contacts_table_and_execute_the_query() throws SQLException {
+
+        query = manage.getContactsInsertInto();
+        preparedStatement = getPraperedStatement(query);
+        // INSERT INTO contacts (id, name, email, query_type, message, created_at, updated_at, others) VALUES (?,?,?,?,?,?,?,?)
+        preparedStatement.setInt(1,65);
+        preparedStatement.setString(2,"Veli");
+        preparedStatement.setString(3,"mnmnmn@gmail.com");
+        preparedStatement.setString(4,"xyz");
+        preparedStatement.setString(5,"finish the project!");
+        Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
+        preparedStatement.setTimestamp(6,timestamp);
+        preparedStatement.setString(7,null);
+        preparedStatement.setString(8,"last day");
+        // Assert that it is added
+        sonuc = preparedStatement.executeUpdate();
+        assertEquals(1,sonuc);
+
+    }
+    @Given("Update the message information in the contacts table.")
+    public void update_the_message_information_in_the_contacts_table() throws SQLException {
+        //"UPDATE contacts SET message = ? WHERE id = ?;";
+        query = manage.getContactsMessageUpdate();
+        preparedStatement = JDBCReusableMethods.getConnection().prepareStatement(query);
+        preparedStatement.setInt(1,65);
+        preparedStatement.setString(2,"message is updated");
+        sonuc = preparedStatement.executeUpdate();
+        //assertEquals(1,sonuc);
     }
 
 }

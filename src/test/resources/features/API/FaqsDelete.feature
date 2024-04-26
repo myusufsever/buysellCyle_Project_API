@@ -25,7 +25,7 @@ Feature: As an administrator, I want to be able to delete the record specified b
 
     Examples:
       | id |
-      | 190 |
+      | 200 |
 
   Scenario Outline: When a DELETE request containing valid authorization credentials and an incorrect
   (non-existent in the system) FAQ's id is sent to the /api/faqsDelete endpoint, the expected status code returned should be 404,
@@ -64,4 +64,4 @@ Feature: As an administrator, I want to be able to delete the record specified b
 
     Examples:
       | id |
-      | 190 |
+      | 200 |
