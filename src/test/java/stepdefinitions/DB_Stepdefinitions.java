@@ -372,6 +372,70 @@ public class DB_Stepdefinitions {
 
     }
 
+
+    @Given("Verify the shipping_address and billing_address are not the same in the order_address_ Query is prepared and executed.")
+    public void verify_the_shipping_address_and_billing_address_are_not_the_same_in_the_order_address_query_is_prepared_and_executed() throws SQLException {
+        query = manage.getShipping_address();
+        resultSet = getStatement().executeQuery(query);
+
+
+
+    }
+
+    @Given("Verify the number of users whose shipping_address and billing_address count equals {int}.")
+    public void verify_the_number_of_users_whose_shipping_address_and_billing_address_count_equals(int user_count) throws SQLException {
+
+        resultSet.next();
+        user_count = resultSet.getInt("user_count");
+        System.out.println(user_count);
+        int expectedsayi=2;
+        assertEquals(expectedsayi,user_count);
+
+    }
+
+    @Given("Verify Calculate the sum of the amount values of the data with type=Referral and id between ten and twenty in the wallet_balances table")
+    public void verify_calculate_the_sum_of_the_amount_values_of_the_data_with_type_and_between_ten_and_twenty_in_the_wallet_balances_table() throws SQLException {
+
+        query = manage.getWallet_balances();
+        resultSet = getStatement().executeQuery(query);
+
+
+    }
+
+    @Given("Verify Calculate the sum of the amount values of the data with type=Referral and id between ten and twenty in the wallet_balances table {int}")
+    public void verify_calculate_the_sum_of_the_amount_values_of_the_data_with_type_and_between_ten_and_twenty_in_the_wallet_balances_table(int total_amount) throws SQLException {
+
+        resultSet.next();
+
+        total_amount= resultSet.getInt("total_amount");
+        double expectedsayi=10.0;
+        double delta = 0.1;
+        assertEquals(expectedsayi,(double)(total_amount),delta);
+
+    }
+
+    @Given("List the unique notes in the attendances table, separated by days.")
+    public void list_the_unique_notes_in_the_attendances_table_separated_by_days() throws SQLException {
+        query = manage.getAttendances();
+        resultSet = getStatement().executeQuery(query);
+
+    }
+    @Given("Verify list the unique {int} in the attendances table, separated by days.")
+    public void verify_list_the_unique_in_the_attendances_table_separated_by_days(int row) throws SQLException {
+
+
+        //--------------------
+        resultSet.next();
+
+        row = resultSet.getRow();
+        int expectedrow=1;
+
+
+        assertEquals(row, expectedrow);
+
+
+    }
+
 }
 
 
