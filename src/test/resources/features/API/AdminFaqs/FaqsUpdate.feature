@@ -17,7 +17,7 @@ of the FAQ record with the specified FAQ id via API connection.
 
 
 
-  @HS
+  @SC
   Scenario Outline: When a PATCH request containing valid authorization credentials, the FAQ id to be updated, and
   the updated information of the FAQ (title, description) is sent to the /api/faqsUpdate/{id} endpoint, the expected
   status code returned should be 202, and the message in the response body should confirm: "faqs updated successfully".
