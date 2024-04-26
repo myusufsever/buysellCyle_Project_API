@@ -25,7 +25,7 @@ Feature: As an administrator, I want to be able to update the Refund&Reason info
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/refundReasonUpdate/<id>" path parameters
     * The api user prepares a PATCH request containing the "<reason>" data to send to the api refundReasonUpdate endpoint.
-    * The API user records the response from the api refundReasonUpdate endpoint, confirming that the status code is '404' and the reason phrase is Not Found.
+    * The api user verifies that for "patchbody" request type the status code is 404 and the message information in the response body is "Not Found"
 
     Examples:
       | id | reason                 |
@@ -40,7 +40,7 @@ Feature: As an administrator, I want to be able to update the Refund&Reason info
     * The api user constructs the base url with the "invalid" token
     * The api user sets "api/refundReasonUpdate/<id>" path parameters
     * The api user prepares a PATCH request containing the "<reason>" data to send to the api refundReasonUpdate endpoint.
-    * The API user records the response from the api refundReasonUpdate endpoint, confirming that the status code is '401' and the reason phrase is Unauthorized.
+    * The api user verifies that for "patchbody" request type the status code is 401 and the message information in the response body is "Unauthorized"
 
     Examples:
       | id | reason                 |

@@ -761,6 +761,12 @@ public class API_Stepdefinitions {
         lastCouponId = given().spec(spec).when().get(fullPath).jsonPath().getInt("coupons[-1].id");
         System.out.println("lastId= "+lastCouponId);
     }
+
+    @Given("The api user verifies that the message information in the response body is {string}")
+    public void the_api_user_verifies_that_the_message_information_in_the_response_body_is(String message) {
+        API_Methods.messageAssert(message);
+    }
+
 }
 
 

@@ -70,7 +70,7 @@ Feature: As an administrator, I want to be able to delete Refund&Reason informat
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/departmentDetails" path parameters
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
-    * The api user sends the DELETE request and saves the response returned from the api refundReasonDelete endpoint.
+    * The api user sends the "delete" request and saves the "Response"
     * The api user verifies that the message information in the response body is "department not found"
 
 

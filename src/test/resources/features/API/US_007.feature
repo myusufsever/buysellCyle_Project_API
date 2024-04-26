@@ -34,7 +34,6 @@ Feature: As an administrator I should be able to access holiday data for staff m
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/holidayList" path parameters
     * The api user sends the "get" request and saves the "Response"
-    * The api user verifies that the status code is 200
     * The api user verifies that for "get" request type the status code is 200 and the message information in the response body is "success"
 
 
