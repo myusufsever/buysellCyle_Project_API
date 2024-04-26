@@ -1,14 +1,14 @@
 @DB_13
 Feature:BACKEND JDBC TESTING
 
+
+
   Background:Database connection
     * Database connection is established.
 
-    #"seller_products tablosunda hiçbir kuponla ilişkilendirilmemiş olan ilk 3 ürünü listeleyip dogrulayiniz.
-  Scenario: US_13 List and validate the first 3 products that are not associated with any coupon in the seller_products table.
+    Scenario: US_13 List and validate the first 3 products that are not associated with any coupon in the seller_products table.
+       #"seller_products tablosunda hiçbir kuponla ilişkilendirilmemiş olan ilk 3 ürünü listeleyip dogrulayiniz.
 
-    * Verify whether  there is data Query is prepared and executed.
-    #Sorgunun hazırlandığını ve yürütüldüğünü doğrulayın.
+    * "Verify_seller_products" query is prepared and executed.
     * List and verify 3 items without coupons.
-    #kupon içermeyen 3 ürün listeleyip doğrulayın
     * Database connection is closed
