@@ -596,16 +596,16 @@ public class API_Stepdefinitions {
                                                                                                             name, String email, String address, String phone, String city, String state, String country, String
                                                                                                             postal_code, String address_type){
         // * The api user prepares a POST request containing the "<name>","<email>","<address>","<phone>","<city>","<state>","<country>","<postal_code>","<address_type>" information to send to the api.
-        reqBody = new HashMap<>();
-        reqBody.put("name", name);
-        reqBody.put("email", email);
-        reqBody.put("address", address);
-        reqBody.put("phone", phone);
-        reqBody.put("city", city);
-        reqBody.put("state", state);
-        reqBody.put("country", country);
-        reqBody.put("postal_code", postal_code);
-        reqBody.put("address_type", address_type);
+        requestBody = new JSONObject();
+        requestBody.put("name", name);
+        requestBody.put("email", email);
+        requestBody.put("address", address);
+        requestBody.put("phone", phone);
+        requestBody.put("city", city);
+        requestBody.put("state", state);
+        requestBody.put("country", country);
+        requestBody.put("postal_code", postal_code);
+        requestBody.put("address_type", address_type);
 
     }
     //============================= US_25 PATCH =========================

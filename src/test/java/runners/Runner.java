@@ -18,11 +18,11 @@ import org.junit.runner.RunWith;
 
  
         tags = "@US022",
-        dryRun = true
-
-
-        tags = "@API",
         dryRun = false
+
+
+
+
 
 
 
