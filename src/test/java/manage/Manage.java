@@ -48,7 +48,7 @@ public class Manage {
     private String  insert_Into_cities = "INSERT INTO cities (name,state_id,status,created_at) VALUES(?, ?, ?, ?);";
     private String  delete_the_data_in_the_cities_table = "delete from u168183796_qabuysell.cities where id=?;";
     private String couponProductsGroup ="SELECT coupon_id, COUNT(*) AS product_count FROM coupon_products GROUP BY coupon_id;";
-    private String   shipping_address="SELECT COUNT(DISTINCT id) FROM order_address_details WHERE shipping_address <> billing_address;";
+    private String   shipping_address="SELECT COUNT(*) AS user_count FROM order_address_details WHERE shipping_address <> billing_address;";
     private String email_template_types_Grouping = "SELECT module, COUNT(*) AS type_count" + "FROM email_template_types" + "WHERE module IS NOT NULL" + "GROUP BY module;";
     private String  wallet_balances="SELECT SUM(amount) AS total_amount FROM wallet_balances WHERE type = 'Referral' AND id BETWEEN 10 AND 20;";
     private String attendances="Select DISTINCT note from attendances group by day";
