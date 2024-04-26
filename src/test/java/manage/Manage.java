@@ -41,24 +41,21 @@ public class Manage {
     private String  refund_reasons_null  ="SELECT * FROM refund_reasons where reason is null;";
     private String  calculate_grand_total_average  ="SELECT AVG(grand_total) AS 'Ortalama grand_total' from u168183796_qabuysell.orders where is_paid=1;";
     private String sum_of_the_total_price ="select SUM(total_price) as sum_total_price from u168183796_qabuysell.carts where created_at <'2024-03-30' and is_buy_now=1;";
-
     private String verify_seller_products = "SELECT * FROM u168183796_qabuysell.seller_products where discount = 0 limit 3;";
-
     private String customerCouponStoresAndUsers  = "SELECT users.*, customer_coupon_stores.* FROM customer_coupon_stores LEFT JOIN users ON customer_coupon_stores.id = users.id LIMIT 3;";
-
-//    private String digital_gift_cards_Add_Data_And_Then_Delete_That_Data = "INSERT INTO digital_gift_cards (id,gift_name,descriptionOne,thumbnail_image_one,thumbnail_image_two,created_at) VALUES (143759, 'Lıghting', 'Mcquen', 'http://lorempixel.com/g/640/350/food/', 'http://lorempixel.com/640/480/nature/',  '2024-04-06 19:14:03');";
-//
-    private String email_template_types_Grouping = "SELECT module, COUNT(*) AS type_count" + "FROM email_template_types" + "WHERE module IS NOT NULL" + "GROUP BY module;";
-
-
-    public String getVerify_opening_balance_updated_with_negative_value() {return verify_opening_balance_updated_with_negative_value;}
-
-  //  private String digital_gift_cards_Add_Data_And_Then_Delete_That_Data = "INSERT INTO digital_gift_cards (id,gift_name,descriptionOne,thumbnail_image_one,thumbnail_image_two,created_at) VALUES (143759, 'Lıghting', 'Mcquen', 'http://lorempixel.com/g/640/350/food/', 'http://lorempixel.com/640/480/nature/',  '2024-04-06 19:14:03');";
-
     private String list_ids_with_shipping_address = "select id from order_address_details where shipping_address='Switzerland';";
-    private String  email_address_from_the_attendances = "";
+    private String  email_address_from_the_attendances = "select email from users where id IN (select id from attendances where year<2022 and id=5);";
     private String  delete_the_data_in_the_cities_table = "delete from u168183796_qabuysell.cities where id=?;";
     private String couponProductsGroup ="SELECT coupon_id, COUNT(*) AS product_count FROM coupon_products GROUP BY coupon_id;";
+    private String select = DB_Stepdefinitions.selectField + DB_Stepdefinitions.fromTable + DB_Stepdefinitions.whereCondition+";";
+    private String   shipping_address="SELECT COUNT(DISTINCT id) FROM order_address_details WHERE shipping_address <> billing_address;";
+    private String email_template_types_Grouping = "SELECT module, COUNT(*) AS type_count" + "FROM email_template_types" + "WHERE module IS NOT NULL" + "GROUP BY module;";
+    private String update = DB_Stepdefinitions.updateTable + DB_Stepdefinitions.setField + DB_Stepdefinitions.whereCondition+";";
+    //  private String digital_gift_cards_Add_Data_And_Then_Delete_That_Data = "INSERT INTO digital_gift_cards (id,gift_name,descriptionOne,thumbnail_image_one,thumbnail_image_two,created_at) VALUES (143759, 'Lıghting', 'Mcquen', 'http://lorempixel.com/g/640/350/food/', 'http://lorempixel.com/640/480/nature/',  '2024-04-06 19:14:03');";
+    //  private String digital_gift_cards_Add_Data_And_Then_Delete_That_Data = "INSERT INTO digital_gift_cards (id,gift_name,descriptionOne,thumbnail_image_one,thumbnail_image_two,created_at) VALUES (143759, 'Lıghting', 'Mcquen', 'http://lorempixel.com/g/640/350/food/', 'http://lorempixel.com/640/480/nature/',  '2024-04-06 19:14:03');";
+
+
+
 
 
 
@@ -72,61 +69,20 @@ public class Manage {
     public String getps_cities_veri_ekleme() {return ps_cities_veri_ekleme;}
     public String getCities_veri_ekleme() {return cities_veri_ekleme;}
     public String getRefund_reasons_null() {return refund_reasons_null;}
-
     public String getVerify_seller_products() { return verify_seller_products; }
-
     public String getCustomerCouponStoresAndUsers() { return customerCouponStoresAndUsers; }
-
-
-
     public String getEmail_template_types_Grouping() {return email_template_types_Grouping;}
-
-
-private String   shipping_address="SELECT COUNT(DISTINCT id) FROM order_address_details WHERE shipping_address <> billing_address;";
-
- public String getShipping_address() { return shipping_address;}
-
-       public String getList_ids_with_shipping_address() {
-        return list_ids_with_shipping_address;
-    }
-
-    public String getEmail_address_from_the_attendances() {
-        return email_address_from_the_attendances;
-    }
-
-    public String getDelete_the_data_in_the_cities_table() {
-        return delete_the_data_in_the_cities_table;
-    }
-
-
-
-   // public String getDigital_gift_cards_Add_Data_And_Then_Delete_That_Data() {return digital_gift_cards_Add_Data_And_Then_Delete_That_Data;}
-
- public String getCouponProductsGroup() { return couponProductsGroup; }
-
- private String update = DB_Stepdefinitions.updateTable + DB_Stepdefinitions.setField + DB_Stepdefinitions.whereCondition+";";
- private String select = DB_Stepdefinitions.selectField + DB_Stepdefinitions.fromTable + DB_Stepdefinitions.whereCondition+";";
-
- public String getPs_cities_veri_ekleme() {
-  return ps_cities_veri_ekleme;
- }
-
- public void setUpdate(String update) {
-  this.update = update;
- }
-
- public void setSelect(String select) {
-  this.select = select;
- }
-
- public String getUpdate() {
-  return update;
- }
-
- public String getSelect() {
-  return select;
- }
-
+    public String getShipping_address() { return shipping_address;}
+    public String getList_ids_with_shipping_address() {return list_ids_with_shipping_address;}
+    public String getEmail_address_from_the_attendances() {return email_address_from_the_attendances;}
+    public String getDelete_the_data_in_the_cities_table() {return delete_the_data_in_the_cities_table;}
+    public String getPs_cities_veri_ekleme() {return ps_cities_veri_ekleme;}
+    public void setUpdate(String update) {this.update = update;}
+    public void setSelect(String select) {this.select = select;}
+    public String getUpdate() {return update;}
+    public String getSelect() {return select;}
+    public String getVerify_opening_balance_updated_with_negative_value() {return verify_opening_balance_updated_with_negative_value;}public String getCouponProductsGroup() { return couponProductsGroup; }
+    // public String getDigital_gift_cards_Add_Data_And_Then_Delete_That_Data() {return digital_gift_cards_Add_Data_And_Then_Delete_That_Data;}
 
 }
 

@@ -303,7 +303,6 @@ public class DB_Stepdefinitions {
         }
 
         Assert.assertArrayEquals(expectedIds, actualIds);
-
     }
     @Given("Verify delete Query from cities table is prepared and executed.")
     public void verify_delete_query_from_cities_table_is_prepared_and_executed() throws SQLException {
@@ -313,8 +312,6 @@ public class DB_Stepdefinitions {
         preparedStatement.executeUpdate();
 
     }
-
-
     @Given("Verify that it has been deleted.")
     public void verify_that_it_has_been_deleted() throws SQLException {
 
@@ -336,6 +333,22 @@ public class DB_Stepdefinitions {
 
  */
     }
+    @Given("Verify users with attendances users Query is prepared and executed.")
+    public void verify_users_with_attendances_users_query_is_prepared_and_executed() throws SQLException {
+        query=manage.getEmail_address_from_the_attendances();
+        resultSet = getStatement().executeQuery(query);
+        resultSet.next();
+    }
+    @Given("Verify the email address from the information of the data in the users with attendances table.")
+    public void verify_the_email_address_from_the_information_of_the_data_in_the_users_with_attendances_table() throws SQLException {
+
+        String expectedEmail="ra_email@gmail.com";
+        String actualEmail=resultSet.getString("0");
+        System.out.println("actualEmail = " + actualEmail);
+        Assert.assertEquals(expectedEmail,actualEmail);
+
+    }
+
 
 
     // ================================BEYTULLAH========================================
