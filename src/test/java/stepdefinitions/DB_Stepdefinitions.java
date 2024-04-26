@@ -93,11 +93,7 @@ public class DB_Stepdefinitions {
 
     /** executeBatch() yöntemi, her sorgunun etkilenen satır sayısını içeren bir int dizisi döndürür.*/
     //-------------------------simge-------------------------------------------
-    @Given("List the unique user_ids query is prepared and executed.")
-    public void list_the_unique_user_ids_query_is_prepared_and_executed() throws SQLException {
-        query = manage.getList_the_unique_id();
-        resultSet = getStatement().executeQuery(query);
-    }
+
     @Given("List the unique user_id information results are obtained.")
     public void list_the_unique_user_id_information_results_are_obtained() throws SQLException {
         while(resultSet.next()){
@@ -106,11 +102,7 @@ public class DB_Stepdefinitions {
             }
         }
     }
-    @Given("Calculate the total cost of products query is prepared and executed.")
-    public void calculate_the_total_cost_of_products_query_is_prepared_and_executed() throws SQLException {
-        query = manage.getSum_of_the_total_price();
-        resultSet = getStatement().executeQuery(query);
-    }
+
     @Given("Verify the total cost value of paid orders in the orders table.")
     public void verify_the_total_cost_value_of_paid_orders_in_the_orders_table() throws SQLException {
         resultSet.next();
@@ -118,11 +110,7 @@ public class DB_Stepdefinitions {
         Double actual_sum_total_price = resultSet.getDouble("sum_total_price");
         Assert.assertEquals(expected_sum_total_price,actual_sum_total_price);
     }
-    @Given("Calculate the average grand total query is prepared and executed.")
-    public void calculate_the_average_grand_total_query_is_prepared_and_executed() throws SQLException {
-        query = manage.getCalculate_grand_total_average();
-        resultSet = getStatement().executeQuery(query);
-    }
+
     @Given("Verify the average grand_total value of paid orders \\(is_paid ={int}) in the orders table.")
     public void verify_the_average_grand_total_value_of_paid_orders_is_paid_in_the_orders_table(int is_paid) throws SQLException {
      resultSet.next();
@@ -284,6 +272,8 @@ public class DB_Stepdefinitions {
                 sonuc = getStatement().executeUpdate(query);
                 System.out.println("sonuç: "+sonuc);
                 break;
+            case "Calculate_the_total_cost": query = manage.getSum_of_the_total_price(); break;
+            case "Calculate_the_average_grand_total": query=manage.getCalculate_grand_total_average();break;
 
 
         }
