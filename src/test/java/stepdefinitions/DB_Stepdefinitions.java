@@ -19,6 +19,7 @@ import static helperDB.BankAccount.generateBankAccount;
 import static helperDB.Cities.generateCities;
 import static helperDB.JDBC_Cons.*;
 import static helperDB.JDBC_Structure_Methods.*;
+import static helperDB.JDBC_Structure_Methods.getPraperedStatement;
 import static org.junit.Assert.*;
 
 
@@ -92,11 +93,7 @@ public class DB_Stepdefinitions {
 
     /** executeBatch() yöntemi, her sorgunun etkilenen satır sayısını içeren bir int dizisi döndürür.*/
     //-------------------------simge-------------------------------------------
-    @Given("List the unique user_ids query is prepared and executed.")
-    public void list_the_unique_user_ids_query_is_prepared_and_executed() throws SQLException {
-        query = manage.getList_the_unique_id();
-        resultSet = getStatement().executeQuery(query);
-    }
+
     @Given("List the unique user_id information results are obtained.")
     public void list_the_unique_user_id_information_results_are_obtained() throws SQLException {
         while(resultSet.next()){
@@ -105,11 +102,7 @@ public class DB_Stepdefinitions {
             }
         }
     }
-    @Given("Calculate the total cost of products query is prepared and executed.")
-    public void calculate_the_total_cost_of_products_query_is_prepared_and_executed() throws SQLException {
-        query = manage.getSum_of_the_total_price();
-        resultSet = getStatement().executeQuery(query);
-    }
+
     @Given("Verify the total cost value of paid orders in the orders table.")
     public void verify_the_total_cost_value_of_paid_orders_in_the_orders_table() throws SQLException {
         resultSet.next();
@@ -117,11 +110,7 @@ public class DB_Stepdefinitions {
         Double actual_sum_total_price = resultSet.getDouble("sum_total_price");
         Assert.assertEquals(expected_sum_total_price,actual_sum_total_price);
     }
-    @Given("Calculate the average grand total query is prepared and executed.")
-    public void calculate_the_average_grand_total_query_is_prepared_and_executed() throws SQLException {
-        query = manage.getCalculate_grand_total_average();
-        resultSet = getStatement().executeQuery(query);
-    }
+
     @Given("Verify the average grand_total value of paid orders \\(is_paid ={int}) in the orders table.")
     public void verify_the_average_grand_total_value_of_paid_orders_is_paid_in_the_orders_table(int is_paid) throws SQLException {
      resultSet.next();
@@ -196,6 +185,13 @@ public class DB_Stepdefinitions {
 
 //=========================== US_014 ZD ===========================
 
+    @Given("Verify whether there is data Query is prepared and executed.")
+    public void verify_whether_there_is_data_query_is_prepared_and_executed() throws SQLException {
+        //query = manage.getRefund_reasons_null();
+        resultSet = getStatement().executeQuery(query);
+    }
+
+
     @Given("Verify the {string} information result are obtained.")
     public void verify_the_information_result_are_obtained(String reason) throws SQLException {
         resultSet.next();
@@ -241,37 +237,47 @@ public class DB_Stepdefinitions {
     public void query_is_prepared_and_executed(String queryName) throws SQLException {
         switch (queryName)
         {
-            case "Opening balance update with negative value": query = manage.getVerify_opening_balance_updated_with_negative_value(); break;
-            case "List_the_unique_ID_notContains": 
+            case "Update the opening_balance with a negative value" :
+                query = manage.getVerify_opening_balance_updated_with_negative_value();
+                sonuc=getStatement().executeUpdate(query);
+                statement=getStatement();
+                break;
+            case "List_the_unique_ID_notContains":
                 query = manage.getList_the_unique_id_not_contains();
-                break;       
+                resultSet = getStatement().executeQuery(query);
+                break;
             case "List_the_unique_ID_contains":
                 query = manage.getList_the_unique_id();
+                resultSet = getStatement().executeQuery(query);
                 break;
             case "coupon_products_group_by":
                 query = manage.getCouponProductsGroup();
-                break;
-            case "query_ismi_1":
-                query = manage.getps_cities_veri_ekleme();
+                resultSet = getStatement().executeQuery(query);
                 break;
             case "Refund_reasons_null":
                 query = manage.getRefund_reasons_null();
-                break;
-            case "query_ismi_3":
-                query = manage.getCities_veri_ekleme();
-                break;
-            case "query_ismi_4":
-                query = manage.getBank_account_insert_data();
+                resultSet = getStatement().executeQuery(query);
                 break;
             case "Verify_seller_products":
                 query = manage.getVerify_seller_products();
+                resultSet = getStatement().executeQuery(query);
                 break;
             case "CustomerCouponStoresAndUsers":
                 query = manage.getCustomerCouponStoresAndUsers();
+                resultSet = getStatement().executeQuery(query);
                 break;
+            case "Update":
+                manage.setUpdate(updateTable + setField + whereCondition+";");
+                query = manage.getUpdate();
+                sonuc = getStatement().executeUpdate(query);
+                System.out.println("sonuç: "+sonuc);
+                break;
+            case "Calculate_the_total_cost": query = manage.getSum_of_the_total_price(); break;
+            case "Calculate_the_average_grand_total": query=manage.getCalculate_grand_total_average();break;
+
 
         }
-        resultSet = getStatement().executeQuery(query);
+
 
     }
 
@@ -330,6 +336,22 @@ public class DB_Stepdefinitions {
 
  */
     }
+    @Given("Verify users with attendances users Query is prepared and executed.")
+    public void verify_users_with_attendances_users_query_is_prepared_and_executed() throws SQLException {
+        query=manage.getEmail_address_from_the_attendances();
+        resultSet = getStatement().executeQuery(query);
+        resultSet.next();
+    }
+    @Given("Verify the email address from the information of the data in the users with attendances table.")
+    public void verify_the_email_address_from_the_information_of_the_data_in_the_users_with_attendances_table() throws SQLException {
+
+        String expectedEmail="ra_email@gmail.com";
+        String actualEmail=resultSet.getString("0");
+        System.out.println("actualEmail = " + actualEmail);
+        Assert.assertEquals(expectedEmail,actualEmail);
+
+    }
+
 
 
     // ================================BEYTULLAH========================================
@@ -347,6 +369,41 @@ public class DB_Stepdefinitions {
             // Sonuçları yazdırma
             System.out.println("Coupon ID: " + couponId + ", Product Count: " + productCount);
         }
+    }
+    public static String updateTable;
+    public static String setField;
+    public static String whereCondition;
+    public static String selectField;
+    public static String fromTable;
+    @Given("UPDATE {string}")
+    public void updateTable(String table) {
+        updateTable = "UPDATE "+ table +" ";
+    }
+
+    @Given("SET {string} = {string}")
+    public void setField(String field, String value) {
+        setField = "SET "+ field +" = "+value +" ";
+    }
+
+    @Given("WHERE {string} {string} {string}")
+    public void whereCondition(String field, String condition, String value) {
+        whereCondition = "WHERE "+ field+condition+value +" ";
+    }
+    @Given("SELECT {string}")
+    public void select(String field) {
+        selectField = "SELECT "+ field+" ";
+    }
+
+    @Given("FROM {string}")
+    public void from(String table) {
+        fromTable = "FROM "+ table+" ";
+    }
+    @Given("Verify that {string} is positive")
+    public void verify(String field) throws SQLException {
+        resultSet.next();
+        int opening_balance = resultSet.getInt(field);
+        assertTrue(opening_balance >= 0);
+
     }
 
 }

@@ -8,6 +8,6 @@ Feature:BACKEND JDBC TESTING
 
   Scenario: Calculate and verify the average grand_total value of paid orders (is_paid =1) in the orders table.
 
-    * Calculate the average grand total query is prepared and executed.
+    * "Calculate_the_average_grand_total" query is prepared and executed.
     * Verify the average grand_total value of paid orders (is_paid =1) in the orders table.
     * Database connection is closed

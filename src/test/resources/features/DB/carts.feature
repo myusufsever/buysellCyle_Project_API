@@ -7,6 +7,6 @@ Feature:BACKEND JDBC TESTING
 
   Scenario:Calculate the total cost of products with is_buy_now=1 before 2024-03-30 in the carts table
 
-    * Calculate the total cost of products query is prepared and executed.
+    * "Calculate_the_total_cost" query is prepared and executed.
     * Verify the total cost value of paid orders in the orders table.
     * Database connection is closed
