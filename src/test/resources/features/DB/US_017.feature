@@ -1,12 +1,12 @@
-Feature: Group the coupon_products table by coupon_id and find how many products there are for each coupon
+Feature: DB17
 
   Background:Database connection
     * Database connection is established.
 
   @DB17
 
-  Scenario: US_016 List ids with shipping_address = 'Switzerland' in the order_address_details table according to the orders table.
+  Scenario: US_017 Verify the email address from the information of the data with id=5 in the user table from the attendances created before 2022 in the attendances table.
 
-    * Verify order_address_details Query is prepared and executed.
-    * Verify the id information results are listed with shipping_address using order_address_details table
+    * Verify users with attendances users Query is prepared and executed.
+    * Verify the email address from the information of the data in the users with attendances table.
     * Database connection is closed
