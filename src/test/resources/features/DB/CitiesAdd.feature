@@ -1,9 +1,9 @@
-Feature:BACKEND JDBC TESTING
+Feature:US_002 Add a data containing the values (id,name,state_id,status,created_at) to the cities table. verify that the data has been added from the cities table.
 
   Background:Database connection
     * Database connection is established.
 
-  @ZSDB
+
   Scenario: cities tablosuna (id,name,state_id,status,created_at) degerlerini iceren bir veri ekleyiniz.
   cities tablosu uzerinden verinin eklendigini dogrulayiniz.
 

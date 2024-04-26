@@ -1,4 +1,4 @@
-Feature:BACKEND JDBC TESTING
+Feature:US_010 BACKEND JDBC TESTING
 
   Background:Database connection
     * Database connection is established.
