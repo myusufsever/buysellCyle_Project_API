@@ -48,19 +48,25 @@ public class Manage {
     private String  delete_the_data_in_the_cities_table = "delete from u168183796_qabuysell.cities where id=?;";
     private String couponProductsGroup ="SELECT coupon_id, COUNT(*) AS product_count FROM coupon_products GROUP BY coupon_id;";
     private String select = DB_Stepdefinitions.selectField + DB_Stepdefinitions.fromTable + DB_Stepdefinitions.whereCondition+";";
-    private String   shipping_address="SELECT COUNT(DISTINCT id) FROM order_address_details WHERE shipping_address <> billing_address;";
     private String email_template_types_Grouping = "SELECT module, COUNT(*) AS type_count" + "FROM email_template_types" + "WHERE module IS NOT NULL" + "GROUP BY module;";
     private String update = DB_Stepdefinitions.updateTable + DB_Stepdefinitions.setField + DB_Stepdefinitions.whereCondition+";";
     //  private String digital_gift_cards_Add_Data_And_Then_Delete_That_Data = "INSERT INTO digital_gift_cards (id,gift_name,descriptionOne,thumbnail_image_one,thumbnail_image_two,created_at) VALUES (143759, 'Lıghting', 'Mcquen', 'http://lorempixel.com/g/640/350/food/', 'http://lorempixel.com/640/480/nature/',  '2024-04-06 19:14:03');";
     //  private String digital_gift_cards_Add_Data_And_Then_Delete_That_Data = "INSERT INTO digital_gift_cards (id,gift_name,descriptionOne,thumbnail_image_one,thumbnail_image_two,created_at) VALUES (143759, 'Lıghting', 'Mcquen', 'http://lorempixel.com/g/640/350/food/', 'http://lorempixel.com/640/480/nature/',  '2024-04-06 19:14:03');";
+    private String  wallet_balances="SELECT SUM(amount) AS total_amount FROM wallet_balances WHERE type = 'Referral' AND id BETWEEN 10 AND 20;";
 
+    private String attendances="Select DISTINCT note from attendances group by day";
 
+    private String   shipping_address="SELECT COUNT(*) AS user_count FROM order_address_details WHERE shipping_address <> billing_address;";
 
+ public String getWallet_balances() {
+  return wallet_balances;
+ }
 
+ public String getAttendances() {
+  return attendances;
+ }
 
-
-
-    public String getList_the_unique_id_not_contains() {return list_the_unique_id_not_contains;}
+ public String getList_the_unique_id_not_contains() {return list_the_unique_id_not_contains;}
     public String getSum_of_the_total_price() {return sum_of_the_total_price;}
     public String getCalculate_grand_total_average() {return calculate_grand_total_average;}
     public String getList_the_unique_id() {return list_the_unique_id;}
