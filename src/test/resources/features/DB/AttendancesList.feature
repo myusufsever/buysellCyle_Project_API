@@ -1,9 +1,9 @@
-Feature:BACKEND JDBC TESTING
+Feature:US_012 list the unique 'notes' in the attendances table, separated by days.
 
   Background:Database connection
     * Database connection is established.
 
-  @dbys
+
   Scenario:list the unique 'notes' in the attendances table, separated by days.
 
 

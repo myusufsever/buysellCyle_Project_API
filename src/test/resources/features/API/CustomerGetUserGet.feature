@@ -1,7 +1,7 @@
-Feature:As a user, I should be able to access detailed information about the user who logged into the system via API connection.
+Feature:US_002 As a user, I should be able to access detailed information about the user who logged into the system via API connection.
 
   @[US_002-TC_001]
-##yusuf
+
   Scenario Outline:When a GET request is sent to the /api/customerGetUser endpoint with valid authorization credentials, the expected status code returned should be 200, and the message in the response body should confirm: "success".
 
     * The api user constructs the base url with the "customer" token
