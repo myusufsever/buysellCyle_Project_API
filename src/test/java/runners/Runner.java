@@ -21,13 +21,6 @@ import org.junit.runner.RunWith;
         dryRun = true
 
 
-        tags = "@API",
-        dryRun = false
-
-
-
-
-
 )
 public class Runner {
 }
