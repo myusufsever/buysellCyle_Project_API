@@ -1,4 +1,4 @@
-Feature:As a user, I should be able to edit my user information via API connection.
+Feature:US_004 As a user, I should be able to edit my user information via API connection.
 
 
 

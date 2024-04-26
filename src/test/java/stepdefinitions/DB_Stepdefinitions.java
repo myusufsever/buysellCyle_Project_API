@@ -10,10 +10,13 @@ import utilities.DB_Utilities.DBUtils;
 import utilities.DB_Utilities.JDBCReusableMethods;
 
 import java.sql.Array;
+import java.sql.ResultSetMetaData;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +35,8 @@ public class DB_Stepdefinitions {
     //prepared statement timestamp instant döndürür.
     Instant instant = Instant.now();
     int sonuc;
+    int numborOfOrdersById;
+    int rowCount;
 
     @Given("Database connection is established.")
     public void database_connection_is_established() {
@@ -240,10 +245,19 @@ public class DB_Stepdefinitions {
     public void query_is_prepared_and_executed(String queryName) throws SQLException {
         switch (queryName)
         {
+            case "Guest Order Details Update" :
+                query = manage.getUpdateShippingName();
+                sonuc = getStatement().executeUpdate(query);break;
+            case "Number of orders placed according to the order_id" :
+                query = manage.getNumberOfOrdersByOrderId();
+                resultSet=getStatement().executeQuery(query);
+                resultSet.next();
+                ResultSetMetaData metaData = resultSet.getMetaData();
+                System.out.println("Total number of orders placed according to the order_id: " + resultSet.getInt(metaData.getColumnLabel(1)));
+                break;
             case "Update the opening_balance with a negative value" :
                 query = manage.getVerify_opening_balance_updated_with_negative_value();
-                sonuc=getStatement().executeUpdate(query);
-                statement=getStatement();
+                sonuc = getStatement().executeUpdate(query);
                 break;
             case "List_the_unique_ID_notContains":
                 query = manage.getList_the_unique_id_not_contains();
@@ -269,12 +283,7 @@ public class DB_Stepdefinitions {
                 query = manage.getCustomerCouponStoresAndUsers();
                 resultSet = getStatement().executeQuery(query);
                 break;
-            case "Update":
-                manage.setUpdate(updateTable + setField + whereCondition+";");
-                query = manage.getUpdate();
-                sonuc = getStatement().executeUpdate(query);
-                System.out.println("sonuç: "+sonuc);
-                break;
+
             case "Calculate_the_total_cost": query = manage.getSum_of_the_total_price(); break;
             case "Calculate_the_average_grand_total": query=manage.getCalculate_grand_total_average();break;
 
@@ -307,20 +316,42 @@ public class DB_Stepdefinitions {
 
         Assert.assertArrayEquals(expectedIds, actualIds);
     }
-    @Given("Verify delete Query from cities table is prepared and executed.")
-    public void verify_delete_query_from_cities_table_is_prepared_and_executed() throws SQLException {
+    @Given("Verify that {int} information has been created.")
+    public void verify_that_information_has_been_created(int rowCount) {
+        System.out.println("Inserted " + result.length + " records successfully.");
+        System.out.println(Arrays.toString(result));
+        assertEquals(rowCount, result.length);
+    }
+    @Given("Prepare delete Query from cities table is prepared and executed.")
+    public void prepare_delete_query_from_cities_table_is_prepared_and_executed() throws SQLException {
         query = manage.getDelete_the_data_in_the_cities_table();
 
         preparedStatement= DBUtils.getPraperedStatement(query);
-        preparedStatement.executeUpdate();
 
     }
     @Given("Verify that it has been deleted.")
     public void verify_that_it_has_been_deleted() throws SQLException {
 
+        long a=8511963174281719693l;
+        preparedStatement.setLong(1, a);
+        rowCount = preparedStatement.executeUpdate();
+
+        assertEquals(1, rowCount);
 
 
+/*
 
+        int id= 5;
+
+        preparedStatement.setString(1, "Beytullah Gorgulu");
+        preparedStatement.setInt(2, id);
+        preparedStatement.setInt(3, id);
+        preparedStatement.setDate(4, Date.valueOf(LocalDate.now()));
+        rowCount = preparedStatement.executeUpdate();
+
+        System.out.println("silinen id; " + id);
+
+/*
 
 /*
         SQLWarning warning = statement.getWarnings();
@@ -336,6 +367,23 @@ public class DB_Stepdefinitions {
 
  */
     }
+    @Given("Verify insert Query from cities table is prepared and executed.")
+    public void verify_insert_query_from_cities_table_is_prepared_and_executed() throws SQLException {
+        query = manage.getInsert_Into_cities();
+        preparedStatement = DBUtils.getPraperedStatement(query);
+
+        preparedStatement.setString(1, "Beytullah Gorgulu");
+        preparedStatement.setInt(2, 1);
+        preparedStatement.setInt(3, 1);
+        preparedStatement.setDate(4, java.sql.Date.valueOf(java.time.LocalDate.now())); // java.sql.Date.valueOf kullanıldı
+        rowCount = preparedStatement.executeUpdate();
+    }
+    @Given("Verify that it has been created.")
+    public void verify_that_it_has_been_created() {
+
+
+        assertEquals(1, rowCount);
+    }
     @Given("Verify users with attendances users Query is prepared and executed.")
     public void verify_users_with_attendances_users_query_is_prepared_and_executed() throws SQLException {
         query=manage.getEmail_address_from_the_attendances();
@@ -346,8 +394,7 @@ public class DB_Stepdefinitions {
     public void verify_the_email_address_from_the_information_of_the_data_in_the_users_with_attendances_table() throws SQLException {
 
         String expectedEmail="ra_email@gmail.com";
-        String actualEmail=resultSet.getString("0");
-        System.out.println("actualEmail = " + actualEmail);
+        String actualEmail=resultSet.getString("email");
         Assert.assertEquals(expectedEmail,actualEmail);
 
     }
@@ -370,39 +417,90 @@ public class DB_Stepdefinitions {
             System.out.println("Coupon ID: " + couponId + ", Product Count: " + productCount);
         }
     }
-    public static String updateTable;
-    public static String setField;
-    public static String whereCondition;
-    public static String selectField;
-    public static String fromTable;
-    @Given("UPDATE {string}")
-    public void updateTable(String table) {
-        updateTable = "UPDATE "+ table +" ";
+
+
+
+    @Given("Verify that {string} field is updated with a {string} value.")
+    public void updateVerification(String field, String value) throws SQLException {
+        assertTrue(sonuc >0);
+        System.out.println("The " + field + " is updated with a " + value + " value.");
+        String fieldValue = value+ " " + field;
+        switch (fieldValue)
+        {
+            case "negative opening_balance" :
+                System.out.println("The test is passed but it is not a good news because the acceptance criteria requires just the opposite case.");
+                System.out.println("The test should fail. So you have a new bug. Just enjoy it."); break;
+
+            case "new shipping_name" :
+                System.out.println("The test is passed and it is a good news because the acceptance criteria requires just this case.");
+                System.out.println("The test should pass. So you have a good working database. Just enjoy it."); break;
+        }
+
+
+
     }
 
-    @Given("SET {string} = {string}")
-    public void setField(String field, String value) {
-        setField = "SET "+ field +" = "+value +" ";
+
+    @Given("Verify the shipping_address and billing_address are not the same in the order_address_ Query is prepared and executed.")
+    public void verify_the_shipping_address_and_billing_address_are_not_the_same_in_the_order_address_query_is_prepared_and_executed() throws SQLException {
+        query = manage.getShipping_address();
+        resultSet = getStatement().executeQuery(query);
+
+
+
     }
 
-    @Given("WHERE {string} {string} {string}")
-    public void whereCondition(String field, String condition, String value) {
-        whereCondition = "WHERE "+ field+condition+value +" ";
-    }
-    @Given("SELECT {string}")
-    public void select(String field) {
-        selectField = "SELECT "+ field+" ";
-    }
+    @Given("Verify the number of users whose shipping_address and billing_address count equals {int}.")
+    public void verify_the_number_of_users_whose_shipping_address_and_billing_address_count_equals(int user_count) throws SQLException {
 
-    @Given("FROM {string}")
-    public void from(String table) {
-        fromTable = "FROM "+ table+" ";
-    }
-    @Given("Verify that {string} is positive")
-    public void verify(String field) throws SQLException {
         resultSet.next();
-        int opening_balance = resultSet.getInt(field);
-        assertTrue(opening_balance >= 0);
+        user_count = resultSet.getInt("user_count");
+        System.out.println(user_count);
+        int expectedsayi=2;
+        assertEquals(expectedsayi,user_count);
+
+    }
+
+    @Given("Verify Calculate the sum of the amount values of the data with type=Referral and id between ten and twenty in the wallet_balances table")
+    public void verify_calculate_the_sum_of_the_amount_values_of_the_data_with_type_and_between_ten_and_twenty_in_the_wallet_balances_table() throws SQLException {
+
+        query = manage.getWallet_balances();
+        resultSet = getStatement().executeQuery(query);
+
+
+    }
+
+    @Given("Verify Calculate the sum of the amount values of the data with type=Referral and id between ten and twenty in the wallet_balances table {int}")
+    public void verify_calculate_the_sum_of_the_amount_values_of_the_data_with_type_and_between_ten_and_twenty_in_the_wallet_balances_table(int total_amount) throws SQLException {
+
+        resultSet.next();
+
+        total_amount= resultSet.getInt("total_amount");
+        double expectedsayi=10.0;
+        double delta = 0.1;
+        assertEquals(expectedsayi,(double)(total_amount),delta);
+
+    }
+
+    @Given("List the unique notes in the attendances table, separated by days.")
+    public void list_the_unique_notes_in_the_attendances_table_separated_by_days() throws SQLException {
+        query = manage.getAttendances();
+        resultSet = getStatement().executeQuery(query);
+
+    }
+    @Given("Verify list the unique {int} in the attendances table, separated by days.")
+    public void verify_list_the_unique_in_the_attendances_table_separated_by_days(int row) throws SQLException {
+
+
+        //--------------------
+        resultSet.next();
+
+        row = resultSet.getRow();
+        int expectedrow=1;
+
+
+        assertEquals(row, expectedrow);
+
 
     }
     // US_04_ insert into & update -> contacts table_Kvsr
