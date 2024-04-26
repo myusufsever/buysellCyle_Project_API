@@ -22,3 +22,5 @@ Feature:BACKEND JDBC TESTING
     #* Prepare a query that adds data to the contacts table
     #* Update the message information
     * Database connection is closed
+
+    # denemeeee

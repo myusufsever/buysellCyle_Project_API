@@ -51,11 +51,9 @@ public class Manage {
     private String email_template_types_Grouping = "SELECT module, COUNT(*) AS type_count" + "FROM email_template_types" + "WHERE module IS NOT NULL" + "GROUP BY module;";
 
 
-    public String getVerify_opening_balance_updated_with_negative_value() {
-        return verify_opening_balance_updated_with_negative_value;
-    }
+    public String getVerify_opening_balance_updated_with_negative_value() {return verify_opening_balance_updated_with_negative_value;}
 
-    private String digital_gift_cards_Add_Data_And_Then_Delete_That_Data = "INSERT INTO digital_gift_cards (id,gift_name,descriptionOne,thumbnail_image_one,thumbnail_image_two,created_at) VALUES (143759, 'Lıghting', 'Mcquen', 'http://lorempixel.com/g/640/350/food/', 'http://lorempixel.com/640/480/nature/',  '2024-04-06 19:14:03');";
+  //  private String digital_gift_cards_Add_Data_And_Then_Delete_That_Data = "INSERT INTO digital_gift_cards (id,gift_name,descriptionOne,thumbnail_image_one,thumbnail_image_two,created_at) VALUES (143759, 'Lıghting', 'Mcquen', 'http://lorempixel.com/g/640/350/food/', 'http://lorempixel.com/640/480/nature/',  '2024-04-06 19:14:03');";
 
     private String list_ids_with_shipping_address = "select id from order_address_details where shipping_address='Switzerland';";
     private String  email_address_from_the_attendances = "select email from users where id IN (select id from attendances where year<2022 and id=5);";
@@ -102,9 +100,7 @@ private String   shipping_address="SELECT COUNT(DISTINCT id) FROM order_address_
 
 
 
-    public String getDigital_gift_cards_Add_Data_And_Then_Delete_That_Data() {
-  return digital_gift_cards_Add_Data_And_Then_Delete_That_Data;
- }
+   // public String getDigital_gift_cards_Add_Data_And_Then_Delete_That_Data() {return digital_gift_cards_Add_Data_And_Then_Delete_That_Data;}
 
  public String getCouponProductsGroup() { return couponProductsGroup; }
 

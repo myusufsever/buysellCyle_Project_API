@@ -11,7 +11,7 @@ Feature: As a user, I want to add a new address record to my profile via API con
     * The api user sets "api/profile/address-store" path parameters
     * The api user prepares a POST request containing the "<name>","<email>","<address>","<phone>","<city>","<state>","<country>","<postal_code>","<address_type>" information to send to the api.
     * The api user sends the "post" request and saves the "Response"
-    * The api user verifies that for "post" request type the status code is 201 and the message information in the response body is "coupon added successfully"
+    * The api user verifies that for "post" request type the status code is 201 and the message information in the response body is "address added successfully"
 
     Examples:
       | name  | email       | address | phone    | city     | state           | country | postal_code | address_type |
@@ -30,7 +30,7 @@ Feature: As a user, I want to add a new address record to my profile via API con
 
     Examples:
       | id  |
-      | 199 |
+      | 404 |
 
   Scenario Outline: When a valid authorization information and an invalid email (not containing '@')
   are sent in the POST body (name, email, address, phone, city, state, country, postal_code, address_type)
@@ -41,7 +41,7 @@ Feature: As a user, I want to add a new address record to my profile via API con
     * The api user sets "api/profile/address-store" path parameters
     * The api user prepares a POST request containing the "<name>","<email>","<address>","<phone>","<city>","<state>","<country>","<postal_code>","<address_type>" information to send to the api.
     * The api user sends the "post" request and saves the "Response"
-    * The api user verifies that for "post" request type the status code is 422 and the message information in the response body is "The email has already been taken."
+    * The api user verifies that for "post" request type the status code is 422 and the message information in the response body is "The email must be a valid email address."
 
     Examples:
       | name  | email       | address | phone    | city     | state           | country | postal_code | address_type |
@@ -58,7 +58,7 @@ Feature: As a user, I want to add a new address record to my profile via API con
     * The api user sets "api/profile/address-store" path parameters
     * The api user prepares a POST request containing the "<name>","<email>","<address>","<phone>","<city>","<state>","<country>","<postal_code>","<address_type>" information to send to the api.
     * The api user sends the "post" request and saves the "Response"
-    * The api user verifies that for "post" request type the status code is 401 and the message information in the response body is "Unauthenticated."
+    * The api user verifies that for "post" request type the status code is 401 and the message information in the response body is "Unauthorized"
 
     Examples:
       | name  | email       | address | phone    | city     | state           | country | postal_code | address_type |
