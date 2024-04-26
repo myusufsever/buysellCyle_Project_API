@@ -20,8 +20,8 @@ Feature: As an administrator, I want to be able to create a new coupon record vi
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/coupon/couponDetails" path parameters
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
-    * The api user sends a GET request and saves the response returned from the api coupon CouponDetails endpoint.
-    * The api user verifies that the message information in the response body is "success"
+    * The api user sends the "getbody" request and saves the "Response"
+    * The api user verifies that for "getbody" request type the status code is 200 and the message information in the response body is "success"
 
     Examples:
       | id |
