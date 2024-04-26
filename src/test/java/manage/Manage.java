@@ -48,21 +48,17 @@ public class Manage {
     private String  delete_the_data_in_the_cities_table = "delete from u168183796_qabuysell.cities where id=?;";
     private String couponProductsGroup ="SELECT coupon_id, COUNT(*) AS product_count FROM coupon_products GROUP BY coupon_id;";
     private String   shipping_address="SELECT COUNT(DISTINCT id) FROM order_address_details WHERE shipping_address <> billing_address;";
-    private String select = DB_Stepdefinitions.selectField + DB_Stepdefinitions.fromTable + DB_Stepdefinitions.whereCondition+";";
     private String email_template_types_Grouping = "SELECT module, COUNT(*) AS type_count" + "FROM email_template_types" + "WHERE module IS NOT NULL" + "GROUP BY module;";
     private String  wallet_balances="SELECT SUM(amount) AS total_amount FROM wallet_balances WHERE type = 'Referral' AND id BETWEEN 10 AND 20;";
     private String attendances="Select DISTINCT note from attendances group by day";
-    private String   shipping_address="SELECT COUNT(*) AS user_count FROM order_address_details WHERE shipping_address <> billing_address;";
+    private String numberOfOrdersByOrderId = "SELECT count(order_id) AS number_of_orders FROM guest_order_details;";
+    private String UpdateShippingName = "UPDATE guest_order_details SET shipping_name = 'Updated Name' WHERE order_id = 2;";
+    private String addNewDeviceTokens = "INSERT INTO device_tokens (id, user_id, device_token) VALUES (?, ?, ?);";
 
- public String getWallet_balances() {
-  return wallet_balances;
- }
 
- public String getAttendances() {
-  return attendances;
- }
-
- public String getList_the_unique_id_not_contains() {return list_the_unique_id_not_contains;}
+    public String getWallet_balances() {return wallet_balances;}
+    public String getAttendances() {return attendances;}
+    public String getList_the_unique_id_not_contains() {return list_the_unique_id_not_contains;}
     public String getSum_of_the_total_price() {return sum_of_the_total_price;}
     public String getCalculate_grand_total_average() {return calculate_grand_total_average;}
     public String getList_the_unique_id() {return list_the_unique_id;}
@@ -80,8 +76,10 @@ public class Manage {
     public String getDelete_the_data_in_the_cities_table() {return delete_the_data_in_the_cities_table;}
     public String getPs_cities_veri_ekleme() {return ps_cities_veri_ekleme;}
     public String getVerify_opening_balance_updated_with_negative_value() {return verify_opening_balance_updated_with_negative_value;}
-    public String getCouponProductsGroup() { return couponProductsGroup; }
-   
+    public String getCouponProductsGroup() { return couponProductsGroup;}
+    public String getNumberOfOrdersByOrderId() {return numberOfOrdersByOrderId;}
+    public String getUpdateShippingName() {return UpdateShippingName;}
+    public String getAddNewDeviceTokens() {return addNewDeviceTokens;}
 
 }
 

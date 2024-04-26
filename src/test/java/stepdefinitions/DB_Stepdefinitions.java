@@ -9,6 +9,7 @@ import org.junit.Assert;
 import utilities.DB_Utilities.DBUtils;
 
 import java.sql.Array;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class DB_Stepdefinitions {
     //prepared statement timestamp instant döndürür.
     Instant instant = Instant.now();
     int sonuc;
+    int numborOfOrdersById;
 
     @Given("Database connection is established.")
     public void database_connection_is_established() {
@@ -237,6 +239,16 @@ public class DB_Stepdefinitions {
     public void query_is_prepared_and_executed(String queryName) throws SQLException {
         switch (queryName)
         {
+            case "Guest Order Details Update" :
+                query = manage.getUpdateShippingName();
+                sonuc = getStatement().executeUpdate(query);break;
+            case "Number of orders placed according to the order_id" :
+                query = manage.getNumberOfOrdersByOrderId();
+                resultSet=getStatement().executeQuery(query);
+                resultSet.next();
+                ResultSetMetaData metaData = resultSet.getMetaData();
+                System.out.println("Total number of orders placed according to the order_id: " + resultSet.getInt(metaData.getColumnLabel(1)));
+                break;
             case "Update the opening_balance with a negative value" :
                 query = manage.getVerify_opening_balance_updated_with_negative_value();
                 sonuc = getStatement().executeUpdate(query);
@@ -364,11 +376,23 @@ public class DB_Stepdefinitions {
 
 
 
-    @Given("Verify that the opening_balance is updated with a negative value.")
-    public void verify_that_the_opening_balance_is_updated_with_a_negative_value() throws SQLException {
+    @Given("Verify that {string} field is updated with a {string} value.")
+    public void updateVerification(String field, String value) throws SQLException {
         assertTrue(sonuc >0);
-        System.out.println("Your test is passed but this not somthing nice.");
-        System.out.println("The test should fail. So you have a new bug. Just enjoy it.");
+        System.out.println("The " + field + " is updated with a " + value + " value.");
+        String fieldValue = value+ " " + field;
+        switch (fieldValue)
+        {
+            case "negative opening_balance" :
+                System.out.println("The test is passed but it is not a good news because the acceptance criteria requires just the opposite case.");
+                System.out.println("The test should fail. So you have a new bug. Just enjoy it."); break;
+
+            case "new shipping_name" :
+                System.out.println("The test is passed and it is a good news because the acceptance criteria requires just this case.");
+                System.out.println("The test should pass. So you have a good working database. Just enjoy it."); break;
+        }
+
+
 
     }
 
