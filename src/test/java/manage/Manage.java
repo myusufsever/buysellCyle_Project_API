@@ -45,6 +45,7 @@ public class Manage {
     private String customerCouponStoresAndUsers  = "SELECT users.*, customer_coupon_stores.* FROM customer_coupon_stores LEFT JOIN users ON customer_coupon_stores.id = users.id LIMIT 3;";
     private String list_ids_with_shipping_address = "select id from order_address_details where shipping_address='Switzerland';";
     private String  email_address_from_the_attendances = "select email from users where id IN (select id from attendances where year<2022 and id=5);";
+    private String  insert_Into_cities = "INSERT INTO cities (name,state_id,status,created_at) VALUES(?, ?, ?, ?);";
     private String  delete_the_data_in_the_cities_table = "delete from u168183796_qabuysell.cities where id=?;";
     private String couponProductsGroup ="SELECT coupon_id, COUNT(*) AS product_count FROM coupon_products GROUP BY coupon_id;";
     private String   shipping_address="SELECT COUNT(DISTINCT id) FROM order_address_details WHERE shipping_address <> billing_address;";
@@ -80,6 +81,7 @@ public class Manage {
     public String getNumberOfOrdersByOrderId() {return numberOfOrdersByOrderId;}
     public String getUpdateShippingName() {return UpdateShippingName;}
     public String getAddNewDeviceTokens() {return addNewDeviceTokens;}
+    public String getInsert_Into_cities() {return insert_Into_cities;}
 
 }
 

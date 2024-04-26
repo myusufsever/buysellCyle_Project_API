@@ -10,8 +10,10 @@ import utilities.DB_Utilities.DBUtils;
 
 import java.sql.Array;
 import java.sql.ResultSetMetaData;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -31,6 +33,7 @@ public class DB_Stepdefinitions {
     Instant instant = Instant.now();
     int sonuc;
     int numborOfOrdersById;
+    int rowCount;
 
     @Given("Database connection is established.")
     public void database_connection_is_established() {
@@ -310,20 +313,42 @@ public class DB_Stepdefinitions {
 
         Assert.assertArrayEquals(expectedIds, actualIds);
     }
-    @Given("Verify delete Query from cities table is prepared and executed.")
-    public void verify_delete_query_from_cities_table_is_prepared_and_executed() throws SQLException {
+    @Given("Verify that {int} information has been created.")
+    public void verify_that_information_has_been_created(int rowCount) {
+        System.out.println("Inserted " + result.length + " records successfully.");
+        System.out.println(Arrays.toString(result));
+        assertEquals(rowCount, result.length);
+    }
+    @Given("Prepare delete Query from cities table is prepared and executed.")
+    public void prepare_delete_query_from_cities_table_is_prepared_and_executed() throws SQLException {
         query = manage.getDelete_the_data_in_the_cities_table();
 
         preparedStatement= DBUtils.getPraperedStatement(query);
-        preparedStatement.executeUpdate();
 
     }
     @Given("Verify that it has been deleted.")
     public void verify_that_it_has_been_deleted() throws SQLException {
 
+        long a=8511963174281719693l;
+        preparedStatement.setLong(1, a);
+        rowCount = preparedStatement.executeUpdate();
+
+        assertEquals(1, rowCount);
 
 
+/*
 
+        int id= 5;
+
+        preparedStatement.setString(1, "Beytullah Gorgulu");
+        preparedStatement.setInt(2, id);
+        preparedStatement.setInt(3, id);
+        preparedStatement.setDate(4, Date.valueOf(LocalDate.now()));
+        rowCount = preparedStatement.executeUpdate();
+
+        System.out.println("silinen id; " + id);
+
+/*
 
 /*
         SQLWarning warning = statement.getWarnings();
@@ -339,6 +364,23 @@ public class DB_Stepdefinitions {
 
  */
     }
+    @Given("Verify insert Query from cities table is prepared and executed.")
+    public void verify_insert_query_from_cities_table_is_prepared_and_executed() throws SQLException {
+        query = manage.getInsert_Into_cities();
+        preparedStatement = DBUtils.getPraperedStatement(query);
+
+        preparedStatement.setString(1, "Beytullah Gorgulu");
+        preparedStatement.setInt(2, 1);
+        preparedStatement.setInt(3, 1);
+        preparedStatement.setDate(4, java.sql.Date.valueOf(java.time.LocalDate.now())); // java.sql.Date.valueOf kullanıldı
+        rowCount = preparedStatement.executeUpdate();
+    }
+    @Given("Verify that it has been created.")
+    public void verify_that_it_has_been_created() {
+
+
+        assertEquals(1, rowCount);
+    }
     @Given("Verify users with attendances users Query is prepared and executed.")
     public void verify_users_with_attendances_users_query_is_prepared_and_executed() throws SQLException {
         query=manage.getEmail_address_from_the_attendances();
@@ -349,8 +391,7 @@ public class DB_Stepdefinitions {
     public void verify_the_email_address_from_the_information_of_the_data_in_the_users_with_attendances_table() throws SQLException {
 
         String expectedEmail="ra_email@gmail.com";
-        String actualEmail=resultSet.getString("0");
-        System.out.println("actualEmail = " + actualEmail);
+        String actualEmail=resultSet.getString("email");
         Assert.assertEquals(expectedEmail,actualEmail);
 
     }
