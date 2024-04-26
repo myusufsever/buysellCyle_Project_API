@@ -239,8 +239,7 @@ public class DB_Stepdefinitions {
         {
             case "Update the opening_balance with a negative value" :
                 query = manage.getVerify_opening_balance_updated_with_negative_value();
-                sonuc=getStatement().executeUpdate(query);
-                statement=getStatement();
+                sonuc = getStatement().executeUpdate(query);
                 break;
             case "List_the_unique_ID_notContains":
                 query = manage.getList_the_unique_id_not_contains();
@@ -266,12 +265,7 @@ public class DB_Stepdefinitions {
                 query = manage.getCustomerCouponStoresAndUsers();
                 resultSet = getStatement().executeQuery(query);
                 break;
-            case "Update":
-                manage.setUpdate(updateTable + setField + whereCondition+";");
-                query = manage.getUpdate();
-                sonuc = getStatement().executeUpdate(query);
-                System.out.println("sonuç: "+sonuc);
-                break;
+
             case "Calculate_the_total_cost": query = manage.getSum_of_the_total_price(); break;
             case "Calculate_the_average_grand_total": query=manage.getCalculate_grand_total_average();break;
 
@@ -367,39 +361,14 @@ public class DB_Stepdefinitions {
             System.out.println("Coupon ID: " + couponId + ", Product Count: " + productCount);
         }
     }
-    public static String updateTable;
-    public static String setField;
-    public static String whereCondition;
-    public static String selectField;
-    public static String fromTable;
-    @Given("UPDATE {string}")
-    public void updateTable(String table) {
-        updateTable = "UPDATE "+ table +" ";
-    }
 
-    @Given("SET {string} = {string}")
-    public void setField(String field, String value) {
-        setField = "SET "+ field +" = "+value +" ";
-    }
 
-    @Given("WHERE {string} {string} {string}")
-    public void whereCondition(String field, String condition, String value) {
-        whereCondition = "WHERE "+ field+condition+value +" ";
-    }
-    @Given("SELECT {string}")
-    public void select(String field) {
-        selectField = "SELECT "+ field+" ";
-    }
 
-    @Given("FROM {string}")
-    public void from(String table) {
-        fromTable = "FROM "+ table+" ";
-    }
-    @Given("Verify that {string} is positive")
-    public void verify(String field) throws SQLException {
-        resultSet.next();
-        int opening_balance = resultSet.getInt(field);
-        assertTrue(opening_balance >= 0);
+    @Given("Verify that the opening_balance is updated with a negative value.")
+    public void verify_that_the_opening_balance_is_updated_with_a_negative_value() throws SQLException {
+        assertTrue(sonuc >0);
+        System.out.println("Your test is passed but this not somthing nice.");
+        System.out.println("The test should fail. So you have a new bug. Just enjoy it.");
 
     }
 
