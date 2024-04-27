@@ -53,11 +53,8 @@ public class Manage {
     private String update = DB_Stepdefinitions.updateTable + DB_Stepdefinitions.setField + DB_Stepdefinitions.whereCondition+";";
     //  private String digital_gift_cards_Add_Data_And_Then_Delete_That_Data = "INSERT INTO digital_gift_cards (id,gift_name,descriptionOne,thumbnail_image_one,thumbnail_image_two,created_at) VALUES (143759, 'Lıghting', 'Mcquen', 'http://lorempixel.com/g/640/350/food/', 'http://lorempixel.com/640/480/nature/',  '2024-04-06 19:14:03');";
     //  private String digital_gift_cards_Add_Data_And_Then_Delete_That_Data = "INSERT INTO digital_gift_cards (id,gift_name,descriptionOne,thumbnail_image_one,thumbnail_image_two,created_at) VALUES (143759, 'Lıghting', 'Mcquen', 'http://lorempixel.com/g/640/350/food/', 'http://lorempixel.com/640/480/nature/',  '2024-04-06 19:14:03');";
-
-
-
-
-
+    private String order_payments_select_query = "select amount from u168183796_qabuysell.order_payments where txn_id!='none' and amount>9000 GROUP BY amount;";
+    private String transactionsSelect = "SELECT * FROM transactions t1 WHERE title IN (SELECT title FROM transactions t2 WHERE t2.payment_method = 'Stripe') AND title IN (SELECT title FROM transactions t3 WHERE t3.payment_method = 'Cash On Delivery');";
 
 
     public String getList_the_unique_id_not_contains() {return list_the_unique_id_not_contains;}
@@ -83,6 +80,24 @@ public class Manage {
     public String getSelect() {return select;}
     public String getVerify_opening_balance_updated_with_negative_value() {return verify_opening_balance_updated_with_negative_value;}public String getCouponProductsGroup() { return couponProductsGroup; }
     // public String getDigital_gift_cards_Add_Data_And_Then_Delete_That_Data() {return digital_gift_cards_Add_Data_And_Then_Delete_That_Data;}
+    public String getOrder_payments_select_query() {return order_payments_select_query;}
+    public String getTransactionsSelect() {return transactionsSelect;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }
 
