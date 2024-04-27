@@ -50,6 +50,9 @@ public class Manage {
     private String couponProductsGroup ="SELECT coupon_id, COUNT(*) AS product_count FROM coupon_products GROUP BY coupon_id;";
     private String shipping_address="SELECT COUNT(*) AS user_count FROM order_address_details WHERE shipping_address <> billing_address;";
     private String email_template_types_Grouping = "SELECT module, COUNT(*) AS type_count" + "FROM email_template_types" + "WHERE module IS NOT NULL" + "GROUP BY module;";
+    private String update = DB_Stepdefinitions.updateTable + DB_Stepdefinitions.setField + DB_Stepdefinitions.whereCondition+";";
+    private String order_payments_select_query = "select amount from u168183796_qabuysell.order_payments where txn_id!='none' and amount>9000 GROUP BY amount;";
+    private String transactionsSelect = "SELECT * FROM transactions t1 WHERE title IN (SELECT title FROM transactions t2 WHERE t2.payment_method = 'Stripe') AND title IN (SELECT title FROM transactions t3 WHERE t3.payment_method = 'Cash On Delivery');";
     private String contactsInsertInto = "INSERT INTO contacts (id, name, email, query_type, message, created_at, updated_at, others) VALUES (?,?,?,?,?,?,?,?)";
     private String contactsMessageUpdate = "UPDATE contacts SET message = ? WHERE id = ?;";
     private String  wallet_balances="SELECT SUM(amount) AS total_amount FROM wallet_balances WHERE type = 'Referral' AND id BETWEEN 10 AND 20;";
@@ -78,6 +81,13 @@ public class Manage {
     public String getEmail_address_from_the_attendances() {return email_address_from_the_attendances;}
     public String getDelete_the_data_in_the_cities_table() {return delete_the_data_in_the_cities_table;}
     public String getPs_cities_veri_ekleme() {return ps_cities_veri_ekleme;}
+    public void setUpdate(String update) {this.update = update;}
+    public void setSelect(String select) {this.select = select;}
+    public String getUpdate() {return update;}
+    public String getSelect() {return select;}
+    public String getVerify_opening_balance_updated_with_negative_value() {return verify_opening_balance_updated_with_negative_value;}public String getCouponProductsGroup() { return couponProductsGroup; }
+    public String getOrder_payments_select_query() {return order_payments_select_query;}
+    public String getTransactionsSelect() {return transactionsSelect;}
     public String getVerify_opening_balance_updated_with_negative_value() {return verify_opening_balance_updated_with_negative_value;}
     public String getCouponProductsGroup() { return couponProductsGroup; }
     public String getContactsInsertInto() {return contactsInsertInto;}
