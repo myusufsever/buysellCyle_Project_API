@@ -82,8 +82,6 @@ public class Manage {
     public String getCouponProductsGroup() { return couponProductsGroup; }
     public String getContactsInsertInto() {return contactsInsertInto;}
     public String getContactsMessageUpdate() {return contactsMessageUpdate;}
-    public String getVerify_opening_balance_updated_with_negative_value() {return verify_opening_balance_updated_with_negative_value;}
-    public String getCouponProductsGroup() { return couponProductsGroup;}
     public String getNumberOfOrdersByOrderId() {return numberOfOrdersByOrderId;}
     public String getUpdateShippingName() {return UpdateShippingName;}
     public String getAddNewDeviceTokens() {return addNewDeviceTokens;}
