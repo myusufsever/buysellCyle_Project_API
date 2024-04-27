@@ -1,5 +1,6 @@
 package stepdefinitions;
 
+import com.github.javafaker.Faker;
 import config_Requirements.ConfigReader;
 import helperDB.BankAccount;
 import helperDB.Cities;
@@ -283,10 +284,21 @@ public class DB_Stepdefinitions {
                 query = manage.getCustomerCouponStoresAndUsers();
                 resultSet = getStatement().executeQuery(query);
                 break;
-
-            case "Calculate_the_total_cost": query = manage.getSum_of_the_total_price(); break;
-            case "Calculate_the_average_grand_total": query=manage.getCalculate_grand_total_average();break;
-
+            case "Calculate_the_total_cost":
+                query = manage.getSum_of_the_total_price();
+                break;
+            case "Calculate_the_average_grand_total":
+                query=manage.getCalculate_grand_total_average();
+                break;
+            case "Email_address_from_the_attendances":
+                query = manage.getEmail_address_from_the_attendances();
+                resultSet = getStatement().executeQuery(query);
+                resultSet.next();
+                break;
+            case "List_ids_with_shipping_address":
+                query = manage.getList_ids_with_shipping_address();
+                resultSet = getStatement().executeQuery(query);
+                resultSet.next();
 
         }
 
@@ -327,14 +339,14 @@ public class DB_Stepdefinitions {
         query = manage.getDelete_the_data_in_the_cities_table();
 
         preparedStatement= DBUtils.getPraperedStatement(query);
-
+        long a=8511963174281719786l;
+        preparedStatement.setLong(1, a);
+        rowCount = preparedStatement.executeUpdate();
     }
     @Given("Verify that it has been deleted.")
     public void verify_that_it_has_been_deleted() throws SQLException {
 
-        long a=8511963174281719693l;
-        preparedStatement.setLong(1, a);
-        rowCount = preparedStatement.executeUpdate();
+
 
         assertEquals(1, rowCount);
 
@@ -398,7 +410,6 @@ public class DB_Stepdefinitions {
         Assert.assertEquals(expectedEmail,actualEmail);
 
     }
-
 
 
     // ================================BEYTULLAH========================================
