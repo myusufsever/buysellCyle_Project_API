@@ -27,7 +27,9 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="01f301c2-4503-49ec-a4f9-38d5835fc104" object-ref="consoles/buysellCycle" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="01f301c2-4503-49ec-a4f9-38d5835fc104" />

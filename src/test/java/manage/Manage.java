@@ -46,7 +46,7 @@ public class Manage {
     private String list_ids_with_shipping_address = "select id from order_address_details where shipping_address='Switzerland';";
     private String email_address_from_the_attendances = "select email from users where id IN (select id from attendances where year<2022 and id=5);";
     private String insert_Into_cities = "INSERT INTO cities (name,state_id,status,created_at) VALUES(?, ?, ?, ?);";
-    private String delete_the_data_in_the_cities_table = "DELETE from u168183796_qabuysell.cities WHERE id=?;";
+    private String delete_the_data_in_the_cities_table = "DELETE from u168183796_qabuysell.cities WHERE state_id=?;";
     private String couponProductsGroup ="SELECT coupon_id, COUNT(*) AS product_count FROM coupon_products GROUP BY coupon_id;";
     private String shipping_address="SELECT COUNT(*) AS user_count FROM order_address_details WHERE shipping_address <> billing_address;";
     private String email_template_types_Grouping = "SELECT module, COUNT(*) AS type_count" + "FROM email_template_types" + "WHERE module IS NOT NULL" + "GROUP BY module;";
