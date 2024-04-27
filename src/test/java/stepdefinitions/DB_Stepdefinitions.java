@@ -338,10 +338,11 @@ public class DB_Stepdefinitions {
     public void prepare_delete_query_from_cities_table_is_prepared_and_executed() throws SQLException {
         query = manage.getDelete_the_data_in_the_cities_table();
 
-        preparedStatement= DBUtils.getPraperedStatement(query);
-        long a=8511963174281719786l;
-        preparedStatement.setLong(1, a);
+        preparedStatement = JDBCReusableMethods.getConnection().prepareStatement(query);
+        int state_id=9999999;
+        preparedStatement.setLong(1, state_id);
         rowCount = preparedStatement.executeUpdate();
+        System.out.println("rowCount ve silinen id= " + rowCount+" "+ state_id);
     }
     @Given("Verify that it has been deleted.")
     public void verify_that_it_has_been_deleted() throws SQLException {
