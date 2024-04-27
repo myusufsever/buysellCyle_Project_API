@@ -11,7 +11,6 @@ import org.junit.Assert;
 import pojos.Pojo;
 import utilities.API_Utilities.API_Methods;
 
-import java.lang.invoke.SwitchPoint;
 import java.util.*;
 import static hooks.HooksAPI.spec;
 import static io.restassured.RestAssured.given;
@@ -37,7 +36,7 @@ public class API_Stepdefinitions {
     public static String updatedId;
     public static int DeletedId;
     public static int deletedId;
-    public static int lastCouponId;
+    public static int lastItemId;
 
     @Given("The api user sets {string} path parameters")
     public void the_api_user_sets_path_parameters(String rawPaths) {
@@ -701,7 +700,7 @@ public class API_Stepdefinitions {
         else if (value.equals("Deleted_Id")) {requestBody.put(key,DeletedId);
             System.out.println(requestBody.toString());}
         else if (key.equals("id")) {
-            if (value.equals("lastCouponId")) {requestBody.put(key,lastCouponId);}
+            if (value.equals("lastItemId")) {requestBody.put(key, lastItemId);}
 //            else if (value.equals("nonList")) {}
             else {id=parseInt(value);requestBody.put(key,value);}
             System.out.println(requestBody.toString());}
@@ -758,8 +757,14 @@ public class API_Stepdefinitions {
     }
     @Given("The api user detects the id at the last index in the response")
     public void the_api_user_detects_the_id_at_the_last_index(){
-        lastCouponId = given().spec(spec).when().get(fullPath).jsonPath().getInt("coupons[-1].id");
-        System.out.println("lastId= "+lastCouponId);
+        lastItemId = given().spec(spec).when().get(fullPath).jsonPath().getInt("coupons[-1].id");
+        System.out.println("lastId= "+ lastItemId);
+    }
+    @Given("The api user detects the id at the last index in the faqList endpoint response")
+    public void the_api_user_detects_id_at_the_last_index(){
+        String key = given().spec(spec).when().get(fullPath).jsonPath().prettify().split("\"")[1];
+        lastItemId = given().spec(spec).when().get(fullPath).jsonPath().getInt(key+"[-1].id");
+        System.out.println("lastId= "+ lastItemId);
     }
 }
 

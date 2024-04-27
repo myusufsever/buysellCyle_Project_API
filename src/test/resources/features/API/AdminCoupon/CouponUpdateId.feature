@@ -9,7 +9,7 @@ Feature: As an administrator, I want to be able to update coupon information wit
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/coupon/couponUpdate/<id>" path parameters
     * The api user prepares a PATCH request containing the "<title>" "<coupon_code>" <coupon_type> "<start_date>" "<end_date>" <discount> <discount_type> <minimum_shopping> <maximum_discount> <is_expire> <is_multiple_buy> data to send to the api coupon couponUpdate endpoint.
-    * The api user sends the PATCH request and saves the response returned from the api coupon couponUpdate endpoint.
+    * The api user sends the "patch" request and saves the "Response"
     * The api user verifies that for "patch" request type the status code is 202 and the message information in the response body is "coupon updated successfully"
     * The api user verifies that the updated id information in the response body matches the id path parameter specified in the endpoint.
 
@@ -26,7 +26,7 @@ Feature: As an administrator, I want to be able to update coupon information wit
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/coupon/couponUpdate/<id>" path parameters
     * The api user prepares a PATCH request containing the "<title>" "<coupon_code>" <coupon_type> "<start_date>" "<end_date>" <discount> <discount_type> <minimum_shopping> <maximum_discount> <is_expire> <is_multiple_buy> data to send to the api coupon couponUpdate endpoint.
-    * The api user records the response from the api coupon couponUpdate endpoint, verifying that the status code is '404' and the reason phrase is coupon not found.
+    * The api user verifies that for "patch" request type the status code is 404 and the message information in the response body is "Not Found"
 
     Examples:
       | id  | title             | coupon_code | coupon_type | start_date | end_date   | discount | discount_type | minimum_shopping | maximum_discount | is_expire | is_multiple_buy |
@@ -41,7 +41,7 @@ Feature: As an administrator, I want to be able to update coupon information wit
     * The api user constructs the base url with the "invalid" token
     * The api user sets "api/coupon/couponUpdate/<id>" path parameters
     * The api user prepares a PATCH request containing the "<title>" "<coupon_code>" <coupon_type> "<start_date>" "<end_date>" <discount> <discount_type> <minimum_shopping> <maximum_discount> <is_expire> <is_multiple_buy> data to send to the api coupon couponUpdate endpoint.
-    * The api user records the response from the api coupon couponUpdate endpoint, verifying that the status code is '401' and the reason phrase is Unauthenticated.
+    * The api user verifies that for "patch" request type the status code is 401 and the message information in the response body is "Unauthenticated."
 
     Examples:
       | id | title            | coupon_code      | coupon_type | start_date | end_date   | discount | discount_type | minimum_shopping | maximum_discount | is_expire | is_multiple_buy |
@@ -54,7 +54,7 @@ Feature: As an administrator, I want to be able to update coupon information wit
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/coupon/couponDetails" path parameters
     * The api user prepares a GET request containing the  <id> for which details are to be accessed
-    * The api user sends a GET request and saves the response returned from the api coupon CouponDetails endpoint.
+    * The api user sends the "getbody" request and saves the "Response"
     * The api user verifies that the title information in the response body is "<title>".
 
     Examples:

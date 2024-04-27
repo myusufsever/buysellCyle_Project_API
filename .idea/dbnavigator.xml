@@ -17,7 +17,9 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="01f301c2-4503-49ec-a4f9-38d5835fc104">
-      <console name="buysellCycle" type="STANDARD" schema="" session="Main" />
+      <console name="buysellCycle" type="STANDARD" schema="u168183796_qabuysell" session="Main"><![CDATA[SELECT * FROM contacts;
+
+UPDATE contacts SET message = ? WHERE id = ?;]]></console>
     </connection>
     <connection id="7e6ecc3f-da90-41da-8f9e-856b14c45b4c">
       <console name="Connection" type="STANDARD" schema="" session="Main" />
@@ -27,7 +29,9 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="01f301c2-4503-49ec-a4f9-38d5835fc104" object-ref="consoles/buysellCycle" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="01f301c2-4503-49ec-a4f9-38d5835fc104" />
@@ -113,8 +117,7 @@
           <debugger-type value="ASK" />
         </debugger>
         <object-filters hide-empty-schemas="false" hide-pseudo-columns="false" hide-audit-columns="false">
-          <object-filters />
-          <object-type-filter use-master-settings="true">
+          <object-type-filter>
             <object-type name="SCHEMA" enabled="true" />
             <object-type name="USER" enabled="true" />
             <object-type name="ROLE" enabled="true" />
@@ -141,6 +144,7 @@
             <object-type name="CLUSTER" enabled="true" />
             <object-type name="DBLINK" enabled="true" />
           </object-type-filter>
+          <object-name-filters />
         </object-filters>
       </connection>
       <connection id="7e6ecc3f-da90-41da-8f9e-856b14c45b4c" active="true" signed="true">
@@ -207,8 +211,7 @@
           <debugger-type value="ASK" />
         </debugger>
         <object-filters hide-empty-schemas="false" hide-pseudo-columns="false" hide-audit-columns="false">
-          <object-filters />
-          <object-type-filter use-master-settings="true">
+          <object-type-filter>
             <object-type name="SCHEMA" enabled="true" />
             <object-type name="USER" enabled="true" />
             <object-type name="ROLE" enabled="true" />
@@ -235,6 +238,7 @@
             <object-type name="CLUSTER" enabled="true" />
             <object-type name="DBLINK" enabled="true" />
           </object-type-filter>
+          <object-name-filters />
         </object-filters>
       </connection>
     </connections>
