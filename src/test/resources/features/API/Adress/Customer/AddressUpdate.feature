@@ -13,7 +13,7 @@ Feature: As a user, I want to be able to update the information of the address i
 
     Examples:
       | id  | name          | email              | address | phone     | city    | state | country | postal_code | address_type |
-      | 313 | Eminegül Özen | eminegul@gmail.com | Bornova | 543256225 | Bornove | İzmir | Türkiye | 38001       | 13           |
+      | 313 | Eminegül Özen | eminegul@gmail.com | Bornova | 543256225 | Bornove | Ankara | Türkiye | 38001       | 13           |
 
 
   Scenario Outline:When a valid authorization information and an incorrect (non-existent in the system) address ID are included in the PATCH request body
@@ -29,7 +29,7 @@ Feature: As a user, I want to be able to update the information of the address i
 
     Examples:
       | id   | name          | email              | address | phone      | city    | state | country | postal_code | address_type |
-      | 1000 | Eminegül Özen | eminegul@gmail.com | Bornova | 5432562251 | Bornova | Izmir | Turkey  | 38000       | 11           |
+      | 1000 | Eminegül Özen | eminegul@gmail.com | Bornova | 5432562251 | Bornova | Ankara | Turkey  | 38000       | 11           |
 
 
   Scenario Outline:When a PATCH request body is sent to the /api/profile/customerAddressUpdate/{id} endpoint with valid authorization credentials,
@@ -46,7 +46,7 @@ Feature: As a user, I want to be able to update the information of the address i
 
     Examples:
       | id  | name          | email             | address | phone      | city    | state | country | postal_code | address_type |
-      | 313 | Eminegül Özen | eminegulgmail.com | Bornova | 5432562251 | Bornova | Izmir | Turkey  | 38000       | 11           |
+      | 313 | Eminegül Özen | eminegulgmail.com | Bornova | 5432562251 | Bornova | Ankara | Turkey  | 38000       | 11           |
 
 
   Scenario Outline:When a PATCH request body containing invalid authorization credentials, the desired address ID to be updated,
@@ -61,7 +61,7 @@ Feature: As a user, I want to be able to update the information of the address i
 
     Examples:
       | id  | name                 | email               | address  | phone      | city    | state | country | postal_code | address_type |
-      | 313 | Zeliha Eminegül Özen | eeminegul@gmail.com | Bornovaa | 5432562251 | Bornova | Izmir | Turkey  | 38000       | 11           |
+      | 313 | Zeliha Eminegül Özen | eeminegul@gmail.com | Bornovaa | 5432562251 | Bornova | Ankara | Turkey  | 38000       | 11           |
 
 
   Scenario Outline:The updated_Id information in the response body returned from the /api/profile/customerAddressUpdate/{id} endpoint

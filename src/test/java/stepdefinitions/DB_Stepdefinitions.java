@@ -7,6 +7,7 @@ import helperDB.Cities;
 import io.cucumber.java.en.Given;
 import manage.Manage;
 import org.junit.Assert;
+import org.testng.asserts.SoftAssert;
 import utilities.DB_Utilities.DBUtils;
 import utilities.DB_Utilities.JDBCReusableMethods;
 
@@ -132,7 +133,6 @@ public class DB_Stepdefinitions {
 
 //----------------------------simge_bitis------------------------------------------
 
-
     @Given("Prepare a query that adds {int} data to the cities table in bulk.")
     public void prepare_a_query_that_adds_data_to_the_cities_table_in_bulk(Integer count) throws SQLException {
         query = manage.getCities_veri_ekleme();
@@ -155,9 +155,6 @@ public class DB_Stepdefinitions {
 
     }
 
-
-
-
     @Given("cities tablosu uzerinden {int} adet verinin eklendigini dogrulayiniz.")
     public void cities_tablosu_uzerinden_adet_verinin_eklendigini_dogrulayiniz(int rowCount) {
 
@@ -166,6 +163,56 @@ public class DB_Stepdefinitions {
         assertEquals(rowCount, result.length);
 
     }
+
+    @Given("Order_payments select query is prepared and executed.")
+    public void order_payments_select_query_is_prepared_and_executed() {
+        query = manage.getOrder_payments_select_query();
+        preparedStatement = getPraperedStatement(query);
+
+    }
+
+    @Given("Transactions select query is prepared and executed.")
+    public void transactions_select_query_is_prepared_and_executed() {
+        query = manage.getTransactionsSelect();
+        preparedStatement = getPraperedStatement(query);
+
+    }
+
+    @Given("Verify that listed expected values")
+    public void verify_that_listed_expected_values() throws SQLException {
+        // Beklenen sonuçları tutacak bir liste oluşturma
+
+        List<String> expectedResults = new ArrayList<>();
+        expectedResults.add("19840.00");
+        expectedResults.add("23800.00");
+        expectedResults.add("27760.00");
+
+        int index = 0;
+        while (resultSet.next()) {
+            double amount = resultSet.getDouble("amount");
+            Assert.assertEquals(expectedResults.get(index), result);
+            index++;
+        }
+    }
+
+    @Given("Verify that listed expected values in transactions list")
+    public void verify_that_listed_expected_values_in_transactions_list() throws SQLException {
+
+        List<String> expectedResults = new ArrayList<>();
+        expectedResults.add("Cash On Delivery");
+        expectedResults.add("Stripe");
+
+        int index = 0;
+
+        while (resultSet.next()) {
+            String paymentMethod1 = resultSet.getString("payment_method");
+            String paymentMethod2 = resultSet.getString("Stripe");
+            Assert.assertEquals(expectedResults.get(index), paymentMethod1);
+            Assert.assertEquals(expectedResults.get(index), paymentMethod2);
+            index++;
+        }
+    }
+
     //=================== US_15 ZD ============================
 
     @Given("List the first {int} data in the customer_coupon_stores table by bringing them from the users table.")
@@ -327,6 +374,7 @@ public class DB_Stepdefinitions {
         }
 
         Assert.assertArrayEquals(expectedIds, actualIds);
+
     }
     @Given("Verify that {int} information has been created.")
     public void verify_that_information_has_been_created(int rowCount) {
@@ -338,11 +386,14 @@ public class DB_Stepdefinitions {
     public void prepare_delete_query_from_cities_table_is_prepared_and_executed() throws SQLException {
         query = manage.getDelete_the_data_in_the_cities_table();
 
-        preparedStatement= DBUtils.getPraperedStatement(query);
-        long a=8511963174281719786l;
-        preparedStatement.setLong(1, a);
+        preparedStatement = JDBCReusableMethods.getConnection().prepareStatement(query);
+        int state_id=9999999;
+        preparedStatement.setLong(1, state_id);
         rowCount = preparedStatement.executeUpdate();
+        System.out.println("rowCount ve silinen id= " + rowCount+" "+ state_id);
     }
+
+
     @Given("Verify that it has been deleted.")
     public void verify_that_it_has_been_deleted() throws SQLException {
 
