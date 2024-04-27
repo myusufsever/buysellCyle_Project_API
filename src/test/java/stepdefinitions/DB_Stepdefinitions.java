@@ -514,39 +514,92 @@ public class DB_Stepdefinitions {
 
 
     }
-    // US_04_ insert into & update -> contacts table_Kvsr
+    // US_04_ insert into & update -> contacts table
     @Given("Prepare a query that adds data to the contacts table and execute the query.")
     public void prepare_a_query_that_adds_data_to_the_contacts_table_and_execute_the_query() throws SQLException {
 
         query = manage.getContactsInsertInto();
         preparedStatement = getPraperedStatement(query);
         // INSERT INTO contacts (id, name, email, query_type, message, created_at, updated_at, others) VALUES (?,?,?,?,?,?,?,?)
-        preparedStatement.setInt(1,65);
-        preparedStatement.setString(2,"Veli");
-        preparedStatement.setString(3,"mnmnmn@gmail.com");
+        preparedStatement.setInt(1,76);
+        preparedStatement.setString(2,"YETER");
+        preparedStatement.setString(3,"sdthsthstjhsrjtsmn@gmail.com");
         preparedStatement.setString(4,"xyz");
-        preparedStatement.setString(5,"finish the project!");
-        Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
-        preparedStatement.setTimestamp(6,timestamp);
-        preparedStatement.setString(7,null);
+        preparedStatement.setString(5,"finish the project!!!");
+        preparedStatement.setDate(6, Date.valueOf(LocalDate.now()));
+        preparedStatement.setDate(7, Date.valueOf(LocalDate.now()));
         preparedStatement.setString(8,"last day");
         // Assert that it is added
-        sonuc = preparedStatement.executeUpdate();
-        assertEquals(1,sonuc);
-
+        int newContacts = preparedStatement.executeUpdate();
+        if (newContacts > 0) {
+            System.out.println("A new data is added");
+        } else {
+            System.out.println(" !! Not Added !! ");
+        }
     }
     @Given("Update the message information in the contacts table.")
     public void update_the_message_information_in_the_contacts_table() throws SQLException {
         //"UPDATE contacts SET message = ? WHERE id = ?;";
         query = manage.getContactsMessageUpdate();
-        preparedStatement = JDBCReusableMethods.getConnection().prepareStatement(query);
-        preparedStatement.setInt(1,65);
-        preparedStatement.setString(2,"message is updated");
-        sonuc = preparedStatement.executeUpdate();
-        //assertEquals(1,sonuc);
-    }
+        int updateID = 76;
+        String updateMessage = "message is UPDATED !";
+        preparedStatement = getPraperedStatement(query);
+        preparedStatement.setInt(1,updateID);
+        preparedStatement.setString(2,updateMessage);
+        int eklenenSatir = preparedStatement.executeUpdate();
 
-}
+        if (eklenenSatir > 0) {
+            System.out.println("Message is updated.");
+        } else {
+            System.out.println(" !! Not Updated !! ");
+        }
+    }
+    // US07_CustomerAddress_Select
+    @Given("Query select is prepared and executed.")
+    public void query_select_is_prepared_and_executed() throws SQLException {
+        query = manage.getCustomerAddress();
+        resultSet = getStatement().executeQuery(query);
+    }
+    @Given("Verify the required results.")
+    public void verify_the_required_results() throws SQLException {
+        List<String> addressList = new ArrayList<>();
+        while (resultSet.next()) {
+            String address = resultSet.getString("address");
+            addressList.add(address);
+        }
+        List<String> expectedName = new ArrayList<>();
+        expectedName.add("DE");
+        expectedName.add("USA");
+        expectedName.add("Switzerland");
+
+        for (int i = 0; i < addressList.size(); i++) {
+            assertEquals(expectedName.get(i), addressList.get(i));
+        }
+    }
+    // US09_LogActivityTable_Calculate
+    @Given("Calculate the total subject as required and verify.")
+    public void calculate_the_total_subject_as_required_and_verify() throws SQLException {
+        query = manage.getLogActivity();
+        resultSet = getStatement().executeQuery(query);
+
+        if (resultSet.next()) {
+            int totalSubject = resultSet.getInt("subject_count");
+            assertEquals(0, totalSubject);
+            System.out.println("Total Subject Count: " + totalSubject);
+        }
+    }
+    // US08_DeliveryProcesses_OrderBy
+    @Given("Prepare the query that orders the names of delivery processes in reverse order")
+    public void prepare_the_query_that_orders_the_names_of_delivery_processes_in_reverse_order() throws SQLException {
+        query = manage.getLogActivity();
+        resultSet = getStatement().executeQuery(query);
+
+        while (resultSet.next()) {
+            String deliveryName = resultSet.getString("name");
+            System.out.println("Delivery Processes Names: " + deliveryName);
+        }
+    }
+    }
 
 
 

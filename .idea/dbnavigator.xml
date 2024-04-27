@@ -19,7 +19,7 @@
     <connection id="01f301c2-4503-49ec-a4f9-38d5835fc104">
       <console name="buysellCycle" type="STANDARD" schema="u168183796_qabuysell" session="Main"><![CDATA[SELECT * FROM contacts;
 
-UPDATE contacts SET message = ? WHERE id = ?;]]></console>
+SELECT name FROM delivery_processes ORDER BY name DESC LIMIT 5;]]></console>
     </connection>
     <connection id="7e6ecc3f-da90-41da-8f9e-856b14c45b4c">
       <console name="Connection" type="STANDARD" schema="" session="Main" />
@@ -29,7 +29,9 @@ UPDATE contacts SET message = ? WHERE id = ?;]]></console>
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="01f301c2-4503-49ec-a4f9-38d5835fc104" object-ref="consoles/buysellCycle" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="01f301c2-4503-49ec-a4f9-38d5835fc104" />
@@ -41,6 +43,7 @@ UPDATE contacts SET message = ? WHERE id = ?;]]></console>
         <condition column="id" operator="=" value="" active="true" />
       </filter>
     </filter-actions>
+    <filter-actions connection-id="01f301c2-4503-49ec-a4f9-38d5835fc104" dataset="u168183796_qabuysell.contacts" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
@@ -48,6 +51,9 @@ UPDATE contacts SET message = ? WHERE id = ?;]]></console>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
     <filters />
+  </component>
+  <component name="DBNavigator.Project.ScriptExecutionManager" clear-outputs="true">
+    <recently-used-interfaces />
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
