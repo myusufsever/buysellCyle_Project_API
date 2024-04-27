@@ -762,7 +762,8 @@ public class API_Stepdefinitions {
     }
     @Given("The api user detects the id at the last index in the faqList endpoint response")
     public void the_api_user_detects_id_at_the_last_index(){
-        lastItemId = given().spec(spec).when().get(fullPath).jsonPath().getInt("Faqs[-1].id");
+        String key = given().spec(spec).when().get(fullPath).jsonPath().prettify().split("\"")[1];
+        lastItemId = given().spec(spec).when().get(fullPath).jsonPath().getInt(key+"[-1].id");
         System.out.println("lastId= "+ lastItemId);
     }
 }
