@@ -1,18 +1,14 @@
 package helperDB;
 
 import config_Requirements.ConfigReader;
+import hooks.Base;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JDBC_Structure_Methods {
-    public static List<String> bank_names = new ArrayList<>();
-    public static Connection connection;
-    public static Statement statement;
-    public static PreparedStatement preparedStatement;
-    public static ResultSet resultSet;
-    public static String query;
+public class JDBC_Structure_Methods extends Base {
+
 
     public static void createConnection() {
         String url = ConfigReader.getProperty("URL", "db");
