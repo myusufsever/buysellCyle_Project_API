@@ -33,6 +33,9 @@ public class Manage {
     private String numberOfOrdersByOrderId = "SELECT count(order_id) AS number_of_orders FROM guest_order_details;";
     private String UpdateShippingName = "UPDATE guest_order_details SET shipping_name = 'Updated Name' WHERE order_id = 2;";
     private String addNewDeviceTokens = "INSERT INTO device_tokens (id, user_id, device_token) VALUES (?, ?, ?);";
-
+    private String customerAddress = "SELECT phone, address FROM customer_addresses WHERE phone LIKE '%5%' LIMIT 3;";
+    private String logActivity = "SELECT COUNT(subject) AS subject_count FROM log_activity WHERE ip = '46.2.239.35' AND method = 'Delete';";
+    private String deliveryProcesses = "SELECT name FROM delivery_processes ORDER BY name DESC LIMIT 5;";
+  
 }
 
