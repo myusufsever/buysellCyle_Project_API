@@ -1,5 +1,5 @@
 @SC @SCAPI
-Feature: Feature:Scenario API, I want to be able to List/Create/Update/Delete FAQ records via API connection.
+Feature:Scenario API, I want to be able to List/Create/Update/Delete FAQ records via API connection.
 #  Getting the List of All FAQs
   Scenario: When a GET request with valid authorization information is sent to the /api/faqList endpoint the returned status code should be verified as 200, and the message in the response body should be verified as "success".
     * The api user constructs the base url with the "admin" token
