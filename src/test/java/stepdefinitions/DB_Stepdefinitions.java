@@ -48,8 +48,7 @@ public class DB_Stepdefinitions extends Base {
     }
 
     @Given("Database connection is closed")
-    public void database_connection_is_closed() {
-        closeConnection();
+    public void database_connection_is_closed() {closeConnection();
     }
 
     @Given("Prepare a query that adds {int} data to the bank_accounts table in bulk.")
