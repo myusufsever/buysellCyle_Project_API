@@ -1,11 +1,7 @@
-Feature: As an administrator, I want to be able to update the information
-of the FAQ record with the specified FAQ id via API connection.
-
-  @HS
-  Scenario Outline:  When a PATCH request containing valid authorization credentials, the FAQ id to be updated, and the
-  updated information of the FAQ (title) is sent to the /api/faqsUpdate/{id} endpoint, the expected status code returned
-  should be 202, and the message in the response body should confirm: "faqs updated successfully".
-
+@HS @API-US15
+Feature: US_015 As an administrator, I want to be able to update the information of the FAQ record with the specified FAQ id via API connection.
+  @API-US15-TC01
+  Scenario Outline:TC01/US_015 When a PATCH request containing valid authorization credentials, the FAQ id to be updated, and the updated information of the FAQ (title) is sent to the /api/faqsUpdate/{id} endpoint, the expected status code returned should be 202, and the message in the response body should confirm: "faqs updated successfully".
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/faqsUpdate/<id>" path parameters
     * The api user adds a key field "title" with the value "updatedTitle" to the request body
@@ -14,14 +10,8 @@ of the FAQ record with the specified FAQ id via API connection.
     Examples:
       |id |
       |119|
-
-
-
-  @SC
-  Scenario Outline: When a PATCH request containing valid authorization credentials, the FAQ id to be updated, and
-  the updated information of the FAQ (title, description) is sent to the /api/faqsUpdate/{id} endpoint, the expected
-  status code returned should be 202, and the message in the response body should confirm: "faqs updated successfully".
-
+  @API-US15-TC02
+  Scenario Outline:TC02/US_015 When a PATCH request containing valid authorization credentials, the FAQ id to be updated, and the updated information of the FAQ (title, description) is sent to the /api/faqsUpdate/{id} endpoint, the expected status code returned should be 202, and the message in the response body should confirm: "faqs updated successfully".
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/faqsUpdate/<id>" path parameters
     * The api user adds a key field "title" with the value "updatedTitle" to the request body
@@ -31,15 +21,8 @@ of the FAQ record with the specified FAQ id via API connection.
     Examples:
       |id |
       |120|
-
-
-
-
-  @HS
-  Scenario Outline: "When a PATCH request containing valid authorization credentials and an incorrect (non-existent in the system)
-  FAQ id, along with the updated information of the FAQ (title, description), is sent to the /api/faqsUpdate/{id} endpoint,
-  the expected status code returned should be 404, and the message in the response body should confirm: "faqs not found".
-
+  @API-US15-TC03
+  Scenario Outline:TC03/US_015 "When a PATCH request containing valid authorization credentials and an incorrect (non-existent in the system) FAQ id, along with the updated information of the FAQ (title, description), is sent to the /api/faqsUpdate/{id} endpoint, the expected status code returned should be 404, and the message in the response body should confirm: "faqs not found".
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/faqsUpdate/<id>" path parameters
     * The api user adds a key field "title" with the value "updatedTitle" to the request body
@@ -48,13 +31,8 @@ of the FAQ record with the specified FAQ id via API connection.
     Examples:
       | id |
       | 96 |
-
-
-  @HS
-  Scenario Outline: When a PATCH request containing invalid authorization credentials, the FAQ id to be updated, and the
-  updated information of the FAQ (title, description) is sent to the /api/faqsUpdate/{id} endpoint, the expected status
-  code returned should be 401, and the message in the response body should confirm: "Unauthenticated.".
-
+  @API-US15-TC04
+  Scenario Outline:TC04/US_015 When a PATCH request containing invalid authorization credentials, the FAQ id to be updated, and the updated information of the FAQ (title, description) is sent to the /api/faqsUpdate/{id} endpoint, the expected status code returned should be 401, and the message in the response body should confirm: "Unauthenticated.".
     * The api user constructs the base url with the "invalid" token
     * The api user sets "api/faqsUpdate/<id>" path parameters
     * The api user adds a key field "title" with the value "updatedTitle" to the request body
@@ -63,11 +41,8 @@ of the FAQ record with the specified FAQ id via API connection.
     Examples:
       | id |
       | 120 |
-
-  @HS
-  Scenario Outline: The updated_Id information in the response body from the /api/faqsUpdate/{id} endpoint should be
-  verified to be the same as the id path parameter specified in the /api/faqsUpdate/{id} endpoint.
-
+  @API-US15-TC05
+  Scenario Outline:TC05/US_015 The updated_Id information in the response body from the /api/faqsUpdate/{id} endpoint should be verified to be the same as the id path parameter specified in the /api/faqsUpdate/{id} endpoint.
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/faqsUpdate/<id>" path parameters
     * The api user adds a key field "title" with the value "updatedTitle" to the request body
@@ -75,15 +50,11 @@ of the FAQ record with the specified FAQ id via API connection.
     * The api user sends the "patch" request and saves the "Response"
     * The api user verifies that for "patch" request type the status code is 202 and the message information in the response body is "faqs updated successfully"
     * The api user verifies that the "updated_Id" information in the response body matches the id path parameter specified in the endpoint.
-
     Examples:
       | id  |
       | 120 |
-
-  @HS
-  Scenario Outline: The update of the FAQ record via the API should be verified through the API
-  by sending a GET request to the /api/faqsDetails endpoint with the updated_Id returned in the response.
-
+  @API-US15-TC06
+  Scenario Outline:TC06/US_015 The update of the FAQ record via the API should be verified through the API by sending a GET request to the /api/faqsDetails endpoint with the updated_Id returned in the response.
     * The api user constructs the base url with the "admin" token
     * The api user sets "api/faqsDetails" path parameters
     * The api user adds a key field "id" with the value "updated_Id" to the request body

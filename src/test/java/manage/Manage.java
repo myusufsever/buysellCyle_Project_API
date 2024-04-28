@@ -1,35 +1,9 @@
 package manage;
 
-import com.github.javafaker.Faker;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
-import org.json.JSONObject;
-import pojos.Pojo;
-import stepdefinitions.DB_Stepdefinitions;
+import lombok.Getter;
 
-import java.util.HashMap;
-
+@Getter
 public class Manage {
-   //********************************** API Test Variables and Parameters **************************************************************************
-                             //************************** From Stepdefinitions Class **************************//
-    public static Response response2;
-    public static int id;
-    public static String fullPath;
-    public JSONObject requestBody = new JSONObject();
-    public JsonPath jsonPath;
-    public HashMap<String, Object> reqBody = new HashMap<>();
-    public Pojo requestPojo;
-    public Faker faker = new Faker();
-    public static String email_class_level;
-    public static String postId;
-    public static String postId2;
-    public static String addedItemId;
-    public static String updatedId;
-    public static int DeletedId;
-    public static int deletedId;
-                             //************************** From Stepdefinitions Class **************************//
-
-        //********************************** API Test Variables and Parameters **************************************************************************
 
     private String verify_opening_balance_updated_with_negative_value = "UPDATE bank_accounts SET opening_balance = -1000000000 where bank_name= 'banka1';";
     private String verify_the_name_value_of_categories="Select  name from categories Where slug='fashion';";
@@ -62,38 +36,6 @@ public class Manage {
     private String customerAddress = "SELECT phone, address FROM customer_addresses WHERE phone LIKE '%5%' LIMIT 3;";
     private String logActivity = "SELECT COUNT(subject) AS subject_count FROM log_activity WHERE ip = '46.2.239.35' AND method = 'Delete';";
     private String deliveryProcesses = "SELECT name FROM delivery_processes ORDER BY name DESC LIMIT 5;";
-
-
-    public String getWallet_balances() {return wallet_balances;}
-    public String getAttendances() {return attendances;}
-    public String getList_the_unique_id_not_contains() {return list_the_unique_id_not_contains;}
-    public String getSum_of_the_total_price() {return sum_of_the_total_price;}
-    public String getCalculate_grand_total_average() {return calculate_grand_total_average;}
-    public String getList_the_unique_id() {return list_the_unique_id;}
-    public String getVerify_the_name_value_of_categories() {return verify_the_name_value_of_categories;}
-    public String getBank_account_insert_data() { return bank_account_insert_data; }
-    public String getps_cities_veri_ekleme() {return ps_cities_veri_ekleme;}
-    public String getCities_veri_ekleme() {return cities_veri_ekleme;}
-    public String getRefund_reasons_null() {return refund_reasons_null;}
-    public String getVerify_seller_products() { return verify_seller_products; }
-    public String getCustomerCouponStoresAndUsers() { return customerCouponStoresAndUsers; }
-    public String getEmail_template_types_Grouping() {return email_template_types_Grouping;}
-    public String getShipping_address() { return shipping_address;}
-    public String getList_ids_with_shipping_address() {return list_ids_with_shipping_address;}
-    public String getEmail_address_from_the_attendances() {return email_address_from_the_attendances;}
-    public String getDelete_the_data_in_the_cities_table() {return delete_the_data_in_the_cities_table;}
-    public String getPs_cities_veri_ekleme() {return ps_cities_veri_ekleme;}
-    public String getVerify_opening_balance_updated_with_negative_value() {return verify_opening_balance_updated_with_negative_value;}public String getCouponProductsGroup() { return couponProductsGroup; }
-    public String getOrder_payments_select_query() {return order_payments_select_query;}
-    public String getTransactionsSelect() {return transactionsSelect;}
-    public String getContactsInsertInto() {return contactsInsertInto;}
-    public String getContactsMessageUpdate() {return contactsMessageUpdate;}
-    public String getNumberOfOrdersByOrderId() {return numberOfOrdersByOrderId;}
-    public String getUpdateShippingName() {return UpdateShippingName;}
-    public String getAddNewDeviceTokens() {return addNewDeviceTokens;}
-    public String getInsert_Into_cities() {return insert_Into_cities;}public static Response getResponse2() {return response2;}
-    public String getCustomerAddress() {return customerAddress;}
-    public String getLogActivity() {return logActivity;}
-    public String getDeliveryProcesses() {return deliveryProcesses;}
+  
 }
 
