@@ -1,28 +1,19 @@
 package stepdefinitions;
-
-import com.github.javafaker.Faker;
 import config_Requirements.ConfigReader;
 import helperDB.BankAccount;
 import helperDB.Cities;
+import hooks.Base;
 import io.cucumber.java.en.Given;
-import manage.Manage;
 import org.junit.Assert;
-import org.testng.asserts.SoftAssert;
 import utilities.DB_Utilities.DBUtils;
 import utilities.DB_Utilities.JDBCReusableMethods;
-
-import java.sql.Array;
 import java.sql.ResultSetMetaData;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import static helperDB.BankAccount.generateBankAccount;
 import static helperDB.Cities.generateCities;
 import static helperDB.JDBC_Cons.*;
@@ -31,14 +22,7 @@ import static helperDB.JDBC_Structure_Methods.getPraperedStatement;
 import static org.junit.Assert.*;
 
 
-public class DB_Stepdefinitions {
-
-    Manage manage = new Manage();
-    //prepared statement timestamp instant döndürür.
-    Instant instant = Instant.now();
-    int sonuc;
-    int numborOfOrdersById;
-    int rowCount;
+public class DB_Stepdefinitions extends Base {
 
     @Given("Database connection is established.")
     public void database_connection_is_established() {
