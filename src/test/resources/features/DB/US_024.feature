@@ -6,5 +6,4 @@ Feature:BACKEND JDBC TESTING
 
 
     * Verify the name value of a categorie Query is prepared and executed.
-
     * Database connection is closed
