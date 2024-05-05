@@ -2,6 +2,7 @@ package stepdefinitions;
 
 import com.github.javafaker.Faker;
 import config_Requirements.ConfigReader;
+import hooks.Base;
 import hooks.HooksAPI;
 import io.cucumber.java.en.Given;
 import io.restassured.path.json.JsonPath;
@@ -18,25 +19,7 @@ import static java.lang.Integer.parseInt;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
 
-public class API_Stepdefinitions {
-
-
-    public static Response response2;
-    public static int id;
-    public static String fullPath;
-    public JSONObject requestBody = new JSONObject();
-    JsonPath jsonPath;
-    HashMap<String, Object> reqBody = new HashMap<>();
-    Pojo requestPojo;
-    Faker faker = new Faker();
-    public static String email_class_level;
-    public static String postId;
-    public static String postId2;
-    public static String addedItemId;
-    public static String updatedId;
-    public static int DeletedId;
-    public static int deletedId;
-    public static int lastItemId;
+public class API_Stepdefinitions extends Base {
 
     @Given("The api user sets {string} path parameters")
     public void the_api_user_sets_path_parameters(String rawPaths) {
@@ -762,7 +745,8 @@ public class API_Stepdefinitions {
     }
     @Given("The api user detects the id at the last index in the faqList endpoint response")
     public void the_api_user_detects_id_at_the_last_index(){
-        lastItemId = given().spec(spec).when().get(fullPath).jsonPath().getInt("Faqs[-1].id");
+        String key = given().spec(spec).when().get(fullPath).jsonPath().prettify().split("\"")[1];
+        lastItemId = given().spec(spec).when().get(fullPath).jsonPath().getInt(key+"[-1].id");
         System.out.println("lastId= "+ lastItemId);
     }
 }

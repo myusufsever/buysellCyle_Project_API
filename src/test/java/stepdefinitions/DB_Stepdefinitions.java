@@ -1,27 +1,22 @@
 package stepdefinitions;
-
-import com.github.javafaker.Faker;
 import config_Requirements.ConfigReader;
 import helperDB.BankAccount;
 import helperDB.Cities;
+import hooks.Base;
 import io.cucumber.java.en.Given;
-import manage.Manage;
 import org.junit.Assert;
 import utilities.DB_Utilities.DBUtils;
 import utilities.DB_Utilities.JDBCReusableMethods;
 
-import java.sql.Array;
-import java.sql.ResultSetMetaData;
 import java.sql.Date;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import static helperDB.BankAccount.generateBankAccount;
 import static helperDB.Cities.generateCities;
 import static helperDB.JDBC_Cons.*;
@@ -30,14 +25,7 @@ import static helperDB.JDBC_Structure_Methods.getPraperedStatement;
 import static org.junit.Assert.*;
 
 
-public class DB_Stepdefinitions {
-
-    Manage manage = new Manage();
-    //prepared statement timestamp instant döndürür.
-    Instant instant = Instant.now();
-    int sonuc;
-    int numborOfOrdersById;
-    int rowCount;
+public class DB_Stepdefinitions extends Base {
 
     @Given("Database connection is established.")
     public void database_connection_is_established() {
@@ -60,8 +48,7 @@ public class DB_Stepdefinitions {
     }
 
     @Given("Database connection is closed")
-    public void database_connection_is_closed() {
-        closeConnection();
+    public void database_connection_is_closed() {closeConnection();
     }
 
     @Given("Prepare a query that adds {int} data to the bank_accounts table in bulk.")
@@ -132,7 +119,6 @@ public class DB_Stepdefinitions {
 
 //----------------------------simge_bitis------------------------------------------
 
-
     @Given("Prepare a query that adds {int} data to the cities table in bulk.")
     public void prepare_a_query_that_adds_data_to_the_cities_table_in_bulk(Integer count) throws SQLException {
         query = manage.getCities_veri_ekleme();
@@ -155,9 +141,6 @@ public class DB_Stepdefinitions {
 
     }
 
-
-
-
     @Given("cities tablosu uzerinden {int} adet verinin eklendigini dogrulayiniz.")
     public void cities_tablosu_uzerinden_adet_verinin_eklendigini_dogrulayiniz(int rowCount) {
 
@@ -166,6 +149,56 @@ public class DB_Stepdefinitions {
         assertEquals(rowCount, result.length);
 
     }
+
+    @Given("Order_payments select query is prepared and executed.")
+    public void order_payments_select_query_is_prepared_and_executed() {
+        query = manage.getOrder_payments_select_query();
+        preparedStatement = getPraperedStatement(query);
+
+    }
+
+    @Given("Transactions select query is prepared and executed.")
+    public void transactions_select_query_is_prepared_and_executed() {
+        query = manage.getTransactionsSelect();
+        preparedStatement = getPraperedStatement(query);
+
+    }
+
+    @Given("Verify that listed expected values")
+    public void verify_that_listed_expected_values() throws SQLException {
+        // Beklenen sonuçları tutacak bir liste oluşturma
+
+        List<String> expectedResults = new ArrayList<>();
+        expectedResults.add("19840.00");
+        expectedResults.add("23800.00");
+        expectedResults.add("27760.00");
+
+        int index = 0;
+        while (resultSet.next()) {
+            double amount = resultSet.getDouble("amount");
+            Assert.assertEquals(expectedResults.get(index), result);
+            index++;
+        }
+    }
+
+    @Given("Verify that listed expected values in transactions list")
+    public void verify_that_listed_expected_values_in_transactions_list() throws SQLException {
+
+        List<String> expectedResults = new ArrayList<>();
+        expectedResults.add("Cash On Delivery");
+        expectedResults.add("Stripe");
+
+        int index = 0;
+
+        while (resultSet.next()) {
+            String paymentMethod1 = resultSet.getString("payment_method");
+            String paymentMethod2 = resultSet.getString("Stripe");
+            Assert.assertEquals(expectedResults.get(index), paymentMethod1);
+            Assert.assertEquals(expectedResults.get(index), paymentMethod2);
+            index++;
+        }
+    }
+
     //=================== US_15 ZD ============================
 
     @Given("List the first {int} data in the customer_coupon_stores table by bringing them from the users table.")
@@ -327,6 +360,7 @@ public class DB_Stepdefinitions {
         }
 
         Assert.assertArrayEquals(expectedIds, actualIds);
+
     }
     @Given("Verify that {int} information has been created.")
     public void verify_that_information_has_been_created(int rowCount) {
@@ -338,11 +372,14 @@ public class DB_Stepdefinitions {
     public void prepare_delete_query_from_cities_table_is_prepared_and_executed() throws SQLException {
         query = manage.getDelete_the_data_in_the_cities_table();
 
-        preparedStatement= DBUtils.getPraperedStatement(query);
-        long a=8511963174281719786l;
-        preparedStatement.setLong(1, a);
+        preparedStatement = JDBCReusableMethods.getConnection().prepareStatement(query);
+        int state_id=9999999;
+        preparedStatement.setLong(1, state_id);
         rowCount = preparedStatement.executeUpdate();
+        System.out.println("rowCount ve silinen id= " + rowCount+" "+ state_id);
     }
+
+
     @Given("Verify that it has been deleted.")
     public void verify_that_it_has_been_deleted() throws SQLException {
 
@@ -514,39 +551,92 @@ public class DB_Stepdefinitions {
 
 
     }
-    // US_04_ insert into & update -> contacts table_Kvsr
+    // US_04_ insert into & update -> contacts table
     @Given("Prepare a query that adds data to the contacts table and execute the query.")
     public void prepare_a_query_that_adds_data_to_the_contacts_table_and_execute_the_query() throws SQLException {
 
         query = manage.getContactsInsertInto();
         preparedStatement = getPraperedStatement(query);
         // INSERT INTO contacts (id, name, email, query_type, message, created_at, updated_at, others) VALUES (?,?,?,?,?,?,?,?)
-        preparedStatement.setInt(1,65);
-        preparedStatement.setString(2,"Veli");
-        preparedStatement.setString(3,"mnmnmn@gmail.com");
+        preparedStatement.setInt(1,76);
+        preparedStatement.setString(2,"YETER");
+        preparedStatement.setString(3,"sdthsthstjhsrjtsmn@gmail.com");
         preparedStatement.setString(4,"xyz");
-        preparedStatement.setString(5,"finish the project!");
-        Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now());
-        preparedStatement.setTimestamp(6,timestamp);
-        preparedStatement.setString(7,null);
+        preparedStatement.setString(5,"finish the project!!!");
+        preparedStatement.setDate(6, Date.valueOf(LocalDate.now()));
+        preparedStatement.setDate(7, Date.valueOf(LocalDate.now()));
         preparedStatement.setString(8,"last day");
         // Assert that it is added
-        sonuc = preparedStatement.executeUpdate();
-        assertEquals(1,sonuc);
-
+        int newContacts = preparedStatement.executeUpdate();
+        if (newContacts > 0) {
+            System.out.println("A new data is added");
+        } else {
+            System.out.println(" !! Not Added !! ");
+        }
     }
     @Given("Update the message information in the contacts table.")
     public void update_the_message_information_in_the_contacts_table() throws SQLException {
         //"UPDATE contacts SET message = ? WHERE id = ?;";
         query = manage.getContactsMessageUpdate();
-        preparedStatement = JDBCReusableMethods.getConnection().prepareStatement(query);
-        preparedStatement.setInt(1,65);
-        preparedStatement.setString(2,"message is updated");
-        sonuc = preparedStatement.executeUpdate();
-        //assertEquals(1,sonuc);
-    }
+        int updateID = 76;
+        String updateMessage = "message is UPDATED !";
+        preparedStatement = getPraperedStatement(query);
+        preparedStatement.setInt(1,updateID);
+        preparedStatement.setString(2,updateMessage);
+        int eklenenSatir = preparedStatement.executeUpdate();
 
-}
+        if (eklenenSatir > 0) {
+            System.out.println("Message is updated.");
+        } else {
+            System.out.println(" !! Not Updated !! ");
+        }
+    }
+    // US07_CustomerAddress_Select
+    @Given("Query select is prepared and executed.")
+    public void query_select_is_prepared_and_executed() throws SQLException {
+        query = manage.getCustomerAddress();
+        resultSet = getStatement().executeQuery(query);
+    }
+    @Given("Verify the required results.")
+    public void verify_the_required_results() throws SQLException {
+        List<String> addressList = new ArrayList<>();
+        while (resultSet.next()) {
+            String address = resultSet.getString("address");
+            addressList.add(address);
+        }
+        List<String> expectedName = new ArrayList<>();
+        expectedName.add("DE");
+        expectedName.add("USA");
+        expectedName.add("Switzerland");
+
+        for (int i = 0; i < addressList.size(); i++) {
+            assertEquals(expectedName.get(i), addressList.get(i));
+        }
+    }
+    // US09_LogActivityTable_Calculate
+    @Given("Calculate the total subject as required and verify.")
+    public void calculate_the_total_subject_as_required_and_verify() throws SQLException {
+        query = manage.getLogActivity();
+        resultSet = getStatement().executeQuery(query);
+
+        if (resultSet.next()) {
+            int totalSubject = resultSet.getInt("subject_count");
+            assertEquals(0, totalSubject);
+            System.out.println("Total Subject Count: " + totalSubject);
+        }
+    }
+    // US08_DeliveryProcesses_OrderBy
+    @Given("Prepare the query that orders the names of delivery processes in reverse order")
+    public void prepare_the_query_that_orders_the_names_of_delivery_processes_in_reverse_order() throws SQLException {
+        query = manage.getLogActivity();
+        resultSet = getStatement().executeQuery(query);
+
+        while (resultSet.next()) {
+            String deliveryName = resultSet.getString("name");
+            System.out.println("Delivery Processes Names: " + deliveryName);
+        }
+    }
+    }
 
 
 

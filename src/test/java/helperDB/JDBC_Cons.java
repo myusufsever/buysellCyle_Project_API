@@ -1,13 +1,13 @@
 package helperDB;
 
 import com.github.javafaker.Faker;
+import hooks.Base;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class JDBC_Cons {
-    static Faker faker=new Faker();
-    public static int[] result;
+public class JDBC_Cons extends Base {
+
 
     public static int count;
     public static List<Integer>guest_order_details_order_id_List=new ArrayList<Integer>();
