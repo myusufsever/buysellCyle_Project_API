@@ -48,3 +48,4 @@ Feature:Scenario API, I want to be able to List/Create/Update/Delete FAQ records
     * The api user adds a key field "id" with the value "lastItemId" to the request body
     * The api user sends the "delete" request and saves the "response"
     * The api user verifies that for "delete" request type the status code is 202 and the message information in the response body is "faqs deleted successfully"
+ ##3
